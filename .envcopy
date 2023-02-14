@@ -1,0 +1,3 @@
+VUE_APP_API_URL=http://appjava2019:9099/bpctst/servlet
+VUE_APP_GMAPS_APIKEY=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg
+VUE_APP_APIREST_URL=http://appjava2019:9099/bpctst/servlet
