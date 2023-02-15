@@ -87,7 +87,17 @@ const routes = [
     name: "marker-view",
     component: () => import("../pages/MarkerViewPage.vue"),
     props: true
-  }
+  },
+  {
+    path: '/404',
+    name: "not fount",
+    component: () => import("@/pages/Default404.vue"),
+  },
+  {
+    path: "/:catchAll(.*)", // Unrecognized path automatically matches 404
+    redirect: '/404',
+  },
+
 ];
 
 const router = createRouter({

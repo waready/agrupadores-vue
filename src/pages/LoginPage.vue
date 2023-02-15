@@ -1,10 +1,12 @@
 <template>
   <div class="container">
     <div class="row justify-content-center align-items-center minh-100">
-      <div class="col-6 card text-center">
-        <div class="card-header bg-secondary">Login</div>
+      <div class="col-11 col-md-6 card shadow-lg  rounded text-center">
+        <div class="card-header">
+          <img width="300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkB2xhIVe2Re3oGukKSxSvsO1ZZe1w33R1l_VOCfu4VeYE_SjzeWZ7XNbHBVi0klm3_g&usqp=CAU" />
+        </div>
         <div class="card-body">
-          <h5 class="card-title">Ingrese sus Accesos</h5>
+          <!-- <h5 class="card-title">Ingrese sus Accesos</h5> -->
           <form @submit.prevent="login()" action="">
             <div class="mb-3">
               <!-- <label for="">Email</label> -->
@@ -72,7 +74,7 @@ export default {
 
   methods: {
     async login() {
-      var result = await AuthService.login(this.username, this.password);
+      var result = await AuthService.login(this.username.toUpperCase(), this.password);
       if (result.success) {
         this.registrar();
       } else {
@@ -92,4 +94,5 @@ export default {
 .minh-100 {
   height: 90vh;
 }
+
 </style>

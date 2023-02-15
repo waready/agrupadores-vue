@@ -13,6 +13,23 @@
     </div>
     <hr />
     <h3>Sucursales Abiertas</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group is-invalid">
+          <input
+            type="text"
+            name="filter"
+            class="form-control"
+            v-model="TextoBuscado"
+            id="filter" />
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="validatedInputGroupPrepend"
+              ><i class="fa fa-search" aria-hidden="true"></i></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -25,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in sucursalesAbiertas" :key="index">
+          <tr v-for="(item, index) in sucursalesFilter" :key="index">
             <th scope="row">{{ item.identificador }}</th>
             <th scope="row">{{ item.descripcion }}</th>
             <td>{{ item.telefono }}</td>
@@ -124,15 +141,34 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
   name: "sucursales",
-  mounted() {
-    this.getSucursalesCajas();
+  async mounted() {
+    // this.getSucursalesCajas();
+    // async getSucursalesCajas() {
+    await ApiService.getSucursalesCajas().then((r) => {
+      console.log(r);
+      this.sucursalesAbiertas =
+        r.detalle.sucursales.sdtSucursalesAbiertas.sBTSucursal;
+      this.sucursalesCerradas =
+        r.detalle.sucursales.sdtSucursalesCerradas.sBTSucursal;
+      this.chartData = {
+        labels: [`abiertas`, `cerradas`],
+        datasets: [
+          {
+            backgroundColor: ["#41B883", "#E46651"],
+            data: [r.detalle.sucursales.abiertas, r.detalle.sucursales.cerradas]
+          }
+        ]
+      };
+    });
+    // },
   },
   components: { Pie },
   data() {
     return {
       sucursales: null,
-      sucursalesAbiertas: null,
-      sucursalesCerradas: null,
+      TextoBuscado: "",
+      sucursalesAbiertas: [],
+      sucursalesCerradas: [],
       chartData: {
         labels: ["January", "February", "March"],
         datasets: [
@@ -149,33 +185,6 @@ export default {
     };
   },
   methods: {
-    async getSucursalesCajas() {
-      await ApiService.getSucursalesCajas().then((r) => {
-        console.log(r);
-        this.sucursalesAbiertas =
-          r.detalle.sucursales.sdtSucursalesAbiertas.sBTSucursal;
-        this.sucursalesCerradas =
-          r.detalle.sucursales.sdtSucursalesCerradas.sBTSucursal;
-        this.chartData = {
-          labels: [`abiertas`, `cerradas`],
-          datasets: [
-            {
-              backgroundColor: ["#41B883", "#E46651"],
-              data: [
-                r.detalle.sucursales.abiertas,
-                r.detalle.sucursales.cerradas
-              ]
-            }
-          ]
-          // labels: [ 'lunary', 'jaguary', 'macht' ],
-          // datasets: [
-          //   {  backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
-          //     data: [40, 20, 12]
-          //   }
-          // ]
-        };
-      });
-    },
     generarMapa(lat, lng) {
       this.$options.markers = new Array();
       // https://www.google.com/maps?ll=-15.322977,-70.028362&z=8&t=m&hl=es-ES&gl=US&mapclient=apiv3
@@ -198,6 +207,15 @@ export default {
         height: `${400}px`,
         position: "relative"
       };
+    },
+    sucursalesFilter() {
+      var buscado = this.TextoBuscado.toUpperCase();
+      return this.sucursalesAbiertas.filter((objeto) => {
+        return (
+          objeto.descripcion.toUpperCase().includes(buscado) ||
+          objeto.identificador == parseInt(buscado)
+        );
+      });
     }
   }
 };
