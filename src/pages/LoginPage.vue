@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row justify-content-center align-items-center minh-100">
       <div class="col-11 col-md-6 card shadow-lg  rounded text-center">
-        <div class="card-header">
-          <img width="300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkB2xhIVe2Re3oGukKSxSvsO1ZZe1w33R1l_VOCfu4VeYE_SjzeWZ7XNbHBVi0klm3_g&usqp=CAU" />
+        <div class="card-header"> 
+          <img class="mt-3" width="250" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkB2xhIVe2Re3oGukKSxSvsO1ZZe1w33R1l_VOCfu4VeYE_SjzeWZ7XNbHBVi0klm3_g&usqp=CAU" />
         </div>
         <div class="card-body">
           <!-- <h5 class="card-title">Ingrese sus Accesos</h5> -->
@@ -24,8 +24,8 @@
                 v-model="password"
                 placeholder="Contraseña" />
             </div>
-            <button class="btn btn-info btn-md btn-block" type="submit">
-              Submit
+            <button class="btn btn-danger btn-md btn-block" type="submit">
+              Ingresar
             </button>
             <div class="alert mt-3 alert-warning" v-show="message">
               {{ message }}
@@ -33,7 +33,9 @@
           </form>
         </div>
         <div class="card-footer text-muted">
-          <a href="#">Forgot Password?</a>
+          <!-- <a href="#">Forgot Password?</a> -->
+          <a href="" class="h6">Bantotal 2023 - Todos los derechos reservados</a>
+
         </div>
       </div>
     </div>
