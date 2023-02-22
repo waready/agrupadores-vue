@@ -22,11 +22,13 @@ class AuthService {
       // var response = {
       //   data :"holi"
       // } 
+    
       var data = response.data;
       Cookies.set("token", "Bearer " + data.access);
       Cookies.set("refreshToken", data.refresh);
       return {
         success: true,
+        data:data,
         message: ""
       };
     } catch (e) {

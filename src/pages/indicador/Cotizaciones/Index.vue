@@ -5,14 +5,14 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col"># Inidice</th>
+            <!-- <th scope="col"># Inidice</th> -->
             <th scope="col">Nombre</th>
             <th scope="col">Cotizacion</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, index) in indices" :key="index">
-            <th scope="row">{{ item.indice }}</th>
+            <!-- <th scope="row">{{ item.indice }}</th> -->
             <td>{{ item.nombre }}</td>
             <td>
               <a :class="item.cotizacionCargada != 'Si' ? 'badge badge-danger' :'badge badge-success' ">{{ item.cotizacionCargada }}</a>
@@ -27,14 +27,14 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col"># Moneda</th>
+            <!-- <th scope="col"># Moneda</th> -->
             <th scope="col">Nombre</th>
             <th scope="col">Tipo de cambio</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, index) in monedas" :key="index">
-            <th scope="row">{{ item.moneda }}</th>
+            <!-- <th scope="row">{{ item.moneda }}</th> -->
             <td>{{ item.nombre }}</td>
             <td><a :class="item.tipoDeCambioCargado != 'Si' ? 'badge badge-danger' :'badge badge-success' ">{{ item.tipoDeCambioCargado}}</a></td>
           </tr>

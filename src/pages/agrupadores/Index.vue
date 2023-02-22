@@ -1,80 +1,46 @@
 <template>
   <div class="mt-3">
     <h2>Agrupadores</h2>
-    <!-- <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col"># Codigo</th>
-          <th scope="col">Descripcíon</th>
-          <th scope="col">Habilitado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in agrupadores" :key="index">
-          <th scope="row">{{ item.codigo }}</th>
-          <td>{{ item.descripcion }}</td>
-          <td>SI</td>
-          <td>
-            <button class="btn btn-info" @click="indicadorID(item.codigo)">
-              Indicador
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
     <hr />
     <div class="row">
-      <div class="col-md-4 col-sm-5 mb-2" v-for="(item, index) in agrupadores" :key="index">
-        <div class="card" >
-          <div class="card-body text-center">
-            <h5 class="card-title mb-2"> {{ item.descripcion }}</h5>
-            <i :class="item.icon"></i>
-            <p class="card-text mt-2">
-              Indicador N° <a href="#" class="card-link">{{ item.codigo }}</a>
-            </p>
-            <button class="btn btn-info" @click="indicadorID(item.codigo)">
-              Indicador
-            </button>
+      <template v-if="agrupadores">
+        <div
+          class="col-md-3 col-sm-5 mb-2"
+          v-for="(item, index) in agrupadores"
+          :key="index">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title mb-2">{{ item.descripcion }}</h5>
+              <div>
+                <!-- <div
+              :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
+                <i :class="item.icon"></i>
+                <p class="card-text mt-2">
+                  Indicador N°
+                  <a href="#" class="card-link">{{ item.codigo }}</a>
+                </p>
+                <div class="content mb-2">
+                  <button class="btn btn-info format" @click="indicadorID(item.codigo)">
+                  Indicador
+                </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4 col-sm-5 mb-2" v-for="(item, index) in agrupadores" :key="index">
-        <div class="card" >
-          <div class="card-body text-center">
-            <h5 class="card-title mb-2"> {{ item.descripcion }}</h5>
-            <i :class="item.icon"></i>
-            <p class="card-text mt-2">
-              Indicador N° <a href="#" class="card-link">{{ item.codigo }}</a>
-            </p>
-            <button class="btn btn-info" @click="indicadorID(item.codigo)">
-              Indicador
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-5 mb-2" v-for="(item, index) in agrupadores" :key="index">
-        <div class="card" >
-          <div class="card-body text-center">
-            <h5 class="card-title mb-2"> {{ item.descripcion }}</h5>
-            <i :class="item.icon"></i>
-            <p class="card-text mt-2">
-              Indicador N° <a href="#" class="card-link">{{ item.codigo }}</a>
-            </p>
-            <button class="btn btn-info" @click="indicadorID(item.codigo)">
-              Indicador
-            </button>
-          </div>
-        </div>
-      </div>
+      </template>
+
+      <loading v-else></loading>
     </div>
   </div>
 </template>
 <script>
 import ApiService from "@/utils/ApiService.js";
 
+import Loading from "@/components/Loading.vue";
 export default {
   // name: "MarketplaceIndex",
-  components: {},
+  components: { Loading },
 
   // directives
   // filters
@@ -100,30 +66,28 @@ export default {
   methods: {
     async getAllAgrupadores() {
       await ApiService.GetAgrupadores().then((response) => {
-        this.agrupadores = response.agrupadores.sBTAgrupador.map( (item) => {
+        this.agrupadores = response.agrupadores.sBTAgrupador.map((item) => {
           switch (item.codigo) {
             case 100:
               // "Condiciones Generales"
-              item.icon = "fas fa-wrench fa-5x"
+              item.icon = "fas fa-wrench fa-5x";
               break;
             case 200:
               // "Cajas y Sucursales"
-              item.icon = "fas fa-building fa-5x"
+              item.icon = "fas fa-building fa-5x";
               break;
             case 300:
               // "Contabilidad"
-              item.icon = "fas fa-file-contract fa-5x"
+              item.icon = "fas fa-file-contract fa-5x";
               break;
             default:
               // sin icon
-              item.icon = ""
+              item.icon = "";
               break;
           }
-          console.log(item)
-          return item
-          
-        }) ;
-
+          console.log(item);
+          return item;
+        });
       });
     },
     indicadorID(id) {
@@ -134,4 +98,15 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.format{
+  margin-bottom: 3%;
+  position: absolute;
+  bottom: 0;  
+}
+</style>

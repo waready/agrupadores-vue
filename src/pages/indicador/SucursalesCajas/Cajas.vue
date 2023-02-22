@@ -13,7 +13,7 @@
       <table class="table table-striped tabla">
         <thead>
           <tr>
-            <th scope="col">identificador</th>
+            <!-- <th scope="col">identificador</th> -->
             <th scope="col">Usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Sucursal</th>
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in cajasAbiertas" :key="index">
-            <th scope="row">{{ item.identificador }}</th>
+            <!-- <th scope="row">{{ item.identificador }}</th> -->
             <td>{{ item.usuario }}</td>
             <td>{{ item.nombre }}</td>
             <td>
@@ -51,7 +51,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">identificador</th>
+            <!-- <th scope="col">identificador</th> -->
             <th scope="col">Usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Sucursal</th>
@@ -59,7 +59,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in cajasCerradas" :key="index">
-            <th scope="row">{{ item.identificador }}</th>
+            <!-- <th scope="row">{{ item.identificador }}</th> -->
             <td>{{ item.usuario }}</td>
             <td>{{ item.nombre }}</td>
             <td>

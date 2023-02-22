@@ -34,7 +34,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">identificador</th>
+            <!-- <th scope="col">identificador</th> -->
             <th scope="col"># Sucursal</th>
             <th scope="col">telefono</th>
             <th scope="col">direccion</th>
@@ -43,7 +43,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in sucursalesFilter" :key="index">
-            <th scope="row">{{ item.identificador }}</th>
+            <!-- <th scope="row">{{ item.identificador }}</th> -->
             <th scope="row">{{ item.descripcion }}</th>
             <td>{{ item.telefono }}</td>
             <td>{{ item.direccion }}</td>
@@ -66,7 +66,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">identificador</th>
+            <!-- <th scope="col">identificador</th> -->
             <th scope="col"># Sucursal</th>
             <th scope="col">telefono</th>
             <th scope="col">direccion</th>
@@ -75,7 +75,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in sucursalesCerradas" :key="index">
-            <th scope="row">{{ item.identificador }}</th>
+            <!-- <th scope="row">{{ item.identificador }}</th> -->
             <th scope="row">{{ item.descripcion }}</th>
             <td>{{ item.telefono }}</td>
             <td>{{ item.direccion }}</td>

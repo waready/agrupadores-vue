@@ -1,64 +1,44 @@
 <template>
   <div class="mt-3">
-    <h2>Indicadores</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col"># Orden</th>
-          <th scope="col">indicador</th>
-          <th scope="col">Descripcíon</th>
-          <th scope="col">Habilitado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in indicadores" :key="index">
-          <th scope="row">{{ item.orden }}</th>
-          <td>{{ item.indicador }}</td>
-          <td>{{ item.descripcion }}</td>
-          <td>SI</td>
-          <td>
-            <button
-              class="btn btn-info"
-              @click="indicadorID(item.indicador)"
-              data-toggle="modal"
-              data-target="#modal-fullscreen-xl">
-              Visualizar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- <div class="row">
-      <div class="col-3">
-        <ul
-          class="list-group"
-          v-for="(item, index) in indicadores"
-          :key="index">
-          
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center mb-2">
-              <a href="" @click="indicadorID(item.indicador)">
-              {{ item.descripcion }}
-              </a>
-              <span class="badge badge-primary badge-pill">{{
-                item.indicador
-              }}</span>
-             
-            </li>
-        </ul>
-      </div>
-      <div class="col-9">
-        holi
-      </div>
-    </div> -->
+    <template v-if="indicadores">
+      <h2>Indicadores</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <!-- <th scope="col"># Orden</th>
+          <th scope="col">indicador</th> -->
+            <th scope="col">Descripcíon</th>
+            <th scope="col">Habilitado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in indicadores" :key="index">
+            <!-- <th scope="row">{{ item.orden }}</th>
+          <td>{{ item.indicador }}</td> -->
+            <td>{{ item.descripcion }}</td>
+            <td>SI</td>
+            <td>
+              <button
+                class="btn btn-info"
+                @click="indicadorID(item.indicador)"
+                data-toggle="modal"
+                data-target="#modal-fullscreen-xl">
+                Visualizar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
+    <loading-vue v-else></loading-vue>
   </div>
 </template>
 <script>
 import ApiService from "@/utils/ApiService.js";
-
+import loadingVue from "@/components/Loading.vue";
 export default {
   // name: "MarketplaceIndex",
-  components: {},
+  components: { loadingVue },
 
   // directives
   // filters

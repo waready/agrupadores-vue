@@ -1,9 +1,12 @@
 <template>
   <div class="container">
     <div class="row justify-content-center align-items-center minh-100">
-      <div class="col-11 col-md-6 card shadow-lg  rounded text-center">
-        <div class="card-header"> 
-          <img class="mt-3" width="250" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkB2xhIVe2Re3oGukKSxSvsO1ZZe1w33R1l_VOCfu4VeYE_SjzeWZ7XNbHBVi0klm3_g&usqp=CAU" />
+      <div class="col-11 col-md-6 card shadow-lg rounded text-center">
+        <div class="card-header">
+          <img
+            class="mt-3"
+            width="250"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkB2xhIVe2Re3oGukKSxSvsO1ZZe1w33R1l_VOCfu4VeYE_SjzeWZ7XNbHBVi0klm3_g&usqp=CAU" />
         </div>
         <div class="card-body">
           <!-- <h5 class="card-title">Ingrese sus Accesos</h5> -->
@@ -34,8 +37,9 @@
         </div>
         <div class="card-footer text-muted">
           <!-- <a href="#">Forgot Password?</a> -->
-          <a href="" class="h6">Bantotal 2023 - Todos los derechos reservados</a>
-
+          <a href="" class="h6"
+            >Bantotal 2023 - Todos los derechos reservados</a
+          >
         </div>
       </div>
     </div>
@@ -76,19 +80,22 @@ export default {
 
   methods: {
     async login() {
-      var result = await AuthService.login(this.username.toUpperCase(), this.password);
-      if (result.success) {
+      var result = await AuthService.login(
+        this.username.toUpperCase(),
+        this.password
+      );
+      console.log(result);
+      if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
         this.registrar();
       } else {
-        this.message = result.message;
+        this.message = result.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+        setTimeout(() => this.message = false, 3500);
       }
     },
     async registrar() {
       await this.$store.dispatch("login");
       this.$router.push("/");
     }
-    //
-    //
   }
 };
 </script>
@@ -96,5 +103,4 @@ export default {
 .minh-100 {
   height: 90vh;
 }
-
 </style>

@@ -1,15 +1,11 @@
-<!-- Author: Wilson Pilco Nunez -->
-<!-- Email: wilsonaux1@gmail.com -->
-<!-- Created at: 2023-01-15 16:06 -->
-<!-- Description: -->
 <template>
   <div class="container">
     <div class="row">
       <div class="col-12">
         <Navbar></Navbar>
         <Sidebar></Sidebar>
-        <router-view class="mltam" />
-        <Footer></Footer>
+        <router-view class="mltam"/>
+        <Footer class="mltam"></Footer>
       </div>
     </div>
   </div>
@@ -69,7 +65,11 @@ export default {
     margin-left: 240px;
   }
 }
-
+@media (1850px < width ) {
+  .mltam{
+    margin-left: auto;
+  }
+}
 
 
 </style>
