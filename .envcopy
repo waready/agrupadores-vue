@@ -3,3 +3,5 @@ VUE_APP_GMAPS_APIKEY=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg
 VUE_APP_APIREST_URL=http://appjava2019:9099/bpctst/servlet
 
  start chrome –disable-web-security –disable-gpu –user-data-dir=~/chromeTemp
+ http://pioneroapp:6415/bpngx16/servlet/com.dlya.bantotal.ardwsbt_Authenticate_v1?Execute
+http://pioneroapp:6415/bpngx16/servlet/com.dlya.bantotal.odwsbt_Authenticate_v1?Execute
