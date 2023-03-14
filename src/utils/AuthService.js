@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import http from "src/utils/http.js";
-
+//var prefijo= 'ardwsbt'
+var prefijo = 'odwsbt'
 class AuthService {
   static async login(username, password) {
     try {
@@ -11,12 +12,13 @@ class AuthService {
           Token: "?",
           Usuario: username,
           Canal: "BTVISION"
+          //Canal:"BTDIGITAL"
         },
         UserId: username,
         UserPassword: password
       };
       var response = await http.post(
-        "com.dlya.bantotal.odwsbt_Authenticate_v1?Execute",
+        "com.dlya.bantotal."+prefijo+"_Authenticate_v1?Execute",
         user
       );
       // var response = {

@@ -1,6 +1,8 @@
 import http  from "./http.js";
 import store from "@/store";
 
+//var prefijo= 'ardwsbt'
+var prefijo = 'odwsbt'
 class ApiService {
     static async GetAgrupadores(){
 
@@ -13,7 +15,7 @@ class ApiService {
                 "Token": "?"
               }
         }
-        return (await http.post("com.dlya.bantotal.odwsbt_BTIndicadores?ObtenerAgrupadores",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerAgrupadores",user)).data;
       }
       static async GetIndicadores(id){
 
