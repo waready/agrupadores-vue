@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import http from "src/utils/http.js";
-//var prefijo= 'ardwsbt'
-var prefijo = 'odwsbt'
+var prefijo= 'ardwsbt'
+//var prefijo = 'odwsbt'
 class AuthService {
   static async login(username, password) {
     try {
@@ -11,8 +11,8 @@ class AuthService {
           Device: 1,
           Token: "?",
           Usuario: username,
-          Canal: "BTVISION"
-          //Canal:"BTDIGITAL"
+          //Canal: "BTVISION"
+          Canal:"BTDIGITAL"
         },
         UserId: username,
         UserPassword: password
@@ -36,7 +36,7 @@ class AuthService {
     } catch (e) {
       return {
         success: false,
-        message: "Error en la autenticacion: " + e.response.data.detail
+        message: "Error en la autenticacion: " + e
       };
     } finally {
       //

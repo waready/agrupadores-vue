@@ -15,12 +15,12 @@
           <tr v-for="(item, index) in indicadores" :key="index">
             <!-- <th scope="row">{{ item.orden }}</th>
           <td>{{ item.indicador }}</td> -->
-            <td>{{ item.descripcion }}</td>
+            <td>{{ item.Descripcion }}</td>
             <td>SI</td>
             <td>
               <button
                 class="btn btn-info"
-                @click="indicadorID(item.indicador)"
+                @click="indicadorID(item.Codigo)"
                 data-toggle="modal"
                 data-target="#modal-fullscreen-xl">
                 Visualizar
@@ -30,7 +30,12 @@
         </tbody>
       </table>
     </template>
+    
     <loading-vue v-else></loading-vue>
+    <div class="alert alert-warning" role="alert" v-show="message">
+      {{ message + '!' }}
+    </div>
+    
   </div>
 </template>
 <script>
@@ -48,7 +53,8 @@ export default {
   },
 
   data: () => ({
-    indicadores: null
+    indicadores: null,
+    message:""
   }),
 
   computed: {
@@ -64,12 +70,19 @@ export default {
   methods: {
     async getAllAgrupadores(idIndicador) {
       await ApiService.GetIndicadores(idIndicador).then((response) => {
-        this.indicadores = response.indicadores.sBTIndicador;
+        if (response.Erroresnegocio.BTErrorNegocio[0]) {
+          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+         
+        }
+        // else{
+        // }
+         this.indicadores = response.sdtIndicadores.SdtsBTIndicador;
       });
     },
     indicadorID(id) {
       if (id == 201) this.$router.push({ path: `/indicador/sucursales` });
       if (id == 106) this.$router.push({ path: `/marketplace` });
+      console.log(id)
     }
     //
     //

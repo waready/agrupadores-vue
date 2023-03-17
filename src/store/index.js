@@ -3,17 +3,20 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     //logged: secureStorage.getItem("token") !== null
-    logged: false
+    logged: false,
+    Token:""
   },
   getters: {},
   mutations: {
-    loginSuccess(state) {
+    loginSuccess(state,user) {
       state.logged = true;
+      state.Token = user.SessionToken;
     }
   },
   actions: {
-    async login({ commit }) {
-      await commit("loginSuccess");
+    async login({ commit },user) {
+      console.log(user)
+      await commit("loginSuccess",user);
     }
   },
   modules: {}

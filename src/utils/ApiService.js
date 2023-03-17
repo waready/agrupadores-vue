@@ -1,8 +1,9 @@
 import http  from "./http.js";
 import store from "@/store";
 
-//var prefijo= 'ardwsbt'
-var prefijo = 'odwsbt'
+var prefijo= 'ardwsbt'
+var token = store.state.Token
+//var prefijo = 'odwsbt'
 class ApiService {
     static async GetAgrupadores(){
 
@@ -10,9 +11,9 @@ class ApiService {
             "Btinreq": {
                 "Requerimiento": 1,
                 "Canal": "BTDIGITAL",
-                "Usuario": "?",
-                "Device": "?",
-                "Token": "?"
+                "Usuario": "INSTALADOR",
+                "Token": token,
+                "Device": 1
               }
         }
         return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerAgrupadores",user)).data;
@@ -23,39 +24,39 @@ class ApiService {
             "Btinreq": {
                 "Requerimiento": 1,
                 "Canal": "BTDIGITAL",
-                "Usuario": "?",
-                "Device": "?",
-                "Token": "?"
+                "Usuario": "INSTALADOR",
+                "Device": 1,
+                "Token": token,
               },
-            "codigo": id
+            "IdAgrupador": parseInt(id)
         }
-        return (await http.post("com.dlya.bantotal.odwsbt_BTIndicadores?ObtenerIndicadoresPorAgrupador",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerIndxAgru",user)).data;
       }
       static async getSucursalesCajas(){
 
         let user = {
             "Btinreq": {
-                "Requerimiento": 1,
-                "Canal": "BTDIGITAL",
-                "Usuario": "?",
-                "Device": "?",
-                "Token": "?"
+              "Requerimiento": 1,
+              "Canal": "BTDIGITAL",
+              "Usuario": "INSTALADOR",
+              "Device": 1,
+              "Token": token,
               },
         }
-        return (await http.post("com.dlya.bantotal.odwsbt_BTIndicadores?InformacionDeSucursalesCajas",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?InformacionDeSucursalesCajas",user)).data;
       }
       static async getCotizaciones(){
 
         let user = {
             "Btinreq": {
-                "Requerimiento": 1,
-                "Canal": "BTDIGITAL",
-                "Usuario": "?",
-                "Device": "?",
-                "Token": "?"
+              "Requerimiento": 1,
+              "Canal": "BTDIGITAL",
+              "Usuario": "INSTALADOR",
+              "Device": 1,
+              "Token": token,
               },
         }
-        return (await http.post("com.dlya.bantotal.odwsbt_BTIndicadores?InformacionDeCotizacion",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerMonedasIndices",user)).data;
       }
 
 

@@ -2,6 +2,7 @@
   <div class="mt-3">
     <h2>Agrupadores</h2>
     <hr />
+    <!-- {{ agrupadores }} -->
     <div class="row">
       <template v-if="agrupadores">
         <div
@@ -10,7 +11,7 @@
           :key="index">
           <div class="card h-100">
             <div class="card-body text-center">
-              <h5 class="card-title mb-2">{{ item.descripcion }}</h5>
+              <h5 class="card-title mb-2">{{ item.Descripcion }}</h5>
               <div>
                 <!-- <div
               :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
@@ -20,7 +21,7 @@
                   <a href="#" class="card-link">{{ item.codigo }}</a>
                 </p>
                 <div class="content mb-2">
-                  <button class="btn btn-info format" @click="indicadorID(item.codigo)">
+                  <button class="btn btn-info format" @click="indicadorID(item.Codigo)">
                   Indicador
                 </button>
                 </div>
@@ -66,8 +67,9 @@ export default {
   methods: {
     async getAllAgrupadores() {
       await ApiService.GetAgrupadores().then((response) => {
-        this.agrupadores = response.agrupadores.sBTAgrupador.map((item) => {
-          switch (item.codigo) {
+       
+        this.agrupadores = response.sdtAgrupadores.sBTAgrupador.map((item) => {
+          switch (item.Codigo) {
             case 100:
               // "Condiciones Generales"
               item.icon = "fas fa-wrench fa-5x";

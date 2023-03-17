@@ -84,16 +84,21 @@ export default {
         this.username.toUpperCase(),
         this.password
       );
-      console.log(result);
-      if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
-        this.registrar();
-      } else {
-        this.message = result.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+
+      if(!result.success){
+        this.message = result.message;
         setTimeout(() => this.message = false, 3500);
+      }else{
+        if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
+          this.registrar(result.data);
+        } else {
+          this.message = result.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+          setTimeout(() => this.message = false, 3500);
+        }
       }
     },
-    async registrar() {
-      await this.$store.dispatch("login");
+    async registrar(user) {
+      await this.$store.dispatch("login",user);
       this.$router.push("/");
     }
   }
