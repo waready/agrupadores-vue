@@ -4,5 +4,11 @@ import router from "./router";
 import store from "./store";
 //blockui
 
+//dataTables
+import { ClientTable } from 'v-tables-3';
 
-createApp(App).use(store).use(router).mount("#app");
+createApp(App)
+    .use(store)
+    .use(router)
+    .use(ClientTable)
+    .mount("#app");

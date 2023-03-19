@@ -43,7 +43,7 @@ class ApiService {
               "Token": token,
               },
         }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?InformacionDeSucursalesCajas",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerSucursalesCajas",user)).data;
       }
       static async getCotizaciones(){
 
