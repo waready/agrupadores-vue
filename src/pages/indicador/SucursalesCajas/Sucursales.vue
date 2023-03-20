@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <h2>Sucursales</h2>
+    <h2 >Sucursales</h2>
+    {{ sucursales }}
+    <div v-if="sucursales">
     <hr />
     <div class="row">
       <div class="col d-flex justify-content-center">
@@ -44,14 +46,14 @@
         <tbody>
           <tr v-for="(item, index) in sucursalesFilter" :key="index">
             <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <th scope="row">{{ item.descripcion }}</th>
-            <td>{{ item.telefono }}</td>
-            <td>{{ item.direccion }}</td>
+            <th scope="row">{{ item.Descripcion }}</th>
+            <td>{{ item.Telefono }}</td>
+            <td>{{ item.Direccion }}</td>
             <td>
               <button
                 class="btn btn-info"
                 data-toggle="modal"
-                @click="generarMapa(item.latitud, item.longitud)"
+                @click="generarMapa(item.Latitud, item.Longitud)"
                 data-target="#exampleModalCenter">
                 Mapa
               </button>
@@ -129,11 +131,14 @@
       </div>
     </div>
   </div>
+  <loading v-else></loading>
+  </div>
 </template>
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
 import ApiService from "@/utils/ApiService";
+import loading from "@/components/Loading.vue";
 // var reponsibe = document.getElementById("#my-chart-id")
 // console.log(reponsibe)
 
@@ -144,28 +149,28 @@ export default {
   async mounted() {
     // this.getSucursalesCajas();
     // async getSucursalesCajas() {
-    await ApiService.getSucursalesCajas().then((r) => {
-      console.log(r);
-      this.sucursalesAbiertas =
-        r.detalle.sucursales.sdtSucursalesAbiertas.sBTSucursal;
-      this.sucursalesCerradas =
-        r.detalle.sucursales.sdtSucursalesCerradas.sBTSucursal;
+    await ApiService.getSucursalesCajas().then((response) => {
+      console.log(response);
+      this.sucursales = true
+      this.sucursalesAbiertas = response.SdtSucursalesCajas.Listadosucursalesa
+      this.sucursalesCerradas = response.SdtSucursalesCajas.Listadosucursalesc
+      
       this.chartData = {
         labels: [`abiertas`, `cerradas`],
         datasets: [
           {
             backgroundColor: ["#41B883", "#E46651"],
-            data: [r.detalle.sucursales.abiertas, r.detalle.sucursales.cerradas]
+            data: [response.SdtSucursalesCajas.Sucursalesabiertas, response.SdtSucursalesCajas.Sucursalescerradas]
           }
         ]
       };
     });
     // },
   },
-  components: { Pie },
+  components: { Pie,loading },
   data() {
     return {
-      sucursales: null,
+      sucursales: false,
       TextoBuscado: "",
       sucursalesAbiertas: [],
       sucursalesCerradas: [],
@@ -210,9 +215,9 @@ export default {
     },
     sucursalesFilter() {
       var buscado = this.TextoBuscado.toUpperCase();
-      return this.sucursalesAbiertas.filter((objeto) => {
+      return this.sucursalesAbiertas.SdtsBTSucursal.filter((objeto) => {
         return (
-          objeto.descripcion.toUpperCase().includes(buscado) ||
+          objeto.Descripcion.toUpperCase().includes(buscado) ||
           objeto.identificador == parseInt(buscado)
         );
       });

@@ -86,6 +86,22 @@ export default {
     message: "",
     columns: ['Nombre', 'Tipocambio'],
     options: {
+      texts: {
+          count:
+            "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
+          first: "Primero",
+          last: "Ultimo",
+          filter: "Filtro:",
+          filterPlaceholder: "Consulta de Busqueda",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros coincidentes",
+          noRequest:"Seleccione al menos un filtro para obtener resultados",
+          filterBy: "Filtrar por {column}",
+          loading: "Cargando...",
+          defaultOption: "Seleccionar {column}",
+          columns: "Columnas"
+        },
       editableColumns:['Nombre'],
       // see the options API
       // filterByColumn: true,
