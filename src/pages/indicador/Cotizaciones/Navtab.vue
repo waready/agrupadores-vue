@@ -3,17 +3,17 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          :class="{ active: $route.name == 'Sucursales' }"
-          to="/sucursales">
-          Sucursales
+          :class="{ active: $route.name == 'monedas' }"
+          to="/monedas">
+          Monedas
         </router-link>
       </li>
       <li class="nav-item">
         <router-link
           class="nav-link"
-          :class="{ active: $route.name == 'Cajas' }"
-          to="/sucursales/cajas">
-          Cajas
+          :class="{ active: $route.name == 'indices' }"
+          to="/monedas/indices">
+          Indices
         </router-link>
       </li>
     </ul>

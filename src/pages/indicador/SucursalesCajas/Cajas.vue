@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h2>Cajas</h2>
+    <div v-if="cajas">
     <hr />
     <div class="row">
       <div class="col d-flex justify-content-center">
@@ -22,12 +23,12 @@
         <tbody>
           <tr v-for="(item, index) in cajasAbiertas" :key="index">
             <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <td>{{ item.usuario }}</td>
-            <td>{{ item.nombre }}</td>
+            <td>{{ item.Usuariocaja }}</td>
+            <td>{{ item.Nombrecaja }}</td>
             <td>
               <button
                 class="btn btn-info"
-                @click="generarSucursal(item.sucursalId)"
+                @click="generarSucursal(item.Codigo)"
                 data-toggle="modal"
                 data-target="#exampleModalCenter">
                 Sucursal
@@ -60,12 +61,12 @@
         <tbody>
           <tr v-for="(item, index) in cajasCerradas" :key="index">
             <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <td>{{ item.usuario }}</td>
-            <td>{{ item.nombre }}</td>
+            <td>{{ item.Usuariocaja }}</td>
+            <td>{{ item.Nombrecaja }}</td>
             <td>
               <button
                 class="btn btn-info"
-               @click="generarSucursal(item.sucursalId)"
+               @click="generarSucursal(item.Codigo)"
                 data-toggle="modal"
                 data-target="#exampleModalCenter">
                 Sucursal
@@ -83,6 +84,8 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <loading v-else></loading>
     <div
       class="modal fade"
       id="exampleModalCenter"
@@ -131,12 +134,14 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
 import ApiService from "@/utils/ApiService";
+import loading from "@/components/Loading.vue";
 // var reponsibe = document.getElementById("#my-chart-id")
 // console.log(reponsibe)
 
@@ -147,13 +152,14 @@ export default {
   mounted() {
     this.getSucursalesCajas();
   },
-  components: { Pie },
+  components: { Pie,loading },
   data() {
     return {
+      cajas:false,
       mostrar:false,
       cajasSelect: null,
-      sucursalesAbiertas: null,
-      sucursalesCerradas: null,
+      cajasAbiertas: [],
+      cajasCerradas: [],
       chartData: {
         labels: ["January", "February", "March"],
         datasets: [
@@ -172,35 +178,30 @@ export default {
   methods: {
     async getSucursalesCajas() {
       await ApiService.getSucursalesCajas().then((r) => {
-        this.cajasAbiertas = r.detalle.cajas.sdtCajasAbiertas.sBTCaja;
-        this.cajasCerradas = r.detalle.cajas.sdtCajasCerradas.sBTCaja;
+        this.cajas = true
+        this.cajasAbiertas = r.SdtSucursalesCajas.Listadocajasa.SdtsBtCaja;
+        this.cajasCerradas = r.SdtSucursalesCajas.Listadocajasc.SdtsBtCaja;
         this.chartData = {
           labels: [`abiertas`, `cerradas`],
           datasets: [
             {
               backgroundColor: ["#41B883", "#E46651"],
-              data: [r.detalle.cajas.abiertas, r.detalle.cajas.cerradas]
+              data: [r.SdtSucursalesCajas.Cajasabiertas, r.SdtSucursalesCajas.Cajascerradas]
             }
           ]
-          // labels: [ 'lunary', 'jaguary', 'macht' ],
-          // datasets: [
-          //   {  backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
-          //     data: [40, 20, 12]
-          //   }
-          // ]
         };
       });
     },
     async generarSucursal(idScurusal) {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajasSelect =
-          r.detalle.sucursales.sdtSucursalesCerradas.sBTSucursal.filter(
-            (item) => item.identificador == idScurusal
+          r.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal.filter(
+            (item) => item.Identificador == idScurusal
           );
         if (!this.cajasSelect[0]) {
           this.cajasSelect =
-            r.detalle.sucursales.sdtSucursalesAbiertas.sBTSucursal.filter(
-              (item) => item.identificador == idScurusal
+            r.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal.filter(
+              (item) => item.Identificador == idScurusal
             );
         }
       });

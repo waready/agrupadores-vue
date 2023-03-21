@@ -12,8 +12,7 @@ const routes = [
       requiresAuth: true
     },
     children: [
-      { path: "", component: () =>
-      import(/* webpackChunkName: "about" */ "../pages/vista105/index.vue") },
+      { path: "", component: PublicIndex  },
       {
         path: "about",
         name: "about",
@@ -34,26 +33,40 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
-        path: "/indicador",
+        path: "/sucursales",
         name: 'general',
         component: () => import("../pages/indicador/SucursalesCajas/ContainerPage.vue"),
         meta: { requiresAuth: true },
         children: [
           {
-            path: "sucursales",
+            path: "",
             component: () => import("../pages/indicador/SucursalesCajas/Sucursales.vue"),
-            name: "configuracion_especialidades"
+            name: "Sucursales"
           },
           {
             path: "cajas",
             component: () => import("../pages/indicador/SucursalesCajas/Cajas.vue"),
-            name: "configuracion_capitulos"
+            name: "Cajas"
           },
         ]
       },
        {
-        path: "/marketplace",
-        component: () => import("../pages/indicador/Cotizaciones/Index.vue")
+        path: "/monedas",
+        name:"Cotizaciones",
+        component: () => import("../pages/indicador/Cotizaciones/ContainerPage.vue"),
+        meta: { requiresAuth: true },
+        children: [
+          {
+            path: "",
+            component: () => import("../pages/indicador/Cotizaciones/Monedas.vue"),
+            name: "monedas"
+          },
+          {
+            path: "indices",
+            component: () => import("../pages/indicador/Cotizaciones/Indices.vue"),
+            name: "indices"
+          },
+        ]
       },
       // {
       //   path: "/marketplace",

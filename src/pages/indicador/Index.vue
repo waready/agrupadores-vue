@@ -140,12 +140,18 @@ export default {
       });
     },
     indicadorID(id) {
-      if (id == 201) this.$router.push({ path: `/indicador/sucursales` });
-      if (id == 106) this.$router.push({ path: `/marketplace` });
+      if (id == 201) this.$router.push({ path: `/sucursales` });
+      if (id == 106) this.$router.push({ path: `/monedas` });
+
+      if (id == 105) this.$router.push({ path: `/monedas` });
+      if (id == 110) this.$router.push({ path: `/monedas` });
+      if (id == 360) this.$router.push({ path: `/monedas` });
+      if (id == 370) this.$router.push({ path: `/monedas` });
+      if (id == 380) this.$router.push({ path: `/monedas` });
       console.log(id)
 
-    toastr.success("hola","bien")
-  
+    toastr.success("Ruta Valida","Dirigiendo..")
+    toastr.error("Ruta en construcción","No Encontrada")  
     }
     //
     //

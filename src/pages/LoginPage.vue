@@ -89,12 +89,12 @@ export default {
         this.message = result.message;
         setTimeout(() => this.message = false, 3500);
       }else{
-        //if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
+        if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
           this.registrar(result.data);
-        //} else {
+        } else {
           this.message = result.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
           setTimeout(() => this.message = false, 3500);
-        //}
+        }
       }
     },
     async registrar(user) {

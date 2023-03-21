@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h2 >Sucursales</h2>
-    {{ sucursales }}
     <div v-if="sucursales">
     <hr />
     <div class="row">
@@ -78,14 +77,14 @@
         <tbody>
           <tr v-for="(item, index) in sucursalesCerradas" :key="index">
             <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <th scope="row">{{ item.descripcion }}</th>
-            <td>{{ item.telefono }}</td>
-            <td>{{ item.direccion }}</td>
+            <th scope="row">{{ item.Descripcion }}</th>
+            <td>{{ item.Telefono }}</td>
+            <td>{{ item.Direccion }}</td>
             <td>
-              <button
+              <button 
                 class="btn btn-info"
                 data-toggle="modal"
-                @click="generarMapa(item.latitud, item.longitud)"
+                @click="generarMapa(item.Latitud, item.Longitud)"
                 data-target="#exampleModalCenter">
                 Mapa
               </button>
@@ -152,8 +151,8 @@ export default {
     await ApiService.getSucursalesCajas().then((response) => {
       console.log(response);
       this.sucursales = true
-      this.sucursalesAbiertas = response.SdtSucursalesCajas.Listadosucursalesa
-      this.sucursalesCerradas = response.SdtSucursalesCajas.Listadosucursalesc
+      this.sucursalesAbiertas = response.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal
+      this.sucursalesCerradas = response.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal
       
       this.chartData = {
         labels: [`abiertas`, `cerradas`],
@@ -215,7 +214,7 @@ export default {
     },
     sucursalesFilter() {
       var buscado = this.TextoBuscado.toUpperCase();
-      return this.sucursalesAbiertas.SdtsBTSucursal.filter((objeto) => {
+      return this.sucursalesAbiertas.filter((objeto) => {
         return (
           objeto.Descripcion.toUpperCase().includes(buscado) ||
           objeto.identificador == parseInt(buscado)
