@@ -12,7 +12,8 @@ const routes = [
       requiresAuth: true
     },
     children: [
-      { path: "", component: PublicIndex },
+      { path: "", component: () =>
+      import(/* webpackChunkName: "about" */ "../pages/vista105/index.vue") },
       {
         path: "about",
         name: "about",

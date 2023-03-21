@@ -17,6 +17,7 @@
     "jquery": "^3.6.3",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
+    "toastr": "^2.1.4",
     "v-tables-3": "^0.4.7",
     "vue": "^3.2.13",
     "vue-chartjs": "^5.2.0",
@@ -37,7 +38,10 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
+    "node-sass": "^8.0.0",
     "prettier": "^2.4.1",
+    "sass": "^1.59.3",
+    "sass-loader": "^10.4.1",
     "style-loader": "^3.3.2"
   }
 }

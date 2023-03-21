@@ -9,22 +9,22 @@
           class="col-md-3 col-sm-5 mb-2"
           v-for="(item, index) in agrupadores"
           :key="index">
-          <div class="card h-100">
+          <div class="card h-100" @click="indicadorID(item.Codigo)">
             <div class="card-body text-center">
-              <h5 class="card-title mb-2">{{ item.Descripcion }}</h5>
+              <h5 class="card-title mb-2 hover-underline-animation">{{ item.Descripcion }}</h5>
               <div>
                 <!-- <div
               :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
                 <i :class="item.icon"></i>
-                <p class="card-text mt-2">
+                <!-- <p class="card-text mt-2">
                   Indicador N°
                   <a href="#" class="card-link">{{ item.codigo }}</a>
-                </p>
-                <div class="content mb-2">
+                </p> -->
+                <!-- <div class="content mb-3">
                   <button class="btn btn-info format" @click="indicadorID(item.Codigo)">
                   Indicador
                 </button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -110,5 +110,33 @@ export default {
   margin-bottom: 3%;
   position: absolute;
   bottom: 0;  
+}
+.card {
+  cursor: pointer;
+}
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: 
+#0087ca;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: 
+#0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 </style>

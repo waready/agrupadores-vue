@@ -17,13 +17,13 @@ class AuthService {
         UserId: username,
         UserPassword: password
       };
-      var response = await http.post(
-        "com.dlya.bantotal."+prefijo+"_Authenticate_v1?Execute",
-        user
-      );
-      // var response = {
-      //   data :"holi"
-      // } 
+      // var response = await http.post(
+      //   "com.dlya.bantotal."+prefijo+"_Authenticate_v1?Execute",
+      //   user
+      // );
+      var response = {
+        data :"holi"
+      } 
     
       var data = response.data;
       Cookies.set("token", "Bearer " + data.access);
