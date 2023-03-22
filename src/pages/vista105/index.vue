@@ -211,9 +211,7 @@ export default {};
 .bi-chevron-right::before {
   content: "\f285";
 }
-.bi-chevron-right::before {
-  content: map-get($bootstrap-icons-map, "chevron-right");
-}
+
 
 /*--------------------------------------------------------------
 # Facts

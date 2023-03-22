@@ -50,7 +50,7 @@ const routes = [
           },
         ]
       },
-       {
+      {
         path: "/monedas",
         name:"Cotizaciones",
         component: () => import("../pages/indicador/Cotizaciones/ContainerPage.vue"),
@@ -68,10 +68,14 @@ const routes = [
           },
         ]
       },
-      // {
-      //   path: "/marketplace",
-      //   component: () => import("../pages/marketplace/Index.vue")
-      // },
+      {
+        path: "/cuadre-saldos",
+        component: () => import("../pages/indicador/CuadreMonedas/Index.vue")
+      },
+      {
+        path: "/rubros-bolsa",
+        component: () => import("../pages/indicador/RubrosBolsa/Index.vue")
+      },
       {
         path: "/marketplace/map",
         component: () => import("../pages/marketplace/MapPage.vue")

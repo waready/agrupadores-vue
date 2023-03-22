@@ -5,10 +5,10 @@ import store from "./store";
 //blockui
 
 //dataTables
-import { ClientTable } from 'v-tables-3';
+import { ClientTable} from 'v-tables-3';
 
 createApp(App)
     .use(store)
     .use(router)
-    .use(ClientTable)
+    .use(ClientTable,{},'bootstrap4')
     .mount("#app");
