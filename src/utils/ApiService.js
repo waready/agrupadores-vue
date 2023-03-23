@@ -71,6 +71,19 @@ class ApiService {
         }
         return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerCuadreMonedasSaldos",user)).data;
       }
+      static async getCondicionesGenerales(){
+
+        let user = {
+            "Btinreq": {
+              "Requerimiento": 1,
+              "Canal": "BTDIGITAL",
+              "Usuario": "INSTALADOR",
+              "Device": 1,
+              "Token": token,
+              },
+        }
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?obtenerCondicionesGenerales",user)).data;
+      }
 
 
 

@@ -77,6 +77,10 @@ const routes = [
         component: () => import("../pages/indicador/RubrosBolsa/Index.vue")
       },
       {
+        path: "/condiciones",
+        component: () => import("../pages/indicador/CondicionesGenerales/Index.vue")
+      },
+      {
         path: "/marketplace/map",
         component: () => import("../pages/marketplace/MapPage.vue")
       }

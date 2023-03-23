@@ -115,7 +115,7 @@ export default {
   cursor: pointer;
 }
 .hover-underline-animation {
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
   color: 
 #0087ca;

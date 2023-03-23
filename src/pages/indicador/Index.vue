@@ -103,19 +103,19 @@ export default {
             switch (item.Codigo) {
               case 105:
                 // "Condiciones Generales"
-                item.icon = "fas fa-wrench fa-5x";
+                item.icon = "fas fa-cogs fa-5x primary";
                 break;
               case 106:
                 // "Informacion de cotizaciones"
-                item.icon = "fas fa-info-circle fa-5x";
+                item.icon = "fas fa-info-circle fa-5x blue";
                 break;
               case 110:
                 // "Prueba"
-                item.icon = "fas fa-chain-broken fa-5x";
+                item.icon = "fas fa-chain-broken fa-5x danger";
                 break;
               case 201:
                 // "Sucursales y Cajas'"
-                item.icon = "fas fa-institution fa-5x";
+                item.icon = "fas fa-institution fa-5x warning";
                 break;
               case 360:
                 // "Transacciones por estado'"
@@ -123,11 +123,11 @@ export default {
                 break;
               case 370:
                 // "Cuadre de monedas en saldos diarios"
-                item.icon = "fas fa-dollar fa-5x";
+                item.icon = "fas fa-dollar fa-5x success";
                 break;
               case 380:
                 // "Posibles rubros bolsa"
-                item.icon = "fas fa-balance-scale fa-5x";
+                item.icon = "fas fa-balance-scale fa-5x secondary";
                 break;
 
               default:
@@ -151,7 +151,7 @@ export default {
         toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 105) {
-        //this.$router.push({ path: `/monedas` });
+        this.$router.push({ path: `/condiciones` });
         toastr.warning("Ruta en construcción", "No finalizada");
       }
       if (id == 110) {
@@ -186,30 +186,5 @@ li {
   padding: 4px;
 }
 
-#toast-container > .toast {
-  background-image: none !important;
-}
 
-#toast-container > .toast:before {
-  position: fixed;
-  font-family: FontAwesome;
-  font-size: 24px;
-  line-height: 18px;
-  float: left;
-  color: #fff;
-  padding-right: 0.5em;
-  margin: auto 0.5em auto -1.5em;
-}
-#toast-container > .toast-warning:before {
-  content: "\f003";
-}
-#toast-container > .toast-error:before {
-  content: "\f001";
-}
-#toast-container > .toast-info:before {
-  content: "\f005";
-}
-#toast-container > .toast-success:before {
-  content: "\f002";
-}
 </style>

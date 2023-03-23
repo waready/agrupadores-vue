@@ -62,8 +62,8 @@ export default {
   },
 
   data: () => ({
-    username: "",
-    password: "",
+    username: "instalador",
+    password: "Bantotal2015",
     loading: false,
     message: ""
   }),
