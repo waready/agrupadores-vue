@@ -4,13 +4,11 @@
       {{ message + "!" }}
     </div>
     <div v-if="CuadreMonedas">
-      <h2>Balance Monedas Saldo</h2>
-      <hr />
       <section id="minimal-statistics">
         <div class="row">
           <div class="col-12 mt-3 mb-1">
-            <h4 class="text-uppercase">Minimal Statistics Cards</h4>
-            <p>Statistics on minimal cards.</p>
+            <h4 class="text-uppercase">Balance Monedas Saldo</h4>
+            <p>Información de los Balances</p>
           </div>
         </div>
         <!-- <div class="row">
@@ -165,10 +163,7 @@
           </div> -->
 
         <div class="row">
-          <div
-            class="col-xl-3 col-sm-6 col-12"
-            v-for="(item, index) in CuadreMonedas"
-            :key="index">
+          <div class="col-xl-3 col-sm-6 col-12" v-for="(item, index) in CuadreMonedas" :key="index">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
@@ -180,18 +175,12 @@
                       <span>{{ item.Nombremoneda }}</span>
                     </div>
                     <div class="align-self-center">
-                      <i
-                        class="fas fa-usd primary font-large-2 float-right"></i>
+                      <i :class="['fas fa-usd float-right',(item.Saldo < 0) ? 'danger' : 'success']"></i>
                     </div>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 100%"
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"></div>
+                    <div :class="(item.Saldo < 0) ? 'bg-danger' : 'bg-success', 'progressbar'" role="progressbar"
+                      style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
               </div>
