@@ -185,7 +185,7 @@ export default {
           labels: [`abiertas`, `cerradas`],
           datasets: [
             {
-              backgroundColor: ["#41B883", "#E46651"],
+              backgroundColor: ["#41B883", "#000"],
               data: [r.SdtSucursalesCajas.Cajasabiertas, r.SdtSucursalesCajas.Cajascerradas]
             }
           ]

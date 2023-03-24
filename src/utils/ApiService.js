@@ -84,7 +84,7 @@ class ApiService {
         }
         return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?obtenerCondicionesGenerales",user)).data;
       }
-      static async getRubroBolsa(){
+      static async getRubroBolsas(){
 
         let user = {
             "Btinreq": {
@@ -95,7 +95,20 @@ class ApiService {
               "Token": token,
               },
         }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?obtenerCondicionesGenerales",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerRubroBolsas",user)).data;
+      }
+      static async getTansaccionEstado(){
+
+        let user = {
+            "Btinreq": {
+              "Requerimiento": 1,
+              "Canal": "BTDIGITAL",
+              "Usuario": "INSTALADOR",
+              "Device": 1,
+              "Token": token,
+              },
+        }
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerTransaccionesEstados",user)).data;
       }
 
 }

@@ -9,13 +9,13 @@
           class="col-md-3 col-sm-5 mb-2"
           v-for="(item, index) in agrupadores"
           :key="index">
-          <div class="card h-100" @click="indicadorID(item.Codigo)">
+          <div class="card h-100 "  @click="indicadorID(item.Codigo)">
             <div class="card-body text-center">
               <h5 class="card-title mb-2 hover-underline-animation">{{ item.Descripcion }}</h5>
               <div>
                 <!-- <div
               :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
-                <i :class="item.icon"></i>
+                <i :class="[item.icon,'mt-3']"></i>
                 <!-- <p class="card-text mt-2">
                   Indicador N°
                   <a href="#" class="card-link">{{ item.codigo }}</a>

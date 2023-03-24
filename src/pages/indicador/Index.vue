@@ -152,15 +152,15 @@ export default {
       }
       if (id == 105) {
         this.$router.push({ path: `/condiciones` });
-        toastr.warning("Ruta en construcción", "No finalizada");
+        toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 110) {
         // this.$router.push({ path: `/monedas` });
         toastr.error("Ruta en construcción", "No Encontrada");
       }
       if (id == 360) {
-        //this.$router.push({ path: `/monedas` });
-         toastr.warning("Ruta en construcción", "No finalizada");
+          this.$router.push({ path: `/transacciones` });
+         toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 370) {
         this.$router.push({ path: `/cuadre-saldos` });
