@@ -12,25 +12,56 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-3 col-sm-6 col-12" v-for="(item, index) in CuadreMonedas" :key="index">
+          <div class="col-md-6">
+            <div class="input-group is-invalid">
+              <input
+                type="text"
+                name="filter"
+                class="form-control"
+                v-model="TextoBuscado"
+                id="filter" />
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="validatedInputGroupPrepend"
+                  ><i class="fa fa-search" aria-hidden="true"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div
+            class="col-xl-3 col-sm-6 col-12"
+            v-for="(item, index) in filterCuadreMoneda"
+            :key="index">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
                   <div class="media d-flex">
                     <div class="media-body text-left">
-                      <h3 :class="(item.Saldo < 0) ? 'danger' : 'success'">
+                      <h3 :class="item.Saldo != 0 ? 'danger' : 'success'">
                         {{ item.Saldo }}
                       </h3>
                       <span>{{ item.Nombremoneda }}</span>
                     </div>
-                    <div :class="['align-self-center',(item.Saldo < 0) ? 'danger' : 'success']">
-
-                     {{ item.Signo }}
+                    <div
+                      :class="[
+                        'align-self-center',
+                        item.Saldo != 0 ? 'danger' : 'success'
+                      ]">
+                      {{ item.Signo }}
                     </div>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
-                    <div :class="[(item.Saldo < 0) ? 'bg-danger' : 'bg-success', 'progressbar']" role="progressbar"
-                      style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div
+                      :class="[
+                        item.Saldo != 0 ? 'bg-danger' : 'bg-success',
+                        'progressbar'
+                      ]"
+                      role="progressbar"
+                      style="width: 100%"
+                      aria-valuenow="100"
+                      aria-valuemin="0"
+                      aria-valuemax="100"></div>
                   </div>
                 </div>
               </div>
@@ -64,36 +95,7 @@ export default {
   data: () => ({
     CuadreMonedas: null,
     message: "",
-    columns: ["Nombremoneda", "Moneda", "Saldo"],
-    options: {
-      editableColumns: ["Nombre"],
-      // see the options API
-      texts: {
-        count:
-          "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
-        first: "Primero",
-        last: "Ultimo",
-        filter: "Filtro:",
-        filterPlaceholder: "Consulta de Busqueda",
-        limit: "Registros:",
-        page: "Pagina:",
-        noResults: "No hay registros coincidentes",
-        noRequest: "Seleccione al menos un filtro para obtener resultados",
-        filterBy: "Filtrar por {column}",
-        loading: "Cargando...",
-        defaultOption: "Seleccionar {column}",
-        columns: "Columnas"
-      },
-      // filterByColumn: true,
-      perPage: 5,
-      perPageValues: [5, 10, 25, 50, 100, 500],
-      headings: {
-        // id: 'ID',
-        Nombremoneda: "Nombre Moneda",
-        Moneda: "Codigo Moneda",
-        Saldo: "Saldo"
-      }
-    }
+    TextoBuscado:""
   }),
 
   computed: {
@@ -121,9 +123,20 @@ export default {
     }
     //
     //
+  },
+  computed:{
+    filterCuadreMoneda(){
+      var buscado = this.TextoBuscado.toUpperCase();
+      return this.CuadreMonedas.filter((objeto) => {
+        return ( 
+           String (objeto.Saldo).toUpperCase().includes(buscado) 
+           || objeto.Nombremoneda.toUpperCase().includes(buscado)
+           || objeto.Signo.toUpperCase().includes(buscado)
+        
+        );
+      });
+    }
   }
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

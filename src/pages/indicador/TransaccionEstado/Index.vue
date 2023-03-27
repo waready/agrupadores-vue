@@ -69,100 +69,116 @@
         <h4 class="text-uppercase">Detalle</h4>
         <p>Detalle Transacciones</p>
       </div>
-      <LineChartGenerator :options="chartOptions" :data="chartData" class="mb-2" />
+      
+      <div class="row">
+        <div class="col-12">
+          <LineChartGenerator
+        :options="chartOptions"
+        :data="chartData"
+        class="mb-2" />
+        </div>
+        <div class="col-12">
+          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+        </div>
+        <!-- <div class="col-12">
+          <Doughnut :options="chartOptions" :data="chartData"  />
+        </div> -->
+        <div class="col-12">
+          <Radar :options="chartOptions" :data="chartData" />
+        </div>
+      </div>
       <div class="row justify-content-md-center">
         <div class="col-md-7 mt-3">
-           <ul class="list-group">
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento autorizado sin contabilizar(A)
-            <span class="badge badge-primary badge-pill">
-              {{ transacciones.Transacciona }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento de ingreso batch no contabilizado(B)
-            <span class="badge badge-warning badge-pill">
-              {{ transacciones.Transaccionb }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento con errores(E)
-            <span class="badge badge-danger badge-pill">
-              {{ transacciones.Transaccione }}
-            </span>
-          </li>
+          <ul class="list-group">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento autorizado sin contabilizar(A)
+              <span class="badge badge-primary badge-pill">
+                {{ transacciones.Transacciona }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento de ingreso batch no contabilizado(B)
+              <span class="badge badge-warning badge-pill">
+                {{ transacciones.Transaccionb }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento con errores(E)
+              <span class="badge badge-danger badge-pill">
+                {{ transacciones.Transaccione }}
+              </span>
+            </li>
 
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento contabilizado y pasado al histórico(H)
-            <span class="badge badge-primary badge-pill">
-              {{ transacciones.Transaccionh }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento de ingreso libre no contabilizado(L)
-            <span class="badge badge-warning badge-pill">
-              {{ transacciones.Transaccionl }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento con autorizaciones pendientes(M)
-            <span class="badge badge-primary badge-pill">
-              {{ transacciones.Transaccionm }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento ingresado por el transaccional no contabilizado(N)
-            <span class="badge badge-warning badge-pill">
-              {{ transacciones.Transaccionn }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento contabilizado, pasado al histórico, con archivos de
-            saldos históricos actualizados(P)
-            <span class="badge badge-primary badge-pill">
-              {{ transacciones.Transaccionp }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento con autorizaciones denegadas(R)
-            <span class="badge badge-warning badge-pill">
-              {{ transacciones.Transaccionr }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento contabilizado sin pasar al histórico(S)
-            <span class="badge badge-primary badge-pill">
-              {{ transacciones.Transaccions }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Movimiento con autoriz. p/tipo cambio ingresado, para ser
-            retomado(X)
-            <span class="badge badge-primary badge-pill">
-              {{ transacciones.Transaccionx }}
-            </span>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center">
-            Sin especificar
-            <span class="badge badge-info badge-pill">
-              {{ transacciones.Transaccionsp }}
-            </span>
-          </li>
-        </ul>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento contabilizado y pasado al histórico(H)
+              <span class="badge badge-primary badge-pill">
+                {{ transacciones.Transaccionh }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento de ingreso libre no contabilizado(L)
+              <span class="badge badge-warning badge-pill">
+                {{ transacciones.Transaccionl }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento con autorizaciones pendientes(M)
+              <span class="badge badge-primary badge-pill">
+                {{ transacciones.Transaccionm }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento ingresado por el transaccional no contabilizado(N)
+              <span class="badge badge-warning badge-pill">
+                {{ transacciones.Transaccionn }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento contabilizado, pasado al histórico, con archivos de
+              saldos históricos actualizados(P)
+              <span class="badge badge-primary badge-pill">
+                {{ transacciones.Transaccionp }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento con autorizaciones denegadas(R)
+              <span class="badge badge-warning badge-pill">
+                {{ transacciones.Transaccionr }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento contabilizado sin pasar al histórico(S)
+              <span class="badge badge-primary badge-pill">
+                {{ transacciones.Transaccions }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Movimiento con autoriz. p/tipo cambio ingresado, para ser
+              retomado(X)
+              <span class="badge badge-primary badge-pill">
+                {{ transacciones.Transaccionx }}
+              </span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center">
+              Sin especificar
+              <span class="badge badge-info badge-pill">
+                {{ transacciones.Transaccionsp }}
+              </span>
+            </li>
+          </ul>
         </div>
-       
       </div>
     </div>
     <loading v-else></loading>
@@ -170,26 +186,36 @@
 </template>
 <script>
 import { Line as LineChartGenerator } from "vue-chartjs";
-
+import { Bar } from "vue-chartjs";
+import { Doughnut } from 'vue-chartjs'
+import { Radar } from 'vue-chartjs'
 import {
   Chart as ChartJS,
   Title,
+  RadialLinearScale,
+  ArcElement,
   Tooltip,
   Legend,
   LineElement,
   LinearScale,
   CategoryScale,
-  PointElement
+  PointElement,
+  BarElement,
+ 
 } from "chart.js";
 
 ChartJS.register(
+  RadialLinearScale,
+  ArcElement,
   Title,
   Tooltip,
   Legend,
   LineElement,
   LinearScale,
   CategoryScale,
-  PointElement
+  PointElement,
+  BarElement
+
 );
 
 import ApiService from "@/utils/ApiService.js";
@@ -198,7 +224,10 @@ export default {
   name: "RubroBolsa",
   components: {
     loading,
-    LineChartGenerator
+    LineChartGenerator,
+    Bar,
+    Doughnut,
+    Radar
   },
   mounted() {
     this.getAllTansaccionEstado();
@@ -264,7 +293,7 @@ export default {
     }
     //
     //
-  }
+  },
 };
 </script>
 

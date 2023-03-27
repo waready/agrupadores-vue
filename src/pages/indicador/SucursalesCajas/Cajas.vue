@@ -2,90 +2,112 @@
   <div class="container">
     <h2>Cajas</h2>
     <div v-if="cajas">
-    <hr />
-    <div class="row">
-      <div class="col d-flex justify-content-center">
-        <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
+      <hr />
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
+        </div>
+      </div>
+      <hr />
+      <h3>Cajas Abiertas</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group is-invalid">
+            <input
+              type="text"
+              name="filter"
+              class="form-control"
+              v-model="TextoBuscado"
+              id="filter" />
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="validatedInputGroupPrepend"
+                ><i class="fa fa-search" aria-hidden="true"></i
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped tabla">
+          <thead>
+            <tr>
+              <!-- <th scope="col">identificador</th> -->
+              <th scope="col">Usuario</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Sucursal</th>
+
+              <th scope="col">Ver Sucursal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in CajasFilter" :key="index">
+              <!-- <th scope="row">{{ item.identificador }}</th> -->
+              <td>{{ item.Usuariocaja }}</td>
+              <td>{{ item.Nombrecaja }}</td>
+              <td>{{ item.Sucursal }}</td>
+              <td>
+                <button
+                  class="btn btn-info"
+                  @click="generarSucursal(item.Codigo)"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter">
+                  Sucursal
+                </button>
+                <!-- <button
+                class="btn btn-info"
+               @click="generarMapa(item.sucursalId)"
+               
+                data-toggle="modal"
+                data-target="#exampleModalCenter">
+                Sucursal
+              </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr />
+      <h3>Cajas Cerradas</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <!-- <th scope="col">identificador</th> -->
+              <th scope="col">Usuario</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Id Sucursal</th>
+              <th scope="col">Sucursal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in cajasCerradas" :key="index">
+              <!-- <th scope="row">{{ item.identificador }}</th> -->
+              <td>{{ item.Usuariocaja }}</td>
+              <td>{{ item.Nombrecaja }}</td>
+              <td>{{ item.Codigo }}</td>
+              <td>
+                <button
+                  class="btn btn-info"
+                  @click="generarSucursal(item.Codigo)"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter">
+                  Sucursal
+                </button>
+                <!-- <button
+                class="btn btn-info"
+               @click="generarMapa(item.sucursalId)"
+               
+                data-toggle="modal"
+                data-target="#exampleModalCenter">
+                Sucursal
+              </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <hr />
-    <h3>Cajas Abiertas</h3>
-    <div class="table-responsive">
-      <table class="table table-striped tabla">
-        <thead>
-          <tr>
-            <!-- <th scope="col">identificador</th> -->
-            <th scope="col">Usuario</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Sucursal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in cajasAbiertas" :key="index">
-            <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <td>{{ item.Usuariocaja }}</td>
-            <td>{{ item.Nombrecaja }}</td>
-            <td>
-              <button
-                class="btn btn-info"
-                @click="generarSucursal(item.Codigo)"
-                data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Sucursal
-              </button>
-              <!-- <button
-                class="btn btn-info"
-               @click="generarMapa(item.sucursalId)"
-               
-                data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Sucursal
-              </button> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <hr />
-    <h3>Cajas Cerradas</h3>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <!-- <th scope="col">identificador</th> -->
-            <th scope="col">Usuario</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Sucursal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in cajasCerradas" :key="index">
-            <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <td>{{ item.Usuariocaja }}</td>
-            <td>{{ item.Nombrecaja }}</td>
-            <td>
-              <button
-                class="btn btn-info"
-               @click="generarSucursal(item.Codigo)"
-                data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Sucursal
-              </button>
-              <!-- <button
-                class="btn btn-info"
-               @click="generarMapa(item.sucursalId)"
-               
-                data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Sucursal
-              </button> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <loading v-else></loading>
+    <loading v-else></loading>
     <div
       class="modal fade"
       id="exampleModalCenter"
@@ -109,14 +131,23 @@
           </div>
           <div class="modal-body">
             <div>
-              <div class="card" v-for="(item,index) in cajasSelect" :key="index">
-                <div class="card-header text-center bg-secondary ">
+              <div
+                class="card"
+                v-for="(item, index) in cajasSelect"
+                :key="index">
+                <div class="card-header text-center bg-secondary">
                   {{ item.descripcion }}
                 </div>
                 <div class="card-body">
-                  <p class="card-title"><i class="fa fa-phone" aria-hidden="true"></i> {{ item.telefono }}</p>
-                  <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ item.direccion }} </p>
-                  <button class="btn btn-primary" >Mostrar mapa</button>
+                  <p class="card-title">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    {{ item.telefono }}
+                  </p>
+                  <p class="card-text">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    {{ item.direccion }}
+                  </p>
+                  <button class="btn btn-primary">Mostrar mapa</button>
                 </div>
               </div>
             </div>
@@ -134,7 +165,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -152,14 +182,17 @@ export default {
   mounted() {
     this.getSucursalesCajas();
   },
-  components: { Pie,loading },
+  components: { Pie, loading },
   data() {
     return {
-      cajas:false,
-      mostrar:false,
+      cajas: false,
+      mostrar: false,
+      TextoBuscado:"",
       cajasSelect: null,
       cajasAbiertas: [],
       cajasCerradas: [],
+      cajasAbiertasPremiun: [],
+      cajasCerradasPremiun: [],
       chartData: {
         labels: ["January", "February", "March"],
         datasets: [
@@ -178,7 +211,7 @@ export default {
   methods: {
     async getSucursalesCajas() {
       await ApiService.getSucursalesCajas().then((r) => {
-        this.cajas = true
+        this.cajas = true;
         this.cajasAbiertas = r.SdtSucursalesCajas.Listadocajasa.SdtsBtCaja;
         this.cajasCerradas = r.SdtSucursalesCajas.Listadocajasc.SdtsBtCaja;
         this.chartData = {
@@ -186,10 +219,32 @@ export default {
           datasets: [
             {
               backgroundColor: ["#41B883", "#000"],
-              data: [r.SdtSucursalesCajas.Cajasabiertas, r.SdtSucursalesCajas.Cajascerradas]
+              data: [
+                r.SdtSucursalesCajas.Cajasabiertas,
+                r.SdtSucursalesCajas.Cajascerradas
+              ]
             }
           ]
         };
+
+        let data = this.cajasAbiertas.map((cajas) => {
+          var cajasSelect = null;
+          cajasSelect =
+            r.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal.filter(
+              (item) => item.Identificador == cajas.Codigo
+            );
+          if (!this.cajasSelect) {
+            cajasSelect =
+              r.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal.filter(
+                (item) => item.Identificador == cajas.Codigo
+              );
+          }
+          //  console.log(cajasSelect)
+          cajas.Sucursal = cajasSelect[0].Descripcion;
+          return cajas;
+        });
+
+        this.cajasAbiertasPremiun = data;
       });
     },
     async generarSucursal(idScurusal) {
@@ -206,18 +261,21 @@ export default {
         }
       });
       //await this.generarMapa()
-       await this.generarMapa(this.cajasSelect[0].latitud, this.cajasSelect[0].longitud)
+      await this.generarMapa(
+        this.cajasSelect[0].latitud,
+        this.cajasSelect[0].longitud
+      );
     },
     async generarMapa(lat, lng) {
       this.$options.markers = new Array();
       // https://www.google.com/maps?ll=-15.322977,-70.028362&z=8&t=m&hl=es-ES&gl=US&mapclient=apiv3
       const uluru = { lat: lat, lng: lng };
-       const map = await new window.google.maps.Map(this.$refs.elMap, {
+      const map = await new window.google.maps.Map(this.$refs.elMap, {
         zoom: 10,
         center: uluru
       });
-     this.$options.map = map;
-     const marker = new google.maps.Marker({
+      this.$options.map = map;
+      const marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, lng),
         map: map
       });
@@ -230,7 +288,17 @@ export default {
         position: "relative"
       };
     },
-  
+    CajasFilter() {
+      var buscado = this.TextoBuscado.toUpperCase();
+      return this.cajasAbiertasPremiun.filter((objeto) => {
+        return ( 
+          objeto.Nombrecaja.toUpperCase().includes(buscado) 
+           || objeto.Sucursal.toUpperCase().includes(buscado)
+        
+        );
+      });
+      //return this.cajasAbiertasPremiun
+    }
   }
 };
 </script>

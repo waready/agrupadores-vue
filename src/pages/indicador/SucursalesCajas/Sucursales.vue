@@ -39,6 +39,8 @@
             <th scope="col"># Sucursal</th>
             <th scope="col">telefono</th>
             <th scope="col">direccion</th>
+            <th scope="col">cajas abiertas</th>
+            <th scope="col">cajas cerradas</th>
             <th scope="col">mapa</th>
           </tr>
         </thead>
@@ -48,6 +50,8 @@
             <th scope="row">{{ item.Descripcion }}</th>
             <td>{{ item.Telefono }}</td>
             <td>{{ item.Direccion }}</td>
+            <td><span class="badge badge-success"> {{ item.cajasA }}</span></td>
+            <td><span class="badge badge-danger"> {{ item.cajasC }}</span></td>
             <td>
               <button
                 class="btn btn-info"
@@ -71,6 +75,8 @@
             <th scope="col"># Sucursal</th>
             <th scope="col">telefono</th>
             <th scope="col">direccion</th>
+            <!-- <th scope="col">cajas abiertas</th>
+            <th scope="col">cajas cerradas</th> -->
             <th scope="col">mapa</th>
           </tr>
         </thead>
@@ -80,6 +86,7 @@
             <th scope="row">{{ item.Descripcion }}</th>
             <td>{{ item.Telefono }}</td>
             <td>{{ item.Direccion }}</td>
+        
             <td>
               <button 
                 class="btn btn-info"
@@ -146,24 +153,37 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default {
   name: "sucursales",
   async mounted() {
-    // this.getSucursalesCajas();
-    // async getSucursalesCajas() {
+  
     await ApiService.getSucursalesCajas().then((response) => {
-      console.log(response);
       this.sucursales = true
       this.sucursalesAbiertas = response.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal
       this.sucursalesCerradas = response.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal
-      
+      this.cajasAbiertas = response.SdtSucursalesCajas.Listadocajasa.SdtsBtCaja;
+      this.cajasCerradas = response.SdtSucursalesCajas.Listadocajasc.SdtsBtCaja;
       this.chartData = {
         labels: [`abiertas`, `cerradas`],
         datasets: [
           {
-            backgroundColor: ["#41B883","#000"],
+            backgroundColor: ["#41B883","#E46651"],
             data: [response.SdtSucursalesCajas.Sucursalesabiertas, response.SdtSucursalesCajas.Sucursalescerradas]
           }
         ]
       };
     });
+
+    let array = this.sucursalesAbiertas.map((item) => {
+      let cajaA = this.cajasAbiertas.filter((filtro) =>{
+        return (filtro.Codigo == item.Identificador)
+      })
+      let cajaC = this.cajasCerradas.filter((filtro) =>{
+        return (filtro.Codigo == item.Identificador)
+      })
+      item.cajasA = cajaA.length
+      item.cajasC = cajaC.length
+      return item;
+    })
+    console.log (array)
+    this.sucusalesPremiun = array
     // },
   },
   components: { Pie,loading },
@@ -172,7 +192,10 @@ export default {
       sucursales: false,
       TextoBuscado: "",
       sucursalesAbiertas: [],
+      sucusalesPremiun:[],
       sucursalesCerradas: [],
+      cajasAbiertas: [],
+      cajasCerradas: [],
       chartData: {
         labels: ["January", "February", "March"],
         datasets: [
@@ -214,7 +237,7 @@ export default {
     },
     sucursalesFilter() {
       var buscado = this.TextoBuscado.toUpperCase();
-      return this.sucursalesAbiertas.filter((objeto) => {
+      return this.sucusalesPremiun.filter((objeto) => {
         return (
           objeto.Descripcion.toUpperCase().includes(buscado) ||
           objeto.identificador == parseInt(buscado)

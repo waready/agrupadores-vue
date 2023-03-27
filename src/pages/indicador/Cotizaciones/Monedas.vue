@@ -42,7 +42,13 @@ export default {
     message: "",
     columns: ['Nombre', 'Tipocambio'],
     options: {
-      editableColumns:['Nombre'],
+      sortable: ['Nombre', 'Tipocambio'],
+      sortIcon: {
+          is: 'fa-sort', // utiliza iconos de Font Awesome
+          base: 'fa',
+          up: 'fa-sort-asc',
+          down: 'fa-sort-desc',
+        },
       // see the options API
       texts: {
           count:
@@ -68,6 +74,8 @@ export default {
         Nombre: "Nombre",
         Tipocambio: "Cotizacion",
       },
+       
+      
     },
   }),
 
@@ -100,6 +108,19 @@ export default {
 };
 </script>
 <style  scoped>
-
+ .sortable-header {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .sortable-header .sort-icon {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+  }
+  .sortable-header .sort-icon.fa-sort {
+    opacity: 0.5;
+  }
 </style>
   

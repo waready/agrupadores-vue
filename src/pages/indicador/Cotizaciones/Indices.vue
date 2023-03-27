@@ -59,7 +59,13 @@ export default {
           defaultOption: "Seleccionar {column}",
           columns: "Columnas"
         },
-      editableColumns:['Nombre'],
+      sortable: ['Nombre', 'Tipocambio'],
+      sortIcon: {
+          is: 'fa-sort', // utiliza iconos de Font Awesome
+          base: 'fa',
+          up: 'fa-sort-asc',
+          down: 'fa-sort-desc',
+        },
       // see the options API
       // filterByColumn: true,
       perPage: 10,
@@ -100,5 +106,21 @@ export default {
   }
 };
 </script>
-<style scoped ></style>
+<style scoped >
+.sortable-header {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .sortable-header .sort-icon {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+  }
+  .sortable-header .sort-icon.fa-sort {
+    opacity: 0.5;
+  }
+
+</style>
   

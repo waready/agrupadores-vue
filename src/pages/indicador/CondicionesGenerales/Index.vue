@@ -261,7 +261,7 @@
                       <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h3 class="title">Fecha de apertura core</h3>
                       <p class="description">
-                        {{ CondicionesGenerales.Fechaapertura }}
+                        {{ fechaApertura }}
                       </p>
                     </a>
                   </div>
@@ -273,7 +273,7 @@
                       <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h3 class="title">Fecha de cierre core</h3>
                       <p class="description">
-                        {{ CondicionesGenerales.Fechacierre }}
+                        {{ fechaCierre }}
                       </p>
                     </a>
                   </div>
@@ -285,7 +285,7 @@
                       <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h3 class="title">Fecha de apertura 7x24</h3>
                       <p class="description">
-                        {{ CondicionesGenerales.Fechaaperturacanales }}
+                        {{ fechaApertura7x24 }}
                       </p>
                     </a>
                   </div>
@@ -297,7 +297,7 @@
                       <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h3 class="title">Fecha de cierre 7x24</h3>
                       <p class="description">
-                        {{ CondicionesGenerales.Fechacierrecanales }}
+                        {{ fechaCierre7x24 }}
                       </p>
                     </a>
                   </div>
@@ -331,7 +331,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale
 );
-
+import moment from 'moment';
 import ApiService from "@/utils/ApiService.js";
 import loading from "@/components/Loading.vue";
 export default {
@@ -380,6 +380,24 @@ export default {
     }
     //
     //
+  },
+  computed:{
+    fechaApertura(){
+      const fecha = moment(this.CondicionesGenerales.Fechaapertura);
+      return fecha.format('DD/MM/YYYY');
+    },
+    fechaCierre(){
+      const fecha = moment(this.CondicionesGenerales.Fechacierre);
+      return fecha.format('DD/MM/YYYY');
+    },
+    fechaApertura7x24(){
+      const fecha = moment(this.CondicionesGenerales.Fechaaperturacanales);
+      return fecha.format('DD/MM/YYYY');
+    },
+    fechaCierre7x24(){
+      const fecha = moment(this.CondicionesGenerales.Fechacierrecanales);
+      return fecha.format('DD/MM/YYYY');
+    }
   }
 };
 </script>
