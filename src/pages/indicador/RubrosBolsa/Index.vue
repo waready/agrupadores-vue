@@ -94,7 +94,7 @@ export default {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
-        this.rubroBolsa = response.sdtRubrobolsas.SdtBBTRUBROBOLSA;
+        this.rubroBolsa = response.sdtRubrobolsas.SdtsBTRubroBolsa;
       });
     }
     //

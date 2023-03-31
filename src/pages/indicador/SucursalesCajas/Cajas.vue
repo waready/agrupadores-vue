@@ -42,13 +42,13 @@
           <tbody>
             <tr v-for="(item, index) in CajasFilter" :key="index">
               <!-- <th scope="row">{{ item.identificador }}</th> -->
-              <td>{{ item.Usuariocaja }}</td>
-              <td>{{ item.Nombrecaja }}</td>
+              <td>{{ item.usuario }}</td>
+              <td>{{ item.nombre }}</td>
               <td>{{ item.Sucursal }}</td>
               <td>
                 <button
                   class="btn btn-info"
-                  @click="generarSucursal(item.Codigo)"
+                  @click="generarSucursal(item.sucursalId)"
                   data-toggle="modal"
                   data-target="#exampleModalCenter">
                   Sucursal
@@ -82,9 +82,9 @@
           <tbody>
             <tr v-for="(item, index) in cajasCerradas" :key="index">
               <!-- <th scope="row">{{ item.identificador }}</th> -->
-              <td>{{ item.Usuariocaja }}</td>
-              <td>{{ item.Nombrecaja }}</td>
-              <td>{{ item.Codigo }}</td>
+              <td>{{ item.UsuarioCaja }}</td>
+              <td>{{ item.NombreCaja }}</td>
+              <td>{{ item.codigo }}</td>
               <td>
                 <button
                   class="btn btn-info"
@@ -212,16 +212,16 @@ export default {
     async getSucursalesCajas() {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajas = true;
-        this.cajasAbiertas = r.SdtSucursalesCajas.Listadocajasa.SdtsBtCaja;
-        this.cajasCerradas = r.SdtSucursalesCajas.Listadocajasc.SdtsBtCaja;
+        this.cajasAbiertas = r.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja;
+        this.cajasCerradas = r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja;
         this.chartData = {
           labels: [`abiertas`, `cerradas`],
           datasets: [
             {
               backgroundColor: ["#41B883", "#000"],
               data: [
-                r.SdtSucursalesCajas.Cajasabiertas,
-                r.SdtSucursalesCajas.Cajascerradas
+                r.sdtSucursalesCajas.cajasAbiertas,
+                r.sdtSucursalesCajas.cajasCerradas
               ]
             }
           ]
@@ -230,17 +230,17 @@ export default {
         let data = this.cajasAbiertas.map((cajas) => {
           var cajasSelect = null;
           cajasSelect =
-            r.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal.filter(
-              (item) => item.Identificador == cajas.Codigo
+            r.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal.filter(
+              (item) => item.identificador == cajas.sucursalId
             );
           if (!this.cajasSelect) {
             cajasSelect =
-              r.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal.filter(
-                (item) => item.Identificador == cajas.Codigo
+              r.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal.filter(
+                (item) => item.identificador == cajas.sucursalId
               );
           }
-          //  console.log(cajasSelect)
-          cajas.Sucursal = cajasSelect[0].Descripcion;
+           //console.log(cajasSelect)
+          cajas.Sucursal = cajasSelect[0].descripcion;
           return cajas;
         });
 
@@ -250,13 +250,13 @@ export default {
     async generarSucursal(idScurusal) {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajasSelect =
-          r.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal.filter(
-            (item) => item.Identificador == idScurusal
+          r.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal.filter(
+            (item) => item.identificador == idScurusal
           );
         if (!this.cajasSelect[0]) {
           this.cajasSelect =
-            r.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal.filter(
-              (item) => item.Identificador == idScurusal
+            r.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal.filter(
+              (item) => item.identificador == idScurusal
             );
         }
       });
@@ -292,7 +292,7 @@ export default {
       var buscado = this.TextoBuscado.toUpperCase();
       return this.cajasAbiertasPremiun.filter((objeto) => {
         return ( 
-          objeto.Nombrecaja.toUpperCase().includes(buscado) 
+          objeto.nombre.toUpperCase().includes(buscado) 
            || objeto.Sucursal.toUpperCase().includes(buscado)
         
         );

@@ -8,9 +8,9 @@
       <hr />
       <div id="moneda">
         <v-client-table :columns="columns" :data="monedas" :options="options">
-          <template v-slot:Tipocambio="item">
-            <a :class="item.row.Tipocambio != 'S' ? 'badge badge-danger' : 'badge badge-success'">{{
-              item.row.Tipocambio }}</a>
+          <template v-slot:tipoCambio="item">
+            <a :class="item.row.tipoCambio != 'S' ? 'badge badge-danger' : 'badge badge-success'">{{
+              item.row.tipoCambio }}</a>
           </template>
         </v-client-table>
       </div>
@@ -40,9 +40,9 @@ export default {
   data: () => ({
     monedas: null,
     message: "",
-    columns: ['Nombre', 'Tipocambio'],
+    columns: ['nombre', 'tipoCambio'],
     options: {
-      sortable: ['Nombre', 'Tipocambio'],
+      sortable: ['nombre', 'tipoCambio'],
       sortIcon: {
           is: 'fa-sort', // utiliza iconos de Font Awesome
           base: 'fa',
@@ -71,8 +71,8 @@ export default {
       perPageValues: [10, 25, 50, 100, 500],  
       headings: {
         // id: 'ID',
-        Nombre: "Nombre",
-        Tipocambio: "Cotizacion",
+        nombre: "Nombre",
+        tipoCambio: "Cotizacion",
       },
        
       
@@ -99,7 +99,7 @@ export default {
 
           }
           //this.indices = response.sdtIndices.SdtBBTMONEDA;
-          this.monedas = response.sdtMonedas.SdtBBTMONEDA;
+          this.monedas = response.sdtMonedas.SdtsBTMonedaIndicador;
         })
     },
     //

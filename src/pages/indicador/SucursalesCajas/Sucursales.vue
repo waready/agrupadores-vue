@@ -2,6 +2,7 @@
   <div class="container">
     <h2 >Sucursales</h2>
     <div v-if="sucursales">
+     
     <hr />
     <div class="row">
       <div class="col d-flex justify-content-center">
@@ -47,16 +48,16 @@
         <tbody>
           <tr v-for="(item, index) in sucursalesFilter" :key="index">
             <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <th scope="row">{{ item.Descripcion }}</th>
-            <td>{{ item.Telefono }}</td>
-            <td>{{ item.Direccion }}</td>
+            <th scope="row">{{ item.descripcion }}</th>
+            <td>{{ item.telefono }}</td>
+            <td>{{ item.direccion }}</td>
             <td><span class="badge badge-success"> {{ item.cajasA }}</span></td>
             <td><span class="badge badge-danger"> {{ item.cajasC }}</span></td>
             <td>
               <button
                 class="btn btn-info"
                 data-toggle="modal"
-                @click="generarMapa(item.Latitud, item.Longitud)"
+                @click="generarMapa(item.latitud, item.longitud)"
                 data-target="#exampleModalCenter">
                 Mapa
               </button>
@@ -83,15 +84,15 @@
         <tbody>
           <tr v-for="(item, index) in sucursalesCerradas" :key="index">
             <!-- <th scope="row">{{ item.identificador }}</th> -->
-            <th scope="row">{{ item.Descripcion }}</th>
-            <td>{{ item.Telefono }}</td>
-            <td>{{ item.Direccion }}</td>
+            <th scope="row">{{ item.descripcion }}</th>
+            <td>{{ item.telefono }}</td>
+            <td>{{ item.direccion }}</td>
         
             <td>
               <button 
                 class="btn btn-info"
                 data-toggle="modal"
-                @click="generarMapa(item.Latitud, item.Longitud)"
+                @click="generarMapa(item.latitud, item.longitud)"
                 data-target="#exampleModalCenter">
                 Mapa
               </button>
@@ -156,16 +157,16 @@ export default {
   
     await ApiService.getSucursalesCajas().then((response) => {
       this.sucursales = true
-      this.sucursalesAbiertas = response.SdtSucursalesCajas.Listadosucursalesa.SdtsBTSucursal
-      this.sucursalesCerradas = response.SdtSucursalesCajas.Listadosucursalesc.SdtsBTSucursal
-      this.cajasAbiertas = response.SdtSucursalesCajas.Listadocajasa.SdtsBtCaja;
-      this.cajasCerradas = response.SdtSucursalesCajas.Listadocajasc.SdtsBtCaja;
+      this.sucursalesAbiertas = response.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal
+      this.sucursalesCerradas = response.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal
+      this.cajasAbiertas = response.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja;
+      this.cajasCerradas = response.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja;
       this.chartData = {
         labels: [`abiertas`, `cerradas`],
         datasets: [
           {
             backgroundColor: ["#41B883","#E46651"],
-            data: [response.SdtSucursalesCajas.Sucursalesabiertas, response.SdtSucursalesCajas.Sucursalescerradas]
+            data: [response.sdtSucursalesCajas.sucursalesAbiertas, response.sdtSucursalesCajas.sucursalesCerradas]
           }
         ]
       };
@@ -173,10 +174,10 @@ export default {
 
     let array = this.sucursalesAbiertas.map((item) => {
       let cajaA = this.cajasAbiertas.filter((filtro) =>{
-        return (filtro.Codigo == item.Identificador)
+        return (filtro.sucursalId == item.identificador)
       })
       let cajaC = this.cajasCerradas.filter((filtro) =>{
-        return (filtro.Codigo == item.Identificador)
+        return (filtro.sucursalId == item.identificador)
       })
       item.cajasA = cajaA.length
       item.cajasC = cajaC.length
@@ -239,7 +240,7 @@ export default {
       var buscado = this.TextoBuscado.toUpperCase();
       return this.sucusalesPremiun.filter((objeto) => {
         return (
-          objeto.Descripcion.toUpperCase().includes(buscado) ||
+          objeto.descripcion.toUpperCase().includes(buscado) ||
           objeto.identificador == parseInt(buscado)
         );
       });

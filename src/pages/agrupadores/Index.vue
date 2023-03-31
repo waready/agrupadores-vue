@@ -9,9 +9,9 @@
           class="col-md-3 col-sm-5 mb-2"
           v-for="(item, index) in agrupadores"
           :key="index">
-          <div class="card h-100 "  @click="indicadorID(item.Codigo)">
+          <div class="card h-100 "  @click="indicadorID(item.codigo)">
             <div class="card-body text-center">
-              <h5 class="card-title mb-2 hover-underline-animation">{{ item.Descripcion }}</h5>
+              <h5 class="card-title mb-2 hover-underline-animation">{{ item.descripcion }}</h5>
               <div>
                 <!-- <div
               :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
@@ -68,8 +68,8 @@ export default {
     async getAllAgrupadores() {
       await ApiService.GetAgrupadores().then((response) => {
        
-        this.agrupadores = response.sdtAgrupadores.sBTAgrupador.map((item) => {
-          switch (item.Codigo) {
+        this.agrupadores = response.sdtAgrupadores.SdtsBTAgrupador.map((item) => {
+          switch (item.codigo) {
             case 100:
               // "Condiciones Generales"
               item.icon = "fas fa-wrench fa-5x";

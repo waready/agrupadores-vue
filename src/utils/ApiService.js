@@ -82,7 +82,7 @@ class ApiService {
               "Token": token,
               },
         }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?obtenerCondicionesGenerales",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerCondicionesGenerales",user)).data;
       }
       static async getRubroBolsas(){
 

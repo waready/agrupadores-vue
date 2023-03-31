@@ -20,7 +20,7 @@
                     <i class="icon-graph success font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h3>{{ transacciones.Exito }}</h3>
+                    <h3>{{ transacciones.exito }}</h3>
                     <span>Contabilizadas con Exito</span>
                   </div>
                 </div>
@@ -38,7 +38,7 @@
                     <i class="icon-graph danger font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h3>{{ transacciones.Error }}</h3>
+                    <h3>{{ transacciones.error }}</h3>
                     <span>Contabilizadas con Error</span>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                     <i class="icon-graph warning font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h3>{{ transacciones.Otros }}</h3>
+                    <h3>{{ transacciones.otros }}</h3>
                     <span>Otros</span>
                   </div>
                 </div>
@@ -69,46 +69,52 @@
         <h4 class="text-uppercase">Detalle</h4>
         <p>Detalle Transacciones</p>
       </div>
-      
+
       <div class="row">
-        <div class="col-12">
-          <LineChartGenerator
-        :options="chartOptions"
-        :data="chartData"
-        class="mb-2" />
+        <ul class="nav nav-tabs">
+          <li
+            class="nav-item"
+            v-for="(grafico, index) in graficos"
+            :key="index">
+            <a class="nav-link" @click="GetGrafico(grafico.id)">
+              {{ grafico.descripcion }}
+            </a>
+          </li>
+        </ul>
+        <div class="col-12" v-show="lineas">
+          <LineChartGenerator :options="chartOptions" :data="chartData" />
         </div>
-        <div class="col-12">
+
+        <div class="col-12" v-show="barras">
           <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
         </div>
-        <!-- <div class="col-12">
-          <Doughnut :options="chartOptions" :data="chartData"  />
-        </div> -->
-        <div class="col-12">
+
+        <div class="col-12" v-show="radar">
           <Radar :options="chartOptions" :data="chartData" />
         </div>
       </div>
       <div class="row justify-content-md-center">
         <div class="col-md-7 mt-3">
           <ul class="list-group">
-            <li
+            <!-- <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento autorizado sin contabilizar(A)
               <span class="badge badge-primary badge-pill">
-                {{ transacciones.Transacciona }}
+                {{ transacciones.transaccionA }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento de ingreso batch no contabilizado(B)
               <span class="badge badge-warning badge-pill">
-                {{ transacciones.Transaccionb }}
+                {{ transacciones.transaccionB }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento con errores(E)
               <span class="badge badge-danger badge-pill">
-                {{ transacciones.Transaccione }}
+                {{ transacciones.transaccionE }}
               </span>
             </li>
 
@@ -116,28 +122,28 @@
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento contabilizado y pasado al histórico(H)
               <span class="badge badge-primary badge-pill">
-                {{ transacciones.Transaccionh }}
+                {{ transacciones.transaccionH }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento de ingreso libre no contabilizado(L)
               <span class="badge badge-warning badge-pill">
-                {{ transacciones.Transaccionl }}
+                {{ transacciones.transaccionL }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento con autorizaciones pendientes(M)
               <span class="badge badge-primary badge-pill">
-                {{ transacciones.Transaccionm }}
+                {{ transacciones.TransaccionM }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento ingresado por el transaccional no contabilizado(N)
               <span class="badge badge-warning badge-pill">
-                {{ transacciones.Transaccionn }}
+                {{ transacciones.transaccionN }}
               </span>
             </li>
             <li
@@ -145,21 +151,21 @@
               Movimiento contabilizado, pasado al histórico, con archivos de
               saldos históricos actualizados(P)
               <span class="badge badge-primary badge-pill">
-                {{ transacciones.Transaccionp }}
+                {{ transacciones.transaccionP }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento con autorizaciones denegadas(R)
               <span class="badge badge-warning badge-pill">
-                {{ transacciones.Transaccionr }}
+                {{ transacciones.transaccionR }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Movimiento contabilizado sin pasar al histórico(S)
               <span class="badge badge-primary badge-pill">
-                {{ transacciones.Transaccions }}
+                {{ transacciones.transaccionS }}
               </span>
             </li>
             <li
@@ -167,14 +173,23 @@
               Movimiento con autoriz. p/tipo cambio ingresado, para ser
               retomado(X)
               <span class="badge badge-primary badge-pill">
-                {{ transacciones.Transaccionx }}
+                {{ transacciones.transaccionX }}
               </span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center">
               Sin especificar
               <span class="badge badge-info badge-pill">
-                {{ transacciones.Transaccionsp }}
+                {{ transacciones.transaccionSP }}
+              </span>
+            </li> -->
+            <li
+              v-for="(item, index) in transaccionesOrdenadas"
+              :key="index"
+              class="list-group-item d-flex justify-content-between align-items-center">
+              {{ item.descripcion }}
+              <span :class="['badge', 'badge-pill', getClass(item)]">
+                {{ item.cantidad }}
               </span>
             </li>
           </ul>
@@ -187,8 +202,8 @@
 <script>
 import { Line as LineChartGenerator } from "vue-chartjs";
 import { Bar } from "vue-chartjs";
-import { Doughnut } from 'vue-chartjs'
-import { Radar } from 'vue-chartjs'
+import { Doughnut } from "vue-chartjs";
+import { Radar } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
@@ -200,8 +215,7 @@ import {
   LinearScale,
   CategoryScale,
   PointElement,
-  BarElement,
- 
+  BarElement
 } from "chart.js";
 
 ChartJS.register(
@@ -215,7 +229,6 @@ ChartJS.register(
   CategoryScale,
   PointElement,
   BarElement
-
 );
 
 import ApiService from "@/utils/ApiService.js";
@@ -233,9 +246,17 @@ export default {
     this.getAllTansaccionEstado();
   },
   data: () => ({
+    graficos: [
+      { id: 1, descripcion: "Lineas" },
+      { id: 2, descripcion: "Barras" },
+      { id: 3, descripcion: "Radar" }
+    ],
+    lineas: true,
+    barras: false,
+    radar: false,
     transacciones: null,
     message: "",
-
+    transaccionesOrdenadas: [],
     chartData: {},
     chartOptions: {
       responsive: true
@@ -253,6 +274,67 @@ export default {
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.transacciones = response.sDTTransaccionesEstados;
+
+        this.transaccionesOrdenadas = Object.keys(this.transacciones)
+          .filter((key) => key.includes("transaccion"))
+          .sort((a, b) => this.transacciones[b] - this.transacciones[a])
+          .map((key) => {
+            const transaccion = {
+              codigo: key,
+              descripcion: "",
+              cantidad: this.transacciones[key]
+            };
+            switch (key) {
+              case "transaccionA":
+                transaccion.descripcion =
+                  "Movimiento autorizado sin contabilizar(A)";
+                break;
+              case "transaccionB":
+                transaccion.descripcion =
+                  "Movimiento de ingreso batch no contabilizado(B)";
+                break;
+              case "transaccionE":
+                transaccion.descripcion = "Movimiento con errores(E)";
+                break;
+              case "transaccionH":
+                transaccion.descripcion =
+                  "Movimiento contabilizado y pasado al histórico(H)";
+                break;
+              case "transaccionL":
+                transaccion.descripcion =
+                  "Movimiento de ingreso libre no contabilizado(L)";
+                break;
+              case "transaccionM":
+                transaccion.descripcion =
+                  "Movimiento con autorizaciones pendientes(M)";
+                break;
+              case "transaccionN":
+                transaccion.descripcion =
+                  "Movimiento ingresado por el transaccional no contabilizado(N)";
+                break;
+              case "transaccionP":
+                transaccion.descripcion =
+                  "Movimiento contabilizado, pasado al histórico, con archivos de saldos históricos actualizados(P)";
+                break;
+              case "transaccionR":
+                transaccion.descripcion =
+                  "Movimiento con autorizaciones denegadas(R)";
+                break;
+              case "transaccionS":
+                transaccion.descripcion =
+                  "Movimiento contabilizado sin pasar al histórico(S)";
+                break;
+              case "transaccionSP":
+                transaccion.descripcion = "Sin especificar";
+                break;
+              case "transaccionX":
+                transaccion.descripcion =
+                  "Movimiento con autoriz. p/tipo cambio ingresado, para ser retomado(X)";
+                break;
+            }
+            return transaccion;
+          });
+        //console.log(transaccionesOrdenadas)
         this.chartData = {
           labels: [
             "Movimiento autorizado sin contabilizar(A)",
@@ -273,27 +355,79 @@ export default {
               label: "Cantidad",
               backgroundColor: "#f87979",
               data: [
-                response.sDTTransaccionesEstados.Transacciona,
-                response.sDTTransaccionesEstados.Transaccionb,
-                response.sDTTransaccionesEstados.Transaccione,
-                response.sDTTransaccionesEstados.Transaccionh,
-                response.sDTTransaccionesEstados.Transaccionl,
-                response.sDTTransaccionesEstados.Transaccionm,
-                response.sDTTransaccionesEstados.Transaccionn,
-                response.sDTTransaccionesEstados.Transaccionp,
-                response.sDTTransaccionesEstados.Transaccionr,
-                response.sDTTransaccionesEstados.Transaccions,
-                response.sDTTransaccionesEstados.Transaccionx,
-                response.sDTTransaccionesEstados.Transaccionsp
+                response.sDTTransaccionesEstados.transaccionA,
+                response.sDTTransaccionesEstados.transaccionB,
+                response.sDTTransaccionesEstados.transaccionE,
+                response.sDTTransaccionesEstados.transaccionH,
+                response.sDTTransaccionesEstados.transaccionL,
+                response.sDTTransaccionesEstados.transaccionM,
+                response.sDTTransaccionesEstados.transaccionN,
+                response.sDTTransaccionesEstados.transaccionP,
+                response.sDTTransaccionesEstados.transaccionR,
+                response.sDTTransaccionesEstados.transaccionS,
+                response.sDTTransaccionesEstados.transaccionX,
+                response.sDTTransaccionesEstados.transaccionSP
               ]
             }
           ]
         };
       });
+    },
+    getClass(item) {
+      switch (item.codigo) {
+        case "transaccionA":
+          return "badge-primary";
+        case "transaccionB":
+          return "badge-warning";
+        case "transaccionE":
+          return "badge-danger";
+        case "transaccionH":
+          return "badge-primary";
+        case "transaccionL":
+          return "badge-warning";
+        case "transaccionM":
+          return "badge-primary";
+        case "transaccionN":
+          return "badge-warning";
+        case "transaccionP":
+          return "badge-primary";
+        case "transaccionR":
+          return "badge-warning";
+        case "transaccionS":
+          return "medium-primary";
+        case "transaccionSP":
+          return "badge-primary";
+        case "transaccionX":
+          return "medium-info";
+        default:
+          return "";
+      }
+    },
+    GetGrafico(id) {
+      let idt = parseInt(id);
+
+      if (idt == 1) {
+        this.lineas = true;
+        this.barras = false;
+        this.radar = false;
+        console.log(1);
+      }
+      if (idt == 2) {
+        this.lineas = false;
+        this.barras = true;
+        this.radar = false;
+        console.log(2);
+      }
+      if (idt == 3) {
+        this.lineas = false;
+        this.barras = false;
+        this.radar = true;
+        console.log(3);
+      }
     }
     //
     //
-  },
+  }
 };
 </script>
 

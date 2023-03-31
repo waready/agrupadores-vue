@@ -38,23 +38,23 @@
                 <div class="card-body">
                   <div class="media d-flex">
                     <div class="media-body text-left">
-                      <h3 :class="item.Saldo != 0 ? 'danger' : 'success'">
-                        {{ item.Saldo }}
+                      <h3 :class="item.saldo != 0 ? 'danger' : 'success'">
+                        {{ item.saldo }}
                       </h3>
-                      <span>{{ item.Nombremoneda }}</span>
+                      <span>{{ item.nombremoneda }}</span>
                     </div>
                     <div
                       :class="[
                         'align-self-center',
-                        item.Saldo != 0 ? 'danger' : 'success'
+                        item.saldo != 0 ? 'danger' : 'success'
                       ]">
-                      {{ item.Signo }}
+                      {{ item.signo }}
                     </div>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
                     <div
                       :class="[
-                        item.Saldo != 0 ? 'bg-danger' : 'bg-success',
+                        item.saldo != 0 ? 'bg-danger' : 'bg-success',
                         'progressbar'
                       ]"
                       role="progressbar"
@@ -118,7 +118,7 @@ export default {
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.CuadreMonedas =
-          response.SdtValanceMonedaSaldos.SdtsBTValanceMonedaSaldo;
+          response.SdtBalanceMonedaSaldos.SdtsBTBalanceMonedaSaldo;
       });
     }
     //
@@ -129,9 +129,9 @@ export default {
       var buscado = this.TextoBuscado.toUpperCase();
       return this.CuadreMonedas.filter((objeto) => {
         return ( 
-           String (objeto.Saldo).toUpperCase().includes(buscado) 
-           || objeto.Nombremoneda.toUpperCase().includes(buscado)
-           || objeto.Signo.toUpperCase().includes(buscado)
+           String (objeto.saldo).toUpperCase().includes(buscado) 
+           || objeto.nombremoneda.toUpperCase().includes(buscado)
+           || objeto.signo.toUpperCase().includes(buscado)
         
         );
       });

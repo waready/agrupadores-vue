@@ -19,15 +19,15 @@
                         <div class="align-self-center">
                          <h1
                             :class="
-                              CondicionesGenerales.Reglasnegocio != 'SI'
+                              CondicionesGenerales.reglasNegocio != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Reglasnegocio }}
+                            {{ CondicionesGenerales.reglasNegocio }}
                           </h1>
                         </div>
                         <div class="media-body text-right">
-                          <h3>{{CondicionesGenerales.Cantidadreglas}}</h3>
+                          <h3>{{CondicionesGenerales.cantidadReglas}}</h3>
                           <span>Reglas de negocio</span>
                         </div>
                       </div>
@@ -43,15 +43,15 @@
                         <div class="align-self-center">
                          <h1
                             :class="
-                              CondicionesGenerales.Opcionpae != 'SI'
+                              CondicionesGenerales.opcionPAE != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Opcionpae }}
+                            {{ CondicionesGenerales.opcionPAE }}
                           </h1>
                         </div>
                         <div class="media-body text-right">
-                          <h3>{{CondicionesGenerales.Cantidadpae}}</h3>
+                          <h3>{{CondicionesGenerales.cantidadPAE}}</h3>
                           <span>PAE</span>
                         </div>
                       </div>
@@ -67,7 +67,7 @@
 
             <div class="row">
               <div class="col-12 mt-3 mb-1">
-                <h4 class="text-uppercase">Debugs</h4>
+                <h4 class="text-uppercase">debugs</h4>
                 <p>Datos Informativos</p>
               </div>
             </div>
@@ -88,11 +88,11 @@
                         <div class="align-self-center">
                           <h1
                             :class="
-                              CondicionesGenerales.Debug != 'SI'
+                              CondicionesGenerales.debug != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Debug }}
+                            {{ CondicionesGenerales.debug }}
                           </h1>
                         </div>
                       </div>
@@ -117,11 +117,11 @@
                         <div class="align-self-center">
                           <h1
                             :class="
-                              CondicionesGenerales.Opcionworflow != 'SI'
+                              CondicionesGenerales.opcionWorkFlow != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Opcionworflow }}
+                            {{ CondicionesGenerales.opcionWorkFlow }}
                           </h1>
                         </div>
                       </div>
@@ -144,11 +144,11 @@
                         <div class="align-self-center">
                           <h1
                             :class="
-                              CondicionesGenerales.Parametrosgeneraleswf != 'SI'
+                              CondicionesGenerales.parametrosGeneralesWF != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Parametrosgeneraleswf }}
+                            {{ CondicionesGenerales.parametrosGeneralesWF }}
                           </h1>
                         </div>
                       </div>
@@ -173,11 +173,11 @@
                         <div class="align-self-center">
                           <h1
                             :class="
-                              CondicionesGenerales.Empresasiguales != 'SI'
+                              CondicionesGenerales.empresasIguales != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Empresasiguales }}
+                            {{ CondicionesGenerales.empresasIguales }}
                           </h1>
                         </div>
                       </div>
@@ -202,11 +202,11 @@
                         <div class="align-self-center">
                           <h1
                             :class="
-                              CondicionesGenerales.Opcion7x24 != 'SI'
+                              CondicionesGenerales.opcion7x24 != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Opcion7x24 }}
+                            {{ CondicionesGenerales.opcion7x24 }}
                           </h1>
                         </div>
                       </div>
@@ -231,11 +231,11 @@
                         <div class="align-self-center">
                           <h1
                             :class="
-                              CondicionesGenerales.Opcionpae != 'SI'
+                              CondicionesGenerales.opcionPAE != 'SI'
                                 ? 'danger'
                                 : 'success'
                             ">
-                            {{ CondicionesGenerales.Opcionpae }}
+                            {{ CondicionesGenerales.opcionPAE }}
                           </h1>
                         </div>
                       </div>
@@ -370,8 +370,8 @@ export default {
               label: "Cantidad",
               backgroundColor: ["#41B883", "#E46651"],
               data: [
-                response.SdtCondicionesGenerales.Cantidadreglas,
-                response.SdtCondicionesGenerales.Cantidadpae
+                response.SdtCondicionesGenerales.cantidadReglas,
+                response.SdtCondicionesGenerales.cantidadPAE
               ]
             }
           ]
@@ -383,19 +383,19 @@ export default {
   },
   computed:{
     fechaApertura(){
-      const fecha = moment(this.CondicionesGenerales.Fechaapertura);
+      const fecha = moment(this.CondicionesGenerales.fechaApertura);
       return fecha.format('DD/MM/YYYY');
     },
     fechaCierre(){
-      const fecha = moment(this.CondicionesGenerales.Fechacierre);
+      const fecha = moment(this.CondicionesGenerales.fechaCierre);
       return fecha.format('DD/MM/YYYY');
     },
     fechaApertura7x24(){
-      const fecha = moment(this.CondicionesGenerales.Fechaaperturacanales);
+      const fecha = moment(this.CondicionesGenerales.fechaAperturaCanales);
       return fecha.format('DD/MM/YYYY');
     },
     fechaCierre7x24(){
-      const fecha = moment(this.CondicionesGenerales.Fechacierrecanales);
+      const fecha = moment(this.CondicionesGenerales.fechaCierreCanales);
       return fecha.format('DD/MM/YYYY');
     }
   }

@@ -12,12 +12,12 @@
         <tbody>
           <tr v-for="(item, index) in indicadores" :key="index">
            
-            <td>{{ item.Descripcion }}</td>
+            <td>{{ item.descripcion }}</td>
             <td>SI</td>
             <td>
               <button
                 class="btn btn-info"
-                @click="indicadorID(item.Codigo)"
+                @click="indicadorID(item.codigo)"
                 data-toggle="modal"
                 data-target="#modal-fullscreen-xl">
                 Visualizar
@@ -30,10 +30,10 @@
         class="col-md-3 col-sm-5 mb-2"
         v-for="(item, index) in indicadores"
         :key="index">
-        <div class="card h-100 mb-2" @click="indicadorID(item.Codigo)">
+        <div class="card h-100 mb-2" @click="indicadorID(item.codigo)">
           <div class="card-body text-center">
             <h5 class="card-title mb-2 hover-underline-animation">
-              {{ item.Descripcion }}
+              {{ item.descripcion }}
             </h5>
             <div>
               <!-- <div
@@ -44,7 +44,7 @@
                   <a href="#" class="card-link">{{ item.codigo }}</a>
                 </p> -->
               <!-- <div class="content mb-3">
-                  <button class="btn btn-info format" @click="indicadorID(item.Codigo)">
+                  <button class="btn btn-info format" @click="indicadorID(item.codigo)">
                   Indicador
                 </button>
                 </div> -->
@@ -94,13 +94,13 @@ export default {
     async getAllAgrupadores(idIndicador) {
       await ApiService.GetIndicadores(idIndicador).then((response) => {
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+          this.message = response.Erroresnegocio.BTErrorNegocio[0].descripcion;
         }
         // else{
         // }
         this.indicadores = response.sdtIndicadores.SdtsBTIndicador.map(
           (item) => {
-            switch (item.Codigo) {
+            switch (item.codigo) {
               case 105:
                 // "Condiciones Generales"
                 item.icon = "fas fa-cogs fa-5x primary";
