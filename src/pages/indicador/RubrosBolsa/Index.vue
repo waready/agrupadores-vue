@@ -14,14 +14,14 @@
   
       <div class="container">
         <div class="row">
-          <div class="col-sm-6 mb-2" v-for="(item,index) in rubroBolsa" :key="index">
+          <div class="col-sm-6 mb-2" v-for="(item,index) in 2" :key="index">
             <div class="card-counter  primary">
               <i class="fa fa-archive"></i>
-              <span class="count-numbers">{{item.Rubro}}</span>
-              <div class="float-right badge ctnro badge-primary">Cuenta : {{ item.Ctnro }} </div>
+              <span class="count-numbers">22234433</span>
+              <div class="float-right badge ctnro badge-primary">Cuenta : 29 </div>
               <br>
-              <div class="float-right badge badge-primary">Ocurrencias :  {{ item.Ocurrencias}} </div>
-              <div class="float-right badge badge-primary">{{item.Descripcion}}</div>
+              <div class="float-right badge badge-primary">Ocurrencias : 2 </div>
+              <div class="float-right badge badge-primary">nombre rubro</div>
               <!-- <p class="count-p">Ocurrencias :  {{ item.Ocurrencias}}</p> -->
             </div>
             

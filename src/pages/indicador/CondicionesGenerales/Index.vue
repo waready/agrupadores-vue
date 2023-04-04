@@ -7,11 +7,11 @@
         <section v-if="CondicionesGenerales">
           <section id="stats-subtitle">
             <div class="row">
-              <div class="col-12 mt-3 mb-1">
+              <!-- <div class="col-12 mt-3 mb-1">
                 <h4 class="text-uppercase">Estadisticas</h4>
                 <p>Reglas de Negocio - PAE</p>
-              </div>
-              <div class="col-xl-6 col-sm-6 col-12">
+              </div> -->
+              <!-- <div class="col-xl-6 col-sm-6 col-12">
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body">
@@ -34,8 +34,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-xl-6 col-sm-6 col-12">
+              </div> 
+               <div class="col-xl-6 col-sm-6 col-12">
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body">
@@ -58,12 +58,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
-            </div>
+            </div> -->
 
             <div class="row">
               <div class="col-12 mt-3 mb-1">
@@ -73,6 +73,63 @@
             </div>
 
             <div class="row">
+                
+               <div class="col-xl-6 col-md-12">
+                <div class="card overflow-hidden">
+                  <div class="card-content">
+                    <div class="card-body cleartfix">
+                      <div class="media align-items-stretch">
+                        <div class="align-self-center">
+                          <i class="icon-social-dropbox info font-large-2 mr-2"></i>
+                        </div>
+                        <div class="media-body">
+                          <h4>Reglas de negocio</h4>
+                          <span class="badge badge-info badge-pill"> Cantidad: {{CondicionesGenerales.cantidadReglas}}</span>
+                        </div>
+                        <div class="align-self-center">
+                          <h1
+                            :class="
+                              CondicionesGenerales.reglasNegocio != 'SI'
+                                ? 'danger'
+                                : 'success'
+                            ">
+                            {{ CondicionesGenerales.reglasNegocio }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-6 col-md-12">
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-body cleartfix">
+                      <div class="media align-items-stretch">
+                        <div class="align-self-center">
+                          <i
+                            class="icon-layers warning font-large-2 mr-2"></i>
+                        </div>
+                        <div class="media-body">
+                          <h4>PAE</h4>
+                          <span class="badge badge-info badge-pill"> Cantidad: {{CondicionesGenerales.cantidadPAE}}</span>
+                        </div>
+                        <div class="align-self-center">
+                          <h1
+                            :class="
+                              CondicionesGenerales.opcionPAE != 'SI'
+                                ? 'danger'
+                                : 'success'
+                            ">
+                            {{ CondicionesGenerales.opcionPAE }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="col-xl-6 col-md-12">
                 <div class="card overflow-hidden">
                   <div class="card-content">
