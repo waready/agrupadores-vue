@@ -1,15 +1,6 @@
 <template>
     <div class="container">
       <Navtab class="mb-3"></Navtab>
-      <div class="card">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card-body">
-              <router-view></router-view>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </template>
   <script>

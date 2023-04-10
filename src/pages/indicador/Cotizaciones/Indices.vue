@@ -33,9 +33,7 @@ export default {
   // directives
   // filters
 
-  props: {
-    //
-  },
+  props: ['data'],
 
   data: () => ({
     indices: null,
@@ -90,16 +88,7 @@ export default {
 
   methods: {
     async getAllAgrupadores() {
-      await ApiService.getCotizaciones()
-        .then((response) => {
-          console.log(response)
-          if (response.Erroresnegocio.BTErrorNegocio[0]) {
-            this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-
-          }
-          this.indices = response.sdtIndices.SdtsBTMonedaIndicador;
-          //this.monedas = response.sdtMonedas.SdtBBTMONEDA;
-        })
+      this.indices = this.data
     },
     //
     //

@@ -15,12 +15,12 @@
         </v-client-table>
       </div>
     </div>
-    <loading v-else></loading>
+    {{ data }}
   </div>
 </template>
 
 <script>
-import ApiService from "@/utils/ApiService.js";
+
 import loading from "@/components/Loading.vue";
 import { ServerTable } from 'v-tables-3';
 export default {
@@ -33,9 +33,7 @@ export default {
   // directives
   // filters
 
-  props: {
-    //
-  },
+  props: ['data'],
 
   data: () => ({
     monedas: null,
@@ -91,16 +89,7 @@ export default {
 
   methods: {
     async getAllAgrupadores() {
-      await ApiService.getCotizaciones()
-        .then((response) => {
-          console.log(response)
-          if (response.Erroresnegocio.BTErrorNegocio[0]) {
-            this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-
-          }
-          //this.indices = response.sdtIndices.SdtBBTMONEDA;
-          this.monedas = response.sdtMonedas.SdtsBTMonedaIndicador;
-        })
+      this.monedas = this.data;
     },
     //
     //
