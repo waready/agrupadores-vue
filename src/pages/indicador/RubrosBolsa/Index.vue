@@ -4,52 +4,98 @@
       {{ message + "!" }}
     </div>
     <div v-if="rubroBolsa">
-    
       <div class="row">
         <div class="col-12 mt-3 mb-1">
-          <h4 class="text-uppercase">Rubro Bolsas </h4>
+          <h4 class="text-uppercase">Rubro Bolsas</h4>
           <p>Información de los Rubros Bolsas</p>
         </div>
       </div>
-  
+
       <div class="container">
         <div class="row">
-          <div class="col-sm-6 mb-2" v-for="(item,index) in 2" :key="index">
-            <div class="card-counter  primary">
-              <i class="fa fa-archive"></i>
-              <span class="count-numbers">22234433</span>
-              <div class="float-right badge ctnro badge-primary">Cuenta : 29 </div>
-              <br>
-              <div class="float-right badge badge-primary">Ocurrencias : 2 </div>
-              <div class="float-right badge badge-primary">nombre rubro</div>
-              <!-- <p class="count-p">Ocurrencias :  {{ item.Ocurrencias}}</p> -->
-            </div>
-            
-          </div>
-
-          <!-- <div class="col-md-4">
-            <div class="card-counter danger">
-              <i class="fa fa-ticket"></i>
-              <span class="count-numbers">599</span>
-              <span class="count-name">Instances</span>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card-counter success">
-              <i class="fa fa-indent"></i>
-              <span class="count-numbers">6875</span>
-              <span class="count-name">Data</span>
+          <!-- <div
+            class="col-xl-6 col-md-12 pb-"
+            v-for="(item, index) in rubroBolsa"
+            :key="index">
+            <div class="card overflow-hidden">
+              <div class="card-content">
+                <div class="card-body cleartfix">
+                  <div class="media align-items-stretch">
+                    <div class="align-self-center">
+                      <i class="fa fa-archive info font-large-2 mr-2"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <p>{{ item.descripcion }}</p>
+                      <h5>{{ item.rubro }}</h5>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                        Dropdown button
+                      </button>
+                      <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div> -->
-
-          <!-- <div class="col-md-4">
-            <div class="card-counter info">
-              <i class="fa fa-users"></i>
-              <span class="count-numbers">35</span>
-              <span class="count-name">Users</span>
+          <div class="col-xl-6 col-md-12"  v-for="(item, index) in rubroBolsa" :key="index">
+            <div class="card">
+              <div class="card-body">
+                <div class="media align-items-stretch">
+                  <div class="align-self-center">
+                    <i class="fa fa-archive info font-large-4 mr-2"></i>
+                  </div>
+                  <div class="media-body text-right">
+                    <p>{{ item.descripcion }}</p>
+                    <h4>{{ item.rubro }}</h4>
+                    <span class="badge badge-info badge-pill mb-2"> Ocurrencias: {{item.ocurrencias}}</span>
+                  </div>
+                </div>
+                <!-- <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p> -->
+                <div class="dropdown text-right">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                    Identificador
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                    style="position: absolute; z-index: 999">
+                    <a class="dropdown-item" >Empresa: <span class="badge badge-info badge-pill "> {{item.empresa}}</span> </a>
+                    <a class="dropdown-item" >Sucursal: <span class="badge badge-info badge-pill "> {{item.sucursal}}</span></a>
+                    <a class="dropdown-item" >Operacion: <span class="badge badge-info badge-pill "> {{item.operacion}}</span></a>
+                    <a class="dropdown-item" >Moneda: <span class="badge badge-info badge-pill "> {{item.moneda}}</span></a>
+                    <a class="dropdown-item" >Papel: <span class="badge badge-info badge-pill "> {{item.papel}}</span></a>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -57,6 +103,7 @@
   </div>
 </template>
 <script>
+
 import ApiService from "@/utils/ApiService.js";
 import loading from "@/components/Loading.vue";
 export default {
@@ -70,6 +117,25 @@ export default {
   data: () => ({
     rubroBolsa: null,
     message: "",
+    config: {
+      options: [
+        {
+          value: "option 1"
+        },
+        {
+          value: "option 2"
+        },
+        {
+          value: "option 3"
+        }
+      ],
+      placeholder: "Placeholder",
+      backgroundColor: "#cde4f5",
+      textColor: "black",
+      borderRadius: "1.5em",
+      border: "1px solid gray",
+      width: 180
+    }
     // data: [
     //   {
     //     Rubro: 2108050001,
@@ -104,40 +170,12 @@ export default {
 </script>
 
 <style scoped>
-.card-counter {
-  box-shadow: 2px 2px 10px #dadada;
-  margin: 5px;
-  padding: 10px 10px;
-  background-color: #fff;
-  columns: #fff;
-  height: 150px;
-  border-radius: 5px;
-  transition: 0.3s linear all;
+.card {
+  position: relative;
 }
 
-.card-counter i {
-  font-size: 5em;
-  opacity: 0.2;
-}
-
-.card-counter .count-numbers {
+.dropdown-menu {
   position: absolute;
-  right: 35px;
-  top: 20px;
-  font-size: 32px;
-  display: block;
+  z-index: 1;
 }
-
-.card-counter .ctnro {
-  position: absolute;
-  right: 29px;
-  top: 70px;
-  /* font-style: italic;
-  text-transform: capitalize; */
-
-  display: block;
-
-}
-
-
 </style>
