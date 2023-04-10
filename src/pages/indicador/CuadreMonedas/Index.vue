@@ -14,54 +14,45 @@
         <div class="row">
           <div class="col-md-6">
             <div class="input-group is-invalid">
-              <input
-                type="text"
-                name="filter"
-                class="form-control"
-                v-model="TextoBuscado"
-                id="filter" />
+              <input type="text" name="filter" class="form-control" v-model="TextoBuscado" id="filter" />
               <div class="input-group-prepend">
-                <span class="input-group-text" id="validatedInputGroupPrepend"
-                  ><i class="fa fa-search" aria-hidden="true"></i
-                ></span>
+                <span class="input-group-text" id="validatedInputGroupPrepend"><i class="fa fa-search"
+                    aria-hidden="true"></i></span>
               </div>
             </div>
           </div>
         </div>
         <div class="row mt-4">
-          <div
-            class="col-xl-3 col-sm-6 col-12"
-            v-for="(item, index) in filterCuadreMoneda"
-            :key="index">
+          <div class="col-xl-4 col-sm-6 col-12" v-for="(item, index) in filterCuadreMoneda" :key="index">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
                   <div class="media d-flex">
                     <div class="media-body text-left">
                       <h3 :class="item.saldo != 0 ? 'danger' : 'success'">
-                        {{ item.saldo }}
+                        {{ item.signo }}
                       </h3>
-                      <span>{{ item.nombremoneda }}</span>
+                      
                     </div>
-                    <div
-                      :class="[
-                        'align-self-center',
-                        item.saldo != 0 ? 'danger' : 'success'
-                      ]">
-                      {{ item.signo }}
+                    
+                    <div :class="[
+                      'align-self-center',
+                      item.saldo != 0 ? 'danger' : 'success'
+                    ]">
+                      {{ formattedNumber(item.saldo) }}
                     </div>
                   </div>
+                  <div>
+                    <span class="badge badge-info badge-pill">{{item.nombre.toUpperCase()}}</span>
+                  </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
-                    <div
-                      :class="[
-                        item.saldo != 0 ? 'bg-danger' : 'bg-success',
-                        'progressbar'
-                      ]"
-                      role="progressbar"
-                      style="width: 100%"
-                      aria-valuenow="100"
-                      aria-valuemin="0"
+                    <br>
+                    <div :class="[
+                      item.saldo != 0 ? 'bg-danger' : 'bg-success',
+                      'progressbar'
+                    ]" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
                       aria-valuemax="100"></div>
+                      
                   </div>
                 </div>
               </div>
@@ -95,7 +86,7 @@ export default {
   data: () => ({
     CuadreMonedas: null,
     message: "",
-    TextoBuscado:""
+    TextoBuscado: ""
   }),
 
   computed: {
@@ -120,22 +111,32 @@ export default {
         this.CuadreMonedas =
           response.SdtBalanceMonedaSaldos.SdtsBTBalanceMonedaSaldo;
       });
+    },
+    formattedNumber(numero) {
+      const formatter = new Intl.NumberFormat('es', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        notation: 'compact'
+      });
+      return formatter.format(numero);
     }
     //
     //
   },
-  computed:{
-    filterCuadreMoneda(){
+  computed: {
+    filterCuadreMoneda() {
       var buscado = this.TextoBuscado.toUpperCase();
       return this.CuadreMonedas.filter((objeto) => {
-        return ( 
-           String (objeto.saldo).toUpperCase().includes(buscado) 
-           || objeto.nombremoneda.toUpperCase().includes(buscado)
-           || objeto.signo.toUpperCase().includes(buscado)
-        
+        return (
+          // String(objeto.saldo).toUpperCase().includes(buscado)
+          objeto.nombre.toUpperCase().includes(buscado)
+          ||
+          objeto.signo.toUpperCase().includes(buscado)
+
         );
       });
-    }
+    },
+
   }
 };
 </script>
