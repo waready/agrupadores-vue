@@ -71,30 +71,34 @@
       </div>
 
       <div class="row">
-        <ul class="nav nav-tabs">
-          <li
-            class="nav-item"
-            v-for="(grafico, index) in graficos"
-            :key="index">
-            <a class="nav-link" @click="GetGrafico(grafico.id)">
-              {{ grafico.descripcion }}
-            </a>
-          </li>
-        </ul>
-        <div class="col-12" v-show="lineas">
-          <LineChartGenerator :options="chartOptions" :data="chartData" />
+        <div class="col-12 mb-3">
+          <Bar
+            id="my-chart-id"
+            :options="chartOptions"
+            :data="chartData"
+            class="mb-2" />
         </div>
+      </div>
 
-        <div class="col-12" v-show="barras">
-          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
-        </div>
-
-        <div class="col-12" v-show="radar">
-          <Radar :options="chartOptions" :data="chartData" />
+      <div class="row mt-2 justify-content-md-center">
+        <div class="col-md-7">
+          <div class="form-group" data-select2-id="52">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01"
+                  >Movimiento</label
+                >
+              </div>
+              <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
+                <option value="">(Elegir)</option>
+                <option v-for="(item,index) in chartData.labels" :key="index" :value="item">{{item}}</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row justify-content-md-center">
-        <div class="col-md-7 mt-3">
+        <div class="col-md-7 mt-1">
           <ul class="list-group">
             <!-- <li
               class="list-group-item d-flex justify-content-between align-items-center">
@@ -184,9 +188,9 @@
               </span>
             </li> -->
             <li
-              v-for="(item, index) in transaccionesOrdenadas"
+              v-for="(item, index) in transaccionFiltrada"
               :key="index"
-              class="list-group-item d-flex justify-content-between align-items-center">
+              class="list-group-item d-flex justify-content-between align-items-center mt-3">
               {{ item.descripcion }}
               <span :class="['badge', 'badge-pill', getClass(item)]">
                 {{ item.cantidad }}
@@ -200,10 +204,8 @@
   </div>
 </template>
 <script>
-import { Line as LineChartGenerator } from "vue-chartjs";
 import { Bar } from "vue-chartjs";
-import { Doughnut } from "vue-chartjs";
-import { Radar } from "vue-chartjs";
+
 import {
   Chart as ChartJS,
   Title,
@@ -236,24 +238,13 @@ import loading from "@/components/Loading.vue";
 export default {
   name: "RubroBolsa",
   components: {
-    loading,
-    LineChartGenerator,
-    Bar,
-    Doughnut,
-    Radar
+    Bar
   },
   mounted() {
     this.getAllTansaccionEstado();
   },
   data: () => ({
-    graficos: [
-      { id: 1, descripcion: "Lineas" },
-      { id: 2, descripcion: "Barras" },
-      { id: 3, descripcion: "Radar" }
-    ],
-    lineas: true,
-    barras: false,
-    radar: false,
+    busqueda:"",
     transacciones: null,
     message: "",
     transaccionesOrdenadas: [],
@@ -277,7 +268,6 @@ export default {
 
         this.transaccionesOrdenadas = Object.keys(this.transacciones)
           .filter((key) => key.includes("transaccion"))
-          .sort((a, b) => this.transacciones[b] - this.transacciones[a])
           .map((key) => {
             const transaccion = {
               codigo: key,
@@ -332,22 +322,27 @@ export default {
                   "Movimiento con autoriz. p/tipo cambio ingresado, para ser retomado(X)";
                 break;
             }
+
             return transaccion;
+          })
+          .sort((a, b) => {
+            if (a.codigo === "transaccionSP") return 1;
+            if (b.codigo === "transaccionSP") return -1;
+            return a.codigo.localeCompare(b.codigo);
           });
-        //console.log(transaccionesOrdenadas)
         this.chartData = {
           labels: [
-            "Movimiento autorizado sin contabilizar(A)",
-            "Movimiento de ingreso batch no contabilizado(B)",
-            "Movimiento con errores(E)",
-            "Movimiento contabilizado y pasado al histórico(H)",
-            "Movimiento de ingreso libre no contabilizado(L)",
-            "Movimiento con autorizaciones pendientes(M)",
-            "Movimiento ingresado por el transaccional no contabilizado(N)",
-            "Movimiento contabilizado, pasado al histórico, con archivos de saldos históricos actualizados(P)",
-            "Movimiento con autorizaciones denegadas(R)",
-            "Movimiento contabilizado sin pasar al histórico(S)",
-            "Movimiento con autoriz. p/tipo cambio ingresado, para ser retomado(X)",
+            "(A)",
+            "(B)",
+            "(E)",
+            "(H)",
+            "(L)",
+            "(M)",
+            "(N)",
+            "(P)",
+            "(R)",
+            "(S)",
+            "(X)",
             "Sin especificar"
           ],
           datasets: [
@@ -402,31 +397,21 @@ export default {
         default:
           return "";
       }
-    },
-    GetGrafico(id) {
-      let idt = parseInt(id);
-
-      if (idt == 1) {
-        this.lineas = true;
-        this.barras = false;
-        this.radar = false;
-        console.log(1);
-      }
-      if (idt == 2) {
-        this.lineas = false;
-        this.barras = true;
-        this.radar = false;
-        console.log(2);
-      }
-      if (idt == 3) {
-        this.lineas = false;
-        this.barras = false;
-        this.radar = true;
-        console.log(3);
-      }
     }
-    //
-    //
+  },
+  computed: {
+    transaccionFiltrada(){
+       //var buscado = this.TextoBuscado.toUpperCase();
+      return this.transaccionesOrdenadas.filter((objeto) => {
+        const descripcion = objeto.descripcion;
+        return descripcion.includes(this.busqueda)
+       // return (
+          // objeto.descripcion.toUpperCase().includes(buscado) ||
+          // objeto.identificador == parseInt(buscado)
+        //)
+      });
+    }
+
   }
 };
 </script>

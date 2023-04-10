@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h2>Cajas</h2>
+
     <div v-if="cajas">
       <hr />
       <div class="row">
@@ -40,20 +41,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in CajasFilter" :key="index">
-              <!-- <th scope="row">{{ item.identificador }}</th> -->
-              <td>{{ item.usuario }}</td>
-              <td>{{ item.nombre }}</td>
-              <td>{{ item.Sucursal }}</td>
-              <td>
-                <button
-                  class="btn btn-info"
-                  @click="generarSucursal(item.sucursalId)"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter">
-                  Sucursal
-                </button>
-                <!-- <button
+            <template v-if="CajasFilter[0]">
+              <tr v-for="(item, index) in CajasFilter" :key="index">
+                <!-- <th scope="row">{{ item.identificador }}</th> -->
+                <td>{{ item.usuario }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.Sucursal }}</td>
+                <td>
+                  <button
+                    class="btn btn-info"
+                    @click="generarSucursal(item.sucursalId)"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter">
+                    Sucursal
+                  </button>
+                  <!-- <button
                 class="btn btn-info"
                @click="generarMapa(item.sucursalId)"
                
@@ -61,8 +63,15 @@
                 data-target="#exampleModalCenter">
                 Sucursal
               </button> -->
-              </td>
-            </tr>
+                </td>
+              </tr>
+            </template>
+
+            <template v-else>
+              <div class="alert alert-warning mt-1" role="alert">
+                {{ "No se encuentran registros!" }}
+              </div>
+            </template>
           </tbody>
         </table>
       </div>
@@ -80,20 +89,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in cajasCerradas" :key="index">
-              <!-- <th scope="row">{{ item.identificador }}</th> -->
-              <td>{{ item.UsuarioCaja }}</td>
-              <td>{{ item.NombreCaja }}</td>
-              <td>{{ item.codigo }}</td>
-              <td>
-                <button
-                  class="btn btn-info"
-                  @click="generarSucursal(item.Codigo)"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter">
-                  Sucursal
-                </button>
-                <!-- <button
+            <template v-if="cajasCerradas[0]">
+              <tr v-for="(item, index) in cajasCerradas" :key="index">
+                <!-- <th scope="row">{{ item.identificador }}</th> -->
+                <td>{{ item.UsuarioCaja }}</td>
+                <td>{{ item.NombreCaja }}</td>
+                <td>{{ item.codigo }}</td>
+                <td>
+                  <button
+                    class="btn btn-info"
+                    @click="generarSucursal(item.Codigo)"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter">
+                    Sucursal
+                  </button>
+                  <!-- <button
                 class="btn btn-info"
                @click="generarMapa(item.sucursalId)"
                
@@ -101,8 +111,14 @@
                 data-target="#exampleModalCenter">
                 Sucursal
               </button> -->
-              </td>
-            </tr>
+                </td>
+              </tr>
+            </template>
+            <template v-else>
+              <div class="alert alert-warning mt-1" role="alert">
+                {{ "No se encuentran registros!" }}
+              </div>
+            </template>
           </tbody>
         </table>
       </div>
@@ -180,14 +196,16 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default {
   name: "sucursales",
   mounted() {
-    this.getSucursalesCajas();
+    const datos = JSON.parse(this.$route.query.datos);
+    this.getSucursalesCajas(datos);
   },
   components: { Pie, loading },
   data() {
     return {
+      //objeto: null,
       cajas: false,
       mostrar: false,
-      TextoBuscado:"",
+      TextoBuscado: "",
       cajasSelect: null,
       cajasAbiertas: [],
       cajasCerradas: [],
@@ -209,11 +227,15 @@ export default {
     };
   },
   methods: {
-    async getSucursalesCajas() {
+    async getSucursalesCajas(id_sucursal) {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajas = true;
-        this.cajasAbiertas = r.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja;
-        this.cajasCerradas = r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja;
+        this.cajasAbiertas = r.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja.filter((item)=>{
+          return item.sucursalId == id_sucursal
+        });
+        this.cajasCerradas = r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja.filter((item)=>{
+          return item.sucursalId == id_sucursal
+        });
         this.chartData = {
           labels: [`abiertas`, `cerradas`],
           datasets: [
@@ -239,7 +261,7 @@ export default {
                 (item) => item.identificador == cajas.sucursalId
               );
           }
-           //console.log(cajasSelect)
+          //console.log(cajasSelect)
           cajas.Sucursal = cajasSelect[0].descripcion;
           return cajas;
         });
@@ -291,10 +313,9 @@ export default {
     CajasFilter() {
       var buscado = this.TextoBuscado.toUpperCase();
       return this.cajasAbiertasPremiun.filter((objeto) => {
-        return ( 
-          objeto.nombre.toUpperCase().includes(buscado) 
-           || objeto.Sucursal.toUpperCase().includes(buscado)
-        
+        return (
+          objeto.nombre.toUpperCase().includes(buscado) ||
+          objeto.Sucursal.toUpperCase().includes(buscado)
         );
       });
       //return this.cajasAbiertasPremiun
