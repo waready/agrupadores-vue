@@ -1,10 +1,6 @@
 <template>
   <div class="mt-3">
     <h2>INDICES</h2>
-
-    <div class="alert alert-warning" role="alert" v-show="message" >
-      {{ message + '!' }}
-    </div>
     <div v-if="indices">
       <div id="indices">
         <v-client-table :columns="columns" :data="indices" :options="options">
@@ -15,18 +11,15 @@
         </v-client-table>
       </div>
     </div>
-    <loading v-else></loading>
   </div>
 </template>
 
 <script>
-import ApiService from "@/utils/ApiService.js";
-import loading from "@/components/Loading.vue";
+
 import { ServerTable } from 'v-tables-3';
 export default {
   // name: "MarketplaceIndex",
   components: {
-    loading,
     ServerTable
   },
 
@@ -38,7 +31,6 @@ export default {
   data: () => ({
     indices: null,
     monedas: null,
-    message: "",
     columns: ['nombre', 'tipoCambio'],
     options: {
       texts: {

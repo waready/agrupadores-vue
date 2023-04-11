@@ -1,8 +1,5 @@
 <template>
   <div class="container mt-3">
-    <div class="alert alert-warning" role="alert" v-show="message" >
-      {{ message + '!' }}
-    </div>
     <div v-if=" monedas">
       <h2>MONEDA</h2>
       <hr />
@@ -15,18 +12,14 @@
         </v-client-table>
       </div>
     </div>
-    {{ data }}
   </div>
 </template>
 
 <script>
-
-import loading from "@/components/Loading.vue";
 import { ServerTable } from 'v-tables-3';
 export default {
   // name: "MarketplaceIndex",
   components: {
-    loading,
     ServerTable
   },
 
@@ -37,7 +30,6 @@ export default {
 
   data: () => ({
     monedas: null,
-    message: "",
     columns: ['nombre', 'tipoCambio'],
     options: {
       sortable: ['nombre', 'tipoCambio'],

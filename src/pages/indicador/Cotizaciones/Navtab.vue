@@ -2,28 +2,32 @@
   <div>
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link" :class="{ active: $route.name == 'monedas' }" >
+        <a
+          class="nav-link"
+          @click="selecionar(1)"
+          :class="{ active: moneda == true }">
           Monedas
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" :class="{ active: $route.name == 'indices' }">
+        <a
+          class="nav-link"
+          @click="selecionar(2)"
+          :class="{ active: indice == true }">
           Indices
         </a>
       </li>
     </ul>
-    <div v-if="monedas">
-      <div class="card">
+    <div class="alert alert-warning" role="alert" v-show="message">
+      {{ message + "!" }}
+    </div>
+    <div v-if="monedas || indices">
+      <div class="card mt-2">
         <div class="row">
           <div class="col-md-12">
             <div class="card-body">
-              holi
-              <template>
-                <monedas :data="monedas"></monedas>
-              </template>
-              <template>
-                <indices :data="indices"></indices>
-              </template>
+              <monedas :data="monedas" v-if="moneda"></monedas>
+              <indices :data="indices" v-if="indice"></indices>
             </div>
           </div>
         </div>
@@ -54,6 +58,9 @@ export default {
   data: () => ({
     monedas: null,
     indices: null,
+    moneda: true,
+    indice: false,
+    message:""
   }),
 
   computed: {
@@ -76,10 +83,17 @@ export default {
         this.indices = response.sdtIndices.SdtsBTMonedaIndicador;
         this.monedas = response.sdtMonedas.SdtsBTMonedaIndicador;
       });
+    },
+    selecionar(id) {
+      if (id == 1) {
+        this.moneda = true;
+        this.indice = false;
+      }
+      if (id == 2) {
+        this.moneda = false;
+        this.indice = true;
+      }
     }
-    //
-    //
-    //
   }
 };
 </script>

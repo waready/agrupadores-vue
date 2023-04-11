@@ -36,7 +36,6 @@
           </form>
         </div>
         <div class="card-footer text-muted">
-          <!-- <a href="#">Forgot Password?</a> -->
           <a href="" class="h6"
             >Bantotal 2023 - Todos los derechos reservados</a
           >

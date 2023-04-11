@@ -3663,6 +3663,11 @@ gaze@^1.0.0:
   dependencies:
     globule "^1.0.0"
 
+generate-js@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/generate-js/-/generate-js-3.1.2.tgz#25ff8dd4c38090a938f648887d536bad46b47b62"
+  integrity sha512-L4IHpPfl9vhDtevoXZGQhQbC376ogHnVGrEr2zMxODsmLSGQGCX/NTd0AzokzSYgBDCKduV690tcqcba10Xo3g==
+
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.npmjs.org/gensync/-/gensync-1.0.0-beta.2.tgz"
@@ -5333,6 +5338,11 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
+popper.js@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
 portfinder@^1.0.26:
   version "1.0.32"
   resolved "https://registry.npmjs.org/portfinder/-/portfinder-1.0.32.tgz"
@@ -6012,6 +6022,13 @@ scss-tokenizer@^0.4.3:
   dependencies:
     js-base64 "^2.4.9"
     source-map "^0.7.3"
+
+secure-web-storage@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/secure-web-storage/-/secure-web-storage-1.0.2.tgz#7309c35c3685f0a9e63a8c4964c6ecdc0f83839c"
+  integrity sha512-Jxlit0lkdspgrcyzYjgJ59MNUuK2t1T6berjU1ttJc0Uht1u8l031aczsp8R4KW+rt4WdKrt3zAopwhqaodCHQ==
+  dependencies:
+    generate-js "^3.1.2"
 
 select-hose@^2.0.0:
   version "2.0.0"
