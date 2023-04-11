@@ -419,7 +419,7 @@ export default {
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
-        this.CondicionesGenerales = response.SdtCondicionesGenerales;
+        this.CondicionesGenerales = response.sdtCondicionesGenerales;
         this.chartData = {
           labels: ["Reglas de negocio", "PAE"],
           datasets: [
@@ -427,8 +427,8 @@ export default {
               label: "Cantidad",
               backgroundColor: ["#41B883", "#E46651"],
               data: [
-                response.SdtCondicionesGenerales.cantidadReglas,
-                response.SdtCondicionesGenerales.cantidadPAE
+                response.sdtCondicionesGenerales.cantidadReglas,
+                response.sdtCondicionesGenerales.cantidadPAE
               ]
             }
           ]

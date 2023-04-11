@@ -19,6 +19,8 @@
                 role="button"
                 >Ir al contenido</router-link
               >
+              <br>
+              <button @click="logout()" class="btn btn-info mt-2">logout()</button>
             </div>
           </div>
         </div>
@@ -30,6 +32,7 @@
 <script>
 /* Script part */
 // import Gallery from "./publications/Gallery.vue";
+import AuthService from '@/utils/AuthService';
 export default {
   name: "MarketplaceIndex",
   components: {
@@ -58,7 +61,12 @@ export default {
   },
 
   methods: {
-    //
+    async logout(){
+      console.log("salir")
+      await AuthService.logout();
+      await this.$store.dispatch("logout");
+      this.$router.push("/login");
+    }
     //
     //
   }

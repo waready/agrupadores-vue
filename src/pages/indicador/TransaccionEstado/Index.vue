@@ -177,7 +177,7 @@ export default {
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
-        this.transacciones = response.sDTTransaccionesEstados;
+        this.transacciones = response.sdtTransaccionesEstados;
 
         this.transaccionesOrdenadas = Object.keys(this.transacciones)
           .filter((key) => key.includes("transaccion"))
@@ -263,18 +263,18 @@ export default {
               label: "Cantidad",
               backgroundColor: "#f87979",
               data: [
-                response.sDTTransaccionesEstados.transaccionA,
-                response.sDTTransaccionesEstados.transaccionB,
-                response.sDTTransaccionesEstados.transaccionE,
-                response.sDTTransaccionesEstados.transaccionH,
-                response.sDTTransaccionesEstados.transaccionL,
-                response.sDTTransaccionesEstados.transaccionM,
-                response.sDTTransaccionesEstados.transaccionN,
-                response.sDTTransaccionesEstados.transaccionP,
-                response.sDTTransaccionesEstados.transaccionR,
-                response.sDTTransaccionesEstados.transaccionS,
-                response.sDTTransaccionesEstados.transaccionX,
-                response.sDTTransaccionesEstados.transaccionSP
+                response.sdtTransaccionesEstados.transaccionA,
+                response.sdtTransaccionesEstados.transaccionB,
+                response.sdtTransaccionesEstados.transaccionE,
+                response.sdtTransaccionesEstados.transaccionH,
+                response.sdtTransaccionesEstados.transaccionL,
+                response.sdtTransaccionesEstados.transaccionM,
+                response.sdtTransaccionesEstados.transaccionN,
+                response.sdtTransaccionesEstados.transaccionP,
+                response.sdtTransaccionesEstados.transaccionR,
+                response.sdtTransaccionesEstados.transaccionS,
+                response.sdtTransaccionesEstados.transaccionX,
+                response.sdtTransaccionesEstados.transaccionSP
               ]
             }
           ]

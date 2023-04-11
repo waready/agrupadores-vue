@@ -63,7 +63,7 @@ class AuthService {
   }
 
   static logout() {
-    AuthServices.removeToken();
+    AuthService.removeToken();
     router.push("/login")
   }
 }
