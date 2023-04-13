@@ -2,63 +2,44 @@
   <div>
     <!--Main Navigation-->
     <header>
-      <!-- Sidebar -->
+       <!-- Sidebar -->
       <nav
         id="sidebarMenu"
-        class="collapse d-lg-block sidebar collapse bg-color">
+        class="collapse d-lg-block sidebar collapse bg-color"
+      >
         <div class="position-sticky">
-          <div class="list-group bg-color text-white list-group-flush mx-3 mt-4">
-            <router-link
-              to="/agrupadores"
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple active">
-              <i class="fas fa-chart-area fa-fw me-3"></i
-              ><span>Agrupadores</span>
-            </router-link>
+          <div
+            class="list-group bg-color text-white list-group-flush mx-3 mt-4"
+          >
+          <!--  @click="routerPadre()" -->
             <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-chart-line fa-fw me-3"></i
-              ><span>Analytics</span></a
+             
+              class="list-group-item list-group-item-action py-2 ripple active"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple">
-              <i class="fas fa-chart-pie fa-fw me-3"></i><span>SEO</span>
+              <i class="fas fa-chart-area fa-fw me-3"></i><span>Agrupadores</span>
             </a>
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span></a
-            >
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-globe fa-fw me-3"></i
-              ><span>International</span></a
-            >
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-building fa-fw me-3"></i
-              ><span>Partners</span></a
-            >
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-calendar fa-fw me-3"></i
-              ><span>Calendar</span></a
-            >
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-            >
-            <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a
-            >
+            <!-- Dropdown -->
+            <div class="dropdown">
+              <ul
+                class="dropdown-menu list-group-item list-group-item-action py-2 ripple active"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <a @click="router(100)" class=" dropdown-item">Condiciones Generales</a>
+                </li>
+                <li>
+                  <a @click="router(200)" class=" dropdown-item">Cajas y Sucursales</a>
+                </li>
+                <li>
+                  <a @click="router(300)" class=" dropdown-item">Contabilidad</a>
+                </li>
+              </ul>
+            </div>
+            <!-- Dropdown -->
           </div>
         </div>
       </nav>
@@ -73,6 +54,20 @@
     <!--Main layout-->
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    routerPadre(){
+      this.$router.push("/");      
+    },
+    router(id){
+      this.$router.push("/indicador/"+id);   
+    }
+
+  },
+}
+</script>
+
 <style>
 body {
   background-color: #fbfbfb;

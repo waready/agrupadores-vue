@@ -116,7 +116,7 @@ export default {
       const formatter = new Intl.NumberFormat('es', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-        notation: 'compact'
+        //notation: 'compact'
       });
       return formatter.format(numero);
     }

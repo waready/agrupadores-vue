@@ -12,18 +12,10 @@ const routes = [
       requiresAuth: true
     },
     children: [
-      { path: "", component: PublicIndex  },
+      // { path: "", component: PublicIndex  },
+     
       {
-        path: "about",
-        name: "about",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/AboutView.vue")
-      },
-      {
-        path: "/agrupadores",
+        path: "",
         component: () => import("../pages/agrupadores/Index.vue")
       },
       {
@@ -83,10 +75,6 @@ const routes = [
       {
         path: "/condiciones",
         component: () => import("../pages/indicador/CondicionesGenerales/Index.vue")
-      },
-      {
-        path: "/marketplace/map",
-        component: () => import("../pages/marketplace/MapPage.vue")
       }
     ]
   },
@@ -108,12 +96,6 @@ const routes = [
     }
   },
   { path: "/profile", component: () => import("../pages/ProfilePage.vue") },
-  {
-    path: "/marker-view/:id",
-    name: "marker-view",
-    component: () => import("../pages/MarkerViewPage.vue"),
-    props: true
-  },
   {
     path: '/404',
     name: "not fount",

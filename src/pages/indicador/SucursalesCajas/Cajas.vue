@@ -10,117 +10,132 @@
         </div>
       </div>
       <hr />
-      <h3>Cajas Abiertas</h3>
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            @click="selecionar(1)"
+            :class="{ active: cajasA == true }">
+            Cajas Abiertas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            @click="selecionar(2)"
+            :class="{ active: cajasC == true }">
+            Cajas Cerradas
+          </a>
+        </li>
+      </ul>
+
       <div class="row">
-        <div class="col-md-4">
-          <div class="input-group is-invalid">
-            <input
-              type="text"
-              name="filter"
-              class="form-control"
-              v-model="TextoBuscado"
-              id="filter" />
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="validatedInputGroupPrepend"
-                ><i class="fa fa-search" aria-hidden="true"></i
-              ></span>
+        <div class="col-md-12">
+          <div class="card-body">
+            <div v-show="cajasA">
+              <h3>Cajas Abiertas</h3>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="input-group is-invalid">
+                    <input
+                      type="text"
+                      name="filter"
+                      class="form-control"
+                      v-model="TextoBuscado"
+                      id="filter" />
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="validatedInputGroupPrepend"
+                        ><i class="fa fa-search" aria-hidden="true"></i
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped tabla">
+                  <thead>
+                    <tr>
+                      <!-- <th scope="col">identificador</th> -->
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Sucursal</th>
+
+                      <th scope="col">Ver Sucursal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template v-if="CajasFilter[0]">
+                      <tr v-for="(item, index) in CajasFilter" :key="index">
+                        <!-- <th scope="row">{{ item.identificador }}</th> -->
+                        <td>{{ item.usuario }}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.Sucursal }}</td>
+                        <td>
+                          <button
+                            class="btn btn-info"
+                            @click="generarSucursal(item.sucursalId)"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                            Sucursal
+                          </button>
+                        </td>
+                      </tr>
+                    </template>
+
+                    <template v-else>
+                      <div class="alert alert-warning mt-1" role="alert">
+                        {{ "No se encuentran registros!" }}
+                      </div>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div v-show="cajasC">
+              <h3>Cajas Cerradas</h3>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <!-- <th scope="col">identificador</th> -->
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Id Sucursal</th>
+                      <th scope="col">Sucursal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template v-if="cajasCerradas[0]">
+                      <tr v-for="(item, index) in cajasCerradas" :key="index">
+                        <!-- <th scope="row">{{ item.identificador }}</th> -->
+                        <td>{{ item.UsuarioCaja }}</td>
+                        <td>{{ item.NombreCaja }}</td>
+                        <td>{{ item.codigo }}</td>
+                        <td>
+                          <button
+                            class="btn btn-info"
+                            @click="generarSucursal(item.Codigo)"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                            Sucursal
+                          </button>
+                        </td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <div class="alert alert-warning mt-1" role="alert">
+                        {{ "No se encuentran registros!" }}
+                      </div>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-striped tabla">
-          <thead>
-            <tr>
-              <!-- <th scope="col">identificador</th> -->
-              <th scope="col">Usuario</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Sucursal</th>
-
-              <th scope="col">Ver Sucursal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-if="CajasFilter[0]">
-              <tr v-for="(item, index) in CajasFilter" :key="index">
-                <!-- <th scope="row">{{ item.identificador }}</th> -->
-                <td>{{ item.usuario }}</td>
-                <td>{{ item.nombre }}</td>
-                <td>{{ item.Sucursal }}</td>
-                <td>
-                  <button
-                    class="btn btn-info"
-                    @click="generarSucursal(item.sucursalId)"
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter">
-                    Sucursal
-                  </button>
-                  <!-- <button
-                class="btn btn-info"
-               @click="generarMapa(item.sucursalId)"
-               
-                data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Sucursal
-              </button> -->
-                </td>
-              </tr>
-            </template>
-
-            <template v-else>
-              <div class="alert alert-warning mt-1" role="alert">
-                {{ "No se encuentran registros!" }}
-              </div>
-            </template>
-          </tbody>
-        </table>
-      </div>
-      <hr />
-      <h3>Cajas Cerradas</h3>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <!-- <th scope="col">identificador</th> -->
-              <th scope="col">Usuario</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Id Sucursal</th>
-              <th scope="col">Sucursal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-if="cajasCerradas[0]">
-              <tr v-for="(item, index) in cajasCerradas" :key="index">
-                <!-- <th scope="row">{{ item.identificador }}</th> -->
-                <td>{{ item.UsuarioCaja }}</td>
-                <td>{{ item.NombreCaja }}</td>
-                <td>{{ item.codigo }}</td>
-                <td>
-                  <button
-                    class="btn btn-info"
-                    @click="generarSucursal(item.Codigo)"
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter">
-                    Sucursal
-                  </button>
-                  <!-- <button
-                class="btn btn-info"
-               @click="generarMapa(item.sucursalId)"
-               
-                data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Sucursal
-              </button> -->
-                </td>
-              </tr>
-            </template>
-            <template v-else>
-              <div class="alert alert-warning mt-1" role="alert">
-                {{ "No se encuentran registros!" }}
-              </div>
-            </template>
-          </tbody>
-        </table>
       </div>
     </div>
     <loading v-else></loading>
@@ -203,6 +218,8 @@ export default {
   data() {
     return {
       //objeto: null,
+      cajasA:true,
+      cajasB:false,
       cajas: false,
       mostrar: false,
       TextoBuscado: "",
@@ -230,12 +247,14 @@ export default {
     async getSucursalesCajas(id_sucursal) {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajas = true;
-        this.cajasAbiertas = r.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja.filter((item)=>{
-          return item.sucursalId == id_sucursal
-        });
-        this.cajasCerradas = r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja.filter((item)=>{
-          return item.sucursalId == id_sucursal
-        });
+        this.cajasAbiertas =
+          r.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja.filter((item) => {
+            return item.sucursalId == id_sucursal;
+          });
+        this.cajasCerradas =
+          r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja.filter((item) => {
+            return item.sucursalId == id_sucursal;
+          });
         this.chartData = {
           labels: [`abiertas`, `cerradas`],
           datasets: [
@@ -301,6 +320,16 @@ export default {
         position: new google.maps.LatLng(lat, lng),
         map: map
       });
+    },
+    selecionar(id) {
+      if (id == 1) {
+        this.cajasA = true;
+        this.cajasC = false;
+      }
+      if (id == 2) {
+        this.cajasA = false;
+        this.cajasC = true;
+      }
     }
   },
   computed: {

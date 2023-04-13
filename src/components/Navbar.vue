@@ -26,17 +26,6 @@
               alt="MDB Logo"
               loading="lazy" /> 
           </a>
-          <!-- Search form -->
-          <!-- <form class="d-none d-md-flex input-group w-auto my-auto">
-            <input
-            autocomplete="off"
-            type="search"
-            class="form-control rounded"
-            placeholder='Search (ctrl + "/" to focus)'
-            style="min-width: 225px;"
-            />
-            <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-        </form> -->
 
           <!-- Right links -->
           <ul class="navbar-nav  flex-row">
@@ -52,12 +41,6 @@
               </a>
               <ul
               class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <!-- <li>
-                  <a class="dropdown-item" href="#">Profile</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Settings</a>
-                </li> -->
                 <li>
                   <a class="dropdown-item" @click="logout()">Logout</a>
                 </li>

@@ -8,14 +8,14 @@
           Sucursales
         </router-link>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <router-link
           class="nav-link"
           :class="{ active: $route.name == 'Cajas' }"
           to="/sucursales/cajas">
           Cajas
         </router-link>
-      </li>
+      </li> -->
     </ul>
   </template>
   <script>
