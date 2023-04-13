@@ -1,7 +1,4 @@
-<!-- Author: Wilson Pilco Nunez -->
-<!-- Email: wilsonaux1@gmail.com -->
-<!-- Created at: 2022-12-16 21:24 -->
-<!-- Description: -->
+
 <template>
   <div>
     <div class="row">

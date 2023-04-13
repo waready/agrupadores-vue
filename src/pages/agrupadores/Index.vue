@@ -115,22 +115,19 @@ export default {
   cursor: pointer;
 }
 .hover-underline-animation {
-  /* display: inline-block; */
   position: relative;
-  color: 
-#0087ca;
+  color:#0087ca;
 }
 
+
 .hover-underline-animation:after {
-  content: '';
   position: absolute;
   width: 100%;
   transform: scaleX(0);
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: 
-#0087ca;
+  background-color: #0087ca;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }

@@ -14,9 +14,9 @@
   </div>
 </template>
 <script>
-import Navbar from "src/components/Navbar.vue";
-import Sidebar from "src/components/Sidebar.vue";
-import Footer from "src/components/Footer.vue";
+import Navbar from "@/components/Navbar.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import Footer from "@/components/Footer.vue";
 /* Script part */
 export default {
   name: "IndexPage",
@@ -55,13 +55,6 @@ export default {
 };
 </script>
 <style scoped>
-/* poner en auto cuando es mas o igual a 1400 display */
-/* @media (max-width: 991px) {
-  .mltam{
-    margin-left: auto;
-  }
-} */
-
 @media (min-width: 992px) {
   .mltam {
     margin-left: 240px;

@@ -1,5 +1,5 @@
 //import Cookies from "js-cookie";
-import http from "src/utils/http.js";
+import http from "@/utils/http.js";
 import secureStorage  from "./secureStorage.js";
 import router from "../router";
 var prefijo = "ardwsbt";

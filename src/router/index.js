@@ -1,8 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 // import HomeView from "../views/HomeView.vue";
 import authGuard from "@/auth-module/index.js";
-import PublicContainer from "src/pages/PublicContainer.vue";
-import PublicIndex from "src/pages/PublicIndex.vue";
+import PublicContainer from "@/pages/PublicContainer.vue";  
 import store from "@/store";
 const routes = [
   {
@@ -78,10 +77,6 @@ const routes = [
       }
     ]
   },
-
-
-
-  { path: "/store", component: () => import("../pages/StorePage.vue") },
   {
     path: "/login",
     component: () => import("../pages/LoginPage.vue"),

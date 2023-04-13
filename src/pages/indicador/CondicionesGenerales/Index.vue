@@ -3,7 +3,6 @@
     <div class="row">
       <h2>Condiciones generales</h2>
       <div class="grey-bg container-fluid">
-
         <section v-if="CondicionesGenerales">
           <section id="stats-subtitle">
             <div class="row">
@@ -73,18 +72,21 @@
             </div>
 
             <div class="row">
-                
-               <div class="col-xl-6 col-md-12">
+              <div class="col-xl-6 col-md-12">
                 <div class="card overflow-hidden">
                   <div class="card-content">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
                         <div class="align-self-center">
-                          <i class="icon-social-dropbox info font-large-2 mr-2"></i>
+                          <i
+                            class="icon-social-dropbox info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
                           <h4>Reglas de negocio</h4>
-                          <span class="badge badge-info badge-pill"> Cantidad: {{CondicionesGenerales.cantidadReglas}}</span>
+                          <span class="badge badge-info badge-pill">
+                            Cantidad:
+                            {{ CondicionesGenerales.cantidadReglas }}</span
+                          >
                         </div>
                         <div class="align-self-center">
                           <h1
@@ -108,12 +110,14 @@
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
                         <div class="align-self-center">
-                          <i
-                            class="icon-layers warning font-large-2 mr-2"></i>
+                          <i class="icon-layers warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
                           <h4>PAE</h4>
-                          <span class="badge badge-info badge-pill"> Cantidad: {{CondicionesGenerales.cantidadPAE}}</span>
+                          <span class="badge badge-info badge-pill">
+                            Cantidad:
+                            {{ CondicionesGenerales.cantidadPAE }}</span
+                          >
                         </div>
                         <div class="align-self-center">
                           <h1
@@ -388,7 +392,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale
 );
-import moment from 'moment';
+import moment from "moment";
 import ApiService from "@/utils/ApiService.js";
 import loading from "@/components/Loading.vue";
 export default {
@@ -438,29 +442,28 @@ export default {
     //
     //
   },
-  computed:{
-    fechaApertura(){
+  computed: {
+    fechaApertura() {
       const fecha = moment(this.CondicionesGenerales.fechaApertura);
-      return fecha.format('DD/MM/YYYY');
+      return fecha.format("DD/MM/YYYY");
     },
-    fechaCierre(){
+    fechaCierre() {
       const fecha = moment(this.CondicionesGenerales.fechaCierre);
-      return fecha.format('DD/MM/YYYY');
+      return fecha.format("DD/MM/YYYY");
     },
-    fechaApertura7x24(){
+    fechaApertura7x24() {
       const fecha = moment(this.CondicionesGenerales.fechaAperturaCanales);
-      return fecha.format('DD/MM/YYYY');
+      return fecha.format("DD/MM/YYYY");
     },
-    fechaCierre7x24(){
+    fechaCierre7x24() {
       const fecha = moment(this.CondicionesGenerales.fechaCierreCanales);
-      return fecha.format('DD/MM/YYYY');
+      return fecha.format("DD/MM/YYYY");
     }
   }
 };
 </script>
 
 <style scoped>
-
 .main-timeline {
   font-family: "Poppins", sans-serif;
 }

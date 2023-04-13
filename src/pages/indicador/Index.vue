@@ -123,11 +123,11 @@ export default {
                 break;
               case 370:
                 // "Cuadre de monedas en saldos diarios"
-                item.icon = "fas fa-dollar fa-5x success";
+                item.icon = "fas fa-balance-scale fa-5x success";
                 break;
               case 380:
                 // "Posibles rubros bolsa"
-                item.icon = "fas fa-balance-scale fa-5x secondary";
+                item.icon = "mt-2 fas fa-sack-dollar fa-5x secondary";
                 break;
 
               default:
@@ -185,6 +185,4 @@ li {
   font-size: 18px;
   padding: 4px;
 }
-
-
 </style>
