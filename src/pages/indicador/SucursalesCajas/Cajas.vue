@@ -232,7 +232,7 @@ export default {
         labels: ["January", "February", "March"],
         datasets: [
           {
-            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            //backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
             data: [40, 20, 12]
           }
         ]
@@ -259,7 +259,7 @@ export default {
           labels: [`abiertas`, `cerradas`],
           datasets: [
             {
-              backgroundColor: ["#41B883", "#000"],
+              backgroundColor: ["#525e5e", "#41B883"],
               data: [
                 r.sdtSucursalesCajas.cajasAbiertas,
                 r.sdtSucursalesCajas.cajasCerradas

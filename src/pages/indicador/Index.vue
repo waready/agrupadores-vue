@@ -2,30 +2,7 @@
   <div class="row mt-3">
     <template v-if="indicadores">
       <h2>Indicadores</h2>
-      <!-- <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Descripcíon</th>
-            <th scope="col">Habilitado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in indicadores" :key="index">
-           
-            <td>{{ item.descripcion }}</td>
-            <td>SI</td>
-            <td>
-              <button
-                class="btn btn-info"
-                @click="indicadorID(item.codigo)"
-                data-toggle="modal"
-                data-target="#modal-fullscreen-xl">
-                Visualizar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
+      <hr>
       <div
         class="col-md-3 col-sm-5 mb-2"
         v-for="(item, index) in indicadores"
@@ -36,18 +13,7 @@
               {{ item.descripcion }}
             </h5>
             <div>
-              <!-- <div
-              :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
               <i :class="item.icon"></i>
-              <!-- <p class="card-text mt-2">
-                  Indicador N°
-                  <a href="#" class="card-link">{{ item.codigo }}</a>
-                </p> -->
-              <!-- <div class="content mb-3">
-                  <button class="btn btn-info format" @click="indicadorID(item.codigo)">
-                  Indicador
-                </button>
-                </div> -->
             </div>
           </div>
         </div>
@@ -174,7 +140,13 @@ export default {
     }
     //
     //
+  },
+  watch: {
+  '$route.params.id': function(newId, oldId) {
+    console.log(newId, " - ", oldId)
+    this.getAllAgrupadores(newId);
   }
+}
 };
 </script>
 <style scoped>

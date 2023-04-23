@@ -7,7 +7,7 @@
         <!-- Container wrapper -->
         <div class="container-fluid">
           <!-- Toggle button -->
-          <button
+          <!-- <button
             class="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
@@ -16,7 +16,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
-          </button>
+          </button> -->
 
           <!-- Brand -->
           <a class="navbar-brand" href="#">

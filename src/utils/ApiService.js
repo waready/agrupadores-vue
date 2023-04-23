@@ -28,9 +28,9 @@ class ApiService {
                 "Device": 1,
                 "Token": token,
               },
-            "IdAgrupador": parseInt(id)
+            "agrupadorId": parseInt(id)
         }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerIndxAgru",user)).data;
+        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerIndicador",user)).data;
       }
       static async getSucursalesCajas(){
 

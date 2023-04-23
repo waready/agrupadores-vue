@@ -13,24 +13,12 @@
             <div class="card-body text-center">
               <h5 class="card-title mb-2 hover-underline-animation">{{ item.descripcion }}</h5>
               <div>
-                <!-- <div
-              :class="item.descripcion.length < 20 ? 'mx pt-3' : 'pt-1'"> -->
                 <i :class="[item.icon,'mt-3']"></i>
-                <!-- <p class="card-text mt-2">
-                  Indicador N°
-                  <a href="#" class="card-link">{{ item.codigo }}</a>
-                </p> -->
-                <!-- <div class="content mb-3">
-                  <button class="btn btn-info format" @click="indicadorID(item.Codigo)">
-                  Indicador
-                </button>
-                </div> -->
               </div>
             </div>
           </div>
         </div>
       </template>
-
       <loading v-else></loading>
     </div>
   </div>

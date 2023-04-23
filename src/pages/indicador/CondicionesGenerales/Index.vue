@@ -1,80 +1,29 @@
 <template>
   <div class="container">
     <div class="row">
-      <h2>Condiciones generales</h2>
+      <h1>Condiciones generales</h1>
       <div class="grey-bg container-fluid">
         <section v-if="CondicionesGenerales">
           <section id="stats-subtitle">
             <div class="row">
-              <!-- <div class="col-12 mt-3 mb-1">
-                <h4 class="text-uppercase">Estadisticas</h4>
-                <p>Reglas de Negocio - PAE</p>
-              </div> -->
-              <!-- <div class="col-xl-6 col-sm-6 col-12">
-                <div class="card">
-                  <div class="card-content">
-                    <div class="card-body">
-                      <div class="media d-flex">
-                        <div class="align-self-center">
-                         <h1
-                            :class="
-                              CondicionesGenerales.reglasNegocio != 'SI'
-                                ? 'danger'
-                                : 'success'
-                            ">
-                            {{ CondicionesGenerales.reglasNegocio }}
-                          </h1>
-                        </div>
-                        <div class="media-body text-right">
-                          <h3>{{CondicionesGenerales.cantidadReglas}}</h3>
-                          <span>Reglas de negocio</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-               <div class="col-xl-6 col-sm-6 col-12">
-                <div class="card">
-                  <div class="card-content">
-                    <div class="card-body">
-                      <div class="media d-flex">
-                        <div class="align-self-center">
-                         <h1
-                            :class="
-                              CondicionesGenerales.opcionPAE != 'SI'
-                                ? 'danger'
-                                : 'success'
-                            ">
-                            {{ CondicionesGenerales.opcionPAE }}
-                          </h1>
-                        </div>
-                        <div class="media-body text-right">
-                          <h3>{{CondicionesGenerales.cantidadPAE}}</h3>
-                          <span>PAE</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-            </div>
-
-            <!-- <div class="row">
-              <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
-            </div> -->
-
-            <div class="row">
               <div class="col-12 mt-3 mb-1">
-                <h4 class="text-uppercase">debugs</h4>
+                <h3 class="text-uppercase">debugs</h3>
                 <p>Datos Informativos</p>
+                <hr />
               </div>
             </div>
 
             <div class="row">
               <div class="col-xl-6 col-md-12">
-                <div class="card overflow-hidden">
-                  <div class="card-content">
+                <div
+                  class="card overflow-hidden"
+                  :class="[
+                    CondicionesGenerales.reglasNegocio !== 'SI'
+                      ? ''
+                      : 'border-danger',
+                    'border-width-5'
+                  ]">
+                  <div class="card-content" style="border-radius:20%">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
                         <div class="align-self-center">
@@ -82,8 +31,8 @@
                             class="icon-social-dropbox info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Reglas de negocio</h4>
-                          <span class="badge badge-info badge-pill">
+                          <h4>Historicos de Reglas de Negocio Activados</h4>
+                          <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadReglas }}</span
                           >
@@ -92,9 +41,10 @@
                           <h1
                             :class="
                               CondicionesGenerales.reglasNegocio != 'SI'
-                                ? 'danger'
-                                : 'success'
+                                ? 'text-secondary'
+                                : 'text-danger tamleter'
                             ">
+                            <i class="fas fa-bug"></i>
                             {{ CondicionesGenerales.reglasNegocio }}
                           </h1>
                         </div>
@@ -105,7 +55,14 @@
               </div>
 
               <div class="col-xl-6 col-md-12">
-                <div class="card">
+                <div
+                  :class="[
+                    'card overflow-hidden',
+                    CondicionesGenerales.opcionPAE != 'SI'
+                      ? ''
+                      : 'border-danger',
+                    'border-width-5'
+                  ]">
                   <div class="card-content">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
@@ -113,19 +70,28 @@
                           <i class="icon-layers warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>PAE</h4>
-                          <span class="badge badge-info badge-pill">
+                          <h4>Historicos PAE Activados</h4>
+                          <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadPAE }}</span
                           >
                         </div>
                         <div class="align-self-center">
-                          <h1
+                          <!-- <h1
                             :class="
                               CondicionesGenerales.opcionPAE != 'SI'
                                 ? 'danger'
                                 : 'success'
+                            "> -->
+
+                          <h1
+                            :class="
+                              CondicionesGenerales.opcionPAE != 'SI'
+                                ? 'text-secondary'
+                                : 'border-danger tamleter'
                             ">
+                            <i class="fas fa-bug"></i>
+
                             {{ CondicionesGenerales.opcionPAE }}
                           </h1>
                         </div>
@@ -135,7 +101,12 @@
                 </div>
               </div>
               <div class="col-xl-6 col-md-12">
-                <div class="card overflow-hidden">
+                <div
+                  :class="[
+                    'card overflow-hidden',
+                    CondicionesGenerales.debug != 'SI' ? '' : 'border-danger',
+                    'border-width-5'
+                  ]">
                   <div class="card-content">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
@@ -150,9 +121,11 @@
                           <h1
                             :class="
                               CondicionesGenerales.debug != 'SI'
-                                ? 'danger'
-                                : 'success'
+                                ? 'text-secondary'
+                                : 'text-danger tamleter'
                             ">
+                            <i class="fas fa-bug"></i>
+
                             {{ CondicionesGenerales.debug }}
                           </h1>
                         </div>
@@ -163,7 +136,14 @@
               </div>
 
               <div class="col-xl-6 col-md-12">
-                <div class="card">
+                <div
+                  :class="[
+                    'card overflow-hidden',
+                    CondicionesGenerales.opcionWorkFlow != 'SI'
+                      ? ''
+                      : 'border-danger',
+                    'border-width-5'
+                  ]">
                   <div class="card-content">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
@@ -179,9 +159,11 @@
                           <h1
                             :class="
                               CondicionesGenerales.opcionWorkFlow != 'SI'
-                                ? 'danger'
-                                : 'success'
+                                ? 'text-secondary'
+                                : 'text-danger tamleter'
                             ">
+                            <i class="fas fa-bug"></i>
+
                             {{ CondicionesGenerales.opcionWorkFlow }}
                           </h1>
                         </div>
@@ -191,7 +173,14 @@
                 </div>
               </div>
               <div class="col-xl-6 col-md-12">
-                <div class="card">
+                <div
+                  :class="[
+                    'card overflow-hidden',
+                    CondicionesGenerales.parametrosGeneralesWF != 'SI'
+                      ? ''
+                      : 'border-danger',
+                    'border-width-5'
+                  ]">
                   <div class="card-content">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
@@ -206,9 +195,11 @@
                           <h1
                             :class="
                               CondicionesGenerales.parametrosGeneralesWF != 'SI'
-                                ? 'danger'
-                                : 'success'
+                                ? 'text-secondary'
+                                : 'text-danger tamleter'
                             ">
+                            <i class="fas fa-bug"></i>
+
                             {{ CondicionesGenerales.parametrosGeneralesWF }}
                           </h1>
                         </div>
@@ -217,7 +208,15 @@
                   </div>
                 </div>
               </div>
-
+            </div>
+            <div class="row">
+              <div class="col-12 mt-3 mb-1">
+                <h3 class="text-uppercase">Periodo Detal 7x24</h3>
+                <p>7 x 24</p>
+                <hr />
+              </div>
+            </div>
+            <div class="row">
               <div class="col-xl-6 col-md-12">
                 <div class="card">
                   <div class="card-content">
@@ -232,12 +231,7 @@
                           <span>FST017 vs FST017CNL iguales?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1
-                            :class="
-                              CondicionesGenerales.empresasIguales != 'SI'
-                                ? 'danger'
-                                : 'success'
-                            ">
+                          <h1>
                             {{ CondicionesGenerales.empresasIguales }}
                           </h1>
                         </div>
@@ -247,7 +241,10 @@
                 </div>
               </div>
 
-              <div class="col-xl-6 col-md-12">
+              <!-- Delta true -->
+              <div
+                class="col-xl-6 col-md-12"
+                v-if="CondicionesGenerales.opcion7x24 == 'SI'">
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body cleartfix">
@@ -261,12 +258,7 @@
                           <span>7x24 habilitado?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1
-                            :class="
-                              CondicionesGenerales.opcion7x24 != 'SI'
-                                ? 'danger'
-                                : 'success'
-                            ">
+                          <h1>
                             {{ CondicionesGenerales.opcion7x24 }}
                           </h1>
                         </div>
@@ -275,8 +267,9 @@
                   </div>
                 </div>
               </div>
+
               <!-- Delta Fail -->
-              <div class="col-xl-6 col-md-12">
+              <div class="col-xl-6 col-md-12" v-else>
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body cleartfix">
@@ -290,12 +283,7 @@
                           <span>Delta habilitado?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1
-                            :class="
-                              CondicionesGenerales.opcionPAE != 'SI'
-                                ? 'danger'
-                                : 'success'
-                            ">
+                          <h1>
                             {{ CondicionesGenerales.opcionPAE }}
                           </h1>
                         </div>
@@ -307,8 +295,9 @@
             </div>
           </section>
           <div class="col-12 mt-3 mb-1">
-            <h4 class="text-uppercase">Fechas Ambiente</h4>
+            <h3 class="text-uppercase">Fechas Ambiente</h3>
             <p>Listados de Fechas</p>
+            <hr />
           </div>
           <div class="container">
             <div class="row">
@@ -464,6 +453,16 @@ export default {
 </script>
 
 <style scoped>
+.tamleter{
+  font-size: 48px;
+}
+
+.border-width-3 {
+  border-width: 3px !important;
+}
+.border-width-5 {
+  border-width: 5px !important;
+}
 .main-timeline {
   font-family: "Poppins", sans-serif;
 }

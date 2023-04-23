@@ -6,8 +6,9 @@
     <div v-if="rubroBolsa">
       <div class="row">
         <div class="col-12 mt-3 mb-1">
-          <h4 class="text-uppercase">Rubro Bolsas</h4>
+          <h3 class="text-uppercase">Rubro Bolsas</h3>
           <p>Información de los Rubros Bolsas</p>
+          <hr>
         </div>
       </div>
 
@@ -63,16 +64,17 @@
                     <i class="fa fa-archive info font-large-4 mr-2"></i>
                   </div>
                   <div class="media-body text-right">
-                    <p>{{ item.descripcion }}</p>
+                    <h2>{{ item.descripcion }}</h2>
                     <h4>{{ item.rubro }}</h4>
-                    <span class="badge badge-info badge-pill mb-2"> Ocurrencias: {{item.ocurrencias}}</span>
+                    
                   </div>
                 </div>
-                <!-- <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p> -->
-                <div class="dropdown text-right">
+                <p class="card-text">
+                  Identificador Bantotal ( Empresa - Sucursal - Operacion - Sub operacion - Moneda - Papel) :
+                   {{ '(' + item.empresa +" - "+ item.sucursal+" - "+ item.operacion+" -  "+ item.subOperacion+" -  "+ item.moneda+" -  " + item.papel +  ')'}} 
+                </p>
+                <span class="mb-2"> Ocurrencias: {{item.ocurrencias}}</span>
+                <!-- <div class="dropdown text-right">
                   <button
                     class="btn btn-secondary dropdown-toggle"
                     type="button"
@@ -92,7 +94,7 @@
                     <a class="dropdown-item" >Moneda: <span class="badge badge-info badge-pill "> {{item.moneda}}</span></a>
                     <a class="dropdown-item" >Papel: <span class="badge badge-info badge-pill "> {{item.papel}}</span></a>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

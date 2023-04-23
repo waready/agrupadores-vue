@@ -11,7 +11,26 @@
           <h4 class="text-uppercase">Resumen</h4>
           <p>Resumen General</p>
         </div>
-        <div class="col-xl-4 col-sm-6 col-12">
+
+        <div class="col-xl-3 col-sm-6 col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-graph info font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-right">
+                    <h3>{{ transacciones.exito + transacciones.error + transacciones.otros}}</h3>
+                    <span>Total de Transacciones</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-sm-6 col-12">
           <div class="card">
             <div class="card-content">
               <div class="card-body">
@@ -29,7 +48,7 @@
           </div>
         </div>
 
-        <div class="col-xl-4 col-sm-6 col-12">
+        <div class="col-xl-3 col-sm-6 col-12">
           <div class="card">
             <div class="card-content">
               <div class="card-body">
@@ -47,7 +66,7 @@
           </div>
         </div>
 
-        <div class="col-xl-4 col-sm-6 col-12">
+        <div class="col-xl-3 col-sm-6 col-12">
           <div class="card">
             <div class="card-content">
               <div class="card-body">
@@ -89,9 +108,18 @@
                   >Movimiento</label
                 >
               </div>
-              <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
+              <select
+                v-model="busqueda"
+                class="custom-select"
+                id="inputGroupSelect01"
+                placeholder="elegir">
                 <option value="">(Elegir)</option>
-                <option v-for="(item,index) in chartData.labels" :key="index" :value="item">{{item}}</option>
+                <option
+                  v-for="(item, index) in labels"
+                  :key="index"
+                  :value="item.id">
+                  {{ item.description }}
+                </option>
               </select>
             </div>
           </div>
@@ -103,10 +131,11 @@
             <li
               v-for="(item, index) in transaccionFiltrada"
               :key="index"
-              class="list-group-item d-flex justify-content-between align-items-center mt-3">
-              {{ item.descripcion }}
+              class="list-group-item d-flex justify-content-between align-items-center mt-3" >
+
+               <h5>{{ item.descripcion }}</h5> 
               <span :class="['badge', 'badge-pill', getClass(item)]">
-                {{ item.cantidad }}
+               <h5> {{ item.cantidad }} </h5> 
               </span>
             </li>
           </ul>
@@ -157,11 +186,50 @@ export default {
     this.getAllTansaccionEstado();
   },
   data: () => ({
-    busqueda:"",
+    busqueda: "",
     transacciones: null,
     message: "",
     transaccionesOrdenadas: [],
     chartData: {},
+    labels: [
+      { id: "(A)", description: "Movimiento autorizado sin contabilizar" },
+      {
+        id: "(B)",
+        description: "Movimiento de ingreso batch no contabilizado"
+      },
+      { id: "(E)", description: "Movimiento con errores" },
+      {
+        id: "(H)",
+        description: "Movimiento contabilizado y pasado al histórico"
+      },
+      {
+        id: "(L)",
+        description: "Movimiento de ingreso libre no contabilizado"
+      },
+      { id: "(M)", description: "Movimiento con autorizaciones pendientes" },
+      {
+        id: "(N)",
+        description:
+          "Movimiento ingresado por el transaccional no contabilizado"
+      },
+      {
+        id: "(P)",
+        description:
+          "Movimiento contabilizado, pasado al histórico, con archivos de saldos históricos actualizados"
+      },
+      { id: "(R)", description: "Movimiento con autorizaciones denegadas" },
+      {
+        id: "(S)",
+        description: "Movimiento contabilizado sin pasar al histórico"
+      },
+      {
+        id: "(X)",
+        description:
+          "Movimiento con autoriz. p/tipo cambio ingresado, para ser retomado"
+      },
+      { id: "Sin especificar", description: "Sin especificar" }
+    ],
+
     chartOptions: {
       responsive: true
       // maintainAspectRatio: false
@@ -245,17 +313,17 @@ export default {
           });
         this.chartData = {
           labels: [
-            "(A)",
-            "(B)",
-            "(E)",
-            "(H)",
-            "(L)",
-            "(M)",
-            "(N)",
-            "(P)",
-            "(R)",
-            "(S)",
-            "(X)",
+            "A",
+            "B",
+            "E",
+            "H",
+            "L",
+            "M",
+            "N",
+            "P",
+            "R",
+            "S",
+            "X",
             "Sin especificar"
           ],
           datasets: [
@@ -284,47 +352,49 @@ export default {
     getClass(item) {
       switch (item.codigo) {
         case "transaccionA":
-          return "badge-primary";
+          return "badge-warning";
         case "transaccionB":
           return "badge-warning";
         case "transaccionE":
           return "badge-danger";
         case "transaccionH":
-          return "badge-primary";
+          return "badge-success";
         case "transaccionL":
           return "badge-warning";
         case "transaccionM":
-          return "badge-primary";
+          return "badge-success";
         case "transaccionN":
           return "badge-warning";
         case "transaccionP":
-          return "badge-primary";
+          return "badge-success";
         case "transaccionR":
-          return "badge-warning";
+          return "badge-danger";
         case "transaccionS":
-          return "medium-primary";
+          return "badge-warning";
         case "transaccionSP":
-          return "badge-primary";
+          return "badge-success";
         case "transaccionX":
-          return "medium-info";
+          return "badge-warning";
+        case "Sin especificar":
+          return "badge-warning";
         default:
           return "";
       }
     }
   },
   computed: {
-    transaccionFiltrada(){
-       //var buscado = this.TextoBuscado.toUpperCase();
+    transaccionFiltrada() {
+      //var buscado = this.TextoBuscado.toUpperCase();
+      console.log(this.busqueda)
       return this.transaccionesOrdenadas.filter((objeto) => {
         const descripcion = objeto.descripcion;
-        return descripcion.includes(this.busqueda)
-       // return (
-          // objeto.descripcion.toUpperCase().includes(buscado) ||
-          // objeto.identificador == parseInt(buscado)
+        return descripcion.includes(this.busqueda);
+        // return (
+        // objeto.descripcion.toUpperCase().includes(buscado) ||
+        // objeto.identificador == parseInt(buscado)
         //)
       });
     }
-
   }
 };
 </script>

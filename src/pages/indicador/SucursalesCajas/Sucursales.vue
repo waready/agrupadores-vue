@@ -81,14 +81,14 @@
                         <td>{{ item.direccion }}</td>
                         <td>
                           <span
-                            class="btn btn-success"
+                            class="btn btn-warning"
                             @click="obtenerCajasA(item)">
                             {{ item.cantidadA }}</span
                           >
                         </td>
                         <td>
                           <span
-                            class="btn btn-danger"
+                            class="btn btn-success"
                             @click="obtenerCajasC(item)">
                             {{ item.cantidadC }}</span
                           >
@@ -231,7 +231,8 @@ export default {
         labels: [`abiertas`, `cerradas`],
         datasets: [
           {
-            backgroundColor: ["#41B883", "#E46651"],
+            // backgroundColor: ["#41B883", "#E46651"],
+            backgroundColor: ["#525e5e", "#41B883"],
             data: [
               response.sdtSucursalesCajas.sucursalesAbiertas,
               response.sdtSucursalesCajas.sucursalesCerradas

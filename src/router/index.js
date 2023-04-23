@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory,createWebHistory } from "vue-router";
 // import HomeView from "../views/HomeView.vue";
 import authGuard from "@/auth-module/index.js";
 import PublicContainer from "@/pages/PublicContainer.vue";  
@@ -90,7 +90,6 @@ const routes = [
       }
     }
   },
-  { path: "/profile", component: () => import("../pages/ProfilePage.vue") },
   {
     path: '/404',
     name: "not fount",
@@ -104,7 +103,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 

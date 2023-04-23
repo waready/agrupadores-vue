@@ -38,12 +38,12 @@
                     <div :class="[
                       'align-self-center',
                       item.saldo != 0 ? 'danger' : 'success'
-                    ]">
+                    ]" style=" font-size: 20px;" >
                       {{ formattedNumber(item.saldo) }}
                     </div>
                   </div>
                   <div>
-                    <span class="badge badge-info badge-pill">{{item.nombre.toUpperCase()}}</span>
+                    <span>{{item.nombre.toUpperCase()}}</span>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
                     <br>

@@ -5,7 +5,7 @@
       <div id="indices">
         <v-client-table :columns="columns" :data="indices" :options="options">
           <template v-slot:tipoCambio="item">
-            <a :class="item.row.tipoCambio != 'S' ? 'badge badge-danger' : 'badge badge-success'">{{
+            <a :class="item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold'">{{
               item.row.tipoCambio }}</a>
           </template>
         </v-client-table>
