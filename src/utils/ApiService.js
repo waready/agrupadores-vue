@@ -1,116 +1,87 @@
-import http  from "./http.js";
+import http from "./http.js";
 import store from "@/store";
 
-var prefijo= 'ardwsbt'
-var token = store.state.Token
-//var prefijo = 'odwsbt'
+var prefijo = "ardwsbt";
+
 class ApiService {
-    static async GetAgrupadores(){
-
-        let user = {
-            "Btinreq": {
-                "Requerimiento": 1,
-                "Canal": "BTDIGITAL",
-                "Usuario": "INSTALADOR",
-                "Token": token,
-                "Device": 1
-              }
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerAgrupadores",user)).data;
+  static async postRequest(url, data) {
+    var token = store.state.Token;
+    console.log("token", store.state.Token);
+    let user = {
+      Btinreq: {
+        Requerimiento: 1,
+        Canal: "BTDIGITAL",
+        Usuario: "INSTALADOR",
+        Token: token,
+        Device: 1
       }
-      static async GetIndicadores(id){
+    };
+    return (await http.post(url, { ...user, ...data })).data;
+  }
 
-        let user = {
-            "Btinreq": {
-                "Requerimiento": 1,
-                "Canal": "BTDIGITAL",
-                "Usuario": "INSTALADOR",
-                "Device": 1,
-                "Token": token,
-              },
-            "agrupadorId": parseInt(id)
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerIndicador",user)).data;
-      }
-      static async getSucursalesCajas(){
+  static async GetAgrupadores() {
+    return this.postRequest(
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerAgrupadores",
+      {}
+    );
+  }
 
-        let user = {
-            "Btinreq": {
-              "Requerimiento": 1,
-              "Canal": "BTDIGITAL",
-              "Usuario": "INSTALADOR",
-              "Device": 1,
-              "Token": token,
-              },
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerSucursalesCajas",user)).data;
-      }
-      static async getCotizaciones(){
+  static async GetIndicadores(id) {
+    return this.postRequest(
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerIndicador",
+      { agrupadorId: parseInt(id) }
+    );
+  }
 
-        let user = {
-            "Btinreq": {
-              "Requerimiento": 1,
-              "Canal": "BTDIGITAL",
-              "Usuario": "INSTALADOR",
-              "Device": 1,
-              "Token": token,
-              },
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerMonedasIndices",user)).data;
-      }
-      static async getCuadreMonedaSaldos(){
+  static async getSucursalesCajas() {
+    return this.postRequest(
+      "com.dlya.bantotal." +
+        prefijo +
+        "_BTIndicadores?ObtenerSucursalesCajas",
+      {}
+    );
+  }
 
-        let user = {
-            "Btinreq": {
-              "Requerimiento": 1,
-              "Canal": "BTDIGITAL",
-              "Usuario": "INSTALADOR",
-              "Device": 1,
-              "Token": token,
-              },
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerCuadreMonedasSaldos",user)).data;
-      }
-      static async getCondicionesGenerales(){
+  static async getCotizaciones() {
+    return this.postRequest(
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerMonedasIndices",
+      {}
+    );
+  }
 
-        let user = {
-            "Btinreq": {
-              "Requerimiento": 1,
-              "Canal": "BTDIGITAL",
-              "Usuario": "INSTALADOR",
-              "Device": 1,
-              "Token": token,
-              },
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerCondicionesGenerales",user)).data;
-      }
-      static async getRubroBolsas(){
+  static async getCuadreMonedaSaldos() {
+    return this.postRequest(
+      "com.dlya.bantotal." +
+        prefijo +
+        "_BTIndicadores?ObtenerCuadreMonedasSaldos",
+      {}
+    );
+  }
 
-        let user = {
-            "Btinreq": {
-              "Requerimiento": 1,
-              "Canal": "BTDIGITAL",
-              "Usuario": "INSTALADOR",
-              "Device": 1,
-              "Token": token,
-              },
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerRubroBolsas",user)).data;
-      }
-      static async getTansaccionEstado(){
+  static async getCondicionesGenerales() {
+    return this.postRequest(
+      "com.dlya.bantotal." +
+        prefijo +
+        "_BTIndicadores?ObtenerCondicionesGenerales",
+      {}
+    );
+  }
 
-        let user = {
-            "Btinreq": {
-              "Requerimiento": 1,
-              "Canal": "BTDIGITAL",
-              "Usuario": "INSTALADOR",
-              "Device": 1,
-              "Token": token,
-              },
-        }
-        return (await http.post("com.dlya.bantotal."+prefijo+"_BTIndicadores?ObtenerTransaccionesEstados",user)).data;
-      }
+  static async getRubroBolsas() {
+    return this.postRequest(
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerRubroBolsas",
+      {}
+    );
+  }
 
+  static async getTansaccionEstado() {
+    return this.postRequest(
+      "com.dlya.bantotal." +
+        prefijo +
+        "_BTIndicadores?ObtenerTransaccionesEstados",
+      {}
+    );
+  }
 }
 
 export default ApiService;
