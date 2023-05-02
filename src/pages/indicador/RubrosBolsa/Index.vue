@@ -28,12 +28,23 @@
                     
                   </div>
                 </div>
-                <p class="card-text">
-                  Identificador Bantotal ( Empresa - Sucursal - Operacion - Sub operacion - Moneda - Papel) :
-                   {{ '(' + item.empresa +" - "+ item.sucursal+" - "+ item.operacion+" -  "+ item.subOperacion+" -  "+ item.moneda+" -  " + item.papel +  ')'}} 
-                </p>
-                <span class="mb-2"> Ocurrencias: {{item.ocurrencias}}</span>
-               
+                <div class="card-text letter">
+                  <hr>
+                  <h5>Clave</h5> 
+                  <ul class="list-unstyled">
+                    <li>Empresa:  {{ item.empresa }}  </li>
+                    <li>Sucursal:  {{ item.sucursal }}</li>
+                    <li>Operacion:  {{ item.operacion }}</li>
+                    <li>Sub Operación:   {{ item.subOperacion }}</li>
+                    <li>Moneda:  {{ item.moneda }}</li>
+                    <li>Papel: {{ item.papel }}</li>
+                  </ul>
+                  <hr>
+                <h5 class="mb-1"><span >  Ocurrencias </span> </h5>
+                  <span>{{ item.ocurrencias }} </span>
+                </div>
+                
+              
               </div>
             </div>
           </div>
@@ -77,7 +88,6 @@ export default {
       border: "1px solid gray",
       width: 180
     }
-   
   }),
 
   methods: {
@@ -100,10 +110,9 @@ export default {
 <style scoped>
 .card {
   position: relative;
+  
 }
-
-.dropdown-menu {
-  position: absolute;
-  z-index: 1;
+.letter{
+  font-size: 1.2rem;
 }
 </style>
