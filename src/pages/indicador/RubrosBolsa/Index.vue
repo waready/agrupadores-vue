@@ -14,48 +14,7 @@
 
       <div class="container">
         <div class="row">
-          <!-- <div
-            class="col-xl-6 col-md-12 pb-"
-            v-for="(item, index) in rubroBolsa"
-            :key="index">
-            <div class="card overflow-hidden">
-              <div class="card-content">
-                <div class="card-body cleartfix">
-                  <div class="media align-items-stretch">
-                    <div class="align-self-center">
-                      <i class="fa fa-archive info font-large-2 mr-2"></i>
-                    </div>
-                    <div class="media-body text-right">
-                      <p>{{ item.descripcion }}</p>
-                      <h5>{{ item.rubro }}</h5>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        Dropdown button
-                      </button>
-                      <div
-                        class="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#"
-                          >Something else here</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
+        
           <div class="col-xl-6 col-md-12"  v-for="(item, index) in rubroBolsa" :key="index">
             <div class="card">
               <div class="card-body">
@@ -74,27 +33,7 @@
                    {{ '(' + item.empresa +" - "+ item.sucursal+" - "+ item.operacion+" -  "+ item.subOperacion+" -  "+ item.moneda+" -  " + item.papel +  ')'}} 
                 </p>
                 <span class="mb-2"> Ocurrencias: {{item.ocurrencias}}</span>
-                <!-- <div class="dropdown text-right">
-                  <button
-                    class="btn btn-secondary dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                    Identificador
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                    style="position: absolute; z-index: 999">
-                    <a class="dropdown-item" >Empresa: <span class="badge badge-info badge-pill "> {{item.empresa}}</span> </a>
-                    <a class="dropdown-item" >Sucursal: <span class="badge badge-info badge-pill "> {{item.sucursal}}</span></a>
-                    <a class="dropdown-item" >Operacion: <span class="badge badge-info badge-pill "> {{item.operacion}}</span></a>
-                    <a class="dropdown-item" >Moneda: <span class="badge badge-info badge-pill "> {{item.moneda}}</span></a>
-                    <a class="dropdown-item" >Papel: <span class="badge badge-info badge-pill "> {{item.papel}}</span></a>
-                  </div>
-                </div> -->
+               
               </div>
             </div>
           </div>
@@ -138,20 +77,7 @@ export default {
       border: "1px solid gray",
       width: 180
     }
-    // data: [
-    //   {
-    //     Rubro: 2108050001,
-    //     Papel: 0,
-    //     Empresa: 1,
-    //     Moneda: 0,
-    //     Ctnro: 104,
-    //     Suboper: 8,
-    //     Ocurrencias: 1054,
-    //     Sucursal: 1,
-    //     Operacion: 0,
-    //     Tipooper: 1
-    //   }
-    // ]
+   
   }),
 
   methods: {
