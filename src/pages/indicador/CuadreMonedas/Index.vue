@@ -43,7 +43,7 @@
                     </div>
                   </div>
                   <div>
-                    <span>{{item.nombre.toUpperCase()}}</span>
+                    <span class="letter">{{item.nombre.toUpperCase()}}</span>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
                     <br>
@@ -140,4 +140,8 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.letter{
+font-size: 1.1rem;
+}
+</style>

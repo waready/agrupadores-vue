@@ -4,8 +4,13 @@
     <div v-if="indices">
       <div id="indices">
         <v-client-table :columns="columns" :data="indices" :options="options">
+          <template v-slot:nombre="item">
+            <div class="letter">
+              {{ item.row.nombre.toUpperCase() }} 
+            </div>
+          </template>
           <template v-slot:tipoCambio="item">
-            <a :class="item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold'">{{
+            <a :class="[item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold','letter']">{{
               item.row.tipoCambio }}</a>
           </template>
         </v-client-table>
@@ -101,6 +106,9 @@ export default {
   }
   .sortable-header .sort-icon.fa-sort {
     opacity: 0.5;
+  }
+  .letter{
+    font-size: 1.1rem;
   }
 
 </style>
