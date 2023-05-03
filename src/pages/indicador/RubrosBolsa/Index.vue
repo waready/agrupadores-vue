@@ -32,12 +32,12 @@
                   <hr>
                   <h5>Clave</h5> 
                   <ul class="list-unstyled">
-                    <li>Empresa:  {{ item.empresa }}  </li>
-                    <li>Sucursal:  {{ item.sucursal }}</li>
+                    <li>Empresa:  {{ item.nombreEmpresa }}  </li>
+                    <li>Sucursal:  {{ item.nombreSucursal }}</li>
                     <li>Operacion:  {{ item.operacion }}</li>
                     <li>Sub Operación:   {{ item.subOperacion }}</li>
-                    <li>Moneda:  {{ item.moneda }}</li>
-                    <li>Papel: {{ item.papel }}</li>
+                    <li>Moneda:  {{ item.signoMoneda }}</li>
+                    <li>Papel: {{ item.nombrePapel }}</li>
                   </ul>
                   <hr>
                 <h5 class="mb-1"><span >  Ocurrencias </span> </h5>

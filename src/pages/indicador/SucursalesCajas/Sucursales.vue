@@ -228,7 +228,7 @@ export default {
       this.cajasAbiertas = response.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja;
       this.cajasCerradas = response.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja;
       this.chartData = {
-        labels: [`abiertas`, `cerradas`],
+        labels: [`Abiertas`, `Cerradas`],
         datasets: [
           {
             // backgroundColor: ["#41B883", "#E46651"],
