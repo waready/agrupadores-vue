@@ -2,7 +2,7 @@
 import http from "@/utils/http.js";
 import secureStorage  from "./secureStorage.js";
 import router from "../router";
-var prefijo = "ardwsbt";
+var prefijo = process.env.VUE_APP_API_PREFIJO;
 //var prefijo = 'odwsbt'
 class AuthService {
   static checkIfHasToken() {

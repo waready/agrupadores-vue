@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <Footer class="mltam"></Footer>
+    <Footer class=""></Footer>
   </div>
 </template>
 <script>

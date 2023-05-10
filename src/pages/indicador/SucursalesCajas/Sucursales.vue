@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h2>Sucursales</h2>
+    <div class="alert alert-warning" role="alert" v-show="message">
+      {{ message + "!" }}
+    </div>
     <div v-if="sucursales">
       <hr />
       <div class="row">
@@ -195,9 +198,6 @@
                 data-dismiss="modal">
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
             </div>
           </div>
         </div>
@@ -220,6 +220,9 @@ export default {
   name: "sucursales",
   async mounted() {
     await ApiService.getSucursalesCajas().then((response) => {
+      if (response.Erroresnegocio.BTErrorNegocio[0]) {
+        this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+      }
       this.sucursales = true;
       this.sucursalesAbiertas =
         response.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal;
@@ -262,6 +265,7 @@ export default {
   components: { Pie, loading },
   data() {
     return {
+      message: "",
       sucursalA: true,
       sucursalC: false,
       sucursales: false,
@@ -288,19 +292,22 @@ export default {
   },
   methods: {
     generarMapa(lat, lng) {
+      
       this.$options.markers = new Array();
-      // https://www.google.com/maps?ll=-15.322977,-70.028362&z=8&t=m&hl=es-ES&gl=US&mapclient=apiv3
-      const uluru = { lat: lat, lng: lng };
-      const map = new window.google.maps.Map(this.$refs.elMap, {
-        zoom: 10,
-        center: uluru
-      });
-      this.$options.map = map;
+      var mapas = this.$refs.elMap;
+      setTimeout( function() {
+       
+        const mymap = L.map(mapas).setView([lat, lng], 10);
+         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+          maxZoom: 18
+        }).addTo(mymap);
 
-      const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lng),
-        map: map
-      });
+        const marker = L.marker([lat, lng]).addTo(mymap);
+
+      },1000)
+  
     },
     obtenerCajasA(item) {
       console.log(item.identificador);

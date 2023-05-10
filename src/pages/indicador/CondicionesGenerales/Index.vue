@@ -2,6 +2,9 @@
   <div class="container">
     <div class="row">
       <h1>Condiciones generales</h1>
+      <div class="alert alert-warning" role="alert" v-show="message">
+        {{ message + "!" }}
+      </div>
       <div class="grey-bg container-fluid">
         <section v-if="CondicionesGenerales">
           <section id="stats-subtitle">

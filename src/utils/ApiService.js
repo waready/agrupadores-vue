@@ -1,7 +1,7 @@
 import http from "./http.js";
 import store from "@/store";
 
-var prefijo = "ardwsbt";
+var prefijo = process.env.VUE_APP_API_PREFIJO
 
 class ApiService {
   static async postRequest(url, data) {

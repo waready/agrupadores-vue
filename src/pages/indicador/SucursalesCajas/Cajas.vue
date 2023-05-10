@@ -218,8 +218,8 @@ export default {
   data() {
     return {
       //objeto: null,
-      cajasA:true,
-      cajasB:false,
+      cajasA: true,
+      cajasB: false,
       cajas: false,
       mostrar: false,
       TextoBuscado: "",
@@ -308,18 +308,19 @@ export default {
       );
     },
     async generarMapa(lat, lng) {
+      if (this.$options.map) {
+        // El mapa ya está inicializado, no hace falta hacerlo nuevamente
+        return;
+      }
       this.$options.markers = new Array();
-      // https://www.google.com/maps?ll=-15.322977,-70.028362&z=8&t=m&hl=es-ES&gl=US&mapclient=apiv3
-      const uluru = { lat: lat, lng: lng };
-      const map = await new window.google.maps.Map(this.$refs.elMap, {
-        zoom: 10,
-        center: uluru
-      });
-      this.$options.map = map;
-      const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lng),
-        map: map
-      });
+      const mymap = L.map(this.$refs.elMap).setView([lat, lng], 10);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(mymap);
+      const marker = L.marker([lat, lng]).addTo(mymap);
+      this.$options.map = mymap;
     },
     selecionar(id) {
       if (id == 1) {

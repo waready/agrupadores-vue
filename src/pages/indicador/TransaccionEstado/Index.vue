@@ -131,9 +131,9 @@
             <li
               v-for="(item, index) in transaccionFiltrada"
               :key="index"
-              class="list-group-item d-flex justify-content-between align-items-center mt-3" >
+              class=" d-flex justify-content-between align-items-center mt-3" >
 
-               <h5>{{ item.descripcion }}</h5> 
+               <span style="font-size: 18px;">{{ item.descripcion }}</span> 
               <span :class="['badge', 'badge-pill', getClass(item)]">
                <h5> {{ item.cantidad }} </h5> 
               </span>

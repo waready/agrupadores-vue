@@ -93,7 +93,7 @@ export default {
   methods: {
     async getAllRubroBolsas() {
       await ApiService.getRubroBolsas().then((response) => {
-        console.log(response);
+      
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
         }

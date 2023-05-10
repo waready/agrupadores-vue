@@ -1,6 +1,9 @@
 <template>
   <div class="mt-3">
     <h2>Agrupadores</h2>
+    <div class="alert alert-warning" role="alert" v-show="message">
+      {{ message + "!" }}
+    </div>
     <hr />
     <!-- {{ agrupadores }} -->
     <div class="row">
@@ -39,7 +42,8 @@ export default {
   },
 
   data: () => ({
-    agrupadores: null
+    agrupadores: null,
+    message:""
   }),
 
   computed: {
@@ -56,6 +60,10 @@ export default {
     async getAllAgrupadores() {
       await ApiService.GetAgrupadores().then((response) => {
        
+        if (response.Erroresnegocio.BTErrorNegocio[0]) {
+          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+        }
+
         this.agrupadores = response.sdtAgrupadores.SdtsBTAgrupador.map((item) => {
           switch (item.codigo) {
             case 100:
