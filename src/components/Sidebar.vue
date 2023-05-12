@@ -28,9 +28,8 @@ export default {
   mounted() {
     this.$refs.sidebarMenu.$el.querySelector("#my-scroll").style.margin =
       "6px 0px 0px";
-    this.$refs.sidebarMenu.$el.querySelector(
-      "#my-scroll .nav-list"
-    ).style.paddingLeft = "0.7rem";
+    this.$refs.sidebarMenu.$el.querySelector("#my-scroll .nav-list").style.padding = "0.7rem";
+
 
     $(document).ready(function () {
       $(".nav-list a").on("click", function () {
