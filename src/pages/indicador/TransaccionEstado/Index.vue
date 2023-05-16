@@ -311,42 +311,63 @@ export default {
             if (b.codigo === "transaccionSP") return -1;
             return a.codigo.localeCompare(b.codigo);
           });
+
+        // this.chartData = {
+        //   labels: [
+        //     "A",
+        //     "B",
+        //     "E",
+        //     "H",
+        //     "L",
+        //     "M",
+        //     "N",
+        //     "P",
+        //     "R",
+        //     "S",
+        //     "X",
+        //     "Sin especificar"
+        //   ],
+        //   datasets: [
+        //     {
+        //       label: "Cantidad",
+        //       backgroundColor: "#f87979",
+        //       data: [
+        //         response.sdtTransaccionesEstados.transaccionA,
+        //         response.sdtTransaccionesEstados.transaccionB,
+        //         response.sdtTransaccionesEstados.transaccionE,
+        //         response.sdtTransaccionesEstados.transaccionH,
+        //         response.sdtTransaccionesEstados.transaccionL,
+        //         response.sdtTransaccionesEstados.transaccionM,
+        //         response.sdtTransaccionesEstados.transaccionN,
+        //         response.sdtTransaccionesEstados.transaccionP,
+        //         response.sdtTransaccionesEstados.transaccionR,
+        //         response.sdtTransaccionesEstados.transaccionS,
+        //         response.sdtTransaccionesEstados.transaccionX,
+        //         response.sdtTransaccionesEstados.transaccionSP
+        //       ]
+        //     }
+        //   ]
+        // }; 
+
         this.chartData = {
-          labels: [
-            "A",
-            "B",
-            "E",
-            "H",
-            "L",
-            "M",
-            "N",
-            "P",
-            "R",
-            "S",
-            "X",
-            "Sin especificar"
-          ],
+          labels: [],
           datasets: [
             {
               label: "Cantidad",
-              backgroundColor: "#f87979",
-              data: [
-                response.sdtTransaccionesEstados.transaccionA,
-                response.sdtTransaccionesEstados.transaccionB,
-                response.sdtTransaccionesEstados.transaccionE,
-                response.sdtTransaccionesEstados.transaccionH,
-                response.sdtTransaccionesEstados.transaccionL,
-                response.sdtTransaccionesEstados.transaccionM,
-                response.sdtTransaccionesEstados.transaccionN,
-                response.sdtTransaccionesEstados.transaccionP,
-                response.sdtTransaccionesEstados.transaccionR,
-                response.sdtTransaccionesEstados.transaccionS,
-                response.sdtTransaccionesEstados.transaccionX,
-                response.sdtTransaccionesEstados.transaccionSP
-              ]
+              backgroundColor: [],
+              data: []
             }
           ]
-        };
+        }
+        for (const [key, value] of Object.entries(response.sdtTransaccionesEstados)) {
+          if (value !== null && value !== 0 && key.startsWith("transaccion")) {
+            const label = key.slice(11);
+            this.chartData.labels.push(label);
+
+            this.chartData.datasets[0].backgroundColor.push("#f87979");
+            this.chartData.datasets[0].data.push(value);
+          }
+        }
       });
     },
     getClass(item) {

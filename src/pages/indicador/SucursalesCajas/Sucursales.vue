@@ -37,11 +37,11 @@
       </ul>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 ">
           <div class="card-body">
             <div v-show="sucursalA">
               <h3>Sucursales Abiertas</h3>
-              <div class="row">
+              <div class="row ">
                 <div class="col-md-4">
                   <div class="input-group is-invalid">
                     <input
@@ -61,16 +61,15 @@
                 </div>
               </div>
               <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped tamleter" >
                   <thead>
                     <tr>
-                      <!-- <th scope="col">identificador</th> -->
-                      <th scope="col"># Sucursal</th>
-                      <th scope="col">telefono</th>
-                      <th scope="col">direccion</th>
-                      <th scope="col">cajas abiertas</th>
-                      <th scope="col">cajas cerradas</th>
-                      <th scope="col">mapa</th>
+                      <th scope="col"># SUCURSAL</th>
+                      <th scope="col">TELEFONO</th>
+                      <th scope="col">DIRECCIÓN</th>
+                      <th scope="col">CAJAS ABIERTAS</th>
+                      <th scope="col">CAJAS CERRADAS</th>
+                      <th scope="col">MAPA</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -78,13 +77,12 @@
                       <tr
                         v-for="(item, index) in sucursalesFilter"
                         :key="index">
-                        <!-- <th scope="row">{{ item.identificador }}</th> -->
                         <th scope="row">{{ item.descripcion }}</th>
                         <td>{{ item.telefono }}</td>
                         <td>{{ item.direccion }}</td>
                         <td>
                           <span
-                            class="btn btn-warning"
+                            class="btn btn-secondary"
                             @click="obtenerCajasA(item)">
                             {{ item.cantidadA }}</span
                           >
@@ -120,16 +118,13 @@
             <div v-show="sucursalC">
               <h3>Sucursales Cerradas</h3>
               <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped tamleter">
                   <thead>
                     <tr>
-                      <!-- <th scope="col">identificador</th> -->
-                      <th scope="col"># Sucursal</th>
-                      <th scope="col">telefono</th>
-                      <th scope="col">direccion</th>
-                      <!-- <th scope="col">cajas abiertas</th>
-            <th scope="col">cajas cerradas</th> -->
-                      <th scope="col">mapa</th>
+                      <th scope="col"># SUCURSAL</th>
+                      <th scope="col">TELEFONO</th>
+                      <th scope="col">DIRECCIÓN</th>
+                      <th scope="col">MAPA</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -137,7 +132,6 @@
                       <tr
                         v-for="(item, index) in sucursalesCerradas"
                         :key="index">
-                        <!-- <th scope="row">{{ item.identificador }}</th> -->
                         <th scope="row">{{ item.descripcion }}</th>
                         <td>{{ item.telefono }}</td>
                         <td>{{ item.direccion }}</td>
@@ -178,7 +172,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
-                Mapa geolocalizacion
+                Mapa geolocalización
               </h5>
               <button
                 type="button"
@@ -292,22 +286,18 @@ export default {
   },
   methods: {
     generarMapa(lat, lng) {
-      
       this.$options.markers = new Array();
       var mapas = this.$refs.elMap;
-      setTimeout( function() {
-       
+      setTimeout(function () {
         const mymap = L.map(mapas).setView([lat, lng], 10);
-         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           attribution:
             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
           maxZoom: 18
         }).addTo(mymap);
 
         const marker = L.marker([lat, lng]).addTo(mymap);
-
-      },1000)
-  
+      }, 1000);
     },
     obtenerCajasA(item) {
       console.log(item.identificador);
@@ -337,8 +327,7 @@ export default {
   computed: {
     myStyles() {
       return {
-        height: `${400}px`,
-        position: "relative"
+        height: `${325}px`,
       };
     },
     sucursalesFilter() {
@@ -354,6 +343,10 @@ export default {
 };
 </script>
 <style scoped>
+.tamleter{
+  font-size: 1.1rem;
+}
+
 .app-store-map {
   width: 100%;
   height: 500px;

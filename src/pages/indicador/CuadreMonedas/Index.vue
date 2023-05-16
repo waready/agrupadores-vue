@@ -7,7 +7,7 @@
       <section id="minimal-statistics">
         <div class="row">
           <div class="col-12 mt-3 mb-1">
-            <h4 class="text-uppercase">Balance Monedas Saldo</h4>
+            <h4 class="text-uppercase">Cierre de Saldo por Monedas</h4>
             <p>Información de los Balances</p>
           </div>
         </div>

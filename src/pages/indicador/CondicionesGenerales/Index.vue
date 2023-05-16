@@ -34,7 +34,7 @@
                             class="icon-social-dropbox info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Historicos de Reglas de Negocio Activados</h4>
+                          <h4>Históricos de Reglas de Negocio Activados</h4>
                           <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadReglas }}</span
@@ -73,20 +73,13 @@
                           <i class="icon-layers warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Historicos PAE Activados</h4>
+                          <h4>Históricos PAE Activados</h4>
                           <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadPAE }}</span
                           >
                         </div>
                         <div class="align-self-center">
-                          <!-- <h1
-                            :class="
-                              CondicionesGenerales.opcionPAE != 'SI'
-                                ? 'danger'
-                                : 'success'
-                            "> -->
-
                           <h1
                             :class="
                               CondicionesGenerales.opcionPAE != 'SI'
@@ -214,14 +207,20 @@
             </div>
             <div class="row">
               <div class="col-12 mt-3 mb-1">
-                <h3 class="text-uppercase">Periodo Detal 7x24</h3>
-                <p>7 x 24</p>
+                <h3 class="text-uppercase">Periodo Delta 24 x 7</h3>
+                <p>24 x 7</p>
                 <hr />
               </div>
             </div>
             <div class="row">
               <div class="col-xl-6 col-md-12">
-                <div class="card">
+                <div :class="[
+                    'card overflow-hidden',
+                    CondicionesGenerales.opcion7x24 === 'SI' && CondicionesGenerales.empresasIguales === 'SI'
+                      ? 'border-danger'
+                      : '',
+                    'border-width-5'
+                  ]">
                   <div class="card-content">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
@@ -258,7 +257,7 @@
                         </div>
                         <div class="media-body">
                           <h4>Delta</h4>
-                          <span>7x24 habilitado?</span>
+                          <span>Delta habilitado?</span>
                         </div>
                         <div class="align-self-center">
                           <h1>
@@ -336,7 +335,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de apertura 7x24</h3>
+                      <h3 class="title">Fecha de apertura 24x7 </h3>
                       <p class="description">
                         {{ fechaApertura7x24 }}
                       </p>
@@ -348,7 +347,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de cierre 7x24</h3>
+                      <h3 class="title">Fecha de cierre 24x7</h3>
                       <p class="description">
                         {{ fechaCierre7x24 }}
                       </p>

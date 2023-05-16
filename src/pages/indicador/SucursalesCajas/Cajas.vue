@@ -55,21 +55,18 @@
                 </div>
               </div>
               <div class="table-responsive">
-                <table class="table table-striped tabla">
+                <table class="table table-striped tamleter tabla">
                   <thead>
                     <tr>
-                      <!-- <th scope="col">identificador</th> -->
-                      <th scope="col">Usuario</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Sucursal</th>
-
-                      <th scope="col">Ver Sucursal</th>
+                      <th scope="col">USUARIO</th>
+                      <th scope="col">NOMBRE</th>
+                      <th scope="col">SUCURSAL</th>
+                      <th scope="col">VER SUCURSAL</th>
                     </tr>
                   </thead>
                   <tbody>
                     <template v-if="CajasFilter[0]">
                       <tr v-for="(item, index) in CajasFilter" :key="index">
-                        <!-- <th scope="row">{{ item.identificador }}</th> -->
                         <td>{{ item.usuario }}</td>
                         <td>{{ item.nombre }}</td>
                         <td>{{ item.Sucursal }}</td>
@@ -97,14 +94,13 @@
             <div v-show="cajasC">
               <h3>Cajas Cerradas</h3>
               <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped tamleter">
                   <thead>
                     <tr>
-                      <!-- <th scope="col">identificador</th> -->
-                      <th scope="col">Usuario</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Id Sucursal</th>
-                      <th scope="col">Sucursal</th>
+                      <th scope="col">USUARIO</th>
+                      <th scope="col">NOMBRE</th>
+                      <th scope="col">SUCURSAL</th>
+                      <th scope="col">VER SUCURSAL</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -178,7 +174,7 @@
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     {{ item.direccion }}
                   </p>
-                  <button class="btn btn-primary">Mostrar mapa</button>
+                  <button class="btn btn-primary">Mostrar Mapa</button>
                 </div>
               </div>
             </div>
@@ -191,7 +187,6 @@
               data-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
@@ -255,19 +250,7 @@ export default {
           r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja.filter((item) => {
             return item.sucursalId == id_sucursal;
           });
-        this.chartData = {
-          labels: [`abiertas`, `cerradas`],
-          datasets: [
-            {
-              backgroundColor: ["#525e5e", "#41B883"],
-              data: [
-                r.sdtSucursalesCajas.cajasAbiertas,
-                r.sdtSucursalesCajas.cajasCerradas
-              ]
-            }
-          ]
-        };
-
+    
         let data = this.cajasAbiertas.map((cajas) => {
           var cajasSelect = null;
           cajasSelect =
@@ -285,6 +268,18 @@ export default {
           return cajas;
         });
 
+        this.chartData = {
+          labels: [`Abiertas`, `Cerradas`],
+          datasets: [
+            {
+              backgroundColor: ["#525e5e", "#41B883"],
+              data: [
+                data.length,
+                r.sdtSucursalesCajas.cajasCerradas
+              ]
+            }
+          ]
+        };
         this.cajasAbiertasPremiun = data;
       });
     },
@@ -354,6 +349,10 @@ export default {
 };
 </script>
 <style scoped>
+.tamleter{
+  font-size: 1.1rem;
+}
+
 .app-store-map {
   width: 100%;
   height: 500px;

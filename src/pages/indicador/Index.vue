@@ -60,7 +60,8 @@ export default {
     async getAllAgrupadores(idIndicador) {
       await ApiService.GetIndicadores(idIndicador).then((response) => {
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].descripcion;
+          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+          console.log(response.Erroresnegocio.BTErrorNegocio[0].Descripcion)
         }
         // else{
         // }

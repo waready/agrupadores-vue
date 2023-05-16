@@ -1,10 +1,11 @@
 <template>
   <div class="mt-3">
     <h2>Agrupadores</h2>
-    <div class="alert alert-warning" role="alert" v-show="message">
+   
+    <hr />
+     <div class="alert alert-warning" role="alert" v-show="message">
       {{ message + "!" }}
     </div>
-    <hr />
     <!-- {{ agrupadores }} -->
     <div class="row">
       <template v-if="agrupadores">
@@ -14,7 +15,7 @@
           :key="index">
           <div class="card h-100 "  @click="indicadorID(item.codigo)">
             <div class="card-body text-center">
-              <h5 class="card-title mb-2 hover-underline-animation">{{ item.descripcion }}</h5>
+              <h5 class="card-title hover-underline-animation">{{ item.descripcion }}</h5>
               <div>
                 <i :class="[item.icon,'mt-3']"></i>
               </div>
@@ -28,7 +29,7 @@
 </template>
 <script>
 import ApiService from "@/utils/ApiService.js";
-
+import AuthService from '@/utils/AuthService';
 import Loading from "@/components/Loading.vue";
 export default {
   // name: "MarketplaceIndex",
@@ -62,13 +63,20 @@ export default {
        
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+          if(this.message == "Sesión inválida"){
+            setTimeout(()=>{
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+            },3000)
+          }
         }
 
         this.agrupadores = response.sdtAgrupadores.SdtsBTAgrupador.map((item) => {
           switch (item.codigo) {
             case 100:
               // "Condiciones Generales"
-              item.icon = "fas fa-wrench fa-5x";
+              item.icon = "fas fa-wrench fa-5x info";
               break;
             case 200:
               // "Cajas y Sucursales"
@@ -76,7 +84,7 @@ export default {
               break;
             case 300:
               // "Contabilidad"
-              item.icon = "fas fa-file-contract fa-5x";
+              item.icon = "fas fa-file-contract fa-5x success";
               break;
             default:
               // sin icon

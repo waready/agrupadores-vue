@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <h2>INDICES</h2>
+    <h2>ÍNDICES</h2>
     <div v-if="indices">
       <div id="indices">
         <v-client-table :columns="columns" :data="indices" :options="options">

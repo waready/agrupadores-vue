@@ -35,7 +35,7 @@
                     <li>Empresa:  {{ item.nombreEmpresa }}  </li>
                     <li>Sucursal:  {{ item.nombreSucursal }}</li>
                     <li>Cuenta: {{ item.cuentaCliente }}</li>
-                    <li>Operacion:  {{ item.operacion }}</li>
+                    <li>Operación:  {{ item.operacion }}</li>
                     <li>Sub Operación:   {{ item.subOperacion }}</li>
                     <li>Moneda:  {{ item.signoMoneda }}</li>
                     <li>Papel: {{ item.nombrePapel }}</li>

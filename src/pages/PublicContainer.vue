@@ -55,14 +55,8 @@ export default {
 };
 </script>
 <style scoped>
-/* @media (min-width: 992px) {
   .mltam {
-    margin-left: 240px;
+    margin-left: 50px;
   }
-}
-@media (1850px < width) {
-  .mltam {
-    margin-left: auto;
-  }
-} */
+
 </style>

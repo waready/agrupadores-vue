@@ -17,7 +17,7 @@
                 class="form-control"
                 type="text"
                 v-model="username"
-                placeholder="E-mail" />
+                placeholder="Usuario" />
             </div>
             <div class="mb-3">
               <!-- <label for="">Password</label> -->
@@ -61,8 +61,8 @@ export default {
   },
 
   data: () => ({
-    username: "instalador",
-    password: "Bantotal2015",
+    username: "",
+    password: "",
     loading: false,
     message: ""
   }),

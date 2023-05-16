@@ -14,7 +14,7 @@
           class="nav-link"
           @click="selecionar(2)"
           :class="{ active: indice == true }">
-          Indices
+          Índices
         </a>
       </li>
     </ul>

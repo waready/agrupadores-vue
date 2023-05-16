@@ -29,6 +29,11 @@ export default {
     this.$refs.sidebarMenu.$el.querySelector("#my-scroll").style.margin =
       "6px 0px 0px";
     this.$refs.sidebarMenu.$el.querySelector("#my-scroll .nav-list").style.padding = "0.7rem";
+    const spanElements = this.$refs.sidebarMenu.$el.querySelectorAll(".nav-list span.links_name");
+    for (let i = 0; i < spanElements.length; i++) {
+      spanElements[i].style.fontSize = "12px";
+    }
+
 
 
     $(document).ready(function () {
