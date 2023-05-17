@@ -21,7 +21,13 @@
                     <i class="icon-graph info font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h3>{{ transacciones.exito + transacciones.error + transacciones.otros}}</h3>
+                    <h3>
+                      {{
+                        transacciones.exito +
+                        transacciones.error +
+                        transacciones.otros
+                      }}
+                    </h3>
                     <span>Total de Transacciones</span>
                   </div>
                 </div>
@@ -40,7 +46,7 @@
                   </div>
                   <div class="media-body text-right">
                     <h3>{{ transacciones.exito }}</h3>
-                    <span>Contabilizadas con Exito</span>
+                    <span>Contabilizadas con Éxito</span>
                   </div>
                 </div>
               </div>
@@ -131,11 +137,10 @@
             <li
               v-for="(item, index) in transaccionFiltrada"
               :key="index"
-              class=" d-flex justify-content-between align-items-center mt-3" >
-
-               <span style="font-size: 18px;">{{ item.descripcion }}</span> 
+              class="d-flex justify-content-between align-items-center mt-3">
+              <span style="font-size: 18px">{{ item.descripcion }}</span>
               <span :class="['badge', 'badge-pill', getClass(item)]">
-               <h5> {{ item.cantidad }} </h5> 
+                <h5>{{ item.cantidad }}</h5>
               </span>
             </li>
           </ul>
@@ -231,8 +236,13 @@ export default {
     ],
 
     chartOptions: {
-      responsive: true
-      // maintainAspectRatio: false
+      responsive: true,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: false
+      }
     }
   }),
 
@@ -312,43 +322,6 @@ export default {
             return a.codigo.localeCompare(b.codigo);
           });
 
-        // this.chartData = {
-        //   labels: [
-        //     "A",
-        //     "B",
-        //     "E",
-        //     "H",
-        //     "L",
-        //     "M",
-        //     "N",
-        //     "P",
-        //     "R",
-        //     "S",
-        //     "X",
-        //     "Sin especificar"
-        //   ],
-        //   datasets: [
-        //     {
-        //       label: "Cantidad",
-        //       backgroundColor: "#f87979",
-        //       data: [
-        //         response.sdtTransaccionesEstados.transaccionA,
-        //         response.sdtTransaccionesEstados.transaccionB,
-        //         response.sdtTransaccionesEstados.transaccionE,
-        //         response.sdtTransaccionesEstados.transaccionH,
-        //         response.sdtTransaccionesEstados.transaccionL,
-        //         response.sdtTransaccionesEstados.transaccionM,
-        //         response.sdtTransaccionesEstados.transaccionN,
-        //         response.sdtTransaccionesEstados.transaccionP,
-        //         response.sdtTransaccionesEstados.transaccionR,
-        //         response.sdtTransaccionesEstados.transaccionS,
-        //         response.sdtTransaccionesEstados.transaccionX,
-        //         response.sdtTransaccionesEstados.transaccionSP
-        //       ]
-        //     }
-        //   ]
-        // }; 
-
         this.chartData = {
           labels: [],
           datasets: [
@@ -358,13 +331,16 @@ export default {
               data: []
             }
           ]
-        }
-        for (const [key, value] of Object.entries(response.sdtTransaccionesEstados)) {
+        };
+        for (const [key, value] of Object.entries(
+          response.sdtTransaccionesEstados
+        )) {
           if (value !== null && value !== 0 && key.startsWith("transaccion")) {
             const label = key.slice(11);
             this.chartData.labels.push(label);
 
             this.chartData.datasets[0].backgroundColor.push("#f87979");
+
             this.chartData.datasets[0].data.push(value);
           }
         }
@@ -406,7 +382,7 @@ export default {
   computed: {
     transaccionFiltrada() {
       //var buscado = this.TextoBuscado.toUpperCase();
-      console.log(this.busqueda)
+      console.log(this.busqueda);
       return this.transaccionesOrdenadas.filter((objeto) => {
         const descripcion = objeto.descripcion;
         return descripcion.includes(this.busqueda);
