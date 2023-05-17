@@ -76,7 +76,7 @@ export default {
           switch (item.codigo) {
             case 100:
               // "Condiciones Generales"
-              item.icon = "fas fa-wrench fa-5x info";
+              item.icon = "fas fa-wrench fa-5x primary";
               break;
             case 200:
               // "Cajas y Sucursales"

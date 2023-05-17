@@ -21,17 +21,7 @@
                     <i class="icon-graph info font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-<<<<<<< HEAD
-                    <h3>
-                      {{
-                        transacciones.exito +
-                        transacciones.error +
-                        transacciones.otros
-                      }}
-                    </h3>
-=======
                     <h3>{{ transacciones.exito + transacciones.error + transacciones.otros }}</h3>
->>>>>>> 8952778b274b955a4bb3f9f2a6fadd008068d721
                     <span>Total de Transacciones</span>
                   </div>
                 </div>
@@ -125,22 +115,12 @@
       <div class="row justify-content-md-center">
         <div class="col-md-7 mt-1">
           <ul class="list-group">
-<<<<<<< HEAD
-            <li
-              v-for="(item, index) in transaccionFiltrada"
-              :key="index"
-              class="d-flex justify-content-between align-items-center mt-3">
-              <span style="font-size: 18px">{{ item.descripcion }}</span>
-              <span :class="['badge', 'badge-pill', getClass(item)]">
-                <h5>{{ item.cantidad }}</h5>
-=======
             <li v-for="(item, index) in transaccionFiltrada" :key="index"
               class=" d-flex justify-content-between align-items-center mt-3">
 
               <span style="font-size: 15px;">{{ item.descripcion }}</span>
               <span :class="['', 'badge-pill', getClass(item)]">
                 <h5> {{ item.cantidad }} </h5>
->>>>>>> 8952778b274b955a4bb3f9f2a6fadd008068d721
               </span>
             </li>
           </ul>
@@ -159,7 +139,6 @@ import {
   RadialLinearScale,
   ArcElement,
   Tooltip,
-  Legend,
   LineElement,
   LinearScale,
   CategoryScale,
@@ -172,7 +151,6 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend,
   LineElement,
   LinearScale,
   CategoryScale,
@@ -353,11 +331,6 @@ export default {
             this.chartData.labels.push(label);
             
 
-<<<<<<< HEAD
-            this.chartData.datasets[0].backgroundColor.push("#f87979");
-
-=======
->>>>>>> 8952778b274b955a4bb3f9f2a6fadd008068d721
             this.chartData.datasets[0].data.push(value);
           }
         }
