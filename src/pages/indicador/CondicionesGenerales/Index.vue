@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <h1>Condiciones generales</h1>
+      <h2>Condiciones generales</h2>
       <div class="alert alert-warning" role="alert" v-show="message">
         {{ message + "!" }}
       </div>
@@ -9,7 +9,7 @@
         <section v-if="CondicionesGenerales">
           <section id="stats-subtitle">
             <div class="row">
-              <div class="col-12 mt-3 mb-1">
+              <div class="col-md-12 mt-3 mb-1">
                 <h3 class="text-uppercase">debugs</h3>
                 <p>Datos Informativos</p>
                 <hr />
@@ -17,7 +17,7 @@
             </div>
 
             <div class="row">
-              <div class="col-xl-6 col-md-12">
+              <div class="col-lg-5 col-md-5 col-sm-12">
                 <div
                   class="card overflow-hidden"
                   :class="[
@@ -34,7 +34,7 @@
                             class="icon-social-dropbox info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Históricos de Reglas de Negocio Activados</h4>
+                          <h5>Históricos de Reglas de Negocio Activados</h5>
                           <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadReglas }}</span
@@ -57,7 +57,7 @@
                 </div>
               </div>
 
-              <div class="col-xl-6 col-md-12">
+              <div class="col-lg-5 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -73,7 +73,7 @@
                           <i class="icon-layers warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Históricos PAE Activados</h4>
+                          <h5>Históricos PAE Activados</h5>
                           <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadPAE }}</span
@@ -96,7 +96,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-6 col-md-12">
+              <div class="col-lg-5 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -110,7 +110,7 @@
                           <i class="icon-globe primary font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Opción general</h4>
+                          <h5>Opción general</h5>
                           <span>Opción general 2850 activada?</span>
                         </div>
                         <div class="align-self-center">
@@ -131,7 +131,7 @@
                 </div>
               </div>
 
-              <div class="col-xl-6 col-md-12">
+              <div class="col-lg-5 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -148,7 +148,7 @@
                             class="icon-game-controller warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Workflow</h4>
+                          <h5>Workflow</h5>
                           <span>Opción XWFV02 correlativo 1 activada</span>
                         </div>
                         <div class="align-self-center">
@@ -168,7 +168,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-6 col-md-12">
+              <div class="col-lg-5 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -184,7 +184,7 @@
                           <i class="icon-folder-alt info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Reporteador</h4>
+                          <h5>Reporteador</h5>
                           <span>Opción XWFV02 correlativo 4 activada</span>
                         </div>
                         <div class="align-self-center">
@@ -213,7 +213,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-xl-6 col-md-12">
+              <div class="col-lg-5 col-md-5 col-sm-12">
                 <div :class="[
                     'card overflow-hidden',
                     CondicionesGenerales.opcion7x24 === 'SI' && CondicionesGenerales.empresasIguales === 'SI'
@@ -229,7 +229,7 @@
                             class="icon-briefcase secondary font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Empresas Iguales</h4>
+                          <h5>Empresas Iguales</h5>
                           <span>FST017 vs FST017CNL iguales?</span>
                         </div>
                         <div class="align-self-center">
@@ -245,7 +245,7 @@
 
               <!-- Delta true -->
               <div
-                class="col-xl-6 col-md-12"
+                class="col-lg-5 col-md-5 col-sm-12"
                 v-if="CondicionesGenerales.opcion7x24 == 'SI'">
                 <div class="card">
                   <div class="card-content">
@@ -256,7 +256,7 @@
                             class="icon-screen-desktop success font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Delta</h4>
+                          <h5>Delta</h5>
                           <span>Delta habilitado?</span>
                         </div>
                         <div class="align-self-center">
@@ -271,7 +271,7 @@
               </div>
 
               <!-- Delta Fail -->
-              <div class="col-xl-6 col-md-12" v-else>
+              <div class="col-lg-5 col-md-5 col-sm-12" v-else>
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body cleartfix">
@@ -281,7 +281,7 @@
                             class="icon-screen-desktop danger font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h4>Delta</h4>
+                          <h5>Delta</h5>
                           <span>Delta habilitado?</span>
                         </div>
                         <div class="align-self-center">
@@ -455,15 +455,15 @@ export default {
 </script>
 
 <style scoped>
-.tamleter{
+/* .tamleter{
   font-size: 48px;
-}
+} */
 
 .border-width-3 {
   border-width: 3px !important;
 }
 .border-width-5 {
-  border-width: 5px !important;
+  border-width: 3px !important;
 }
 .main-timeline {
   font-family: "Poppins", sans-serif;

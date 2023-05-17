@@ -119,8 +119,8 @@
               class=" d-flex justify-content-between align-items-center mt-3">
 
               <span style="font-size: 15px;">{{ item.descripcion }}</span>
-              <span :class="['', 'badge-pill', getClass(item)]">
-                <h5> {{ item.cantidad }} </h5>
+              <span style="font-size: 18px;">
+                <p> {{ item.cantidad }} </p>
               </span>
             </li>
           </ul>

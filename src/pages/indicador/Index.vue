@@ -151,6 +151,9 @@ export default {
 };
 </script>
 <style scoped>
+.card {
+  cursor: pointer;
+}
 body {
   margin: 5em;
 }
