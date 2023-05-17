@@ -8,29 +8,19 @@
       <hr />
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <Pie
-            id="my-chart-id"
-            :options="chartOptions"
-            :data="chartData"
-            :style="myStyles" />
+          <Pie id="my-chart-id" :options="chartOptions" :data="chartData" :style="myStyles" />
         </div>
       </div>
       <hr />
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(1)"
-            :class="{ active: sucursalA == true }">
+          <a class="nav-link" @click="selecionar(1)" :class="{ active: sucursalA == true }">
             Sucursales Abiertas
           </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(2)"
-            :class="{ active: sucursalC == true }">
+          <a class="nav-link" @click="selecionar(2)" :class="{ active: sucursalC == true }">
             Sucursales Cerradas
           </a>
         </li>
@@ -44,62 +34,43 @@
               <div class="row ">
                 <div class="col-md-4">
                   <div class="input-group is-invalid">
-                    <input
-                      type="text"
-                      name="filter"
-                      class="form-control"
-                      v-model="TextoBuscado"
-                      id="filter" />
+                    <input type="text" name="filter" class="form-control" v-model="TextoBuscado" id="filter" />
                     <div class="input-group-prepend">
-                      <span
-                        class="input-group-text"
-                        id="validatedInputGroupPrepend"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></span>
+                      <span class="input-group-text" id="validatedInputGroupPrepend"><i class="fa fa-search"
+                          aria-hidden="true"></i></span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="table-responsive">
-                <table class="table table-striped tamleter" >
+                <table class="table table-striped tamleter">
                   <thead>
                     <tr>
-                      <th scope="col"># SUCURSAL</th>
-                      <th scope="col">TELEFONO</th>
-                      <th scope="col">DIRECCIÓN</th>
-                      <th scope="col">CAJAS ABIERTAS</th>
-                      <th scope="col">CAJAS CERRADAS</th>
-                      <th scope="col">MAPA</th>
+                      <th  style='width:50%' class="w-75" >#SUCURSAL</th>
+                      <th  style='width:10%'>TELEFONO</th>
+                      <th  style='width:10%'>DIRECCIÓN</th>
+                      <th  style='width:10%'>CAJAS ABIERTAS</th>
+                      <th  style='width:10%'>CAJAS CERRADAS</th>
+                      <th  style='width:10%'>MAPA</th>
                     </tr>
                   </thead>
                   <tbody>
                     <template v-if="sucursalesFilter[0]">
-                      <tr
-                        v-for="(item, index) in sucursalesFilter"
-                        :key="index">
+                      <tr v-for="(item, index) in sucursalesFilter" :key="index">
                         <th scope="row">{{ item.descripcion }}</th>
                         <td>{{ item.telefono }}</td>
                         <td>{{ item.direccion }}</td>
                         <td>
-                          <span
-                            class="btn btn-secondary"
-                            @click="obtenerCajasA(item)">
-                            {{ item.cantidadA }}</span
-                          >
+                          <span class="btn btn-secondary" @click="obtenerCajasA(item)">
+                            {{ item.cantidadA }}</span>
                         </td>
                         <td>
-                          <span
-                            class="btn btn-success"
-                            @click="obtenerCajasC(item)">
-                            {{ item.cantidadC }}</span
-                          >
+                          <span class="btn btn-success" @click="obtenerCajasC(item)">
+                            {{ item.cantidadC }}</span>
                         </td>
                         <td>
-                          <button
-                            class="btn btn-info"
-                            data-toggle="modal"
-                            @click="generarMapa(item.latitud, item.longitud)"
-                            data-target="#exampleModalCenter">
+                          <button class="btn btn-info" data-toggle="modal"
+                            @click="generarMapa(item.latitud, item.longitud)" data-target="#exampleModalCenter">
                             Mapa
                           </button>
                         </td>
@@ -121,7 +92,7 @@
                 <table class="table table-striped tamleter">
                   <thead>
                     <tr>
-                      <th scope="col"># SUCURSAL</th>
+                      <th scope="col">#SUCURSAL</th>
                       <th scope="col">TELEFONO</th>
                       <th scope="col">DIRECCIÓN</th>
                       <th scope="col">MAPA</th>
@@ -129,19 +100,14 @@
                   </thead>
                   <tbody>
                     <template v-if="sucursalesCerradas[0]">
-                      <tr
-                        v-for="(item, index) in sucursalesCerradas"
-                        :key="index">
+                      <tr v-for="(item, index) in sucursalesCerradas" :key="index">
                         <th scope="row">{{ item.descripcion }}</th>
                         <td>{{ item.telefono }}</td>
                         <td>{{ item.direccion }}</td>
 
                         <td>
-                          <button
-                            class="btn btn-info"
-                            data-toggle="modal"
-                            @click="generarMapa(item.latitud, item.longitud)"
-                            data-target="#exampleModalCenter">
+                          <button class="btn btn-info" data-toggle="modal"
+                            @click="generarMapa(item.latitud, item.longitud)" data-target="#exampleModalCenter">
                             Mapa
                           </button>
                         </td>
@@ -161,24 +127,15 @@
         </div>
       </div>
 
-      <div
-        class="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
                 Mapa geolocalización
               </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -186,10 +143,7 @@
               <div ref="elMap" class="app-store-map"></div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
             </div>
@@ -343,10 +297,6 @@ export default {
 };
 </script>
 <style scoped>
-.tamleter{
-  font-size: 1.1rem;
-}
-
 .app-store-map {
   width: 100%;
   height: 500px;

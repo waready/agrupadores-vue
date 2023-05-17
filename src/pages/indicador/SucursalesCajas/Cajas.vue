@@ -331,8 +331,8 @@ export default {
   computed: {
     myStyles() {
       return {
-        height: `${400}px`,
-        position: "relative"
+        height: `${325}px`,        
+        //position: "relative"
       };
     },
     CajasFilter() {
@@ -349,9 +349,6 @@ export default {
 };
 </script>
 <style scoped>
-.tamleter{
-  font-size: 1.1rem;
-}
 
 .app-store-map {
   width: 100%;
