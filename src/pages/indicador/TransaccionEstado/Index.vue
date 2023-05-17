@@ -21,7 +21,7 @@
                     <i class="icon-graph info font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h3>{{ transacciones.exito + transacciones.error + transacciones.otros}}</h3>
+                    <h3>{{ transacciones.exito + transacciones.error + transacciones.otros }}</h3>
                     <span>Total de Transacciones</span>
                   </div>
                 </div>
@@ -91,11 +91,7 @@
 
       <div class="row">
         <div class="col-12 mb-3">
-          <Bar
-            id="my-chart-id"
-            :options="chartOptions"
-            :data="chartData"
-            class="mb-2" />
+          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" class="mb-2" />
         </div>
       </div>
 
@@ -104,20 +100,11 @@
           <div class="form-group" data-select2-id="52">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01"
-                  >Movimiento</label
-                >
+                <label class="input-group-text" for="inputGroupSelect01">Movimiento</label>
               </div>
-              <select
-                v-model="busqueda"
-                class="custom-select"
-                id="inputGroupSelect01"
-                placeholder="elegir">
+              <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
                 <option value="">(Elegir)</option>
-                <option
-                  v-for="(item, index) in labels"
-                  :key="index"
-                  :value="item.id">
+                <option v-for="(item, index) in labels" :key="index" :value="item.id">
                   {{ item.description }}
                 </option>
               </select>
@@ -128,14 +115,12 @@
       <div class="row justify-content-md-center">
         <div class="col-md-7 mt-1">
           <ul class="list-group">
-            <li
-              v-for="(item, index) in transaccionFiltrada"
-              :key="index"
-              class=" d-flex justify-content-between align-items-center mt-3" >
+            <li v-for="(item, index) in transaccionFiltrada" :key="index"
+              class=" d-flex justify-content-between align-items-center mt-3">
 
-               <span style="font-size: 18px;">{{ item.descripcion }}</span> 
-              <span :class="['badge', 'badge-pill', getClass(item)]">
-               <h5> {{ item.cantidad }} </h5> 
+              <span style="font-size: 15px;">{{ item.descripcion }}</span>
+              <span :class="['', 'badge-pill', getClass(item)]">
+                <h5> {{ item.cantidad }} </h5>
               </span>
             </li>
           </ul>
@@ -361,10 +346,23 @@ export default {
         }
         for (const [key, value] of Object.entries(response.sdtTransaccionesEstados)) {
           if (value !== null && value !== 0 && key.startsWith("transaccion")) {
-            const label = key.slice(11);
+            let label = key.slice(11);
+            if (label === 'A' || label === 'B' || label === 'L' || label === 'N' || label === 'S' || label === 'X' || label === 'SP') {
+                this.chartData.datasets[0].backgroundColor.push("#f0ad4e");
+            }
+            if(label === 'E' || label === 'R'){
+              this.chartData.datasets[0].backgroundColor.push("#22bb33");
+            }
+            if(label === 'H' || label === 'M' || label === 'P'){
+              this.chartData.datasets[0].backgroundColor.push("#bb2124");
+            }
+            
+            if (label === "SP") {
+              label = "Sin especificar"
+            }
             this.chartData.labels.push(label);
+            
 
-            this.chartData.datasets[0].backgroundColor.push("#f87979");
             this.chartData.datasets[0].data.push(value);
           }
         }
@@ -372,32 +370,32 @@ export default {
     },
     getClass(item) {
       switch (item.codigo) {
-        case "transaccionA":
-          return "badge-warning";
-        case "transaccionB":
-          return "badge-warning";
-        case "transaccionE":
-          return "badge-danger";
-        case "transaccionH":
-          return "badge-success";
-        case "transaccionL":
-          return "badge-warning";
-        case "transaccionM":
-          return "badge-success";
-        case "transaccionN":
-          return "badge-warning";
-        case "transaccionP":
-          return "badge-success";
-        case "transaccionR":
-          return "badge-danger";
-        case "transaccionS":
-          return "badge-warning";
-        case "transaccionSP":
-          return "badge-success";
-        case "transaccionX":
-          return "badge-warning";
-        case "Sin especificar":
-          return "badge-warning";
+        // case "transaccionA":
+        //   return "badge-warning";
+        // case "transaccionB":
+        //   return "badge-warning";
+        // case "transaccionE":
+        //   return "badge-danger";
+        // case "transaccionH":
+        //   return "badge-success";
+        // case "transaccionL":
+        //   return "badge-warning";
+        // case "transaccionM":
+        //   return "badge-success";
+        // case "transaccionN":
+        //   return "badge-warning";
+        // case "transaccionP":
+        //   return "badge-success";
+        // case "transaccionR":
+        //   return "badge-danger";
+        // case "transaccionS":
+        //   return "badge-warning";
+        // case "transaccionSP":
+        //   return "badge-success";
+        // case "transaccionX":
+        //   return "badge-warning";
+        // case "Sin especificar":
+        //   return "badge-warning";
         default:
           return "";
       }
