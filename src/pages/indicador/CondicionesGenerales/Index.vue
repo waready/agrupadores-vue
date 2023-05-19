@@ -384,6 +384,7 @@ ChartJS.register(
   LinearScale
 );
 import moment from "moment";
+import AuthService from "@/utils/AuthService";
 import ApiService from "@/utils/ApiService.js";
 import loading from "@/components/Loading.vue";
 export default {
@@ -411,6 +412,13 @@ export default {
         console.log(response);
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+          if(this.message == "Sesión inválida"){
+            setTimeout(()=>{
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+            },3000)
+          }
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 

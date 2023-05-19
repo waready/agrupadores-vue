@@ -27,6 +27,7 @@
   </div>
 </template>
 <script>
+import AuthService from "@/utils/AuthService";
 import ApiService from "@/utils/ApiService.js";
 import loadingVue from "@/components/Loading.vue";
 import toastr from "toastr";
@@ -61,7 +62,13 @@ export default {
       await ApiService.GetIndicadores(idIndicador).then((response) => {
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          console.log(response.Erroresnegocio.BTErrorNegocio[0].Descripcion)
+          if(this.message == "Sesión inválida"){
+            setTimeout(()=>{
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+            },3000)
+          }
         }
         // else{
         // }

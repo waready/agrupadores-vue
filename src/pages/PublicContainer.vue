@@ -5,8 +5,7 @@
         <div class="col-12">
           <Navbar></Navbar>
           <Sidebar></Sidebar>
-          <router-view class="mltam" />
-          
+          <router-view class="mltam" />          
         </div>
       </div>
     </div>

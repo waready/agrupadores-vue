@@ -157,6 +157,7 @@
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
+import AuthService from "@/utils/AuthService";
 import ApiService from "@/utils/ApiService";
 import loading from "@/components/Loading.vue";
 // var reponsibe = document.getElementById("#my-chart-id")
@@ -170,6 +171,13 @@ export default {
     await ApiService.getSucursalesCajas().then((response) => {
       if (response.Erroresnegocio.BTErrorNegocio[0]) {
         this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+        if(this.message == "Sesión inválida"){
+            setTimeout(()=>{
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+            },3000)
+          }
       }
       this.sucursales = true;
       this.sucursalesAbiertas =

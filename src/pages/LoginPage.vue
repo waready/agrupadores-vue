@@ -74,7 +74,7 @@ export default {
   // watch: {},
 
   mounted() {
-    //
+    $('body').css('padding-left', '');
   },
 
   methods: {

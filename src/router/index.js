@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory,createWebHistory } from "vue-router";
-// import HomeView from "../views/HomeView.vue";
 import authGuard from "@/auth-module/index.js";
 import PublicContainer from "@/pages/PublicContainer.vue";  
 import store from "@/store";
@@ -11,7 +10,6 @@ const routes = [
       requiresAuth: true
     },
     children: [
-      // { path: "", component: PublicIndex  },
      
       {
         path: "",

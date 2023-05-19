@@ -44,8 +44,6 @@
                 <h5 class="mb-1"><span >  Ocurrencias </span> </h5>
                   <span>{{ item.ocurrencias }} </span>
                 </div>
-                
-              
               </div>
             </div>
           </div>
@@ -56,7 +54,7 @@
   </div>
 </template>
 <script>
-
+import AuthService from "@/utils/AuthService";
 import ApiService from "@/utils/ApiService.js";
 import loading from "@/components/Loading.vue";
 export default {
@@ -97,6 +95,13 @@ export default {
       
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+          if(this.message == "Sesión inválida"){
+            setTimeout(()=>{
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+            },3000)
+          }
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
         this.rubroBolsa = response.sdtRubrobolsas.SdtsBTRubroBolsa;
