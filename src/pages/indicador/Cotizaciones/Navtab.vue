@@ -88,8 +88,11 @@ export default {
             },3000)
           }
         }
-        this.indices = response.sdtIndices.SdtsBTMonedaIndicador;
-        this.monedas = response.sdtMonedas.SdtsBTMonedaIndicador;
+        this.indices = response.sdtIndices.sBTMonedaIndice;
+        this.monedas = response.sdtMonedas.sBTMonedaIndice;
+        if (!this.indices[0] || !this.monedas[0] ) {
+          this.message = "No se encuentran registros!";
+        }
       });
     },
     selecionar(id) {

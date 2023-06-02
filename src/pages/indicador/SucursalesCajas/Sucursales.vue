@@ -186,6 +186,8 @@ export default {
         response.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal;
       this.cajasAbiertas = response.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja;
       this.cajasCerradas = response.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja;
+
+      
       this.chartData = {
         labels: [`Abiertas`, `Cerradas`],
         datasets: [

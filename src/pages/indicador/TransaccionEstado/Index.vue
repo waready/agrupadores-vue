@@ -163,7 +163,8 @@ import loading from "@/components/Loading.vue";
 export default {
   name: "RubroBolsa",
   components: {
-    Bar
+    Bar,
+    loading
   },
   mounted() {
     this.getAllTansaccionEstado();
@@ -241,7 +242,9 @@ export default {
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.transacciones = response.sdtTransaccionesEstados;
-
+         if (!this.transacciones) {
+          this.message = "No se encuentran registros!";
+        }
         this.transaccionesOrdenadas = Object.keys(this.transacciones)
           .filter((key) => key.includes("transaccion"))
           .map((key) => {

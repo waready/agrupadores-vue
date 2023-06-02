@@ -423,6 +423,9 @@ export default {
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.CondicionesGenerales = response.sdtCondicionesGenerales;
+        if (!this.CondicionesGenerales) {
+          this.message = "No se encuentran registros!";
+        }
         this.chartData = {
           labels: ["Reglas de negocio", "PAE"],
           datasets: [

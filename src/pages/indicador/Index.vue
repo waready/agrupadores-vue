@@ -72,7 +72,7 @@ export default {
         }
         // else{
         // }
-        this.indicadores = response.sdtIndicadores.SdtsBTIndicador.map(
+        this.indicadores = response.sdtIndicadores.sBTIndicador.map(
           (item) => {
             switch (item.codigo) {
               case 105:
@@ -113,6 +113,10 @@ export default {
             return item;
           }
         );
+        if (!this.indicadores[0]) {
+          this.message = "No se encuentran registros!";
+        }
+
       });
     },
     indicadorID(id) {

@@ -72,7 +72,7 @@ export default {
           }
         }
 
-        this.agrupadores = response.sdtAgrupadores.SdtsBTAgrupador.map((item) => {
+        this.agrupadores = response.sdtAgrupadores.sBTAgrupador.map((item) => {
           switch (item.codigo) {
             case 100:
               // "Condiciones Generales"
@@ -94,6 +94,10 @@ export default {
           console.log(item);
           return item;
         });
+        if (!this.agrupadores[0]) {
+          this.message = "No se encuentran registros!";
+        }
+
       });
     },
     indicadorID(id) {

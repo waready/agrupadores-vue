@@ -28,7 +28,7 @@ class ApiService {
 
   static async GetIndicadores(id) {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerIndicador",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerIndicadores",
       { agrupadorId: parseInt(id) }
     );
   }
@@ -53,7 +53,7 @@ class ApiService {
     return this.postRequest(
       "com.dlya.bantotal." +
         prefijo +
-        "_BTIndicadores?ObtenerCuadreMonedasSaldos",
+        "_BTIndicadores?ObtenerCierreSaldosPorMoneda",
       {}
     );
   }
@@ -69,7 +69,7 @@ class ApiService {
 
   static async getRubroBolsas() {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerRubroBolsas",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerRubrosBolsa",
       {}
     );
   }

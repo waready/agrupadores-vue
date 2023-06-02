@@ -117,7 +117,11 @@ export default {
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.CuadreMonedas =
-          response.SdtBalanceMonedaSaldos.SdtsBTBalanceMonedaSaldo;
+          response.sdtBalanceMonedaSaldos.sBTBalanceMonedaSaldo;
+
+        if (!this.CuadreMonedas[0]) {
+          this.message = "No se encuentran registros!";
+        }
       });
     },
     formattedNumber(numero) {
