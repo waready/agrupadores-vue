@@ -267,14 +267,14 @@ export default {
       console.log(item.identificador);
       this.$router.push({
         name: "Cajas",
-        query: { datos: item.identificador }
+        query: { datos: item.identificador, caja:0 }
       });
     },
     obtenerCajasC(item) {
       console.log(item.identificador);
       this.$router.push({
         name: "Cajas",
-        query: { datos: item.identificador }
+        query: { datos: item.identificador, caja:1}
       });
     },
     selecionar(id) {

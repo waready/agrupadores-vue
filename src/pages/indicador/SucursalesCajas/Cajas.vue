@@ -207,7 +207,16 @@ export default {
   name: "sucursales",
   mounted() {
     const datos = JSON.parse(this.$route.query.datos);
-    this.getSucursalesCajas(datos);
+    const caja = JSON.parse(this.$route.query.caja);
+    if (caja == 1) {
+      this.cajasA = false;
+      this.cajasC = true;
+    }
+
+    var pElement = document.querySelector('p.VuePagination__count');
+    console.log("p elmento ", pElement)
+    pElement.textContent = '1 registro';
+
   },
   components: { Pie, loading },
   data() {

@@ -55,7 +55,7 @@ export default {
 </script>
 <style scoped>
   .mltam {
-    margin-left: 50px;
+    margin-left: 30px;
   }
 
 </style>
