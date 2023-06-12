@@ -2,7 +2,7 @@ import http from "./http.js";
 import store from "@/store";
 
 var prefijo = process.env.VUE_APP_API_PREFIJO
-
+// var version = process.env.VUE_APP_API_VERSION;
 class ApiService {
   static async postRequest(url, data) {
     var token = store.state.Token;

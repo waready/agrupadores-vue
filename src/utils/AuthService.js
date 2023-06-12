@@ -3,7 +3,7 @@ import http from "@/utils/http.js";
 import secureStorage  from "./secureStorage.js";
 import router from "../router";
 var prefijo = process.env.VUE_APP_API_PREFIJO;
-//var prefijo = 'odwsbt'
+var version = process.env.VUE_APP_API_VERSION;
 class AuthService {
   static checkIfHasToken() {
     return secureStorage.getItem("token") !== null;
@@ -24,7 +24,7 @@ class AuthService {
         UserPassword: password
       };
       var response = await http.post(
-        "com.dlya.bantotal." + prefijo + "_Authenticate_v1?Execute",
+        "com.dlya.bantotal." + prefijo + "_Authenticate_"+version+"?Execute",
         user
       );
       // var response = {
