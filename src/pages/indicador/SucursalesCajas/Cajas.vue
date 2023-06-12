@@ -212,11 +212,7 @@ export default {
       this.cajasA = false;
       this.cajasC = true;
     }
-
-    var pElement = document.querySelector('p.VuePagination__count');
-    console.log("p elmento ", pElement)
-    pElement.textContent = '1 registro';
-
+     this.getSucursalesCajas(datos);
   },
   components: { Pie, loading },
   data() {
