@@ -68,7 +68,7 @@ export default {
       headings: {
         // id: 'ID',
         nombre: "Nombre",
-        tipoCambio: "Cotizacion",
+        tipoCambio: "Cotización",
       },
     },
   }),

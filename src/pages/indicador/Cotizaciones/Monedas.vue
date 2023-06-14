@@ -67,7 +67,7 @@ export default {
       headings: {
         // id: 'ID',
         nombre: "Nombre",
-        tipoCambio: "Cotizacion",
+        tipoCambio: "Cotización",
       },
        
       
@@ -84,7 +84,7 @@ export default {
     this.getAllAgrupadores();
     $(document).ready(function () {
       $('.VuePagination__count').text(function(i, text) {
-        return text.replace('Un registros', '1 registro');
+        return text.replace('Un registro', '1 registro');
       });
     });
   },

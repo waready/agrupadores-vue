@@ -5,7 +5,7 @@
         <div class="modal-wrapper">
           <div class="modal-container">
             <div class="modal-body text-white">
-              <slot name="body"> Espere un momento porfavor!! </slot>
+              <slot name="body"> Espere un momento por favor!! </slot>
               <br />
               <div class="splash-title">
                 <div class="lds-facebook">

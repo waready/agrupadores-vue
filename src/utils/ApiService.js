@@ -6,7 +6,7 @@ var prefijo = process.env.VUE_APP_API_PREFIJO
 class ApiService {
   static async postRequest(url, data) {
     var token = store.state.Token;
-    console.log("token", store.state.Token);
+    //console.log("token", store.state.Token);
     let user = {
       Btinreq: {
         Requerimiento: 1,
@@ -69,7 +69,7 @@ class ApiService {
 
   static async getRubroBolsas() {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerRubrosBolsa",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerRubrosBolsas",
       {}
     );
   }
