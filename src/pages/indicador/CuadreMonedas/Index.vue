@@ -1,15 +1,16 @@
 <template>
   <div class="container mt-3">
-    <div class="alert alert-warning" role="alert" v-show="message">
-      {{ message + "!" }}
-    </div>
     <div v-if="CuadreMonedas">
       <section id="minimal-statistics">
         <div class="row">
           <div class="col-12 mt-3 mb-1">
             <h4 class="text-uppercase">Cierre de Saldo por Monedas</h4>
             <p>Información de los Balances</p>
+            <hr/>
           </div>
+        </div>
+        <div class="alert alert-warning" role="alert" v-show="message">
+          {{ message + "!" }}
         </div>
         <div class="row">
           <div class="col-md-6">
