@@ -104,7 +104,7 @@ export default {
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
-        this.rubroBolsa = response.sdtRubrosBolsa.sBTRubrosBolsa;
+        this.rubroBolsa = response.sdtRubrosBolsa.sBTRubroBolsa;
         
         if (!this.rubroBolsa[0]) {
           this.message = "No se encuentran registros!";
