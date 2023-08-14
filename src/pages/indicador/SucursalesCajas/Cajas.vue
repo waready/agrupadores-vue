@@ -248,23 +248,23 @@ export default {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajas = true;
         this.cajasAbiertas =
-          r.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja.filter((item) => {
+          r.sdtSucursalesCajas.listadoCajasA.SdtsBTCaja.filter((item) => {
             return item.sucursalId == id_sucursal;
           });
         this.cajasCerradas =
-          r.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja.filter((item) => {
+          r.sdtSucursalesCajas.listadoCajasC.SdtsBTCaja.filter((item) => {
             return item.sucursalId == id_sucursal;
           });
     
         let data = this.cajasAbiertas.map((cajas) => {
           var cajasSelect = null;
           cajasSelect =
-            r.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal.filter(
+            r.sdtSucursalesCajas.listadoSucursalesC.SdtsBTSucursal.filter(
               (item) => item.identificador == cajas.sucursalId
             );
           if (!this.cajasSelect) {
             cajasSelect =
-              r.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal.filter(
+              r.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal.filter(
                 (item) => item.identificador == cajas.sucursalId
               );
           }
@@ -291,12 +291,12 @@ export default {
     async generarSucursal(idScurusal) {
       await ApiService.getSucursalesCajas().then((r) => {
         this.cajasSelect =
-          r.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal.filter(
+          r.sdtSucursalesCajas.listadoSucursalesC.SdtsBTSucursal.filter(
             (item) => item.identificador == idScurusal
           );
         if (!this.cajasSelect[0]) {
           this.cajasSelect =
-            r.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal.filter(
+            r.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal.filter(
               (item) => item.identificador == idScurusal
             );
         }
@@ -350,7 +350,24 @@ export default {
       });
       //return this.cajasAbiertasPremiun
     }
+  },
+  watch: {
+  cajasSelect: {
+    deep: true,
+    handler(newCajasSelect) {
+      console.log("cambios");
+      if (newCajasSelect.length > 0) {
+        this.generarMapa(newCajasSelect[0].latitud, newCajasSelect[0].longitud);
+        this.$nextTick(() => {
+          if (this.$options.map) {
+            this.$options.map.invalidateSize();
+          }
+        });
+      }
+    }
   }
+},
+
 };
 </script>
 <style scoped>
