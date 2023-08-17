@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <h2>Cajas</h2>
-    <hr>
-    <div>
-      <button class="btn btn-info" v-for="(item,index) in Sucursal" :key="index" @click="generarSucursal(item.identificador)" data-toggle="modal"
-        data-target="#exampleModalCenter">
-        Sucursal
-      </button>
+    <div v-for="(item, index) in Sucursal" :key="index">
+      <h2>Cajas Sucursal ( {{ item.descripcion }} )</h2>
+      <hr>
+      <div>
+        <button class="btn btn-info" @click="generarSucursal(item.identificador)" data-toggle="modal"
+          data-target="#exampleModalCenter">
+          Sucursal
+        </button>
+      </div>
     </div>
     <div v-if="cajas">
       <hr />
@@ -52,7 +54,7 @@
                     <tr>
                       <th scope="col">USUARIO</th>
                       <th scope="col">NOMBRE</th>
-                      <th scope="col">SUCURSAL</th>
+                      <!-- <th scope="col">SUCURSAL</th> -->
                       <!-- <th scope="col">VER SUCURSAL</th> -->
                     </tr>
                   </thead>
@@ -61,7 +63,7 @@
                       <tr v-for="(item, index) in CajasFilter" :key="index">
                         <td>{{ item.usuario }}</td>
                         <td>{{ item.nombre }}</td>
-                        <td>{{ item.Sucursal }}</td>
+                        <!-- <td>{{ item.Sucursal }}</td> -->
                         <!-- <td>
                           <button class="btn btn-info" @click="generarSucursal(item.sucursalId)" data-toggle="modal"
                             data-target="#exampleModalCenter">
@@ -88,7 +90,7 @@
                     <tr>
                       <th scope="col">USUARIO</th>
                       <th scope="col">NOMBRE</th>
-                      <th scope="col">SUCURSAL</th>
+                      <!-- <th scope="col">SUCURSAL</th> -->
                       <!-- <th scope="col">VER SUCURSAL</th> -->
                     </tr>
                   </thead>
@@ -98,7 +100,7 @@
                         <!-- <th scope="row">{{ item.identificador }}</th> -->
                         <td>{{ item.UsuarioCaja }}</td>
                         <td>{{ item.NombreCaja }}</td>
-                        <td>{{ item.codigo }}</td>
+                        <!-- <td>{{ item.codigo }}</td> -->
                         <!-- <td>
                           <button class="btn btn-info" @click="generarSucursal(item.Codigo)" data-toggle="modal"
                             data-target="#exampleModalCenter">
