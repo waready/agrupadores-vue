@@ -24,7 +24,7 @@ class AuthService {
         UserPassword: password
       };
       var response = await http.post(
-        "com.dlya.bantotal." + prefijo + "_Authenticate_"+version+"?Execute",
+        "com.dlya.bantotal." + prefijo + "_Authenticate_"+version+"Execute",
         user
       );
       // var response = {

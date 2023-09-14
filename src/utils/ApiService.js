@@ -2,7 +2,7 @@ import http from "./http.js";
 import store from "@/store";
 
 var prefijo = process.env.VUE_APP_API_PREFIJO
-// var version = process.env.VUE_APP_API_VERSION;
+var version = process.env.VUE_APP_API_VERSION;
 class ApiService {
   static async postRequest(url, data) {
     var token = store.state.Token;
@@ -21,14 +21,14 @@ class ApiService {
 
   static async GetAgrupadores() {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerAgrupadores",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores_"+version+"ObtenerAgrupadores",
       {}
     );
   }
 
   static async GetIndicadores(id) {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerIndicadores",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores_"+version+"ObtenerIndicadores",
       { agrupadorId: parseInt(id) }
     );
   }
@@ -37,14 +37,14 @@ class ApiService {
     return this.postRequest(
       "com.dlya.bantotal." +
         prefijo +
-        "_BTIndicadores?ObtenerSucursalesCajas",
+        "_BTIndicadores_"+version+"ObtenerSucursalesCajas",
       {}
     );
   }
 
   static async getCotizaciones() {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerMonedasIndices",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores_"+version+"ObtenerMonedasIndices",
       {}
     );
   }
@@ -53,7 +53,7 @@ class ApiService {
     return this.postRequest(
       "com.dlya.bantotal." +
         prefijo +
-        "_BTIndicadores?ObtenerCierreSaldosPorMoneda",
+        "_BTIndicadores_"+version+"ObtenerCierreSaldosPorMoneda",
       {}
     );
   }
@@ -62,14 +62,14 @@ class ApiService {
     return this.postRequest(
       "com.dlya.bantotal." +
         prefijo +
-        "_BTIndicadores?ObtenerCondicionesGenerales",
+        "_BTIndicadores_"+version+"ObtenerCondicionesGenerales",
       {}
     );
   }
 
   static async getRubroBolsas() {
     return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores?ObtenerRubrosBolsas",
+      "com.dlya.bantotal." + prefijo + "_BTIndicadores_"+version+"ObtenerRubrosBolsas",
       {}
     );
   }
@@ -78,7 +78,7 @@ class ApiService {
     return this.postRequest(
       "com.dlya.bantotal." +
         prefijo +
-        "_BTIndicadores?ObtenerTransaccionesEstados",
+        "_BTIndicadores_"+version+"ObtenerTransaccionesEstados",
       {}
     );
   }
