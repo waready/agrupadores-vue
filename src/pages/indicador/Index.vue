@@ -1,7 +1,7 @@
 <template>
   <div class="row mt-3">
     <template v-if="indicadores">
-      <h2>Indicadores</h2>
+      <h2>Indicadores de {{ detalleIndicador }}</h2>
       <hr>
       <div
         class="col-md-3 col-sm-5 mb-2"
@@ -43,6 +43,7 @@ export default {
   },
 
   data: () => ({
+    detalleIndicador:"",
     indicadores: null,
     message: ""
   }),
@@ -59,6 +60,13 @@ export default {
 
   methods: {
     async getAllAgrupadores(idIndicador) {
+      if (idIndicador == 100)
+      this.detalleIndicador = "Condiciones generales"
+      if (idIndicador == 200)
+      this.detalleIndicador = "Cajas Sucursales"
+      if (idIndicador == 300)
+      this.detalleIndicador = "Contabilidad"
+
       await ApiService.GetIndicadores(idIndicador).then((response) => {
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
