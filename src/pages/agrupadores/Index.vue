@@ -1,23 +1,20 @@
 <template>
   <div class="mt-3">
     <h2>Agrupadores</h2>
-   
+
     <hr />
-     <div class="alert alert-warning" role="alert" v-show="message">
+    <div class="alert alert-warning" role="alert" v-show="message">
       {{ message + "!" }}
     </div>
     <!-- {{ agrupadores }} -->
     <div class="row">
       <template v-if="agrupadores">
-        <div
-          class="col-md-3 col-sm-5 mb-2"
-          v-for="(item, index) in agrupadores"
-          :key="index">
-          <div class="card h-100 "  @click="indicadorID(item.codigo)">
+        <div class="col-md-3 col-sm-5 mb-2" v-for="(item, index) in agrupadores" :key="index">
+          <div class="card h-100 " @click="indicadorID(item.codigo)">
             <div class="card-body text-center">
               <h5 class="card-title">{{ item.descripcion }}</h5>
               <div>
-                <i :class="[item.icon,'mt-3']"></i>
+                <i :class="[item.icon, 'mt-3']"></i>
               </div>
             </div>
           </div>
@@ -31,6 +28,7 @@
 import ApiService from "@/utils/ApiService.js";
 import AuthService from '@/utils/AuthService';
 import Loading from "@/components/Loading.vue";
+
 export default {
   // name: "MarketplaceIndex",
   components: { Loading },
@@ -44,7 +42,7 @@ export default {
 
   data: () => ({
     agrupadores: null,
-    message:""
+    message: ""
   }),
 
   computed: {
@@ -60,15 +58,15 @@ export default {
   methods: {
     async getAllAgrupadores() {
       await ApiService.GetAgrupadores().then((response) => {
-       
+
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          if(this.message == "Sesión inválida"){
-            setTimeout(()=>{
-                AuthService.logout();
-                this.$store.dispatch("logout");
-                this.$router.push("/login");
-            },3000)
+          if (this.message == "Sesión inválida") {
+            setTimeout(() => {
+              AuthService.logout();
+              this.$store.dispatch("logout");
+              this.$router.push("/login");
+            }, 3000)
           }
         }
 
@@ -102,6 +100,31 @@ export default {
     },
     indicadorID(id) {
       this.$router.push({ path: `/indicador/${id}` });
+      $(document).ready(function () {
+        if(id == 100)
+          $('.nav-list #links_0 a').trigger('click');
+        if(id == 200)
+          $('.nav-list #links_1 a').trigger('click');
+        if(id == 300)
+          $('.nav-list #links_2 a').trigger('click');
+        
+        $(".nav-list #links_0 a").on("click", function () {
+          // removemos la clase 'active' de todos los elementos li
+          $(".nav-list #links_0 a").css({
+            "background-color": ""
+          });
+          // removemos el color rojo de todos los elementos span
+          $(".nav-list #links_0 i").css({ color: "" });
+          $(".nav-list #links_0 span").css({ color: "" });
+          // agregamos la clase 'active' solo al elemento li clickeado
+          $(this).css({
+            "background-color": "rgb(245, 245, 245)"
+          });
+          // establecemos el color de fondo del elemento li clickeado a gris claro
+          $(this).find("i").css({ color: "#3e2c42" });
+          $(this).find("span").css({ color: "#3e2c42" });
+        });
+      });
     }
     //
     //
@@ -109,22 +132,25 @@ export default {
 };
 </script>
 <style scoped>
-.content{
+.content {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.format{
+
+.format {
   margin-bottom: 3%;
   position: absolute;
-  bottom: 0;  
+  bottom: 0;
 }
+
 .card {
   cursor: pointer;
 }
+
 .hover-underline-animation {
   position: relative;
-  color:#0087ca;
+  color: #0087ca;
 }
 
 

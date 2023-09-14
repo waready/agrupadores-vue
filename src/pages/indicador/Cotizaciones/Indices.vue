@@ -81,6 +81,11 @@ export default {
 
   mounted() {
     this.getAllAgrupadores();
+    $(document).ready(function () {
+      $('.VuePagination__count').text(function(i, text) {
+        return text.replace('Un registro', '1 registro');
+      });
+    });
   },
 
   methods: {

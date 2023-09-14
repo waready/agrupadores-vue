@@ -181,11 +181,11 @@ export default {
       }
       this.sucursales = true;
       this.sucursalesAbiertas =
-        response.sdtSucursalesCajas.ListadoSucursalesA.SdtsBTSucursal;
+        response.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal;
       this.sucursalesCerradas =
-        response.sdtSucursalesCajas.ListadoSucursalesC.SdtsBTSucursal;
-      this.cajasAbiertas = response.sdtSucursalesCajas.ListadoCajasA.SdtsBTCaja;
-      this.cajasCerradas = response.sdtSucursalesCajas.ListadoCajasC.SdtsBTCaja;
+        response.sdtSucursalesCajas.listadoSucursalesC.SdtsBTSucursal;
+      this.cajasAbiertas = response.sdtSucursalesCajas.listadoCajasA.SdtsBTCaja;
+      this.cajasCerradas = response.sdtSucursalesCajas.listadoCajasC.SdtsBTCaja;
 
       
       this.chartData = {

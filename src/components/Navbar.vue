@@ -29,15 +29,16 @@
 
           <!-- Right links -->
           <ul class="navbar-nav  flex-row">
+            <a class="btn btn-secondary text-white" @click="logout()">Salir <i class="ml-1 fa-solid fa-right-from-bracket"></i></a>
             <!-- Notification dropdown -->
             <!-- Avatar -->
-            <li class="nav-item dropdown">
+            <!--li class="nav-item dropdown">
               <a
                  class="nav-link ml-4  dropdown-toggle hidden-arrow" role="button"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <i class="fas fa-user fa-lg"></i>
                 <span class="badge rounded-pill badge-notification bg-danger"
                   >1</span
-                >
+                > 
               </a>
               <ul
               class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -45,7 +46,7 @@
                   <a class="dropdown-item" @click="logout()">Logout</a>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
         <!-- Container wrapper -->
