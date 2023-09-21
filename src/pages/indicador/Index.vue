@@ -67,7 +67,7 @@ export default {
       if (idIndicador == 300)
       this.detalleIndicador = "Contabilidad"
 
-      await ApiService.GetIndicadores(idIndicador).then((response) => {
+      await AuthService.GetIndicadores(idIndicador).then((response) => {
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
           if(this.message == "Sesión inválida"){

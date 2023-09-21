@@ -150,7 +150,7 @@
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     {{ item.direccion }}
                   </p>
-                  <button class="btn btn-primary">Mostrar Mapa</button>
+                  <!-- <button class="btn btn-primary">Mostrar Mapa</button> -->
                 </div>
               </div>
             </div>
@@ -170,6 +170,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
 import ApiService from "@/utils/ApiService";
+import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
 // var reponsibe = document.getElementById("#my-chart-id")
 // console.log(reponsibe)
@@ -219,7 +220,7 @@ export default {
   },
   methods: {
     async getSucursalesCajas(id_sucursal) {
-      await ApiService.getSucursalesCajas().then((r) => {
+      await AuthService.getSucursalesCajas().then((r) => {
         /**recuperar sucursal**/
         this.Sucursal = r.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal.filter(item => item.identificador == id_sucursal);
         // console.log(this.Sucursal[0])
@@ -266,7 +267,7 @@ export default {
       });
     },
     async generarSucursal(idScurusal) {
-      await ApiService.getSucursalesCajas().then((r) => {
+      await AuthService.getSucursalesCajas().then((r) => {
         this.cajasSelect =
           r.sdtSucursalesCajas.listadoSucursalesC.SdtsBTSucursal.filter(
             (item) => item.identificador == idScurusal

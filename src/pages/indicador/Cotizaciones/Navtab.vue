@@ -76,7 +76,7 @@ export default {
 
   methods: {
     async getAllAgrupadores() {
-      await ApiService.getCotizaciones().then((response) => {
+      await AuthService.getCotizaciones().then((response) => {
         console.log(response);
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;

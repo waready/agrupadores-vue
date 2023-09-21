@@ -57,7 +57,7 @@ export default {
 
   methods: {
     async getAllAgrupadores() {
-      await ApiService.GetAgrupadores().then((response) => {
+      await AuthService.GetAgrupadores().then((response) => {
 
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;

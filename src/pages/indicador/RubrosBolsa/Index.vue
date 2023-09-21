@@ -91,7 +91,7 @@ export default {
 
   methods: {
     async getAllRubroBolsas() {
-      await ApiService.getRubroBolsas().then((response) => {
+      await AuthService.getRubroBolsas().then((response) => {
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
           if (this.message == "Sesión inválida") {

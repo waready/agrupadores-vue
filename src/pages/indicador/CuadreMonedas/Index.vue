@@ -103,7 +103,7 @@ export default {
 
   methods: {
     async getAllCuadreMonedaSaldos() {
-      await ApiService.getCuadreMonedaSaldos().then((response) => {
+      await AuthService.getCuadreMonedaSaldos().then((response) => {
         console.log(response);
         if (response.Erroresnegocio.BTErrorNegocio[0]) {
           this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;

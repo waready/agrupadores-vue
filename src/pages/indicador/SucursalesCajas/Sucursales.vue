@@ -168,7 +168,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default {
   name: "sucursales",
   async mounted() {
-    await ApiService.getSucursalesCajas().then((response) => {
+    await AuthService.getSucursalesCajas().then((response) => {
       if (response.Erroresnegocio.BTErrorNegocio[0]) {
         this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
         if(this.message == "Sesión inválida"){
