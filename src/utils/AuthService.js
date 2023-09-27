@@ -1,44 +1,43 @@
-//import Cookies from "js-cookie";
 import http from "@/utils/http.js";
 import secureStorage from "./secureStorage.js";
 import router from "../router";
 import store from "@/store";
-var prefijo = process.env.VUE_APP_API_PREFIJO;
-var version = process.env.VUE_APP_API_VERSION;
+
+const prefijo = process.env.VUE_APP_API_PREFIJO;
+const version = process.env.VUE_APP_API_VERSION;
+const btServicesEnv = process.env.VUE_APP_BTEXPOSER;
+const btServicesEnabled = btServicesEnv === 'true';
+
+const API_URL = btServicesEnabled
+  ? `${prefijo}Indicadores/`
+  : `com.dlya.bantotal.${prefijo}_BTIndicadores_${version}`;
 
 class AuthService {
-
-
   static checkIfHasToken() {
     return secureStorage.getItem("token") !== null;
   }
 
   static async login(username, password) {
     try {
-      let user = {
+      const user = {
         Btinreq: {
           Requerimiento: 1,
           Device: 1,
           Token: "?",
           Usuario: username,
-          //Canal: "BTVISION"
           Canal: "BTDIGITAL"
         },
         UserId: username,
         UserPassword: password
       };
-      var response = await http.post(
-        "com.dlya.bantotal." + prefijo + "_Authenticate_" + version + "Execute",
-        user
-      );
-      // var response = {
-      //   data :"holi"
-      // }
 
-      var data = response.data;
-      // Cookies.set("token", "Bearer " + data.access);
-      // Cookies.set("refreshToken", data.refresh);
-      AuthService.saveAccessToken(response.data);
+      const url = btServicesEnabled
+        ? `Authenticate/${version}Execute`
+        : `com.dlya.bantotal.${prefijo}_Authenticate_${version}Execute`;
+      const response = await http.post(url, user);
+
+      const data = response.data;
+      AuthService.saveAccessToken(data);
       return {
         success: true,
         data: data,
@@ -47,24 +46,18 @@ class AuthService {
     } catch (e) {
       return {
         success: false,
-        message: "Error en la autenticacion: " + e
+        message: "Error en la autenticación: " + e
       };
-    } finally {
-      //
     }
   }
 
   static saveAccessToken(tokenResponse) {
-    secureStorage.setItem(
-      "token", `${tokenResponse.SessionToken}`
-    );
-    //http.defaults.headers["Authorization"] = secureStorage.getItem("token");
+    secureStorage.setItem("token", `${tokenResponse.SessionToken}`);
   }
 
-  static async postRequest(url, data) {
-    var token = store.state.Token;
-    //console.log("token", store.state.Token);
-    let user = {
+  static async postRequest(endpoint, data) {
+    const token = store.state.Token;
+    const user = {
       Btinreq: {
         Requerimiento: 1,
         Canal: "BTDIGITAL",
@@ -73,8 +66,14 @@ class AuthService {
         Device: 1
       }
     };
-    return (await http.post(url, { ...user, ...data })).data;
+  
+    if (btServicesEnabled) {
+      return (await http.get(`${API_URL}${endpoint}`, { ...user, ...data })).data;
+    } else {
+      return (await http.post(`${API_URL}${endpoint}`, { ...user, ...data })).data;
+    }
   }
+  
 
   static removeToken() {
     localStorage.clear();
@@ -83,71 +82,56 @@ class AuthService {
 
   static logout() {
     AuthService.removeToken();
-    router.push("/login")
+    router.push("/login");
   }
 
   static async GetAgrupadores() {
-    return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores_" + version + "ObtenerAgrupadores",
-      {}
-    );
+    const endpoint = "ObtenerAgrupadores";
+    return this.postRequest(endpoint, {});
   }
 
   static async GetIndicadores(id) {
-    return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores_" + version + "ObtenerIndicadores",
-      { agrupadorId: parseInt(id) }
-    );
+    const endpoint = `ObtenerIndicadores/${parseInt(id)}`;
+    return this.postRequest(endpoint, { agrupadorId: parseInt(id) });
+  }
+  static async GetIndicadores(id) {
+    // Construye la URL de la solicitud condicionalmente
+    const endpoint = btServicesEnabled
+      ? `ObtenerIndicadores/${parseInt(id)}`
+      : `ObtenerIndicadores`;
+  
+    return this.postRequest(endpoint, { agrupadorId: parseInt(id) });
   }
 
+
   static async getSucursalesCajas() {
-    return this.postRequest(
-      "com.dlya.bantotal." +
-      prefijo +
-      "_BTIndicadores_" + version + "ObtenerSucursalesCajas",
-      {}
-    );
+    const endpoint = "ObtenerSucursalesCajas";
+    return this.postRequest(endpoint, {});
   }
 
   static async getCotizaciones() {
-    return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores_" + version + "ObtenerMonedasIndices",
-      {}
-    );
+    const endpoint = "ObtenerMonedasIndices";
+    return this.postRequest(endpoint, {});
   }
 
   static async getCuadreMonedaSaldos() {
-    return this.postRequest(
-      "com.dlya.bantotal." +
-      prefijo +
-      "_BTIndicadores_" + version + "ObtenerCierreSaldosPorMoneda",
-      {}
-    );
+    const endpoint = "ObtenerCierreSaldosPorMoneda";
+    return this.postRequest(endpoint, {});
   }
 
   static async getCondicionesGenerales() {
-    return this.postRequest(
-      "com.dlya.bantotal." +
-      prefijo +
-      "_BTIndicadores_" + version + "ObtenerCondicionesGenerales",
-      {}
-    );
+    const endpoint = "ObtenerCondicionesGenerales";
+    return this.postRequest(endpoint, {});
   }
 
   static async getRubroBolsas() {
-    return this.postRequest(
-      "com.dlya.bantotal." + prefijo + "_BTIndicadores_" + version + "ObtenerRubrosBolsas",
-      {}
-    );
+    const endpoint = "ObtenerRubrosBolsas";
+    return this.postRequest(endpoint, {});
   }
 
   static async getTansaccionEstado() {
-    return this.postRequest(
-      "com.dlya.bantotal." +
-      prefijo +
-      "_BTIndicadores_" + version + "ObtenerTransaccionesEstados",
-      {}
-    );
+    const endpoint = "ObtenerTransaccionesEstados";
+    return this.postRequest(endpoint, {});
   }
 }
 

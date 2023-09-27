@@ -7,7 +7,7 @@ var sessionToken = Cookies.get("token");
 var token = store.state.Token;
 
 const http = axios.create({
-  baseURL: process.env.VUE_APP_APIREST_URL,
+  baseURL: process.env.VUE_APP_API_URL,
   headers: {
     Authorization: sessionToken,
     Requerimiento: 1,

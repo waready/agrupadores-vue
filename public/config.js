@@ -4,19 +4,22 @@
  * Created at: 2023-06-06 06:06
  */
 
-
 // Initialize variables globales 
+// BTSERVICES ON ("true") - OFF ("false")
+
+window.GetBTexposer= "true"
+
 // url ambiente - ejemplo:
 /*
     url ambiente = http://appjava2019:10222/desaprodv2r3orcl/servlet/com.dlya.bantotal.odwsbt_Authenticate_v1
     GetUrlPro = http://pioneroapp:6004/productogx16/servlet/
 */
 /*
-    url ambiente = https://pioneroapp2.dlya.corp:3001/app/servlet/com.dlya.bantotal.ardwsbt_Authenticate_v1_Execute
-    GetUrlPro = https://pioneroapp2.dlya.corp:3001/app/servlet/
+    BTSERVICES
+    GetUrlPro = https://pioneroapp2.dlya.corp:3001/api/
 */
 
-window.GetUrlPro= "https://pioneroapp2.dlya.corp:3001/app/servlet/"
+window.GetUrlPro= "https://pioneroapp2.dlya.corp:3001/api/"
 
 //sufijo del ambiente - ejemplo
 /*
@@ -24,10 +27,10 @@ window.GetUrlPro= "https://pioneroapp2.dlya.corp:3001/app/servlet/"
     GetSufijo = odwsbt
 */
 /*
-    url ambiente = https://pioneroapp2.dlya.corp:3001/app/servlet/com.dlya.bantotal.ardwsbt_Authenticate_v1_Execute
-    GetSufijo = ardwsbt
+    BTSERVICES 
+    GetSufijo = ""
 */
-window.GetSufijo= "ardwsbt"
+window.GetSufijo= ""
 
 //Version auth 
 /*
@@ -35,7 +38,7 @@ window.GetSufijo= "ardwsbt"
     GetVrSer = v1?
 */
 /*
-    url ambiente = https://pioneroapp2.dlya.corp:3001/app/servlet/com.dlya.bantotal.ardwsbt_Authenticate_v1_Execute
-    GetVrSer = v1_
+    BTSERVICES
+    GetVrSer = v1/
 */
-window.GetVrSer= "v1_"
+window.GetVrSer= "v1/"
