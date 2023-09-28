@@ -3,11 +3,8 @@
     <div class="row justify-content-center align-items-center minh-100">
       <div class="col-11 col-md-6 card shadow-lg rounded text-center">
         <div class="card-header">
-          <img
-            class="mt-2"
-            width="250"
-            src="@/assets/logoB.png"/>
-          
+          <img class="mt-2" width="250" src="@/assets/logoB.png" />
+
           <!-- <img
             class="mt-3"
             width="250"
@@ -79,7 +76,7 @@ export default {
   // watch: {},
 
   mounted() {
-    $('body').css('padding-left', '');
+    $("body").css("padding-left", "");
   },
 
   methods: {
@@ -89,20 +86,25 @@ export default {
         this.password
       );
 
-      if(!result.success){
+      if (!result.success) {
         this.message = result.message;
-        setTimeout(() => this.message = false, 3500);
-      }else{
-        if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
+        setTimeout(() => (this.message = false), 3500);
+      } else {
+        if (!result.data.Erroresnegocio) {
           this.registrar(result.data);
         } else {
-          this.message = result.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          setTimeout(() => this.message = false, 3500);
+          if (!result.data.Erroresnegocio.BTErrorNegocio[0]) {
+            this.registrar(result.data);
+          } else {
+            this.message =
+              result.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            setTimeout(() => (this.message = false), 3500);
+          }
         }
       }
     },
     async registrar(user) {
-      await this.$store.dispatch("login",user);
+      await this.$store.dispatch("login", user);
       this.$router.push("/");
     }
   }

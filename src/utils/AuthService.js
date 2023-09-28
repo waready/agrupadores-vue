@@ -9,7 +9,7 @@ const btServicesEnv = process.env.VUE_APP_BTEXPOSER;
 const btServicesEnabled = btServicesEnv === 'true';
 
 const API_URL = btServicesEnabled
-  ? `${prefijo}Indicadores/`
+  ? `${prefijo}BTIndicadores/${version}`
   : `com.dlya.bantotal.${prefijo}_BTIndicadores_${version}`;
 
 class AuthService {
