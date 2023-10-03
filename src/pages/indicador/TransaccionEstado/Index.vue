@@ -21,7 +21,13 @@
                     <i class="icon-graph info font-large-2 float-left"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h3>{{ transacciones.exito + transacciones.error + transacciones.otros }}</h3>
+                    <h3>
+                      {{
+                        transacciones.exito +
+                        transacciones.error +
+                        transacciones.otros
+                      }}
+                    </h3>
                     <span>Total de Transacciones</span>
                   </div>
                 </div>
@@ -91,7 +97,11 @@
 
       <div class="row">
         <div class="col-12 mb-3">
-          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" class="mb-2" />
+          <Bar
+            id="my-chart-id"
+            :options="chartOptions"
+            :data="chartData"
+            class="mb-2" />
         </div>
       </div>
 
@@ -100,11 +110,20 @@
           <div class="form-group" data-select2-id="52">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Movimiento</label>
+                <label class="input-group-text" for="inputGroupSelect01"
+                  >Movimiento</label
+                >
               </div>
-              <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
+              <select
+                v-model="busqueda"
+                class="custom-select"
+                id="inputGroupSelect01"
+                placeholder="elegir">
                 <option value="">(Elegir)</option>
-                <option v-for="(item, index) in labels" :key="index" :value="item.id">
+                <option
+                  v-for="(item, index) in labels"
+                  :key="index"
+                  :value="item.id">
                   {{ item.description }}
                 </option>
               </select>
@@ -115,12 +134,13 @@
       <div class="row justify-content-md-center">
         <div class="col-md-7 mt-1">
           <ul class="list-group">
-            <li v-for="(item, index) in transaccionFiltrada" :key="index"
-              class=" d-flex justify-content-between align-items-center mt-3">
-
-              <span style="font-size: 15px;">{{ item.descripcion }}</span>
-              <span style="font-size: 18px;">
-                <p> {{ item.cantidad }} </p>
+            <li
+              v-for="(item, index) in transaccionFiltrada"
+              :key="index"
+              class="d-flex justify-content-between align-items-center mt-3">
+              <span style="font-size: 15px">{{ item.descripcion }}</span>
+              <span style="font-size: 18px">
+                <p>{{ item.cantidad }}</p>
               </span>
             </li>
           </ul>
@@ -228,21 +248,23 @@ export default {
   methods: {
     async getAllTansaccionEstado() {
       await AuthService.getTansaccionEstado().then((response) => {
-        console.log(response);
-        if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          if(this.message == "Sesión inválida"){
-            setTimeout(()=>{
+        if (response.Erroresnegocio) {
+          if (response.Erroresnegocio.BTErrorNegocio[0]) {
+            this.message =
+              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            if (this.message == "Sesión inválida") {
+              setTimeout(() => {
                 AuthService.logout();
                 this.$store.dispatch("logout");
                 this.$router.push("/login");
-            },3000)
+              }, 3000);
+            }
           }
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.transacciones = response.sdtTransaccionesEstados;
-         if (!this.transacciones) {
+        if (!this.transacciones) {
           this.message = "No se encuentran registros!";
         }
         this.transaccionesOrdenadas = Object.keys(this.transacciones)
@@ -325,21 +347,28 @@ export default {
         )) {
           if (value !== null && value !== 0 && key.startsWith("transaccion")) {
             let label = key.slice(11);
-            if (label === 'A' || label === 'B' || label === 'L' || label === 'N' || label === 'S' || label === 'X' || label === 'SP') {
-                this.chartData.datasets[0].backgroundColor.push("#f0ad4e");
+            if (
+              label === "A" ||
+              label === "B" ||
+              label === "L" ||
+              label === "N" ||
+              label === "S" ||
+              label === "X" ||
+              label === "SP"
+            ) {
+              this.chartData.datasets[0].backgroundColor.push("#f0ad4e");
             }
-            if(label === 'E' || label === 'R'){
+            if (label === "E" || label === "R") {
               this.chartData.datasets[0].backgroundColor.push("#22bb33");
             }
-            if(label === 'H' || label === 'M' || label === 'P'){
+            if (label === "H" || label === "M" || label === "P") {
               this.chartData.datasets[0].backgroundColor.push("#bb2124");
             }
-            
+
             if (label === "SP") {
-              label = "Sin especificar"
+              label = "Sin especificar";
             }
             this.chartData.labels.push(label);
-            
 
             this.chartData.datasets[0].data.push(value);
           }

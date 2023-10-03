@@ -26,7 +26,7 @@
                       : 'border-danger',
                     'border-width-5'
                   ]">
-                  <div class="card-content" style="border-radius:20%">
+                  <div class="card-content" style="border-radius: 20%">
                     <div class="card-body cleartfix">
                       <div class="media align-items-stretch">
                         <div class="align-self-center">
@@ -214,9 +214,11 @@
             </div>
             <div class="row">
               <div class="col-lg-5 col-md-5 col-sm-12">
-                <div :class="[
+                <div
+                  :class="[
                     'card overflow-hidden',
-                    CondicionesGenerales.opcion7x24 === 'SI' && CondicionesGenerales.empresasIguales === 'SI'
+                    CondicionesGenerales.opcion7x24 === 'SI' &&
+                    CondicionesGenerales.empresasIguales === 'SI'
                       ? 'border-danger'
                       : '',
                     'border-width-5'
@@ -335,7 +337,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de apertura 24x7 </h3>
+                      <h3 class="title">Fecha de apertura 24x7</h3>
                       <p class="description">
                         {{ fechaApertura7x24 }}
                       </p>
@@ -409,15 +411,17 @@ export default {
   methods: {
     async getAllCondicionesGenerales() {
       await AuthService.getCondicionesGenerales().then((response) => {
-        console.log(response);
-        if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          if(this.message == "Sesión inválida"){
-            setTimeout(()=>{
+        if (response.Erroresnegocio) {
+          if (response.Erroresnegocio.BTErrorNegocio[0]) {
+            this.message =
+              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            if (this.message == "Sesión inválida") {
+              setTimeout(() => {
                 AuthService.logout();
                 this.$store.dispatch("logout");
                 this.$router.push("/login");
-            },3000)
+              }, 3000);
+            }
           }
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;

@@ -1,21 +1,13 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import store from "@/store";
 
+
+// Obtén el token de sesión y otros datos de tu almacenamiento o fuente adecuada.
 var sessionToken = Cookies.get("token");
-// var refreshToken = Cookies.get('refreshToken');
-var token = store.state.Token;
+
 
 const http = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
-  headers: {
-    Authorization: sessionToken,
-    Requerimiento: 1,
-    Canal: "BTDIGITAL",
-    Usuario: "INSTALADOR",
-    Token: token,
-    Device: 1
-  }
+  baseURL: process.env.VUE_APP_API_URL
 });
 
 export default http;

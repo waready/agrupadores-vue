@@ -2,7 +2,7 @@
   <div class="row mt-3">
     <template v-if="indicadores">
       <h2>Indicadores de {{ detalleIndicador }}</h2>
-      <hr>
+      <hr />
       <div
         class="col-md-3 col-sm-5 mb-2"
         v-for="(item, index) in indicadores"
@@ -43,7 +43,7 @@ export default {
   },
 
   data: () => ({
-    detalleIndicador:"",
+    detalleIndicador: "",
     indicadores: null,
     message: ""
   }),
@@ -60,71 +60,68 @@ export default {
 
   methods: {
     async getAllAgrupadores(idIndicador) {
-      if (idIndicador == 100)
-      this.detalleIndicador = "Condiciones generales"
-      if (idIndicador == 200)
-      this.detalleIndicador = "Cajas Sucursales"
-      if (idIndicador == 300)
-      this.detalleIndicador = "Contabilidad"
+      if (idIndicador == 100) this.detalleIndicador = "Condiciones generales";
+      if (idIndicador == 200) this.detalleIndicador = "Cajas Sucursales";
+      if (idIndicador == 300) this.detalleIndicador = "Contabilidad";
 
       await AuthService.GetIndicadores(idIndicador).then((response) => {
-        if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          if(this.message == "Sesión inválida"){
-            setTimeout(()=>{
+        if (response.Erroresnegocio) {
+          if (response.Erroresnegocio.BTErrorNegocio[0]) {
+            this.message =
+              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            if (this.message == "Sesión inválida") {
+              setTimeout(() => {
                 AuthService.logout();
                 this.$store.dispatch("logout");
                 this.$router.push("/login");
-            },3000)
+              }, 3000);
+            }
           }
         }
         // else{
         // }
-        this.indicadores = response.sdtIndicadores.sBTIndicador.map(
-          (item) => {
-            switch (item.codigo) {
-              case 105:
-                // "Condiciones Generales"
-                item.icon = "fas fa-cogs fa-5x primary";
-                break;
-              case 106:
-                // "Informacion de cotizaciones"
-                item.icon = "fas fa-info-circle fa-5x blue";
-                break;
-              case 110:
-                // "Prueba"
-                item.icon = "fas fa-chain-broken fa-5x danger";
-                break;
-              case 201:
-                // "Sucursales y Cajas'"
-                item.icon = "fas fa-institution fa-5x warning";
-                break;
-              case 360:
-                // "Transacciones por estado'"
-                item.icon = "fas fa-credit-card-alt fa-5x";
-                break;
-              case 370:
-                // "Cuadre de monedas en saldos diarios"
-                item.icon = "fas fa-balance-scale fa-5x success";
-                break;
-              case 380:
-                // "Posibles rubros bolsa"
-                item.icon = "mt-2 fas fa-sack-dollar fa-5x secondary";
-                break;
+        this.indicadores = response.sdtIndicadores.sBTIndicador.map((item) => {
+          switch (item.codigo) {
+            case 105:
+              // "Condiciones Generales"
+              item.icon = "fas fa-cogs fa-5x primary";
+              break;
+            case 106:
+              // "Informacion de cotizaciones"
+              item.icon = "fas fa-info-circle fa-5x blue";
+              break;
+            case 110:
+              // "Prueba"
+              item.icon = "fas fa-chain-broken fa-5x danger";
+              break;
+            case 201:
+              // "Sucursales y Cajas'"
+              item.icon = "fas fa-institution fa-5x warning";
+              break;
+            case 360:
+              // "Transacciones por estado'"
+              item.icon = "fas fa-credit-card-alt fa-5x";
+              break;
+            case 370:
+              // "Cuadre de monedas en saldos diarios"
+              item.icon = "fas fa-balance-scale fa-5x success";
+              break;
+            case 380:
+              // "Posibles rubros bolsa"
+              item.icon = "mt-2 fas fa-sack-dollar fa-5x secondary";
+              break;
 
-              default:
-                // sin icon
-                item.icon = "";
-                break;
-            }
-            console.log(item);
-            return item;
+            default:
+              // sin icon
+              item.icon = "";
+              break;
           }
-        );
+          //console.log(item);
+          return item;
+        });
         if (!this.indicadores[0]) {
           this.message = "No se encuentran registros!";
         }
-
       });
     },
     indicadorID(id) {
@@ -145,8 +142,8 @@ export default {
         toastr.error("Ruta en construcción", "No Encontrada");
       }
       if (id == 360) {
-          this.$router.push({ path: `/transacciones` });
-         toastr.success("Ruta Valida", "Dirigiendo..");
+        this.$router.push({ path: `/transacciones` });
+        toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 370) {
         this.$router.push({ path: `/cuadre-saldos` });
@@ -156,17 +153,17 @@ export default {
         this.$router.push({ path: `/rubros-bolsa` });
         toastr.success("Ruta Valida", "Dirigiendo..");
       }
-      console.log(id);
+      //console.log(id);
     }
     //
     //
   },
   watch: {
-  '$route.params.id': function(newId, oldId) {
-    console.log(newId, " - ", oldId)
-    this.getAllAgrupadores(newId);
+    "$route.params.id": function (newId, oldId) {
+      //console.log(newId, " - ", oldId);
+      this.getAllAgrupadores(newId);
+    }
   }
-}
 };
 </script>
 <style scoped>

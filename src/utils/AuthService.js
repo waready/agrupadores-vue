@@ -6,17 +6,13 @@ import store from "@/store";
 const prefijo = process.env.VUE_APP_API_PREFIJO;
 const version = process.env.VUE_APP_API_VERSION;
 const btServicesEnv = process.env.VUE_APP_BTEXPOSER;
-const btServicesEnabled = btServicesEnv === 'true';
+const btServicesEnabled = btServicesEnv === "true";
 
 const API_URL = btServicesEnabled
-  ? `${prefijo}BTIndicadores/${version}`
-  : `com.dlya.bantotal.${prefijo}_BTIndicadores_${version}`;
+  ? `${prefijo}Indicadores/${version}/`
+  : `com.dlya.bantotal.${prefijo}_BTIndicadores_${version}?`;
 
 class AuthService {
-  static checkIfHasToken() {
-    return secureStorage.getItem("token") !== null;
-  }
-
   static async login(username, password) {
     try {
       const user = {
@@ -32,22 +28,25 @@ class AuthService {
       };
 
       const url = btServicesEnabled
-        ? `Authenticate/${version}Execute`
-        : `com.dlya.bantotal.${prefijo}_Authenticate_${version}Execute`;
-      const response = await http.post(url, user);
+        ? `Authenticate/${version}/Execute`
+        : `com.dlya.bantotal.${prefijo}_Authenticate_${version}?Execute`;
+
+      const headers = {
+        Requerimiento: 1,
+        Device: 1,
+        Canal: "BTDIGITAL",
+        Usuario: username
+      };
+
+      const response = await http.post(`${url}`,user,
+        { headers }
+      );
 
       const data = response.data;
       AuthService.saveAccessToken(data);
-      return {
-        success: true,
-        data: data,
-        message: ""
-      };
+      return { success: true, data, message: "" };
     } catch (e) {
-      return {
-        success: false,
-        message: "Error en la autenticación: " + e
-      };
+      return { success: false, message: "Error en la autenticación: " + e };
     }
   }
 
@@ -55,25 +54,47 @@ class AuthService {
     secureStorage.setItem("token", `${tokenResponse.SessionToken}`);
   }
 
-  static async postRequest(endpoint, data) {
+  static async postRequest(endpoint, parametros) {
     const token = store.state.Token;
+    const usuario = store.state.user;
+
     const user = {
       Btinreq: {
         Requerimiento: 1,
         Canal: "BTDIGITAL",
-        Usuario: "INSTALADOR",
+        Usuario: usuario,
         Token: token,
         Device: 1
       }
     };
-  
+    
+    const headers = {
+      Requerimiento: 1,
+      Canal: "BTDIGITAL",
+      Usuario: usuario,
+      Token: token,
+      Device: 1
+    };
+
+    const data = {
+      Requerimiento: 1,
+      Canal: "BTDIGITAL",
+      Usuario: usuario,
+      Token: token,
+      Device: 1
+    };
+
     if (btServicesEnabled) {
-      return (await http.get(`${API_URL}${endpoint}`, { ...user, ...data })).data;
+      const response = await (endpoint === "ObtenerIndicadores"
+        ? http.post(`${API_URL}${endpoint}`, { ...user, ...parametros }, { headers })
+        : http.get(`${API_URL}${endpoint}`, { params: data, headers }));
+
+      return response.data;
     } else {
-      return (await http.post(`${API_URL}${endpoint}`, { ...user, ...data })).data;
+      console.log("nooo esta!")
+      return (await http.post(`${API_URL}${endpoint}`, { ...user, ...parametros })).data;
     }
   }
-  
 
   static removeToken() {
     localStorage.clear();
@@ -85,24 +106,18 @@ class AuthService {
     router.push("/login");
   }
 
+  static async GetIndicadores(id) {
+    // const endpoint = btServicesEnabled
+    //   ? `ObtenerIndicadores`
+    //   : `ObtenerIndicadores/${parseInt(id)}`;
+    const endpoint = `ObtenerIndicadores`;
+    return this.postRequest(endpoint, { agrupadorId: parseInt(id) });
+  }
+
   static async GetAgrupadores() {
     const endpoint = "ObtenerAgrupadores";
     return this.postRequest(endpoint, {});
   }
-
-  static async GetIndicadores(id) {
-    const endpoint = `ObtenerIndicadores/${parseInt(id)}`;
-    return this.postRequest(endpoint, { agrupadorId: parseInt(id) });
-  }
-  static async GetIndicadores(id) {
-    // Construye la URL de la solicitud condicionalmente
-    const endpoint = btServicesEnabled
-      ? `ObtenerIndicadores/${parseInt(id)}`
-      : `ObtenerIndicadores`;
-  
-    return this.postRequest(endpoint, { agrupadorId: parseInt(id) });
-  }
-
 
   static async getSucursalesCajas() {
     const endpoint = "ObtenerSucursalesCajas";

@@ -61,7 +61,7 @@ export default {
     indices: null,
     moneda: true,
     indice: false,
-    message:""
+    message: ""
   }),
 
   computed: {
@@ -77,20 +77,22 @@ export default {
   methods: {
     async getAllAgrupadores() {
       await AuthService.getCotizaciones().then((response) => {
-        console.log(response);
-        if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          if(this.message == "Sesión inválida"){
-            setTimeout(()=>{
+        if (response.Erroresnegocio) {
+          if (response.Erroresnegocio.BTErrorNegocio[0]) {
+            this.message =
+              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            if (this.message == "Sesión inválida") {
+              setTimeout(() => {
                 AuthService.logout();
                 this.$store.dispatch("logout");
                 this.$router.push("/login");
-            },3000)
+              }, 3000);
+            }
           }
         }
         this.indices = response.sdtIndices.sBTMonedaIndice;
         this.monedas = response.sdtMonedas.sBTMonedaIndice;
-        if (!this.indices[0] || !this.monedas[0] ) {
+        if (!this.indices[0] || !this.monedas[0]) {
           this.message = "No se encuentran registros!";
         }
       });

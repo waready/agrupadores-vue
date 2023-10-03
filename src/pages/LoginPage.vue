@@ -104,6 +104,7 @@ export default {
       }
     },
     async registrar(user) {
+      user.Usuario = this.username.toUpperCase();
       await this.$store.dispatch("login", user);
       this.$router.push("/");
     }

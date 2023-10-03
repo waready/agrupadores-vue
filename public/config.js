@@ -19,7 +19,7 @@ window.GetBTexposer= "true"
     GetUrlPro = https://pioneroapp2.dlya.corp:3001/api/
 */
 
-window.GetUrlPro= "https://pioneroapp2.dlya.corp:3001/api/"
+window.GetUrlPro= "https://miscuotasqa.bantotal.com/api/"
 
 //sufijo del ambiente - ejemplo
 /*
@@ -41,4 +41,4 @@ window.GetSufijo= ""
     BTSERVICES
     GetVrSer = v1/
 */
-window.GetVrSer= "v1/"
+window.GetVrSer= "v1"

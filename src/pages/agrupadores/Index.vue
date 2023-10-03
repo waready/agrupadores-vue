@@ -9,8 +9,11 @@
     <!-- {{ agrupadores }} -->
     <div class="row">
       <template v-if="agrupadores">
-        <div class="col-md-3 col-sm-5 mb-2" v-for="(item, index) in agrupadores" :key="index">
-          <div class="card h-100 " @click="indicadorID(item.codigo)">
+        <div
+          class="col-md-3 col-sm-5 mb-2"
+          v-for="(item, index) in agrupadores"
+          :key="index">
+          <div class="card h-100" @click="indicadorID(item.codigo)">
             <div class="card-body text-center">
               <h5 class="card-title">{{ item.descripcion }}</h5>
               <div>
@@ -26,7 +29,7 @@
 </template>
 <script>
 import ApiService from "@/utils/ApiService.js";
-import AuthService from '@/utils/AuthService';
+import AuthService from "@/utils/AuthService";
 import Loading from "@/components/Loading.vue";
 
 export default {
@@ -58,15 +61,18 @@ export default {
   methods: {
     async getAllAgrupadores() {
       await AuthService.GetAgrupadores().then((response) => {
-
-        if (response.Erroresnegocio.BTErrorNegocio[0]) {
-          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
-          if (this.message == "Sesión inválida") {
-            setTimeout(() => {
-              AuthService.logout();
-              this.$store.dispatch("logout");
-              this.$router.push("/login");
-            }, 3000)
+        console.log(response)
+        if (response.Erroresnegocio) {
+          if (response.Erroresnegocio.BTErrorNegocio[0]) {
+            this.message =
+              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            if (this.message == "Sesión inválida") {
+              setTimeout(() => {
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+              }, 3000);
+            }
           }
         }
 
@@ -89,25 +95,21 @@ export default {
               item.icon = "";
               break;
           }
-          console.log(item);
+          //console.log(item);
           return item;
         });
         if (!this.agrupadores[0]) {
           this.message = "No se encuentran registros!";
         }
-
       });
     },
     indicadorID(id) {
       this.$router.push({ path: `/indicador/${id}` });
       $(document).ready(function () {
-        if(id == 100)
-          $('.nav-list #links_0 a').trigger('click');
-        if(id == 200)
-          $('.nav-list #links_1 a').trigger('click');
-        if(id == 300)
-          $('.nav-list #links_2 a').trigger('click');
-        
+        if (id == 100) $(".nav-list #links_0 a").trigger("click");
+        if (id == 200) $(".nav-list #links_1 a").trigger("click");
+        if (id == 300) $(".nav-list #links_2 a").trigger("click");
+
         $(".nav-list #links_0 a").on("click", function () {
           // removemos la clase 'active' de todos los elementos li
           $(".nav-list #links_0 a").css({
@@ -152,7 +154,6 @@ export default {
   position: relative;
   color: #0087ca;
 }
-
 
 .hover-underline-animation:after {
   position: absolute;

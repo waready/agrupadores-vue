@@ -1,10 +1,10 @@
 import store from "@/store";
 
 export const authGuard = (to, from, next) => {
-  console.log("Before Each Routes");
+  //console.log("Before Each Routes");
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (store.state.logged) {
-      console.log("Logged in");
+      //console.log("Logged in");
       next();
       return;
     }
