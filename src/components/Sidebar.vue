@@ -76,6 +76,12 @@ export default {
           name: "Contabilidad",
           tooltip: "Contabilidad",
           icon: "bx-file"
+        },
+        {
+          link: "/powerbi",
+          name: "POWER-BI",
+          tooltip: "Contabilidad",
+          icon: "bx-chart"
         }
       ]
     };
