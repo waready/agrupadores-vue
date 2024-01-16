@@ -96,16 +96,18 @@
       </div>
 
       <div class="row">
-        <div class="col-12 mb-3">
-          <Bar
+        <div class="col d-flex justify-content-center">
+          <!-- <Bar
             id="my-chart-id"
             :options="chartOptions"
             :data="chartData"
-            class="mb-2" />
+            class="mb-2" /> -->
+
+          <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
         </div>
       </div>
 
-      <div class="row mt-2 justify-content-md-center">
+      <!-- <div class="row mt-2 justify-content-md-center">
         <div class="col-md-7">
           <div class="form-group" data-select2-id="52">
             <div class="input-group mb-3">
@@ -130,8 +132,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row justify-content-md-center">
+      </div> -->
+      <!-- <div class="row justify-content-md-center">
         <div class="col-md-7 mt-1">
           <ul class="list-group">
             <li
@@ -145,14 +147,47 @@
             </li>
           </ul>
         </div>
+      </div> -->
+      <div class="container mt-2">
+        <div class="row justify-content-md-center">
+          <div class="col-md-7">
+            <div class="form-group">
+              <label for="inputGroupSelect01">Movimiento</label>
+              <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
+                <option value="">(Elegir)</option>
+                <option v-for="(item, index) in labels" :key="index" :value="item.id">{{ item.description }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+          <div class="col-md-7 mt-1">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Movimiento</th>
+                  <th scope="col">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in transaccionFiltrada" :key="index">
+                  <td>{{ item.descripcion }}</td>
+                  <td :class="isPrimaryBadge(item.descripcion)">{{ item.cantidad }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+
     </div>
     <loading v-else></loading>
   </div>
 </template>
 <script>
 import { Bar } from "vue-chartjs";
-
+import { Pie } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
@@ -163,7 +198,8 @@ import {
   LinearScale,
   CategoryScale,
   PointElement,
-  BarElement
+  BarElement,
+  Legend
 } from "chart.js";
 
 ChartJS.register(
@@ -171,6 +207,7 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
+  Legend,
   LineElement,
   LinearScale,
   CategoryScale,
@@ -184,6 +221,7 @@ export default {
   name: "RubroBolsa",
   components: {
     Bar,
+    Pie,
     loading
   },
   mounted() {
@@ -246,6 +284,20 @@ export default {
   }),
 
   methods: {
+    isPrimaryBadge(description) {
+      const labelscolor = ["A", "B", "L", "N", "X", "SP"];
+      const labelscolorRed = ["E", "R"];
+      const labelscolorGreen = ["H", "M", "P", "S"];
+
+      if (labelscolor.some(label => description.includes(label))) {
+        return 'table-warning';
+      } else if (labelscolorRed.some(label => description.includes(label))) {
+        return 'table-danger'; // Assuming red for these labels
+      } else if (labelscolorGreen.some(label => description.includes(label))) {
+        return 'table-success'; // Assuming green for these labels
+      }
+      return 'table-info'; // Default case
+    },
     async getAllTansaccionEstado() {
       await AuthService.getTansaccionEstado().then((response) => {
         if (response.Erroresnegocio) {
@@ -332,47 +384,50 @@ export default {
             return a.codigo.localeCompare(b.codigo);
           });
 
+        const exito = response.sdtTransaccionesEstados.exito || 0;
+        const error = response.sdtTransaccionesEstados.error || 0;
+        const otros = response.sdtTransaccionesEstados.otros || 0;
+
         this.chartData = {
-          labels: [],
+          labels: ["Éxito", "Error", "Otros"],
           datasets: [
             {
               label: "Cantidad",
-              backgroundColor: [],
-              data: []
-            }
-          ]
+              backgroundColor: ["#16d39a", "#ff7588", "#ffa87d"], // Puedes cambiar los colores según tus preferencias
+              data: [exito, error, otros],
+            },
+          ],
         };
-        for (const [key, value] of Object.entries(
-          response.sdtTransaccionesEstados
-        )) {
-          if (value !== null && value !== 0 && key.startsWith("transaccion")) {
-            let label = key.slice(11);
-            if (
-              label === "A" ||
-              label === "B" ||
-              label === "L" ||
-              label === "N" ||
-              label === "S" ||
-              label === "X" ||
-              label === "SP"
-            ) {
-              this.chartData.datasets[0].backgroundColor.push("#f0ad4e");
-            }
-            if (label === "E" || label === "R") {
-              this.chartData.datasets[0].backgroundColor.push("#22bb33");
-            }
-            if (label === "H" || label === "M" || label === "P") {
-              this.chartData.datasets[0].backgroundColor.push("#bb2124");
-            }
+        // for (const [key, value] of Object.entries(
+        //   response.sdtTransaccionesEstados
+        // )) {
+        //   if (value !== null && value !== 0 && key.startsWith("transaccion")) {
+        //     let label = key.slice(11);
+        //     if (
+        //       label === "A" ||
+        //       label === "B" ||
+        //       label === "L" ||
+        //       label === "N" ||
+        //       label === "X" ||
+        //       label === "SP"
+        //     ) {
+        //       this.chartData.datasets[0].backgroundColor.push("#f0ad4e");
+        //     }
+        //     if (label === "E" || label === "R") {
+        //       this.chartData.datasets[0].backgroundColor.push("#bb2124");
+        //     }
+        //     if (label === "H" || label === "M" || label === "P" || label === "S") {
+        //       this.chartData.datasets[0].backgroundColor.push("#22bb33"); //22bb33
+        //     }
 
-            if (label === "SP") {
-              label = "Sin especificar";
-            }
-            this.chartData.labels.push(label);
+        //     if (label === "SP") {
+        //       label = "Sin especificar";
+        //     }
+        //     this.chartData.labels.push(label);
 
-            this.chartData.datasets[0].data.push(value);
-          }
-        }
+        //     this.chartData.datasets[0].data.push(value);
+        //   }
+        // }
       });
     },
     getClass(item) {
@@ -409,6 +464,12 @@ export default {
     }
   },
   computed: {
+    myStyles() {
+      return {
+        height: `${425}px`,
+        //position: "relative"
+      };
+    },
     transaccionFiltrada() {
       //var buscado = this.TextoBuscado.toUpperCase();
       console.log(this.busqueda);

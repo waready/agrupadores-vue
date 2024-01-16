@@ -5,7 +5,7 @@
  */
 
 // Initialize variables globales 
-// BTSERVICES ON ("true") - OFF ("false")
+// BTEXPOSER ON ("true") - OFF ("false")
 
 window.GetBTexposer= "true"
 
@@ -15,7 +15,7 @@ window.GetBTexposer= "true"
     GetUrlPro = http://pioneroapp:6004/productogx16/servlet/
 */
 /*
-    BTSERVICES
+    BTEXPOSER
     GetUrlPro = https://pioneroapp2.dlya.corp:3001/api/
 */
 
@@ -27,7 +27,7 @@ window.GetUrlPro= "https://miscuotasqa.bantotal.com/api/"
     GetSufijo = odwsbt
 */
 /*
-    BTSERVICES 
+    BTEXPOSER 
     GetSufijo = ""
 */
 window.GetSufijo= ""
@@ -38,7 +38,7 @@ window.GetSufijo= ""
     GetVrSer = v1?
 */
 /*
-    BTSERVICES
+    BTEXPOSER
     GetVrSer = v1/
 */
 window.GetVrSer= "v1"

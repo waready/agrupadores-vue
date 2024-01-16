@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-3">
     <div v-if=" monedas">
-      <h2>MONEDA</h2>
+      <h3>MONEDA</h3>
       <hr />
       <div id="moneda">
         <v-client-table :columns="columns" :data="monedas" :options="options">
@@ -113,8 +113,8 @@ export default {
   .sortable-header .sort-icon.fa-sort {
     opacity: 0.5;
   }
-  .letter{
+  /* .letter{
     font-size: 1.1rem;
-  }
+  } */
 </style>
   

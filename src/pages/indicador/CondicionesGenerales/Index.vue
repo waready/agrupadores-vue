@@ -10,14 +10,14 @@
           <section id="stats-subtitle">
             <div class="row">
               <div class="col-md-12 mt-3 mb-1">
-                <h3 class="text-uppercase">debugs</h3>
+                <h4 class="text-uppercase">debugs</h4>
                 <p>Datos Informativos</p>
                 <hr />
               </div>
             </div>
 
             <div class="row">
-              <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   class="card overflow-hidden"
                   :class="[
@@ -34,14 +34,14 @@
                             class="icon-social-dropbox info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Históricos de Reglas de Negocio Activados</h5>
+                          <h6>Históricos de Reglas de Negocio Activados</h6>
                           <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadReglas }}</span
                           >
                         </div>
                         <div class="align-self-center">
-                          <h1
+                          <h4
                             :class="
                               CondicionesGenerales.reglasNegocio != 'SI'
                                 ? 'text-secondary'
@@ -49,7 +49,7 @@
                             ">
                             <i class="fas fa-bug"></i>
                             {{ CondicionesGenerales.reglasNegocio }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -57,7 +57,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -73,14 +73,14 @@
                           <i class="icon-layers warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Históricos PAE Activados</h5>
+                          <h6>Históricos PAE Activados</h6>
                           <span>
                             Cantidad:
                             {{ CondicionesGenerales.cantidadPAE }}</span
                           >
                         </div>
                         <div class="align-self-center">
-                          <h1
+                          <h4
                             :class="
                               CondicionesGenerales.opcionPAE != 'SI'
                                 ? 'text-secondary'
@@ -89,14 +89,14 @@
                             <i class="fas fa-bug"></i>
 
                             {{ CondicionesGenerales.opcionPAE }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -110,11 +110,11 @@
                           <i class="icon-globe primary font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Opción general</h5>
+                          <h6>Opción general</h6>
                           <span>Opción general 2850 activada?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1
+                          <h4
                             :class="
                               CondicionesGenerales.debug != 'SI'
                                 ? 'text-secondary'
@@ -123,7 +123,7 @@
                             <i class="fas fa-bug"></i>
 
                             {{ CondicionesGenerales.debug }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -131,7 +131,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -148,11 +148,11 @@
                             class="icon-game-controller warning font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Workflow</h5>
+                          <h6>Workflow</h6>
                           <span>Opción XWFV02 correlativo 1 activada</span>
                         </div>
                         <div class="align-self-center">
-                          <h1
+                          <h4
                             :class="
                               CondicionesGenerales.opcionWorkFlow != 'SI'
                                 ? 'text-secondary'
@@ -161,14 +161,14 @@
                             <i class="fas fa-bug"></i>
 
                             {{ CondicionesGenerales.opcionWorkFlow }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -184,11 +184,11 @@
                           <i class="icon-folder-alt info font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Reporteador</h5>
+                          <h6>Reporteador</h6>
                           <span>Opción XWFV02 correlativo 4 activada</span>
                         </div>
                         <div class="align-self-center">
-                          <h1
+                          <h4
                             :class="
                               CondicionesGenerales.parametrosGeneralesWF != 'SI'
                                 ? 'text-secondary'
@@ -197,7 +197,7 @@
                             <i class="fas fa-bug"></i>
 
                             {{ CondicionesGenerales.parametrosGeneralesWF }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -207,13 +207,13 @@
             </div>
             <div class="row">
               <div class="col-12 mt-3 mb-1">
-                <h3 class="text-uppercase">Periodo Delta 24 x 7</h3>
+                <h4 class="text-uppercase">Periodo Delta 24 x 7</h4>
                 <p>24 x 7</p>
                 <hr />
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
                     'card overflow-hidden',
@@ -231,13 +231,13 @@
                             class="icon-briefcase secondary font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Empresas Iguales</h5>
+                          <h6>Empresas Iguales</h6>
                           <span>FST017 vs FST017CNL iguales?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1>
+                          <h4>
                             {{ CondicionesGenerales.empresasIguales }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -247,7 +247,7 @@
 
               <!-- Delta true -->
               <div
-                class="col-lg-5 col-md-5 col-sm-12"
+                class="col-lg-6 col-md-5 col-sm-12"
                 v-if="CondicionesGenerales.opcion7x24 == 'SI'">
                 <div class="card">
                   <div class="card-content">
@@ -258,13 +258,13 @@
                             class="icon-screen-desktop success font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Delta</h5>
+                          <h6>Delta</h6>
                           <span>Delta habilitado?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1>
+                          <h4>
                             {{ CondicionesGenerales.opcion7x24 }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -273,7 +273,7 @@
               </div>
 
               <!-- Delta Fail -->
-              <div class="col-lg-5 col-md-5 col-sm-12" v-else>
+              <div class="col-lg-6 col-md-5 col-sm-12" v-else>
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body cleartfix">
@@ -283,13 +283,13 @@
                             class="icon-screen-desktop danger font-large-2 mr-2"></i>
                         </div>
                         <div class="media-body">
-                          <h5>Delta</h5>
+                          <h6>Delta</h6>
                           <span>Delta habilitado?</span>
                         </div>
                         <div class="align-self-center">
-                          <h1>
+                          <h4>
                             {{ CondicionesGenerales.opcionPAE }}
-                          </h1>
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -299,7 +299,7 @@
             </div>
           </section>
           <div class="col-12 mt-3 mb-1">
-            <h3 class="text-uppercase">Fechas Ambiente</h3>
+            <h4 class="text-uppercase">Fechas Ambiente</h4>
             <p>Listados de Fechas</p>
             <hr />
           </div>
@@ -313,7 +313,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de apertura core</h3>
+                      <h4 class="title">Fecha de apertura core</h4>
                       <p class="description">
                         {{ fechaApertura }}
                       </p>
@@ -325,7 +325,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de cierre core</h3>
+                      <h4 class="title">Fecha de cierre core</h4>
                       <p class="description">
                         {{ fechaCierre }}
                       </p>
@@ -337,7 +337,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de apertura 24x7</h3>
+                      <h4 class="title">Fecha de apertura 24x7</h4>
                       <p class="description">
                         {{ fechaApertura7x24 }}
                       </p>
@@ -349,7 +349,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <!-- <div class="timeline-year">2021-11-30</div> -->
-                      <h3 class="title">Fecha de cierre 24x7</h3>
+                      <h4 class="title">Fecha de cierre 24x7</h4>
                       <p class="description">
                         {{ fechaCierre7x24 }}
                       </p>
@@ -537,13 +537,13 @@ export default {
 }
 .main-timeline .title {
   color: #00c6da;
-  font-size: 23px;
+  font-size: 19px;
   font-weight: 600;
   text-transform: uppercase;
   margin: 0 0 5px;
 }
 .main-timeline .description {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   margin: 0;
 }

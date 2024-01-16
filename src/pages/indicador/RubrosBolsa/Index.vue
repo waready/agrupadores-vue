@@ -3,8 +3,8 @@
     <div v-if="rubroBolsa">
       <div class="row">
         <div class="col-12 mt-3 mb-1">
-          <h3 class="text-uppercase">Rubro Bolsas</h3>
-          <p>Información de los Rubros Bolsas</p>
+          <h3 class="text-uppercase">Posibles rubros centralizados</h3>
+          <p>Información de los posibles rubros centralizados</p>
           <hr />
         </div>
       </div>
@@ -15,7 +15,7 @@
         <div class="row">
           <div
             class="col-xl-6 col-md-12"
-            v-for="(item, index) in rubroBolsa"
+            v-for="(item, index) in 4"
             :key="index">
             <div class="card">
               <div class="card-body">
@@ -24,25 +24,25 @@
                     <i class="fa fa-archive info font-large-4 mr-2"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h2>{{ item.descripcion }}</h2>
-                    <h4>{{ item.rubro }}</h4>
+                    <h2> descripcion </h2>
+                    <h4> rubro</h4>
                   </div>
                 </div>
                 <div class="card-text letter">
                   <hr />
                   <h5>Clave</h5>
                   <ul class="list-unstyled">
-                    <li>Empresa: {{ item.nombreEmpresa }}</li>
-                    <li>Sucursal: {{ item.nombreSucursal }}</li>
-                    <li>Cuenta: {{ item.cuentaCliente }}</li>
-                    <li>Operación: {{ item.operacion }}</li>
-                    <li>Sub Operación: {{ item.subOperacion }}</li>
-                    <li>Moneda: {{ item.signoMoneda }}</li>
-                    <li>Papel: {{ item.nombrePapel }}</li>
+                    <li>Empresa: name </li>
+                    <li>Sucursal: casa matriz</li>
+                    <li>Cuenta: 26</li>
+                    <li>Operación:100</li>
+                    <li>Sub Operación: 1</li>
+                    <li>Moneda: $</li>
+                    <li>Papel: 1 </li>
                   </ul>
                   <hr />
                   <h5 class="mb-1"><span> Ocurrencias </span></h5>
-                  <span>{{ item.ocurrencias }} </span>
+                  <span>ocurrencias</span>
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default {
 .card {
   position: relative;
 }
-.letter {
+/* .letter {
   font-size: 1.2rem;
-}
+} */
 </style>

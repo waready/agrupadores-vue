@@ -77,12 +77,12 @@ export default {
           tooltip: "Contabilidad",
           icon: "bx-file"
         },
-        {
-          link: "/powerbi",
-          name: "POWER-BI",
-          tooltip: "Contabilidad",
-          icon: "bx-chart"
-        }
+        // {
+        //   link: "/powerbi",
+        //   name: "POWER-BI",
+        //   tooltip: "Contabilidad",
+        //   icon: "bx-chart"
+        // }
       ]
     };
   }

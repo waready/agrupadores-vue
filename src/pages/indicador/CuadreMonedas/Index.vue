@@ -42,9 +42,9 @@
                 <div class="card-body">
                   <div class="media d-flex">
                     <div class="media-body text-left">
-                      <h3 :class="item.saldo != 0 ? 'danger' : 'success'">
+                      <h4 :class="item.saldo != 0 ? 'danger' : 'success'">
                         {{ item.signo }}
-                      </h3>
+                      </h4>
                     </div>
 
                     <div
@@ -52,12 +52,12 @@
                         'align-self-center',
                         item.saldo != 0 ? 'danger' : 'success'
                       ]"
-                      style="font-size: 20px">
+                      style="font-size: 17px">
                       {{ formattedNumber(item.saldo) }}
                     </div>
                   </div>
                   <div>
-                    <span class="letter">{{ item.nombre.toUpperCase() }}</span>
+                    <span class="">{{ item.nombre.toUpperCase() }}</span>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
                     <br />
@@ -170,7 +170,7 @@ export default {
 };
 </script>
 <style scoped>
-.letter {
+/* .letter {
   font-size: 1.1rem;
-}
+} */
 </style>

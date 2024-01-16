@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <h2>ÍNDICES</h2>
+    <h3>ÍNDICES</h3>
     <div v-if="indices">
       <div id="indices">
         <v-client-table :columns="columns" :data="indices" :options="options">
@@ -112,9 +112,9 @@ export default {
   .sortable-header .sort-icon.fa-sort {
     opacity: 0.5;
   }
-  .letter{
+  /* .letter{
     font-size: 1.1rem;
-  }
+  } */
 
 </style>
   

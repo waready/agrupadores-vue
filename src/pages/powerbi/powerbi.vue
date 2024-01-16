@@ -45,7 +45,7 @@ export default {
 </script> -->
 
 
-<template>
+<!-- <template>
     <div>
       <PowerBIReportEmbed
         :embedConfig="embedConfig"
@@ -91,4 +91,7 @@ export default {
       };
     },
   };
-  </script>
+  </script> -->
+  <template>
+    
+  </template>

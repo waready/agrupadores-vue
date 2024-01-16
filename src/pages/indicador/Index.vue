@@ -150,7 +150,7 @@ export default {
         toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 380) {
-        this.$router.push({ path: `/rubros-bolsa` });
+        this.$router.push({ path: `/rubros-centralizados` });
         toastr.success("Ruta Valida", "Dirigiendo..");
       }
       //console.log(id);
@@ -159,9 +159,10 @@ export default {
     //
   },
   watch: {
-    "$route.params.id": function (newId, oldId) {
-      //console.log(newId, " - ", oldId);
-      this.getAllAgrupadores(newId);
+    "$route.params.id": function (newId) {
+      const valores = ["100","200","300"];
+      if(valores.includes(newId))
+        this.getAllAgrupadores(newId);
     }
   }
 };
