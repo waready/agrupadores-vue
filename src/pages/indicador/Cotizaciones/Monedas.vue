@@ -86,6 +86,8 @@ export default {
       $('.VuePagination__count').text(function(i, text) {
         return text.replace('Un registro', '1 registro');
       });
+      $('.VueTables__search-field label').hide();
+      $('.VueTables__search-field .VueTables__search__input').css('text-align', 'left');
     });
   },
 
@@ -116,5 +118,6 @@ export default {
   /* .letter{
     font-size: 1.1rem;
   } */
+
 </style>
   

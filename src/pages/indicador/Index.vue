@@ -127,31 +127,31 @@ export default {
     indicadorID(id) {
       if (id == 201) {
         this.$router.push({ path: `/sucursales` });
-        toastr.success("Ruta Valida", "Dirigiendo..");
+        //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 106) {
         this.$router.push({ path: `/monedas` });
-        toastr.success("Ruta Valida", "Dirigiendo..");
+        //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 105) {
         this.$router.push({ path: `/condiciones` });
-        toastr.success("Ruta Valida", "Dirigiendo..");
+        //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 110) {
         // this.$router.push({ path: `/monedas` });
-        toastr.error("Ruta en construcción", "No Encontrada");
+        //toastr.error("Ruta en construcción", "No Encontrada");
       }
       if (id == 360) {
         this.$router.push({ path: `/transacciones` });
-        toastr.success("Ruta Valida", "Dirigiendo..");
+        //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 370) {
         this.$router.push({ path: `/cuadre-saldos` });
-        toastr.success("Ruta Valida", "Dirigiendo..");
+        //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 380) {
         this.$router.push({ path: `/rubros-centralizados` });
-        toastr.success("Ruta Valida", "Dirigiendo..");
+        //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       //console.log(id);
     }
