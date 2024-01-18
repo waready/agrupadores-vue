@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
-                  class="card overflow-hidden"
+                  class="card custom-card overflow-hidden"
                   :class="[
                     CondicionesGenerales.reglasNegocio !== 'SI'
                       ? ''
@@ -60,7 +60,7 @@
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
-                    'card overflow-hidden',
+                    'card custom-card overflow-hidden',
                     CondicionesGenerales.opcionPAE != 'SI'
                       ? ''
                       : 'border-danger',
@@ -99,7 +99,7 @@
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
-                    'card overflow-hidden',
+                    'card custom-card overflow-hidden',
                     CondicionesGenerales.debug != 'SI' ? '' : 'border-danger',
                     'border-width-5'
                   ]">
@@ -134,7 +134,7 @@
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
-                    'card overflow-hidden',
+                    'card custom-card overflow-hidden',
                     CondicionesGenerales.opcionWorkFlow != 'SI'
                       ? ''
                       : 'border-danger',
@@ -171,7 +171,7 @@
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
                   :class="[
-                    'card overflow-hidden',
+                    'card custom-card overflow-hidden',
                     CondicionesGenerales.parametrosGeneralesWF != 'SI'
                       ? ''
                       : 'border-danger',
@@ -205,6 +205,7 @@
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-12 mt-3 mb-1">
                 <h4 class="text-uppercase">Periodo Delta 24 x 7</h4>
@@ -212,6 +213,7 @@
                 <hr />
               </div>
             </div>
+            
             <div class="row">
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
@@ -474,6 +476,7 @@ export default {
   font-size: 48px;
 } */
 
+
 .border-width-3 {
   border-width: 3px !important;
 }
@@ -497,7 +500,7 @@ export default {
 .main-timeline .timeline-content {
   color: #555;
   background: #fff;
-  min-height: 130px;
+  
   padding: 30px 150px 30px 30px;
   border-top: none;
   display: block;
@@ -584,6 +587,18 @@ export default {
 .main-timeline .timeline:nth-child(4n + 4) .title {
   color: #7438b9;
 }
+@media screen and (max-width: 1186px) {
+  .custom-card {
+    height: 120px; /* Puedes ajustar la altura según tus necesidades */
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .custom-card {
+    height: 170px; /* Puedes ajustar la altura según tus necesidades */
+  }
+}
+
 @media screen and (max-width: 767px) {
   .main-timeline .timeline,
   .main-timeline .timeline:nth-child(even) {
@@ -617,4 +632,5 @@ export default {
     right: auto;
   }
 }
+
 </style>

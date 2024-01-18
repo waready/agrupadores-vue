@@ -2,6 +2,7 @@
   <div class="mt-3">
     <h3>ÍNDICES</h3>
     <div v-if="indices">
+      <hr>
       <div id="indices">
         <v-client-table :columns="columns" :data="indices" :options="options">
           <template v-slot:nombre="item">
@@ -44,7 +45,7 @@ export default {
           first: "Primero",
           last: "Ultimo",
           filter: "Filtro:",
-          filterPlaceholder: "Consulta de Busqueda",
+          filterPlaceholder: "Busqueda",
           limit: "Registros:",
           page: "Pagina:",
           noResults: "No hay registros coincidentes",
@@ -86,6 +87,7 @@ export default {
         return text.replace('Un registro', '1 registro');
       });
       $('.VueTables__search-field label').hide();
+      $(".VueTables__search").addClass("float-right");
     });
   },
 

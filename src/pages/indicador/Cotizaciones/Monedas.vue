@@ -51,7 +51,7 @@ export default {
           first: "Primero",
           last: "Ultimo",
           filter: "Filtro:",
-          filterPlaceholder: "Consulta de Busqueda",
+          filterPlaceholder: "Busqueda",
           limit: "Registros:",
           page: "Pagina:",
           noResults: "No hay registros coincidentes",
@@ -87,7 +87,7 @@ export default {
         return text.replace('Un registro', '1 registro');
       });
       $('.VueTables__search-field label').hide();
-      $('.VueTables__search-field .VueTables__search__input').css('text-align', 'left');
+      $(".VueTables__search").addClass("float-right");
     });
   },
 

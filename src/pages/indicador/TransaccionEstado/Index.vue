@@ -13,7 +13,7 @@
         </div>
 
         <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card">
+          <div class="card h-80">
             <div class="card-content">
               <div class="card-body">
                 <div class="media d-flex">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card">
+          <div class="card h-80">
             <div class="card-content">
               <div class="card-body">
                 <div class="media d-flex">
@@ -55,7 +55,7 @@
         </div>
 
         <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card">
+          <div class="card h-80">
             <div class="card-content">
               <div class="card-body">
                 <div class="media d-flex">
@@ -73,7 +73,7 @@
         </div>
 
         <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card">
+          <div class="card h-80">
             <div class="card-content">
               <div class="card-body">
                 <div class="media d-flex">
@@ -162,7 +162,7 @@
         </div>
 
         <div class="row justify-content-md-center">
-          <div class="col-md-7 mt-1">
+          <div class="col-md-12 mt-1">
             <table class="table">
               <thead>
                 <tr>
@@ -491,4 +491,8 @@ export default {
   background-color: #fff;
   color: black;
 }
+
+.h-80 {
+    height: 80% !important;
+  }
 </style>
