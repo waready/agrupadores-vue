@@ -15,7 +15,7 @@
           :key="index">
           <div class="card h-100" @click="indicadorID(item.codigo)">
             <div class="card-body text-center">
-              <h5 class="card-title">{{ item.descripcion }}</h5>
+              <h6 class="card-title">{{ item.descripcion }}</h6>
               <div>
                 <i :class="[item.icon, 'mt-3']"></i>
               </div>

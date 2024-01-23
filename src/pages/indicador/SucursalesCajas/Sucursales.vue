@@ -49,17 +49,12 @@
                       name="filter"
                       class="form-control"
                       v-model="TextoBuscado"
+                      placeholder="Busqueda"
                       id="filter" />
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text"
-                        id="validatedInputGroupPrepend"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></span>
-                    </div>
                   </div>
                 </div>
               </div>
+              <br/>
               <div class="table-responsive">
                 <table class="table table-striped tamleter">
                   <thead>

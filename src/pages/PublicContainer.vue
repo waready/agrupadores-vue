@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col-12">
+        <div class="col-11">
           <Navbar></Navbar>
           <Sidebar></Sidebar>
           <router-view class="mltam" />          

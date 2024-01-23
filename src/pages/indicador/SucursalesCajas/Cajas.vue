@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div v-for="(item, index) in Sucursal" :key="index">
-      <h2>Cajas Sucursal ( {{ item.descripcion }} )</h2>
+      <h2>Cajas de la Sucursal ( {{ item.descripcion }} )</h2>
       <hr>
       <div>
         <button class="btn btn-info" @click="generarSucursal(item.identificador)" data-toggle="modal"
           data-target="#exampleModalCenter">
-          Sucursal
+          Datos de la Sucursal
         </button>
       </div>
     </div>

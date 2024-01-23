@@ -587,7 +587,7 @@ export default {
 .main-timeline .timeline:nth-child(4n + 4) .title {
   color: #7438b9;
 }
-@media screen and (max-width: 1186px) {
+@media screen and (max-width: 1286px) {
   .custom-card {
     height: 120px; /* Puedes ajustar la altura según tus necesidades */
   }

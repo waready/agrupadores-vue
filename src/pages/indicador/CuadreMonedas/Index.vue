@@ -17,6 +17,7 @@
                 type="text"
                 name="filter"
                 class="form-control"
+                placeholder="Busqueda"
                 v-model="TextoBuscado"
                 id="filter" />
               <div class="input-group-prepend">
@@ -37,7 +38,7 @@
             class="col-xl-4 col-sm-6 col-12"
             v-for="(item, index) in filterCuadreMoneda"
             :key="index">
-            <div class="card">
+            <div class="card custom-card ">
               <div class="card-content">
                 <div class="card-body">
                   <div class="media d-flex">
@@ -57,7 +58,7 @@
                     </div>
                   </div>
                   <div>
-                    <span class="">{{ item.nombre.toUpperCase() }}</span>
+                    <span class="name">{{ item.nombre.toUpperCase() }}</span>
                   </div>
                   <div class="progress mt-1 mb-0" style="height: 7px">
                     <br />
@@ -164,6 +165,16 @@ export default {
           objeto.nombre.toUpperCase().includes(buscado) ||
           objeto.signo.toUpperCase().includes(buscado)
         );
+      })
+      .sort((a, b) => {
+        // Ordenar por saldo != 0 primero
+        if (a.saldo !== 0 && b.saldo === 0) {
+          return -1;
+        } else if (a.saldo === 0 && b.saldo !== 0) {
+          return 1;
+        } else {
+          return 0;
+        }
       });
     }
   }
@@ -173,4 +184,12 @@ export default {
 /* .letter {
   font-size: 1.1rem;
 } */
+
+.custom-card {
+  height: 130px; /* Puedes ajustar la altura según tus necesidades */
+}
+
+.name{
+  font-size: 14px;
+}
 </style>
