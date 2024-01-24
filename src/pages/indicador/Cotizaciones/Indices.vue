@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <h3>ÍNDICES</h3>
+    <h3>PASAJE A HISTORICO POR ESPECIE</h3>
     <div v-if="indices">
       <hr>
       <div id="indices">
@@ -11,8 +11,8 @@
             </div>
           </template>
           <template v-slot:tipoCambio="item">
-            <a :class="[item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold','letter']">{{
-              item.row.tipoCambio }}</a>
+            <a :class="[item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold','letter']">
+              {{ item.row.tipoCambio!= 'S' ? 'No' : 'Si' }}</a>
           </template>
         </v-client-table>
       </div>
@@ -69,7 +69,7 @@ export default {
       headings: {
         // id: 'ID',
         nombre: "Nombre",
-        tipoCambio: "Cotización",
+        tipoCambio: "Pasaje a histórico",
       },
     },
   }),

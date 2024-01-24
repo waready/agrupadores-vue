@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-3">
     <div v-if=" monedas">
-      <h3>MONEDA</h3>
+      <h3>PASAJE A HISTORICO POR MONEDA</h3>
       <hr />
       <div id="moneda">
         <v-client-table :columns="columns" :data="monedas" :options="options">
@@ -11,8 +11,8 @@
             </div>
           </template>
           <template v-slot:tipoCambio="item">
-            <a :class="['letter',item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold']">{{
-              item.row.tipoCambio }}</a>
+            <a :class="['letter',item.row.tipoCambio != 'S' ? 'badge badge-danger text-white font-weight-bold' : 'badge badge-success  text-white font-weight-bold']">
+              {{ item.row.tipoCambio != 'S' ? 'No' : 'Si' }}</a>
           </template>
         </v-client-table>
       </div>
@@ -67,7 +67,7 @@ export default {
       headings: {
         // id: 'ID',
         nombre: "Nombre",
-        tipoCambio: "Cotización",
+        tipoCambio: "Pasaje a histórico",
       },
        
       
