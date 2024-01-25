@@ -213,7 +213,7 @@
                 <hr />
               </div>
             </div>
-            
+
             <div class="row">
               <div class="col-lg-6 col-md-5 col-sm-12">
                 <div
@@ -313,8 +313,8 @@
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
                         <i class="fa fa-calendar"></i>
+                        <span class="icon-text ">{{ fechaApertura }}</span>
                       </div>
-                      <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h4 class="title">Fecha de apertura core</h4>
                       <p class="description">
                         {{ fechaApertura }}
@@ -325,8 +325,8 @@
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
                         <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaCierre }}</span>
                       </div>
-                      <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h4 class="title">Fecha de cierre core</h4>
                       <p class="description">
                         {{ fechaCierre }}
@@ -337,8 +337,8 @@
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
                         <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaApertura7x24 }}</span>
                       </div>
-                      <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h4 class="title">Fecha de apertura 24x7</h4>
                       <p class="description">
                         {{ fechaApertura7x24 }}
@@ -349,8 +349,8 @@
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
                         <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaCierre7x24 }}</span>
                       </div>
-                      <!-- <div class="timeline-year">2021-11-30</div> -->
                       <h4 class="title">Fecha de cierre 24x7</h4>
                       <p class="description">
                         {{ fechaCierre7x24 }}
@@ -476,7 +476,6 @@ export default {
   font-size: 48px;
 } */
 
-
 .border-width-3 {
   border-width: 3px !important;
 }
@@ -500,7 +499,6 @@ export default {
 .main-timeline .timeline-content {
   color: #555;
   background: #fff;
-  
   padding: 30px 150px 30px 30px;
   border-top: none;
   display: block;
@@ -510,7 +508,7 @@ export default {
   content: "";
   background-color: #00c6da;
   height: 100%;
-  width: 70px;
+  width: 120px;
   position: absolute;
   top: 0;
   right: 0;
@@ -520,12 +518,23 @@ export default {
 }
 .main-timeline .timeline-icon {
   color: #fff;
-  font-size: 40px;
+  font-size: 82 px;
   line-height: 40px;
   transform: translateY(-50%);
   position: absolute;
   top: 50%;
-  right: 16px;
+  right: 20px;
+}
+
+.main-timeline .icon-text {
+  position: absolute;
+  top: 65%;
+  right: 0px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #333;
+  font-weight: bold;
+  margin: 0;
 }
 .main-timeline .timeline-year {
   color: #333;
@@ -632,5 +641,4 @@ export default {
     right: auto;
   }
 }
-
 </style>
