@@ -306,61 +306,62 @@
             <hr />
           </div>
           <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="main-timeline">
-                  <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
-                        <i class="fa fa-calendar"></i>
-                        <span class="icon-text ">{{ fechaApertura }}</span>
-                      </div>
-                      <h4 class="title">Fecha de apertura core</h4>
-                      <p class="description">
-                        {{ fechaApertura }}
-                      </p>
-                    </a>
-                  </div>
-                  <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
-                        <i class="fa fa-calendar"></i>
-                        <span class="icon-text">{{ fechaCierre }}</span>
-                      </div>
-                      <h4 class="title">Fecha de cierre core</h4>
-                      <p class="description">
-                        {{ fechaCierre }}
-                      </p>
-                    </a>
-                  </div>
-                  <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
-                        <i class="fa fa-calendar"></i>
-                        <span class="icon-text">{{ fechaApertura7x24 }}</span>
-                      </div>
-                      <h4 class="title">Fecha de apertura 24x7</h4>
-                      <p class="description">
-                        {{ fechaApertura7x24 }}
-                      </p>
-                    </a>
-                  </div>
-                  <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
-                        <i class="fa fa-calendar"></i>
-                        <span class="icon-text">{{ fechaCierre7x24 }}</span>
-                      </div>
-                      <h4 class="title">Fecha de cierre 24x7</h4>
-                      <p class="description">
-                        {{ fechaCierre7x24 }}
-                      </p>
-                    </a>
-                  </div>
-                </div>
-              </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="main-timeline">
+        <div class="timeline">
+          <a href="#" class="timeline-content">
+            <div class="timeline-icon">
+              <h4 class="title">Fecha de apertura core</h4>
+              <i class="fa fa-calendar"></i>
+              <span class="icon-text">{{ fechaApertura }}</span>
             </div>
-          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="main-timeline">
+        <div class="timeline">
+          <a href="#" class="timeline-content">
+            <div class="timeline-icon">
+              <h4 class="title">Fecha de cierre core</h4>
+              <i class="fa fa-calendar"></i>
+              <span class="icon-text">{{ fechaCierre }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="main-timeline">
+        <div class="timeline">
+          <a href="#" class="timeline-content">
+            <div class="timeline-icon">
+              <h4 class="title">Fecha de apertura 24x7</h4>
+              <i class="fa fa-calendar"></i>
+              <span class="icon-text">{{ fechaApertura7x24 }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="main-timeline">
+        <div class="timeline">
+          <a href="#" class="timeline-content">
+            <div class="timeline-icon">
+              <h4 class="title">Fecha de cierre 24x7</h4>
+              <i class="fa fa-calendar"></i>
+              <span class="icon-text">{{ fechaCierre7x24 }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
         </section>
         <loading v-else></loading>
       </div>
@@ -472,130 +473,89 @@ export default {
 </script>
 
 <style scoped>
-/* .tamleter{
-  font-size: 48px;
-} */
-
-.border-width-3 {
-  border-width: 3px !important;
-}
-.border-width-5 {
-  border-width: 3px !important;
-}
 .main-timeline {
   font-family: "Poppins", sans-serif;
 }
+
 .main-timeline:after {
   content: "";
   display: block;
   clear: both;
 }
-.main-timeline .timeline {
-  width: calc(50% + 70px);
-  margin: 0 5px 0 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  float: left;
+
+.timeline {
+  width: 100%;
+  margin-bottom: 30px;
 }
-.main-timeline .timeline-content {
-  color: #555;
-  background: #fff;
-  padding: 30px 150px 30px 30px;
+
+.timeline-content {
+  background-color: #00c6da;
+  height: 100%;
+  width: 100%;
   border-top: none;
   display: block;
   position: relative;
+  padding: 100px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.main-timeline .timeline-content:before {
+
+.timeline-content:before {
   content: "";
   background-color: #00c6da;
   height: 100%;
-  width: 120px;
+  width: 100%;
   position: absolute;
   top: 0;
   right: 0;
 }
-.main-timeline .timeline-content:hover {
+
+.timeline-content:hover {
   text-decoration: none;
 }
-.main-timeline .timeline-icon {
+
+.timeline-icon {
   color: #fff;
-  font-size: 82 px;
+  font-size: 150px;
   line-height: 40px;
-  transform: translateY(-50%);
   position: absolute;
-  top: 50%;
-  right: 20px;
+  top: 40%;
+  left: 70px;
+  transform: translateY(-50%);
 }
 
-.main-timeline .icon-text {
+.title {
   position: absolute;
-  top: 65%;
-  right: 0px;
-  transform: translateY(-50%);
+  font-weight: bold;
+  color: #333;
   font-size: 12px;
-  color: #333;
-  font-weight: bold;
-  margin: 0;
-}
-.main-timeline .timeline-year {
-  color: #333;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 40px;
-  text-align: center;
-  transform: translateY(-50%) rotate(90deg);
-  position: absolute;
-  top: 50%;
-  right: 60px;
-}
-.main-timeline .title {
-  color: #00c6da;
-  font-size: 19px;
-  font-weight: 600;
   text-transform: uppercase;
-  margin: 0 0 5px;
+  margin-bottom: 10px;
 }
-.main-timeline .description {
-  font-size: 17px;
+
+.icon-text {
+  position: absolute;
+  top: 35%;
+  right: 30px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #333;
   font-weight: bold;
   margin: 0;
 }
-.main-timeline .timeline:nth-child(even) {
-  float: right;
-  margin: 0 0 0 5px;
+
+@media screen and (max-width: 767px) {
+  .timeline-content {
+    text-align: center;
+  }
+
+  .timeline-icon {
+    right: auto;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
 }
-.main-timeline .timeline:nth-child(even) .timeline-content {
-  padding: 30px 30px 30px 150px;
-}
-.main-timeline .timeline:nth-child(even) .timeline-content:before {
-  right: auto;
-  left: 0;
-}
-.main-timeline .timeline:nth-child(even) .timeline-icon {
-  right: auto;
-  left: 10px;
-}
-.main-timeline .timeline:nth-child(even) .timeline-year {
-  right: auto;
-  left: 60px;
-}
-.main-timeline .timeline:nth-child(4n + 2) .timeline-content:before {
-  background-color: #00a6f9;
-}
-.main-timeline .timeline:nth-child(4n + 2) .title {
-  color: #00a6f9;
-}
-.main-timeline .timeline:nth-child(4n + 3) .timeline-content:before {
-  background-color: #ff3e7d;
-}
-.main-timeline .timeline:nth-child(4n + 3) .title {
-  color: #ff3e7d;
-}
-.main-timeline .timeline:nth-child(4n + 4) .timeline-content:before {
-  background-color: #7438b9;
-}
-.main-timeline .timeline:nth-child(4n + 4) .title {
-  color: #7438b9;
-}
+
+
 @media screen and (max-width: 1286px) {
   .custom-card {
     height: 120px; /* Puedes ajustar la altura según tus necesidades */
