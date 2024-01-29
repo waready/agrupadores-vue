@@ -306,62 +306,61 @@
             <hr />
           </div>
           <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="main-timeline">
-        <div class="timeline">
-          <a href="#" class="timeline-content">
-            <div class="timeline-icon">
-              <h4 class="title">Fecha de apertura core</h4>
-              <i class="fa fa-calendar"></i>
-              <span class="icon-text">{{ fechaApertura }}</span>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="main-timeline">
+                  <div class="timeline">
+                    <a href="#" class="timeline-content">
+                      <div class="timeline-icon">
+                        <h4 class="title">Fecha de apertura core</h4>
+                        <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaApertura }}</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="main-timeline">
+                  <div class="timeline">
+                    <a href="#" class="timeline-content">
+                      <div class="timeline-icon">
+                        <h4 class="title">Fecha de cierre core</h4>
+                        <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaCierre }}</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="main-timeline">
+                  <div class="timeline">
+                    <a href="#" class="timeline-content">
+                      <div class="timeline-icon">
+                        <h4 class="title">Fecha de apertura 24x7</h4>
+                        <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaApertura7x24 }}</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="main-timeline">
+                  <div class="timeline">
+                    <a href="#" class="timeline-content">
+                      <div class="timeline-icon">
+                        <h4 class="title">Fecha de cierre 24x7</h4>
+                        <i class="fa fa-calendar"></i>
+                        <span class="icon-text">{{ fechaCierre7x24 }}</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="main-timeline">
-        <div class="timeline">
-          <a href="#" class="timeline-content">
-            <div class="timeline-icon">
-              <h4 class="title">Fecha de cierre core</h4>
-              <i class="fa fa-calendar"></i>
-              <span class="icon-text">{{ fechaCierre }}</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="main-timeline">
-        <div class="timeline">
-          <a href="#" class="timeline-content">
-            <div class="timeline-icon">
-              <h4 class="title">Fecha de apertura 24x7</h4>
-              <i class="fa fa-calendar"></i>
-              <span class="icon-text">{{ fechaApertura7x24 }}</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="main-timeline">
-        <div class="timeline">
-          <a href="#" class="timeline-content">
-            <div class="timeline-icon">
-              <h4 class="title">Fecha de cierre 24x7</h4>
-              <i class="fa fa-calendar"></i>
-              <span class="icon-text">{{ fechaCierre7x24 }}</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+          </div>
         </section>
         <loading v-else></loading>
       </div>
@@ -520,22 +519,24 @@ export default {
   position: absolute;
   top: 40%;
   left: 70px;
-  transform: translateY(-50%);
+  transform: translateY(-40%);
 }
 
 .title {
   position: absolute;
+  top: 15%;
+  left: 3px;
   font-weight: bold;
   color: #333;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  margin-bottom: 10px;
+ 
 }
 
 .icon-text {
   position: absolute;
-  top: 35%;
-  right: 30px;
+  top: 65%;
+  right: 15px;
   transform: translateY(-50%);
   font-size: 16px;
   color: #333;
@@ -551,10 +552,9 @@ export default {
   .timeline-icon {
     right: auto;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-40%) translateX(-50%);
   }
 }
-
 
 @media screen and (max-width: 1286px) {
   .custom-card {
@@ -569,36 +569,9 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-  .main-timeline .timeline,
-  .main-timeline .timeline:nth-child(even) {
-    width: 100%;
-    margin: 0 0 30px;
-  }
+  
 }
 @media screen and (max-width: 576px) {
-  .main-timeline .timeline .timeline-content,
-  .main-timeline .timeline:nth-child(even) .timeline-content {
-    text-align: center;
-    padding: 130px 25px 25px;
-  }
-  .main-timeline .timeline .timeline-content:before,
-  .main-timeline .timeline:nth-child(even) .timeline-content:before {
-    height: 70px;
-    width: 100%;
-  }
-  .main-timeline .timeline-icon,
-  .main-timeline .timeline:nth-child(even) .timeline-icon {
-    transform: translateY(0) translateX(-50%);
-    top: 16px;
-    left: 50%;
-    right: auto;
-  }
-  .main-timeline .timeline-year,
-  .main-timeline .timeline:nth-child(even) .timeline-year {
-    transform: translateY(0) translateX(-50%);
-    top: 80px;
-    left: 50%;
-    right: auto;
-  }
+
 }
 </style>
