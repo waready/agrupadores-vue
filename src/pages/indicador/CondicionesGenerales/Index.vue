@@ -312,7 +312,7 @@
                   <div class="timeline">
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
-                        <h4 class="title">Fecha de apertura core</h4>
+                        <h4 class="title"> apertura core</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaApertura }}</span>
                       </div>
@@ -325,7 +325,7 @@
                   <div class="timeline">
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
-                        <h4 class="title">Fecha de cierre core</h4>
+                        <h4 class="title">cierre core</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaCierre }}</span>
                       </div>
@@ -338,7 +338,7 @@
                   <div class="timeline">
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
-                        <h4 class="title">Fecha de apertura 24x7</h4>
+                        <h4 class="title">apertura 24x7</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaApertura7x24 }}</span>
                       </div>
@@ -351,7 +351,7 @@
                   <div class="timeline">
                     <a href="#" class="timeline-content">
                       <div class="timeline-icon">
-                        <h4 class="title">Fecha de cierre 24x7</h4>
+                        <h4 class="title">cierre 24x7</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaCierre7x24 }}</span>
                       </div>
@@ -495,12 +495,12 @@ export default {
   display: block;
   position: relative;
   padding: 100px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
 }
 
 .timeline-content:before {
   content: "";
-  background-color: #00c6da;
+  background-color: #fff;
   height: 100%;
   width: 100%;
   position: absolute;
@@ -513,22 +513,22 @@ export default {
 }
 
 .timeline-icon {
-  color: #fff;
+  color: #00c6da;
   font-size: 150px;
   line-height: 40px;
   position: absolute;
   top: 40%;
-  left: 70px;
+  left: 18%;
   transform: translateY(-40%);
 }
 
 .title {
   position: absolute;
   top: 15%;
-  left: 3px;
+  left: 10px;
   font-weight: bold;
-  color: #333;
-  font-size: 11px;
+  color: #fff;
+  font-size: 14px;
   text-transform: uppercase;
  
 }
@@ -536,10 +536,10 @@ export default {
 .icon-text {
   position: absolute;
   top: 65%;
-  right: 15px;
+  right: 3px;
   transform: translateY(-50%);
-  font-size: 16px;
-  color: #333;
+  font-size: 21px;
+  color: #fff;
   font-weight: bold;
   margin: 0;
 }

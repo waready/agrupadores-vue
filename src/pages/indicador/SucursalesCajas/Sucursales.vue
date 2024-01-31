@@ -8,29 +8,19 @@
       <hr />
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <Pie
-            id="my-chart-id"
-            :options="chartOptions"
-            :data="chartData"
-            :style="myStyles" />
+          <Pie id="my-chart-id" :options="chartOptions" :data="chartData" :style="myStyles" />
         </div>
       </div>
       <hr />
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(1)"
-            :class="{ active: sucursalA == true }">
+          <a class="nav-link" @click="selecionar(1)" :class="{ active: sucursalA == true }">
             Sucursales Abiertas
           </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(2)"
-            :class="{ active: sucursalC == true }">
+          <a class="nav-link" @click="selecionar(2)" :class="{ active: sucursalC == true }">
             Sucursales Cerradas
           </a>
         </li>
@@ -41,20 +31,16 @@
           <div class="card-body">
             <div v-show="sucursalA">
               <h3>Sucursales Abiertas</h3>
-              <div class="row">
+              <div class="row justify-content-end">
                 <div class="col-md-4">
                   <div class="input-group is-invalid">
-                    <input
-                      type="text"
-                      name="filter"
-                      class="form-control"
-                      v-model="TextoBuscado"
-                      placeholder="Busqueda"
+                    <input type="text" name="filter" class="form-control" v-model="TextoBuscado" placeholder="Busqueda"
                       id="filter" />
                   </div>
                 </div>
               </div>
-              <br/>
+              <br />
+              
               <div class="table-responsive">
                 <table class="table table-striped tamleter">
                   <thead>
@@ -69,32 +55,21 @@
                   </thead>
                   <tbody>
                     <template v-if="sucursalesFilter[0]">
-                      <tr
-                        v-for="(item, index) in sucursalesFilter"
-                        :key="index">
+                      <tr v-for="(item, index) in sucursalesFilter" :key="index">
                         <th scope="row">{{ item.descripcion }}</th>
                         <td>{{ item.telefono }}</td>
                         <td>{{ item.direccion }}</td>
                         <td>
-                          <span
-                            class="btn btn-secondary"
-                            @click="obtenerCajasA(item)">
-                            {{ item.cantidadA }}</span
-                          >
+                          <span class="btn btn-secondary" @click="obtenerCajasA(item)">
+                            {{ item.cantidadA }}</span>
                         </td>
                         <td>
-                          <span
-                            class="btn btn-success"
-                            @click="obtenerCajasC(item)">
-                            {{ item.cantidadC }}</span
-                          >
+                          <span class="btn btn-success" @click="obtenerCajasC(item)">
+                            {{ item.cantidadC }}</span>
                         </td>
                         <td>
-                          <button
-                            class="btn btn-info"
-                            data-toggle="modal"
-                            @click="generarMapa(item.latitud, item.longitud)"
-                            data-target="#exampleModalCenter">
+                          <button class="btn btn-info" data-toggle="modal"
+                            @click="generarMapa(item.latitud, item.longitud)" data-target="#exampleModalCenter">
                             Mapa
                           </button>
                         </td>
@@ -124,19 +99,14 @@
                   </thead>
                   <tbody>
                     <template v-if="sucursalesCerradas[0]">
-                      <tr
-                        v-for="(item, index) in sucursalesCerradas"
-                        :key="index">
+                      <tr v-for="(item, index) in sucursalesCerradas" :key="index">
                         <th scope="row">{{ item.descripcion }}</th>
                         <td>{{ item.telefono }}</td>
                         <td>{{ item.direccion }}</td>
 
                         <td>
-                          <button
-                            class="btn btn-info"
-                            data-toggle="modal"
-                            @click="generarMapa(item.latitud, item.longitud)"
-                            data-target="#exampleModalCenter">
+                          <button class="btn btn-info" data-toggle="modal"
+                            @click="generarMapa(item.latitud, item.longitud)" data-target="#exampleModalCenter">
                             Mapa
                           </button>
                         </td>
@@ -156,24 +126,15 @@
         </div>
       </div>
 
-      <div
-        class="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
                 Mapa geolocalización
               </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -181,10 +142,7 @@
               <div ref="elMap" class="app-store-map"></div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
             </div>
@@ -287,7 +245,44 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: true
-      }
+      },
+      columns: ['nombre', 'tipoCambio'],
+    options: {
+      sortable: ['nombre', 'tipoCambio'],
+      sortIcon: {
+          is: 'fa-sort', // utiliza iconos de Font Awesome
+          base: 'fa',
+          up: 'fa-sort-asc',
+          down: 'fa-sort-desc',
+        },
+      // see the options API
+      texts: {
+          count:
+            "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
+          first: "Primero",
+          last: "Ultimo",
+          filter: "Filtro:",
+          filterPlaceholder: "Busqueda",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros coincidentes",
+          noRequest:"Seleccione al menos un filtro para obtener resultados",
+          filterBy: "Filtrar por {column}",
+          loading: "Cargando...",
+          defaultOption: "Seleccionar {column}",
+          columns: "Columnas"
+        },
+      // filterByColumn: true,
+      perPage: 10,
+      perPageValues: [10, 25, 50, 100, 500],  
+      headings: {
+        // id: 'ID',
+        nombre: "Nombre",
+        tipoCambio: "Pasaje a histórico",
+      },
+       
+      
+    },
     };
   },
   methods: {

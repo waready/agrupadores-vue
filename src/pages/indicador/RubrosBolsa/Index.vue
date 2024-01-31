@@ -15,7 +15,7 @@
         <div class="row">
           <div
             class="col-xl-6 col-md-12"
-            v-for="(item, index) in 4"
+            v-for="(item, index) in rubroBolsa"
             :key="index">
             <div class="card">
               <div class="card-body">
@@ -24,25 +24,25 @@
                     <i class="fa fa-archive info font-large-4 mr-2"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h2> descripcion </h2>
-                    <h4> rubro</h4>
+                    <h2>{{ item.descripcion }}</h2>
+                    <h4>{{ item.rubro }}</h4>
                   </div>
                 </div>
                 <div class="card-text letter">
                   <hr />
                   <h5>Clave</h5>
                   <ul class="list-unstyled">
-                    <li>Empresa: name </li>
-                    <li>Sucursal: casa matriz</li>
-                    <li>Cuenta: 26</li>
-                    <li>Operación:100</li>
-                    <li>Sub Operación: 1</li>
-                    <li>Moneda: $</li>
-                    <li>Papel: 1 </li>
+                    <li>Empresa: {{ item.nombreEmpresa }}</li>
+                    <li>Sucursal: {{ item.nombreSucursal }}</li>
+                    <li>Cuenta: {{ item.cuentaCliente }}</li>
+                    <li>Operación: {{ item.operacion }}</li>
+                    <li>Sub Operación: {{ item.subOperacion }}</li>
+                    <li>Moneda: {{ item.signoMoneda }}</li>
+                    <li>Papel: {{ item.nombrePapel }}</li>
                   </ul>
                   <hr />
                   <h5 class="mb-1"><span> Ocurrencias </span></h5>
-                  <span>ocurrencias</span>
+                  <span>{{ item.ocurrencias }} </span>
                 </div>
               </div>
             </div>
