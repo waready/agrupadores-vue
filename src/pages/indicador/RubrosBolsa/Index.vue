@@ -24,21 +24,21 @@
                     <i class="fa fa-archive info font-large-4 mr-2"></i>
                   </div>
                   <div class="media-body text-right">
-                    <h2>{{ item.descripcion }}</h2>
-                    <h4>{{ item.rubro }}</h4>
+                    <h3>{{ item.rubro }}</h3>
+                    <h4> <em> {{ item.descripcion }}  </em></h4>
                   </div>
                 </div>
                 <div class="card-text letter">
                   <hr />
                   <h5>Clave</h5>
                   <ul class="list-unstyled">
-                    <li>Empresa: {{ item.nombreEmpresa }}</li>
-                    <li>Sucursal: {{ item.nombreSucursal }}</li>
-                    <li>Cuenta: {{ item.cuentaCliente }}</li>
-                    <li>Operación: {{ item.operacion }}</li>
-                    <li>Sub Operación: {{ item.subOperacion }}</li>
-                    <li>Moneda: {{ item.signoMoneda }}</li>
-                    <li>Papel: {{ item.nombrePapel }}</li>
+                    <li>Empresa: <strong>  {{item.empresa }} - {{ item.nombreEmpresa }} </strong></li>
+                    <li>Sucursal: <strong> {{item.sucursal}} - {{item.nombreSucursal }}</strong> </li>
+                    <li>Cuenta: <strong> {{ item.cuentaCliente }}</strong></li>
+                    <li>Operación:<strong> {{ item.operacion }} </strong> </li>
+                    <li>Sub Operación:<strong> {{ item.subOperacion }} </strong> </li>
+                    <li>Moneda:<strong> {{ item.moneda }} - {{ item.signoMoneda }} </strong> </li>
+                    <li>Especie: <strong>{{ item.papel }} - {{ item.nombrePapel }}</strong></li>
                   </ul>
                   <hr />
                   <h5 class="mb-1"><span> Ocurrencias </span></h5>
