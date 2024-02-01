@@ -25,7 +25,7 @@
                   </div>
                   <div class="media-body text-right">
                     <h3>{{ item.rubro }}</h3>
-                    <h4> <em> {{ item.descripcion }}  </em></h4>
+                    <p> <em> {{ item.descripcion }}  </em></p>
                   </div>
                 </div>
                 <div class="card-text letter">
@@ -35,14 +35,14 @@
                     <li>Empresa: <strong>  {{item.empresa }} - {{ item.nombreEmpresa }} </strong></li>
                     <li>Sucursal: <strong> {{item.sucursal}} - {{item.nombreSucursal }}</strong> </li>
                     <li>Cuenta: <strong> {{ item.cuentaCliente }}</strong></li>
-                    <li>Operación:<strong> {{ item.operacion }} </strong> </li>
-                    <li>Sub Operación:<strong> {{ item.subOperacion }} </strong> </li>
-                    <li>Moneda:<strong> {{ item.moneda }} - {{ item.signoMoneda }} </strong> </li>
+                    <li>Operación: <strong> {{ item.operacion }} </strong> </li>
+                    <li>Sub Operación: <strong> {{ item.subOperacion }} </strong> </li>
+                    <li>Moneda: <strong> {{ item.moneda }} - {{ item.signoMoneda }} </strong> </li>
                     <li>Especie: <strong>{{ item.papel }} - {{ item.nombrePapel }}</strong></li>
                   </ul>
                   <hr />
                   <h5 class="mb-1"><span> Ocurrencias </span></h5>
-                  <span>{{ item.ocurrencias }} </span>
+                  <span> <strong> {{ item.ocurrencias }} </strong> </span>
                 </div>
               </div>
             </div>

@@ -93,7 +93,7 @@
                     :options="options">
                     <template v-slot:cantidadA="item">
                       <a
-                      @click="obtenerCajasA(item.row)"
+                        @click="obtenerCajasA(item.row)"
                         :class="[
                           'letter',
                           'badge badge-secondary  text-white font-weight-bold'
@@ -102,12 +102,12 @@
                       >
                     </template>
                     <template v-slot:cantidadC="item">
-                      <a  
-                      @click="obtenerCajasC(item.row)"
+                      <a
+                        @click="obtenerCajasC(item.row)"
                         :class="[
                           'letter',
                           'badge badge-success  text-white font-weight-bold'
-                        ]" >
+                        ]">
                         {{ item.row.cantidadC }}</a
                       >
                     </template>
@@ -115,18 +115,25 @@
                       <button
                         class="btn btn-info"
                         data-toggle="modal"
-                        @click="generarMapa(item.row.latitud, item.row.longitud)"
+                        @click="
+                          generarMapa(item.row.latitud, item.row.longitud)
+                        "
                         data-target="#exampleModalCenter">
                         Mapa
                       </button>
                     </template>
                   </v-client-table>
                 </template>
+                <template v-else>
+                  <div class="alert alert-warning mt-1" role="alert">
+                    {{ "No se encuentran registros!" }}
+                  </div>
+                </template>
               </div>
             </div>
-            <!-- <div v-show="sucursalC">
-                <h3>Sucursales Cerradas</h3>
-                <div class="table-responsive">
+            <div v-show="sucursalC">
+              <h3>Sucursales Cerradas</h3>
+              <!-- <div class="table-responsive">
                   <table class="table table-striped tamleter">
                     <thead>
                       <tr>
@@ -159,8 +166,50 @@
                       </template>
                     </tbody>
                   </table>
+                </div> -->
+              <template v-if="sucursalesCerradas[0]">
+                <v-client-table
+                  ref="table"
+                  :data="sucursalesCerradas"
+                  :columns="optionc.columns"
+                  :options="optionc">
+                  <template v-slot:cantidadA="item">
+                    <a
+                      @click="obtenerCajasA(item.row)"
+                      :class="[
+                        'letter',
+                        'badge badge-secondary  text-white font-weight-bold'
+                      ]">
+                      {{ item.row.cantidadA }}</a
+                    >
+                  </template>
+                  <template v-slot:cantidadC="item">
+                    <a
+                      @click="obtenerCajasC(item.row)"
+                      :class="[
+                        'letter',
+                        'badge badge-success  text-white font-weight-bold'
+                      ]">
+                      {{ item.row.cantidadC }}</a
+                    >
+                  </template>
+                  <template v-slot:MAPA="item">
+                    <button
+                      class="btn btn-info"
+                      data-toggle="modal"
+                      @click="generarMapa(item.row.latitud, item.row.longitud)"
+                      data-target="#exampleModalCenter">
+                      Mapa
+                    </button>
+                  </template>
+                </v-client-table>
+              </template>
+              <template v-else>
+                <div class="alert alert-warning mt-1" role="alert">
+                  {{ "No se encuentran registros!" }}
                 </div>
-              </div> -->
+              </template>
+            </div>
           </div>
         </div>
       </div>
@@ -256,7 +305,6 @@ export default {
         "MAPA"
       ],
       options: {
-        sortable: ["nombre", "tipoCambio"],
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
           base: "fa",
@@ -285,11 +333,47 @@ export default {
         perPageValues: [10, 25, 50, 100, 500],
         headings: {
           // id: 'ID',
-          descripcion: "#SUCURSAL",
+          descripcion: "SUCURSAL",
           telefono: "TELEFONO",
           direccion: "DIRECCIÓN",
           cantidadA: "CAJAS ABIERTAS",
           cantidadC: "CAJAS CERRADAS"
+        }
+      },
+
+      optionc: {
+        columns: ["descripcion", "telefono", "direccion", "MAPA"],
+        sortIcon: {
+          is: "fa-sort", // utiliza iconos de Font Awesome
+          base: "fa",
+          up: "fa-sort-asc",
+          down: "fa-sort-desc"
+        },
+        // see the options API
+        texts: {
+          count:
+            "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
+          first: "Primero",
+          last: "Ultimo",
+          filter: "Filtro:",
+          filterPlaceholder: "Busqueda",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros coincidentes",
+          noRequest: "Seleccione al menos un filtro para obtener resultados",
+          filterBy: "Filtrar por {column}",
+          loading: "Cargando...",
+          defaultOption: "Seleccionar {column}",
+          columns: "Columnas"
+        },
+        // filterByColumn: true,
+        perPage: 10,
+        perPageValues: [10, 25, 50, 100, 500],
+        headings: {
+          // id: 'ID',
+          descripcion: "SUCURSAL",
+          telefono: "TELEFONO",
+          direccion: "DIRECCIÓN"
         }
       }
     };
@@ -392,10 +476,14 @@ export default {
 
         $(document).ready(function () {
           $(".VuePagination__count").text(function (i, text) {
-            return text.replace("Un registro", "1 registro");
-          });
-          $(".VueTables__search-field label").hide();
-          $(".VueTables__search").addClass("float-right");
+          return text.replace("Un registro", "1 registro");
+        });
+        $(".VueTables__search-field label").hide();
+        //$(".VueTables__search").addClass("float-right");
+
+        $(".VueTables__limit-field label").hide();
+      
+        $(".VuePagination__pagination").addClass("justify-content-center");
         });
       } catch (error) {
         console.error("Error al obtener sucursales y cajas:", error);
@@ -428,6 +516,6 @@ export default {
 }
 
 .letter {
-  font-size: 14 px;
+  font-size: 14px;
 }
 </style>

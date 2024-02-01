@@ -310,8 +310,8 @@
               <div class="col-md-3">
                 <div class="main-timeline">
                   <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
+                    <a  class="timeline-content">
+                      <div class="timeline-icon1">
                         <h4 class="title"> apertura core</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaApertura }}</span>
@@ -323,8 +323,8 @@
               <div class="col-md-3">
                 <div class="main-timeline">
                   <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
+                    <a  class="timeline-content">
+                      <div class="timeline-icon2">
                         <h4 class="title">cierre core</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaCierre }}</span>
@@ -336,8 +336,8 @@
               <div class="col-md-3">
                 <div class="main-timeline">
                   <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
+                    <a  class="timeline-content">
+                      <div class="timeline-icon3">
                         <h4 class="title">apertura 24x7</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaApertura7x24 }}</span>
@@ -349,8 +349,8 @@
               <div class="col-md-3">
                 <div class="main-timeline">
                   <div class="timeline">
-                    <a href="#" class="timeline-content">
-                      <div class="timeline-icon">
+                    <a  class="timeline-content">
+                      <div class="timeline-icon4">
                         <h4 class="title">cierre 24x7</h4>
                         <i class="fa fa-calendar"></i>
                         <span class="icon-text">{{ fechaCierre7x24 }}</span>
@@ -488,7 +488,7 @@ export default {
 }
 
 .timeline-content {
-  background-color: #00c6da;
+  background-color: #fff;
   height: 100%;
   width: 100%;
   border-top: none;
@@ -512,8 +512,38 @@ export default {
   text-decoration: none;
 }
 
-.timeline-icon {
+.timeline-icon1 {
   color: #00c6da;
+  font-size: 150px;
+  line-height: 40px;
+  position: absolute;
+  top: 40%;
+  left: 18%;
+  transform: translateY(-40%);
+}
+
+.timeline-icon2 {
+  color: #00a6f9;
+  font-size: 150px;
+  line-height: 40px;
+  position: absolute;
+  top: 40%;
+  left: 18%;
+  transform: translateY(-40%);
+}
+
+
+.timeline-icon3 {
+  color: #ff3e7d;
+  font-size: 150px;
+  line-height: 40px;
+  position: absolute;
+  top: 40%;
+  left: 18%;
+  transform: translateY(-40%);
+}
+.timeline-icon4 {
+  color: #7438b9;
   font-size: 150px;
   line-height: 40px;
   position: absolute;
@@ -525,12 +555,11 @@ export default {
 .title {
   position: absolute;
   top: 15%;
-  left: 10px;
+  left: 12%;
   font-weight: bold;
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
- 
 }
 
 .icon-text {
@@ -544,7 +573,7 @@ export default {
   margin: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 994px) {
   .timeline-content {
     text-align: center;
   }
@@ -558,20 +587,92 @@ export default {
 
 @media screen and (max-width: 1286px) {
   .custom-card {
-    height: 120px; /* Puedes ajustar la altura según tus necesidades */
+    height: 120px; /* Ajusta la altura según tus necesidades */
+  }
+
+  .timeline-content {
+    background-color: #fff;
+    height: 50%;
+    width: 50%;
+    border-top: none;
+    display: block;
+    position: relative; /* Agregamos position: relative; para que las posiciones absolutas funcionen correctamente */
+    top: 30px; /* Ajusta la posición vertical según tus necesidades */
+
+    padding: 20px; /* Ajusta el relleno según tus necesidades */
+    box-sizing: border-box; /* Ajusta el modelo de caja para incluir el relleno en el tamaño total */
+  }
+
+  .timeline-content:before {
+    content: "";
+    background-color: #fff;
+    height: 100%; /* Ajusta la altura al 100% para cubrir todo el contenedor */
+    width: 100%; /* Ajusta el ancho al 100% para cubrir todo el contenedor */
+
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .timeline-content {
+    text-align: center;
+  }
+
+  .timeline-icon {
+    right: auto;
+    left: 50%;
+    transform: translateY(-40%) translateX(-50%);
   }
 }
+
 
 @media screen and (max-width: 991px) {
   .custom-card {
-    height: 170px; /* Puedes ajustar la altura según tus necesidades */
+    height: 180px; /* Puedes ajustar la altura según tus necesidades */
   }
+  .card-content{
+    height: 180px;
+  }
+  
 }
 
 @media screen and (max-width: 767px) {
+  .custom-card {
+    height: 130px; /* Puedes ajustar la altura según tus necesidades */
+  }
+  .card-content{
+    height: 130px;
+  }
+  .timeline-content {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  border-top: none;
+  display: block;
+  position: relative;
+  padding: 100px;
   
 }
-@media screen and (max-width: 576px) {
+
+.timeline-content:before {
+  content: "";
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 }
+@media screen and (max-width: 576px) {
+  .custom-card {
+    height: 120px; /* Puedes ajustar la altura según tus necesidades */
+  }
+  .card-content{
+    height: 120px;
+  }
+}
+
+
 </style>

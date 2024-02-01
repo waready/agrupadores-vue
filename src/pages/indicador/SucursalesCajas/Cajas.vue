@@ -2,9 +2,12 @@
   <div class="container">
     <div v-for="(item, index) in Sucursal" :key="index">
       <h2>Cajas de la Sucursal ( {{ item.descripcion }} )</h2>
-      <hr>
+      <hr />
       <div>
-        <button class="btn btn-info" @click="generarSucursal(item.identificador)" data-toggle="modal"
+        <button
+          class="btn btn-info"
+          @click="generarSucursal(item.identificador)"
+          data-toggle="modal"
           data-target="#exampleModalCenter">
           Datos de la Sucursal
         </button>
@@ -21,12 +24,18 @@
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" @click="selecionar(1)" :class="{ active: cajasA == true }">
+          <a
+            class="nav-link"
+            @click="selecionar(1)"
+            :class="{ active: cajasA == true }">
             Cajas Abiertas
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" @click="selecionar(2)" :class="{ active: cajasC == true }">
+          <a
+            class="nav-link"
+            @click="selecionar(2)"
+            :class="{ active: cajasC == true }">
             Cajas Cerradas
           </a>
         </li>
@@ -37,7 +46,8 @@
           <div class="card-body">
             <div v-show="cajasA">
               <h3>Cajas Abiertas</h3>
-              <div class="row">
+
+              <!-- <div class="row">
                 <div class="col-md-4">
                   <div class="input-group is-invalid">
                     <input type="text" name="filter" class="form-control" v-model="TextoBuscado" id="filter" />
@@ -47,15 +57,14 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="table-responsive">
+              </div> -->
+              <!-- <div class="table-responsive">
                 <table class="table table-striped tamleter tabla">
                   <thead>
                     <tr>
                       <th scope="col">USUARIO</th>
                       <th scope="col">NOMBRE</th>
-                      <!-- <th scope="col">SUCURSAL</th> -->
-                      <!-- <th scope="col">VER SUCURSAL</th> -->
+                 
                     </tr>
                   </thead>
                   <tbody>
@@ -63,13 +72,7 @@
                       <tr v-for="(item, index) in CajasFilter" :key="index">
                         <td>{{ item.usuario }}</td>
                         <td>{{ item.nombre }}</td>
-                        <!-- <td>{{ item.Sucursal }}</td> -->
-                        <!-- <td>
-                          <button class="btn btn-info" @click="generarSucursal(item.sucursalId)" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                            Sucursal
-                          </button>
-                        </td> -->
+                    
                       </tr>
                     </template>
 
@@ -80,33 +83,39 @@
                     </template>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
+              <template v-if="cajasAbiertasPremiun[0]">
+                <v-client-table
+                  ref="table"
+                  :data="cajasAbiertasPremiun"
+                  :columns="columns"
+                  :options="options">
+                </v-client-table>
+              </template>
+              <template v-else>
+                <div class="alert alert-warning mt-1" role="alert">
+                  {{ "No se encuentran registros!" }}
+                </div>
+              </template>
             </div>
             <div v-show="cajasC">
               <h3>Cajas Cerradas</h3>
-              <div class="table-responsive">
+              <!-- <div class="table-responsive">
                 <table class="table table-striped tamleter">
                   <thead>
                     <tr>
                       <th scope="col">USUARIO</th>
                       <th scope="col">NOMBRE</th>
-                      <!-- <th scope="col">SUCURSAL</th> -->
-                      <!-- <th scope="col">VER SUCURSAL</th> -->
+              
                     </tr>
                   </thead>
                   <tbody>
                     <template v-if="cajasCerradas[0]">
                       <tr v-for="(item, index) in cajasCerradas" :key="index">
-                        <!-- <th scope="row">{{ item.identificador }}</th> -->
+               
                         <td>{{ item.UsuarioCaja }}</td>
                         <td>{{ item.NombreCaja }}</td>
-                        <!-- <td>{{ item.codigo }}</td> -->
-                        <!-- <td>
-                          <button class="btn btn-info" @click="generarSucursal(item.Codigo)" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                            Sucursal
-                          </button>
-                        </td> -->
+                      
                       </tr>
                     </template>
                     <template v-else>
@@ -116,14 +125,32 @@
                     </template>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
+              <template v-if="cajasCerradas[0]">
+                <v-client-table
+                  ref="table"
+                  :data="cajasCerradas"
+                  :columns="columns"
+                  :options="options">
+                </v-client-table>
+              </template>
+              <template v-else>
+                <div class="alert alert-warning mt-1" role="alert">
+                  {{ "No se encuentran registros!" }}
+                </div>
+              </template>
             </div>
           </div>
         </div>
       </div>
     </div>
     <loading v-else></loading>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -131,13 +158,20 @@
             <h5 class="modal-title" id="exampleModalLongTitle">
               Sucursal de la Caja
             </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div>
-              <div class="card" v-for="(item, index) in cajasSelect" :key="index">
+              <div
+                class="card"
+                v-for="(item, index) in cajasSelect"
+                :key="index">
                 <div class="card-header text-center bg-secondary">
                   {{ item.descripcion }}
                 </div>
@@ -157,7 +191,10 @@
             <div ref="elMap" class="app-store-map"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal">
               Close
             </button>
           </div>
@@ -169,9 +206,9 @@
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
-import ApiService from "@/utils/ApiService";
 import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
+import { ServerTable } from "v-tables-3";
 // var reponsibe = document.getElementById("#my-chart-id")
 // console.log(reponsibe)
 
@@ -188,7 +225,7 @@ export default {
     }
     this.getSucursalesCajas(datos);
   },
-  components: { Pie, loading },
+  components: { Pie, loading, ServerTable },
   data() {
     return {
       //objeto: null,
@@ -215,6 +252,40 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
+      },
+      columns: ["usuario", "nombre"],
+      options: {
+        sortIcon: {
+          is: "fa-sort", // utiliza iconos de Font Awesome
+          base: "fa",
+          up: "fa-sort-asc",
+          down: "fa-sort-desc"
+        },
+        // see the options API
+        texts: {
+          count:
+            "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
+          first: "Primero",
+          last: "Ultimo",
+          filter: "Filtro:",
+          filterPlaceholder: "Busqueda",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros coincidentes",
+          noRequest: "Seleccione al menos un filtro para obtener resultados",
+          filterBy: "Filtrar por {column}",
+          loading: "Cargando...",
+          defaultOption: "Seleccionar {column}",
+          columns: "Columnas"
+        },
+        // filterByColumn: true,
+        perPage: 5,
+        perPageValues: [5, 10, 25, 50, 100, 500],
+        headings: {
+          // id: 'ID',
+          usuario: "# USUARIO",
+          nombre: "NOMBRE"
+        }
       }
     };
   },
@@ -222,7 +293,10 @@ export default {
     async getSucursalesCajas(id_sucursal) {
       await AuthService.getSucursalesCajas().then((r) => {
         /**recuperar sucursal**/
-        this.Sucursal = r.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal.filter(item => item.identificador == id_sucursal);
+        this.Sucursal =
+          r.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal.filter(
+            (item) => item.identificador == id_sucursal
+          );
         // console.log(this.Sucursal[0])
         /**listados cajas**/
         this.cajas = true;
@@ -256,14 +330,22 @@ export default {
           datasets: [
             {
               backgroundColor: ["#525e5e", "#41B883"],
-              data: [
-                data.length,
-                r.sdtSucursalesCajas.cajasCerradas
-              ]
+              data: [data.length, r.sdtSucursalesCajas.cajasCerradas]
             }
           ]
         };
         this.cajasAbiertasPremiun = data;
+        $(document).ready(function () {
+          $(".VuePagination__count").text(function (i, text) {
+          return text.replace("Un registro", "1 registro");
+        });
+        $(".VueTables__search-field label").hide();
+        //$(".VueTables__search").addClass("float-right");
+
+        $(".VueTables__limit-field label").hide();
+      
+        $(".VuePagination__pagination").addClass("justify-content-center");
+        });
       });
     },
     async generarSucursal(idScurusal) {
@@ -326,7 +408,7 @@ export default {
   computed: {
     myStyles() {
       return {
-        height: `${325}px`,
+        height: `${325}px`
         //position: "relative"
       };
     },
@@ -347,7 +429,10 @@ export default {
       handler(newCajasSelect) {
         console.log("cambios");
         if (newCajasSelect.length > 0) {
-          this.generarMapa(newCajasSelect[0].latitud, newCajasSelect[0].longitud);
+          this.generarMapa(
+            newCajasSelect[0].latitud,
+            newCajasSelect[0].longitud
+          );
           this.$nextTick(() => {
             if (this.$options.map) {
               this.$options.map.invalidateSize();
@@ -356,8 +441,7 @@ export default {
         }
       }
     }
-  },
-
+  }
 };
 </script>
 <style scoped>
