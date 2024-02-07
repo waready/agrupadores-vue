@@ -27,6 +27,7 @@
     "vue-chartjs": "^5.2.0",
     "vue-router": "^4.0.3",
     "vue-sidebar-menu-akahon": "^1.0.2",
+    "vuejs3-datepicker": "^1.1.2",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

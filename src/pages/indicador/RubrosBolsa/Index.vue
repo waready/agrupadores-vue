@@ -25,7 +25,7 @@
                   </div>
                   <div class="media-body text-right">
                     <h3>{{ item.rubro }}</h3>
-                    <p> <em> {{ item.descripcion }}  </em></p>
+                    <p class="text-truncate"><em>{{ item.descripcion }}</em></p>
                   </div>
                 </div>
                 <div class="card-text letter">
@@ -123,6 +123,7 @@ export default {
 <style scoped>
 .card {
   position: relative;
+  /* height: 39vh;  */
 }
 /* .letter {
   font-size: 1.2rem;

@@ -39,7 +39,7 @@
         </div>
         <div class="card-footer text-muted">
           <a href="" class="h6"
-            >Bantotal 2023 - Todos los derechos reservados</a
+            >Bantotal {{year}} - Todos los derechos reservados</a
           >
         </div>
       </div>
@@ -66,7 +66,8 @@ export default {
     username: "",
     password: "",
     loading: false,
-    message: ""
+    message: "",
+    year: "" 
   }),
 
   computed: {
@@ -77,6 +78,10 @@ export default {
 
   mounted() {
     $("body").css("padding-left", "");
+    const date = new Date();          
+    const formatear = date.getFullYear();   
+    // Mostramos el año                                
+    this.year = formatear;
   },
 
   methods: {

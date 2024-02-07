@@ -361,6 +361,7 @@
               </div>
             </div>
           </div>
+          <ApiService :fechaA="CondicionesGenerales.fechaApertura"  :fechaC = "CondicionesGenerales.fechaCierre"  :fecha7x24A = "CondicionesGenerales.fechaAperturaCanales"  :fecha7x24C ="CondicionesGenerales.fechaCierreCanales"></ApiService>
         </section>
         <loading v-else></loading>
       </div>
@@ -389,13 +390,14 @@ ChartJS.register(
 );
 import moment from "moment";
 import AuthService from "@/utils/AuthService";
-import ApiService from "@/utils/ApiService.js";
+import ApiService from "@/components/calendarios.vue";
 import loading from "@/components/Loading.vue";
 export default {
   name: "RubroBolsa",
   components: {
     loading,
-    Bar
+    Bar,
+    ApiService
   },
   mounted() {
     this.getAllCondicionesGenerales();

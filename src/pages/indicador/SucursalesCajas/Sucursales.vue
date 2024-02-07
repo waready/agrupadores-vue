@@ -305,6 +305,19 @@ export default {
         "MAPA"
       ],
       options: {
+        columnsClasses: {
+            // Asignamos la clase ancho-columna para establecer un ancho específico
+            cantidadA: 'ancho-columna',
+            cantidadC: 'ancho-columna',
+            descripcion: 'ancho-columna1',
+            direccion: 'ancho-columna1',
+            MAPA:'ancho-columna2'
+            // Puedes agregar más columnas y clases según sea necesario
+          },
+        // columnsDisplay:{
+        //   descripcion:"min_mobile"
+        // },
+        columnsDropdown:true,
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
           base: "fa",
@@ -336,8 +349,8 @@ export default {
           descripcion: "SUCURSAL",
           telefono: "TELEFONO",
           direccion: "DIRECCIÓN",
-          cantidadA: "CAJAS ABIERTAS",
-          cantidadC: "CAJAS CERRADAS"
+          cantidadA: "CAJAS A.",
+          cantidadC: "CAJAS C."
         }
       },
 
@@ -509,7 +522,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style >
 .app-store-map {
   width: 100%;
   height: 500px;
@@ -517,5 +530,25 @@ export default {
 
 .letter {
   font-size: 14px;
+}
+
+/* Clase para quitar márgenes y rellenos */
+.sin-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+/* Clase para establecer un ancho específico */
+.ancho-columna {
+  width: 10px; /* Puedes ajustar este valor según sea necesario */
+}
+
+.ancho-columna1 {
+  width: 300px; /* Puedes ajustar este valor según sea necesario */
+}
+
+.ancho-columna2 {
+  width: 2px; /* Puedes ajustar este valor según sea necesario */
+  padding:0px;
 }
 </style>
