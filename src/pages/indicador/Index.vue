@@ -4,12 +4,12 @@
       <h2>Indicadores de {{ detalleIndicador }}</h2>
       <hr />
       <div
-        class="col-md-3 col-sm-5 mb-2"
+        class="col-md-4 col-sm-5 mb-2"
         v-for="(item, index) in indicadores"
         :key="index">
         <div class="card h-100 mb-2" @click="indicadorID(item.codigo)">
           <div class="card-body text-center">
-            <h5 class="card-title mb-2 hover-underline-animation">
+            <h5 class="card-title mb-2">
               {{ item.descripcion }}
             </h5>
             <div>

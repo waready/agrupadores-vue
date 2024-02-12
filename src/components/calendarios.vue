@@ -1,171 +1,161 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <date-picker
-          v-model="selectedDateA"
-          :value="selectedDateA"
-          :disabledDates="disabledDates"
-          :initialDate="initialDate"
-          inline="true"
-          language="es"
-          :calendar-class="customCalendarClassA">
-          <template v-slot:belowDate>
-            <p class="text-center font-weight-bold">APERTURA CORE</p>
-          </template>
-        </date-picker>
-      </div>
-      <div class="col-md-3">
-        <date-picker
-          v-model="selectedDateC"
-          :value="selectedDateC"
-          :disabledDates="disabledDates"
-          :initialDate="initialDate"
-          inline="true"
-          language="es"
-          :calendar-class="customCalendarClassC">
-          <template v-slot:belowDate>
-            <p class="text-center font-weight-bold">CIERRE CORE</p>
-          </template>
-        </date-picker>
-      </div>
-      <div class="col-md-3">
-        <date-picker
-          v-model="selectedDate7x24A"
-          :value="selectedDate7x24A"
-          :disabledDates="disabledDates"
-          :initialDate="initialDate"
-          inline="true"
-          language="es"
-          :calendar-class="customCalendarClass7X24A">
-          <template v-slot:belowDate>
-            <p class="text-center font-weight-bold">APERTURA 7X24</p>
-          </template>
-        </date-picker>
-      </div>
-      <div class="col-md-3">
-        <date-picker
-          v-model="selectedDate7x24C"
-          :value="selectedDate7x24C"
-          :disabledDates="disabledDates"
-          :initialDate="initialDate"
-          inline="true"
-          language="es"
-          :calendar-class="customCalendarClass7X24C">
-          <template v-slot:belowDate>
-            <p class="text-center font-weight-bold">CIERRE 7X24</p>
-          </template>
-        </date-picker>
-      </div>
+  <div class="row">
+    <div class="col-md-3">
+      <figure>
+        <header>
+          APERTURA CORE
+        </header>
+        <section>
+          10-05-2024
+        </section>
+      </figure>
+    </div>
+    <div class="col-md-3">
+      <figure>
+        <header>
+          CIERRE CORE
+        </header>
+        <section>
+          09-04-2024
+        </section>
+      </figure>
+    </div>
+    <div class="col-md-3">
+      <figure>
+        <header>
+          APERTURA 24X7
+        </header>
+        <section>
+          10-04-2024
+        </section>
+      </figure>
+    </div>
+    <div class="col-md-3">
+      <figure>
+        <header>
+          CIERRE 24X7
+        </header>
+        <section>
+          09-04-2024
+        </section>
+      </figure>
     </div>
   </div>
 </template>
 
-<script>
-import DatePicker from "vuejs3-datepicker";
+<style scoped>
+/* @group Mixins */
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
 
-export default {
-  components: {
-    DatePicker
-  },
-  props: ["fechaA","fechaC","fecha7x24A","fecha7x24C"],
-  data() {
-    return {
-      selectedDateA: (() => {
-        const fecha = new Date(this.fechaA);
-        fecha.setDate(fecha.getDate() + 1);
-        return fecha;
-      })(), 
-      selectedDateC: (() => {
-        const fecha = new Date(this.fechaC);
-        fecha.setDate(fecha.getDate() + 1);
-        return fecha;
-      })(), 
-      selectedDate7x24A: (() => {
-        const fecha = new Date(this.fecha7x24A);
-        fecha.setDate(fecha.getDate() + 1);
-        return fecha;
-      })(), 
-      selectedDate7x24C: (() => {
-        const fecha = new Date(this.fecha7x24C);
-        fecha.setDate(fecha.getDate() + 1);
-        return fecha;
-      })(), 
-      disabledDates: {
-        // to: new Date(),
-        // // Ejemplo para deshabilitar fechas en el futuro
-        // from: new Date()
-      },
-      customCalendarClassA: { "custom-backgroundA": true },
-      customCalendarClassC: { "custom-backgroundC": true },
-      customCalendarClass7X24A: { "custom-background7x24A": true },
-      customCalendarClass7X24C: { "custom-background7x24C": true }
+html {
+  background-color: #282e3a;
+}
 
-    };
+body {
+  width: 400px;
+  margin: 0 auto;
+}
+
+figure {
+  margin: 30px auto;
+
+  width: 128px;
+  height: 111px;
+
+  background-color: #a3a0a0;
+  border-radius: 10px;
+
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+
+    width: 128px;
+    height: 69px;
+
+    border-radius: 10px 10px 0 0;
+
+    background-image: -webkit-linear-gradient(white 0%, #edeeef 100%);
+    background-image: -moz-linear-gradient(white 0%, #edeeef 100%);
+    background-image: -o-linear-gradient(white 0%, #edeeef 100%);
+    background-image: linear-gradient(white 0%, #edeeef 100%);
+
   }
-};
-</script>
 
-<style>
-.custom-backgroundA .vuejs3-datepicker__calendar-topbar {
-  background-color: #00c6da;
-}
+  header {
+    width: 128px;
+    height: 27px;
 
-.custom-backgroundA .cell.selected {
-  background-color: #00c6da;
-}
+    position: absolute;
+    top: -1px;
 
-.custom-backgroundA .cell.selected:hover {
-  background-color: #00c6da; /* Mantener el color de fondo predeterminado */
-}
+    background-color: #fa565a;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 3px solid #e5e5e5;
 
+    font:  12px/27px Arial, Helvetica, Geneva, sans-serif;
+    letter-spacing: 0.5px;
+    color: #fff;
 
-.custom-backgroundC .vuejs3-datepicker__calendar-topbar {
-  background-color: #00a6f9;
-}
+    text-align: center;
+  }
 
-.custom-backgroundC .cell.selected {
-  background-color: #00a6f9;
-}
+  section {
+    width: 128px;
+    height: 80px;
 
-.custom-backgroundC .cell.selected:hover {
-  background-color: #00a6f9; /* Mantener el color de fondo predeterminado */
-}
+    position: absolute;
+    top: 45%;
 
+    font: 26px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    letter-spacing: -2px;
+    color: #4c566b;
 
-.custom-background7x24A .vuejs3-datepicker__calendar-topbar {
-  background-color: #ff3e7d;
-}
+    text-align: center;
 
-.custom-background7x24A .cell.selected {
-  background-color: #ff3e7d;
-}
+    z-index: 10;
 
-.custom-background7x24A .cell.selected:hover {
-  background-color: #ff3e7d; /* Mantener el color de fondo predeterminado */
-}
+    &:before {
+      content: '';
+      display: block;
 
-.custom-background7x24C .vuejs3-datepicker__calendar-topbar {
-  background-color: #7438b9;
-}
+      position: absolute;
+      top: 35px;
 
-.custom-background7x24C .cell.selected {
-  background-color: #7438b9;
-}
+      width: 3px;
+      height: 10px;
 
-.custom-background7x24C .cell.selected:hover {
-  background-color: #7438b9; /* Mantener el color de fondo predeterminado */
-}
+      background-image: -webkit-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+      background-image: -moz-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+      background-image: -o-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+      background-image: linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+    }
 
+    &:after {
+      content: '';
+      display: block;
 
-.vuejs3-datepicker__calendar .cell.day-header {
-  display: none;
-}
+      position: absolute;
+      top: 35px;
+      right: 0;
 
-/* Media query para pantallas mayores a 767px */
-@media screen and (min-width: 768px) {
-  .vuejs3-datepicker__calendar {
-    width: 183px;
+      width: 3px;
+      height: 10px;
+
+      background-image: -webkit-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+      background-image: -moz-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+      background-image: -o-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+      background-image: linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
+    }
+
   }
 }
+
+/* @end */
 </style>

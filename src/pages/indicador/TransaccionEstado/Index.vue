@@ -6,7 +6,7 @@
     <div v-if="transacciones">
       <h2>Estado Transacciones</h2>
       <hr />
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12 mt-3 mb-1">
           <h4 class="text-uppercase">Resumen</h4>
           <p>Resumen General</p>
@@ -89,17 +89,95 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-12 mt-3 mb-1">
         <h4 class="text-uppercase">Detalle</h4>
         <p>Detalle Transacciones</p>
       </div>
-
+      
       <div class="row">
-        <div class="col d-flex justify-content-center">
-
+        <div class="col-7 d-flex justify-content-center">
           <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
         </div>
+        <div class="col-5">
+          <div class="col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-graph info font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-right">
+                    <h4>
+                      {{
+                        transacciones.exito +
+                        transacciones.error +
+                        transacciones.otros
+                      }}
+                    </h4>
+                    <span>Total de Transacciones</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="col-12">
+            <div class="card v-10">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-graph success font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ transacciones.exito }}</h4>
+                      <span>Contabilizadas con Éxito</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-graph danger font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ transacciones.error }}</h4>
+                      <span>Contabilizadas con Error</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-graph warning font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ transacciones.otros }}</h4>
+                      <span>Otros</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
 
       <div class="container mt-2">
@@ -241,7 +319,7 @@ export default {
     isPrimaryBadge(description) {
       const labelscolor = ["A", "B", "L", "N", "X", "SP"];
       const labelscolorRed = ["E", "R"];
-      const labelscolorGreen = ["H", "M", "P", "S"];
+      const labelscolorGreen = ["H", "(S)"];
 
       if (labelscolor.some(label => description.includes(label))) {
         return 'table-warning';
@@ -250,7 +328,7 @@ export default {
       } else if (labelscolorGreen.some(label => description.includes(label))) {
         return 'table-success'; // Assuming green for these labels
       }
-      return 'table-info'; // Default case
+      return 'table-warning'; // Default case
     },
     async getAllTansaccionEstado() {
       await AuthService.getTansaccionEstado().then((response) => {
@@ -358,7 +436,7 @@ export default {
   computed: {
     myStyles() {
       return {
-        height: `${425}px`,
+        height: `${400}px`,
         //position: "relative"
       };
     },
@@ -372,14 +450,19 @@ export default {
   this.transaccionesOrdenadas.forEach(objeto => {
     const ultimaLetra = objeto.codigo.slice(-1);
 
-    if (["A", "B", "L", "N", "X", "SP"].includes(ultimaLetra)) {
+    if (["A", "B", "L", "N", "X", "SP", "M", "P"].includes(ultimaLetra)) {
       grupo1.push(objeto);
     } else if (["E", "R"].includes(ultimaLetra)) {
       grupo2.push(objeto);
-    } else if (["H", "M", "P", "S"].includes(ultimaLetra)) {
+    } else if (["H", "S"].includes(ultimaLetra)) {
       grupo3.push(objeto);
     }
   });
+
+  // Ordenar cada grupo por cantidad de mayor a menor
+  grupo1.sort((a, b) => b.cantidad - a.cantidad);
+  grupo2.sort((a, b) => b.cantidad - a.cantidad);
+  grupo3.sort((a, b) => b.cantidad - a.cantidad);
 
   // Concatenar los subarrays en un solo array ordenado
   const transaccionesFiltradas = [...grupo1, ...grupo2, ...grupo3];
@@ -393,17 +476,7 @@ export default {
   return resultadoFinal;
 }
 
+
   }
 };
 </script>
-
-<style scoped>
-.list-group-item {
-  background-color: #fff;
-  color: black;
-}
-
-.h-80 {
-    height: 80% !important;
-  }
-</style>

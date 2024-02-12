@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <h3>PASAJE A HISTORICO POR ESPECIE</h3>
+    <h3>PASAJE A HISTÓRICO POR ESPECIE</h3>
     <div v-if="indices">
       <hr />
       <div id="indices">
@@ -51,7 +51,7 @@ export default {
         first: "Primero",
         last: "Ultimo",
         filter: "Filtro:",
-        filterPlaceholder: "Busqueda",
+        filterPlaceholder: "Búsqueda",
         limit: "Registros:",
         page: "Pagina:",
         noResults: "No hay registros coincidentes",

@@ -11,10 +11,10 @@
       <div class="alert alert-warning" role="alert" v-show="message">
         {{ message + "!" }}
       </div>
-      <div class="container">
+      <div class="">
         <div class="row">
           <div
-            class="col-xl-6 col-md-12"
+            class="col-xl-6 col-lg-12"
             v-for="(item, index) in rubroBolsa"
             :key="index">
             <div class="card">
@@ -25,7 +25,7 @@
                   </div>
                   <div class="media-body text-right">
                     <h3>{{ item.rubro }}</h3>
-                    <p class="text-truncate"><em>{{ item.descripcion }}</em></p>
+                    <p class="text-truncate tam-letter"><em>{{ item.descripcion }}</em></p>
                   </div>
                 </div>
                 <div class="card-text letter">
@@ -128,4 +128,7 @@ export default {
 /* .letter {
   font-size: 1.2rem;
 } */
+.tam-letter {
+  font-size: 15px;
+}
 </style>

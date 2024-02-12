@@ -98,8 +98,11 @@
                           'letter',
                           'badge badge-secondary  text-white font-weight-bold'
                         ]">
-                        {{ item.row.cantidadA }}</a
+                        {{ item.row.cantidadA }}
+                        
+                        </a
                       >
+                      <i class="fas fa-eye"></i>
                     </template>
                     <template v-slot:cantidadC="item">
                       <a
@@ -108,20 +111,38 @@
                           'letter',
                           'badge badge-success  text-white font-weight-bold'
                         ]">
-                        {{ item.row.cantidadC }}</a
+                        {{ item.row.cantidadC }}
+                        
+                        </a
                       >
+                      <i class="fas fa-eye"></i>
                     </template>
-                    <template v-slot:MAPA="item">
-                      <button
-                        class="btn btn-info"
+                    <template v-slot:direccion="item">
+                     <p> {{ item.row.direccion   }}
+                      <p
+                       
                         data-toggle="modal"
                         @click="
                           generarMapa(item.row.latitud, item.row.longitud)
                         "
                         data-target="#exampleModalCenter">
-                        Mapa
-                      </button>
+                        <i class="fas fa-map-marker-alt"></i>
+                      </p>
+                     </p>
                     </template>
+                    <!-- <template v-slot:MAPA="item">
+                      <button
+                        class="mr-3 btn btn-info"
+                        data-toggle="modal"
+                        @click="
+                          generarMapa(item.row.latitud, item.row.longitud)
+                        "
+                        data-target="#exampleModalCenter">
+                        <i class="fas fa-map-marker-alt"></i>
+                      </button>
+                     
+                    </template> -->
+
                   </v-client-table>
                 </template>
                 <template v-else>
@@ -199,7 +220,7 @@
                       data-toggle="modal"
                       @click="generarMapa(item.row.latitud, item.row.longitud)"
                       data-target="#exampleModalCenter">
-                      Mapa
+                      <i class="fas fa-map-marker-alt"></i>
                     </button>
                   </template>
                 </v-client-table>
@@ -273,6 +294,7 @@ export default {
   components: { Pie, loading, ServerTable },
   data() {
     return {
+      sucursal:"",
       message: "",
       sucursalA: true,
       sucursalC: false,
@@ -302,7 +324,6 @@ export default {
         "direccion",
         "cantidadA",
         "cantidadC",
-        "MAPA"
       ],
       options: {
         columnsClasses: {
@@ -317,7 +338,6 @@ export default {
         // columnsDisplay:{
         //   descripcion:"min_mobile"
         // },
-        columnsDropdown:true,
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
           base: "fa",
@@ -331,7 +351,7 @@ export default {
           first: "Primero",
           last: "Ultimo",
           filter: "Filtro:",
-          filterPlaceholder: "Busqueda",
+          filterPlaceholder: "Búsqueda",
           limit: "Registros:",
           page: "Pagina:",
           noResults: "No hay registros coincidentes",
@@ -346,11 +366,12 @@ export default {
         perPageValues: [10, 25, 50, 100, 500],
         headings: {
           // id: 'ID',
-          descripcion: "SUCURSAL",
-          telefono: "TELEFONO",
+          descripcion: "NOMBRE",
+          telefono: "TELÉFONO",
           direccion: "DIRECCIÓN",
-          cantidadA: "CAJAS A.",
-          cantidadC: "CAJAS C."
+          cantidadA: "CAJAS ABIERTAS",
+          cantidadC: "CAJAS CERRADAS",
+          MAPA:"MAPA"
         }
       },
 
@@ -369,7 +390,7 @@ export default {
           first: "Primero",
           last: "Ultimo",
           filter: "Filtro:",
-          filterPlaceholder: "Busqueda",
+          filterPlaceholder: "Búsqueda",
           limit: "Registros:",
           page: "Pagina:",
           noResults: "No hay registros coincidentes",
@@ -405,6 +426,7 @@ export default {
 
         const marker = L.marker([lat, lng]).addTo(mymap);
       }, 1000);
+
     },
     obtenerCajasA(item) {
       console.log(item.identificador);
@@ -493,9 +515,7 @@ export default {
         });
         $(".VueTables__search-field label").hide();
         //$(".VueTables__search").addClass("float-right");
-
         $(".VueTables__limit-field label").hide();
-      
         $(".VuePagination__pagination").addClass("justify-content-center");
         });
       } catch (error) {

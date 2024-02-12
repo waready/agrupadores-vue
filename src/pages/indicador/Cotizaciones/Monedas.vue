@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-3">
     <div v-if="monedas">
-      <h3>PASAJE A HISTORICO POR MONEDA</h3>
+      <h3>PASAJE A HISTÓRICO POR MONEDA</h3>
       <hr />
       <div id="moneda">
         <v-client-table :columns="columns" :data="monedas" :options="options">
@@ -58,7 +58,7 @@ export default {
         first: "Primero",
         last: "Ultimo",
         filter: "Filtro:",
-        filterPlaceholder: "Busqueda",
+        filterPlaceholder: "Búsqueda",
         limit: "Registros:",
         page: "Pagina:",
         noResults: "No hay registros coincidentes",

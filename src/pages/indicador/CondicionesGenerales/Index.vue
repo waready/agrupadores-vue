@@ -305,7 +305,7 @@
             <p>Listados de Fechas</p>
             <hr />
           </div>
-          <div class="container">
+          <!-- <div class="container">
             <div class="row">
               <div class="col-md-3">
                 <div class="main-timeline">
@@ -360,8 +360,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <ApiService :fechaA="CondicionesGenerales.fechaApertura"  :fechaC = "CondicionesGenerales.fechaCierre"  :fecha7x24A = "CondicionesGenerales.fechaAperturaCanales"  :fecha7x24C ="CondicionesGenerales.fechaCierreCanales"></ApiService>
+          <hr>
+          <Service :fechaA="CondicionesGenerales.fechaApertura"  :fechaC = "CondicionesGenerales.fechaCierre"  :fecha7x24A = "CondicionesGenerales.fechaAperturaCanales"  :fecha7x24C ="CondicionesGenerales.fechaCierreCanales"></Service>
         </section>
         <loading v-else></loading>
       </div>
@@ -391,13 +393,15 @@ ChartJS.register(
 import moment from "moment";
 import AuthService from "@/utils/AuthService";
 import ApiService from "@/components/calendarios.vue";
+import Service from "@/components/calendar.vue";
 import loading from "@/components/Loading.vue";
 export default {
   name: "RubroBolsa",
   components: {
     loading,
     Bar,
-    ApiService
+    ApiService,
+    Service
   },
   mounted() {
     this.getAllCondicionesGenerales();

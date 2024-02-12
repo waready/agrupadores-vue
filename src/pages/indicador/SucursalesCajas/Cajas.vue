@@ -172,9 +172,9 @@
                 class="card"
                 v-for="(item, index) in cajasSelect"
                 :key="index">
-                <div class="card-header text-center bg-secondary">
+                <!-- <div class="card-header text-center bg-secondary">
                   {{ item.descripcion }}
-                </div>
+                </div> -->
                 <div class="card-body">
                   <p class="card-title">
                     <i class="fa fa-phone" aria-hidden="true"></i>
@@ -268,7 +268,7 @@ export default {
           first: "Primero",
           last: "Ultimo",
           filter: "Filtro:",
-          filterPlaceholder: "Busqueda",
+          filterPlaceholder: "Búsqueda",
           limit: "Registros:",
           page: "Pagina:",
           noResults: "No hay registros coincidentes",
@@ -279,11 +279,11 @@ export default {
           columns: "Columnas"
         },
         // filterByColumn: true,
-        perPage: 5,
-        perPageValues: [5, 10, 25, 50, 100, 500],
+        perPage: 10,
+        perPageValues: [ 10, 25, 50, 100, 500],
         headings: {
           // id: 'ID',
-          usuario: "# USUARIO",
+          usuario: "USUARIO",
           nombre: "NOMBRE"
         }
       }
