@@ -61,7 +61,6 @@ export default {
   methods: {
     async getAllAgrupadores() {
       await AuthService.GetAgrupadores().then((response) => {
-        console.log(response)
         if (response.Erroresnegocio) {
           if (response.Erroresnegocio.BTErrorNegocio[0]) {
             this.message =

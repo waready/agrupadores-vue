@@ -423,7 +423,7 @@ export default {
 
 @media screen and (max-width: 1286px) {
   .custom-card {
-    height: 120px; /* Ajusta la altura según tus necesidades */
+    height: 130px; /* Ajusta la altura según tus necesidades */
   }
 
 }
