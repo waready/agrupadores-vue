@@ -13,34 +13,39 @@
       </div>
       <div class="">
         <div class="row">
-          <div
-            class="col-xl-6 col-lg-12"
-            v-for="(item, index) in rubroBolsa"
-            :key="index">
+          <div class="col-xl-6 col-lg-12" v-for="(item, index) in rubroBolsa" :key="index">
             <div class="card">
               <div class="card-body">
                 <div class="media align-items-stretch">
                   <div class="align-self-center">
                     <i class="fa fa-archive info font-large-4 mr-2"></i>
                   </div>
-                  <div class="media-body text-right">
-                    <h3>{{ item.rubro }}</h3>
+                  <div class="media-body text-left">
+                    <h3>
+                      {{ item.rubro }}
+                      <a class="mb-1" @click="toggleClave(index)" data-toggle="tooltip" data-placement="top" title="Ver clave">
+                        <i class="fas fa-eye text-secondary"></i>
+                      </a>
+                    </h3>
                     <p class="text-truncate tam-letter"><em>{{ item.descripcion }}</em></p>
                   </div>
                 </div>
                 <div class="card-text letter">
-                  <hr />
-                  <h5>Clave</h5>
-                  <ul class="list-unstyled">
-                    <li>Empresa: <strong>  {{item.empresa }} - {{ item.nombreEmpresa }} </strong></li>
-                    <li>Sucursal: <strong> {{item.sucursal}} - {{item.nombreSucursal }}</strong> </li>
-                    <li>Cuenta: <strong> {{ item.cuentaCliente }}</strong></li>
-                    <li>Operación: <strong> {{ item.operacion }} </strong> </li>
-                    <li>Sub Operación: <strong> {{ item.subOperacion }} </strong> </li>
-                    <li>Moneda: <strong> {{ item.moneda }} - {{ item.signoMoneda }} </strong> </li>
-                    <li>Especie: <strong>{{ item.papel }} - {{ item.nombrePapel }}</strong></li>
-                  </ul>
-                  <hr />
+                  <div v-if="mostrarClave[index]">
+                    <hr />
+                    <h5>Clave</h5>
+                    <ul class="list-unstyled">
+                      <li>Empresa: <strong> {{ item.empresa }} - {{ item.nombreEmpresa }} </strong></li>
+                      <li>Sucursal: <strong> {{ item.sucursal }} - {{ item.nombreSucursal }}</strong> </li>
+                      <li>Cuenta: <strong> {{ item.cuentaCliente }} - {{ item.nombreCuenta }}</strong></li>
+                      <li>Modulo: <strong> {{ item.nombreModulo }} </strong> </li>
+                      <li>Operación: <strong> {{ item.operacion }} - {{ item.nombreOperacion }} </strong> </li>
+                      <li>Sub Operación: <strong> {{ item.subOperacion }} </strong> </li>
+                      <li>Moneda: <strong> {{ item.moneda }} - {{ item.signoMoneda }} </strong> </li>
+                      <li>Especie: <strong>{{ item.papel }} - {{ item.nombrePapel }}</strong></li>
+                    </ul>
+                    <hr />
+                  </div>
                   <h5 class="mb-1"><span> Ocurrencias </span></h5>
                   <span> <strong> {{ item.ocurrencias }} </strong> </span>
                 </div>
@@ -55,7 +60,6 @@
 </template>
 <script>
 import AuthService from "@/utils/AuthService";
-import ApiService from "@/utils/ApiService.js";
 import loading from "@/components/Loading.vue";
 export default {
   name: "RubroBolsa",
@@ -66,6 +70,7 @@ export default {
     this.getAllRubroBolsas();
   },
   data: () => ({
+    mostrarClave: [],
     rubroBolsa: null,
     message: "",
     config: {
@@ -113,6 +118,9 @@ export default {
           this.message = "No se encuentran registros!";
         }
       });
+    },
+    toggleClave(index) {
+      this.mostrarClave[index] = typeof this.mostrarClave[index] === 'undefined' ? true : !this.mostrarClave[index];
     }
     //
     //
@@ -125,6 +133,7 @@ export default {
   position: relative;
   /* height: 39vh;  */
 }
+
 /* .letter {
   font-size: 1.2rem;
 } */

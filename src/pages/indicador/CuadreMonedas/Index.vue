@@ -17,7 +17,7 @@
                 type="text"
                 name="filter"
                 class="form-control"
-                placeholder="Busqueda"
+                placeholder="Búsqueda"
                 v-model="TextoBuscado"
                 id="filter" />
               <div class="input-group-prepend">

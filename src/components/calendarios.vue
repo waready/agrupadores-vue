@@ -45,21 +45,6 @@
 
 <style scoped>
 /* @group Mixins */
-* {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  outline: 0;
-}
-
-html {
-  background-color: #282e3a;
-}
-
-body {
-  width: 400px;
-  margin: 0 auto;
-}
 
 figure {
   margin: 30px auto;
@@ -67,7 +52,11 @@ figure {
   width: 128px;
   height: 111px;
 
-  background-color: #a3a0a0;
+  /* background-image: -webkit-linear-gradient(#08111b 0%, #e5e5e5 100%); */
+  /* background-image: -moz-linear-gradient(#193b5e 0%, #e5e5e5 100%); */
+  /* background-image: -o-linear-gradient(#18436f 0%, #e5e5e5 100%); */
+  background-image: linear-gradient(#fafbfb 0%, #e5e5e5 100%);
+
   border-radius: 10px;
 
   position: relative;
@@ -77,7 +66,7 @@ figure {
     display: block;
 
     width: 128px;
-    height: 69px;
+    height: 65px;
 
     border-radius: 10px 10px 0 0;
 
@@ -99,7 +88,7 @@ figure {
     border-radius: 10px 10px 0 0;
     border-bottom: 3px solid #e5e5e5;
 
-    font:  12px/27px Arial, Helvetica, Geneva, sans-serif;
+    font:  13px/25px Arial, Helvetica, Geneva, sans-serif;
     letter-spacing: 0.5px;
     color: #fff;
 
@@ -115,47 +104,14 @@ figure {
 
     font: 26px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
     letter-spacing: -2px;
-    color: #4c566b;
+    color: #4c566b; /* color de fuente */
 
     text-align: center;
 
     z-index: 10;
-
-    &:before {
-      content: '';
-      display: block;
-
-      position: absolute;
-      top: 35px;
-
-      width: 3px;
-      height: 10px;
-
-      background-image: -webkit-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-      background-image: -moz-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-      background-image: -o-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-      background-image: linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-    }
-
-    &:after {
-      content: '';
-      display: block;
-
-      position: absolute;
-      top: 35px;
-      right: 0;
-
-      width: 3px;
-      height: 10px;
-
-      background-image: -webkit-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-      background-image: -moz-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-      background-image: -o-linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-      background-image: linear-gradient(#b5bdc5 0%, #e5e5e5 100%);
-    }
-
   }
 }
 
 /* @end */
+
 </style>

@@ -1,41 +1,70 @@
 <template>
   <div class="container">
     <div v-for="(item, index) in Sucursal" :key="index">
-      <h2>Cajas de la Sucursal ( {{ item.descripcion }} )</h2>
-      <hr />
-      <div>
-        <button
-          class="btn btn-info"
-          @click="generarSucursal(item.identificador)"
-          data-toggle="modal"
+      <h2>Cajas de la Sucursal ( {{ item.descripcion }} )
+        <a class="btn btn-info mb-1" 
+        @click="generarSucursal(item.identificador)" 
+        data-toggle="modal"
+        data-placement="top" title="Ver mapa"
           data-target="#exampleModalCenter">
-          Datos de la Sucursal
-        </button>
-      </div>
+          <i class="fas fa-map-marker-alt text-white fa-xl"></i>
+        </a>
+      </h2>
     </div>
     <div v-if="cajas">
       <hr />
       <div class="row">
-        <div class="col d-flex justify-content-center">
+        <div class="col-7 d-flex justify-content-center">
           <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
+        </div>
+        <div class="col-5">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-pie-chart success font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ cajasAbiertas.length }}</h4>
+                      <span>Cajas Abiertas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-pie-chart danger font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ cajasCerradas.length }}</h4>
+                      <span>Cajas Cerradas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <hr />
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(1)"
-            :class="{ active: cajasA == true }">
+          <a class="nav-link" @click="selecionar(1)" :class="{ active: cajasA == true }">
             Cajas Abiertas
           </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(2)"
-            :class="{ active: cajasC == true }">
+          <a class="nav-link" @click="selecionar(2)" :class="{ active: cajasC == true }">
             Cajas Cerradas
           </a>
         </li>
@@ -46,50 +75,8 @@
           <div class="card-body">
             <div v-show="cajasA">
               <h3>Cajas Abiertas</h3>
-
-              <!-- <div class="row">
-                <div class="col-md-4">
-                  <div class="input-group is-invalid">
-                    <input type="text" name="filter" class="form-control" v-model="TextoBuscado" id="filter" />
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="validatedInputGroupPrepend"><i class="fa fa-search"
-                          aria-hidden="true"></i></span>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <!-- <div class="table-responsive">
-                <table class="table table-striped tamleter tabla">
-                  <thead>
-                    <tr>
-                      <th scope="col">USUARIO</th>
-                      <th scope="col">NOMBRE</th>
-                 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <template v-if="CajasFilter[0]">
-                      <tr v-for="(item, index) in CajasFilter" :key="index">
-                        <td>{{ item.usuario }}</td>
-                        <td>{{ item.nombre }}</td>
-                    
-                      </tr>
-                    </template>
-
-                    <template v-else>
-                      <div class="alert alert-warning mt-1" role="alert">
-                        {{ "No se encuentran registros!" }}
-                      </div>
-                    </template>
-                  </tbody>
-                </table>
-              </div> -->
               <template v-if="cajasAbiertasPremiun[0]">
-                <v-client-table
-                  ref="table"
-                  :data="cajasAbiertasPremiun"
-                  :columns="columns"
-                  :options="options">
+                <v-client-table ref="table" :data="cajasAbiertasPremiun" :columns="columns" :options="options">
                 </v-client-table>
               </template>
               <template v-else>
@@ -100,38 +87,8 @@
             </div>
             <div v-show="cajasC">
               <h3>Cajas Cerradas</h3>
-              <!-- <div class="table-responsive">
-                <table class="table table-striped tamleter">
-                  <thead>
-                    <tr>
-                      <th scope="col">USUARIO</th>
-                      <th scope="col">NOMBRE</th>
-              
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <template v-if="cajasCerradas[0]">
-                      <tr v-for="(item, index) in cajasCerradas" :key="index">
-               
-                        <td>{{ item.UsuarioCaja }}</td>
-                        <td>{{ item.NombreCaja }}</td>
-                      
-                      </tr>
-                    </template>
-                    <template v-else>
-                      <div class="alert alert-warning mt-1" role="alert">
-                        {{ "No se encuentran registros!" }}
-                      </div>
-                    </template>
-                  </tbody>
-                </table>
-              </div> -->
               <template v-if="cajasCerradas[0]">
-                <v-client-table
-                  ref="table"
-                  :data="cajasCerradas"
-                  :columns="columns"
-                  :options="options">
+                <v-client-table ref="table" :data="cajasCerradas" :columns="columns" :options="options">
                 </v-client-table>
               </template>
               <template v-else>
@@ -145,36 +102,21 @@
       </div>
     </div>
     <loading v-else></loading>
-    <div
-      class="modal fade"
-      id="exampleModalCenter"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">
-              Sucursal de la Caja
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close">
+            <div v-for="(item, index) in Sucursal" :key="index">
+              <h5>Sucursal:  ( {{ item.descripcion }} )</h5>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div>
-              <div
-                class="card"
-                v-for="(item, index) in cajasSelect"
-                :key="index">
-                <!-- <div class="card-header text-center bg-secondary">
-                  {{ item.descripcion }}
-                </div> -->
+              <div class="card" v-for="(item, index) in cajasSelect" :key="index">
                 <div class="card-body">
                   <p class="card-title">
                     <i class="fa fa-phone" aria-hidden="true"></i>
@@ -191,10 +133,7 @@
             <div ref="elMap" class="app-store-map"></div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
               Close
             </button>
           </div>
@@ -253,7 +192,7 @@ export default {
         responsive: true,
         maintainAspectRatio: false
       },
-      columns: ["usuario", "nombre"],
+      columns: ["indicador","usuario", "nombre"],
       options: {
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
@@ -280,9 +219,9 @@ export default {
         },
         // filterByColumn: true,
         perPage: 10,
-        perPageValues: [ 10, 25, 50, 100, 500],
+        perPageValues: [10, 25, 50, 100, 500],
         headings: {
-          // id: 'ID',
+          indicador: '# CAJA',
           usuario: "USUARIO",
           nombre: "NOMBRE"
         }
@@ -337,14 +276,14 @@ export default {
         this.cajasAbiertasPremiun = data;
         $(document).ready(function () {
           $(".VuePagination__count").text(function (i, text) {
-          return text.replace("Un registro", "1 registro");
-        });
-        $(".VueTables__search-field label").hide();
-        //$(".VueTables__search").addClass("float-right");
+            return text.replace("Un registro", "1 registro");
+          });
+          $(".VueTables__search-field label").hide();
+          //$(".VueTables__search").addClass("float-right");
 
-        $(".VueTables__limit-field label").hide();
-      
-        $(".VuePagination__pagination").addClass("justify-content-center");
+          $(".VueTables__limit-field label").hide();
+
+          $(".VuePagination__pagination").addClass("justify-content-center");
         });
       });
     },
@@ -368,19 +307,6 @@ export default {
       );
     },
     async generarMapa(lat, lng) {
-      // if (this.$options.map) {
-      //   // El mapa ya está inicializado, no hace falta hacerlo nuevamente
-      //   return;
-      // }
-      // this.$options.markers = new Array();
-      // const mymap = L.map(this.$refs.elMap).setView([lat, lng], 10);
-      // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      //   attribution:
-      //     'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      //   maxZoom: 18
-      // }).addTo(mymap);
-      // const marker = L.marker([lat, lng]).addTo(mymap);
-      // this.$options.map = mymap;
       this.$options.markers = new Array();
       var mapas = this.$refs.elMap;
       setTimeout(function () {

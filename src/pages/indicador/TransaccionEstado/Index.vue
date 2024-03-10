@@ -6,123 +6,39 @@
     <div v-if="transacciones">
       <h2>Estado Transacciones</h2>
       <hr />
-      <!-- <div class="row">
-        <div class="col-12 mt-3 mb-1">
-          <h4 class="text-uppercase">Resumen</h4>
-          <p>Resumen General</p>
-        </div>
-
-        <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card h-80">
-            <div class="card-content">
-              <div class="card-body">
-                <div class="media d-flex">
-                  <div class="align-self-center">
-                    <i class="icon-graph info font-large-2 float-left"></i>
-                  </div>
-                  <div class="media-body text-right">
-                    <h3>
-                      {{
-                        transacciones.exito +
-                        transacciones.error +
-                        transacciones.otros
-                      }}
-                    </h3>
-                    <span>Total de Transacciones</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card h-80">
-            <div class="card-content">
-              <div class="card-body">
-                <div class="media d-flex">
-                  <div class="align-self-center">
-                    <i class="icon-graph success font-large-2 float-left"></i>
-                  </div>
-                  <div class="media-body text-right">
-                    <h3>{{ transacciones.exito }}</h3>
-                    <span>Contabilizadas con Éxito</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card h-80">
-            <div class="card-content">
-              <div class="card-body">
-                <div class="media d-flex">
-                  <div class="align-self-center">
-                    <i class="icon-graph danger font-large-2 float-left"></i>
-                  </div>
-                  <div class="media-body text-right">
-                    <h3>{{ transacciones.error }}</h3>
-                    <span>Contabilizadas con Error</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-sm-6 col-12">
-          <div class="card h-80">
-            <div class="card-content">
-              <div class="card-body">
-                <div class="media d-flex">
-                  <div class="align-self-center">
-                    <i class="icon-graph warning font-large-2 float-left"></i>
-                  </div>
-                  <div class="media-body text-right">
-                    <h3>{{ transacciones.otros }}</h3>
-                    <span>Otros</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="col-12 mt-3 mb-1">
         <h4 class="text-uppercase">Detalle</h4>
         <p>Detalle Transacciones</p>
       </div>
-      
+
       <div class="row">
         <div class="col-7 d-flex justify-content-center">
           <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
         </div>
         <div class="col-5">
           <div class="col-12">
-          <div class="card">
-            <div class="card-content">
-              <div class="card-body">
-                <div class="media d-flex">
-                  <div class="align-self-center">
-                    <i class="icon-graph info font-large-2 float-left"></i>
-                  </div>
-                  <div class="media-body text-right">
-                    <h4>
-                      {{
-                        transacciones.exito +
-                        transacciones.error +
-                        transacciones.otros
-                      }}
-                    </h4>
-                    <span>Total de Transacciones</span>
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-graph info font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>
+                        {{
+                          transacciones.exito +
+                          transacciones.error +
+                          transacciones.otros
+                        }}
+                      </h4>
+                      <span>Total de Transacciones</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
           <div class="col-12">
             <div class="card v-10">
               <div class="card-content">
@@ -177,41 +93,52 @@
             </div>
           </div>
         </div>
-        
       </div>
+      <hr />
+      <div class="row justify-content-md-center">
+        <div class="col-md-8">
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block " @click="detalle = !detalle">{{ detalle ?
+            'ocultar detalle transacciones ' : 'ver detalle transacciones' }} <i v-if="detalle"
+              class="fas fa-long-arrow-alt-up"></i>
+            <i v-else class="fas fa-long-arrow-alt-down"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row" v-if="detalle">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7 mt-3">
+              <div class="form-group">
+                <label for="inputGroupSelect01">Movimiento</label>
+                <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
+                  <option value="">(Todos)</option>
+                  <option v-for="(item, index) in labels" :key="index" :value="item.id">{{ item.description }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-      <div class="container mt-2">
-        <div class="row justify-content-md-center">
-          <div class="col-md-7">
-            <div class="form-group">
-              <label for="inputGroupSelect01">Movimiento</label>
-              <select v-model="busqueda" class="custom-select" id="inputGroupSelect01" placeholder="elegir">
-                <option value="">(Elegir)</option>
-                <option v-for="(item, index) in labels" :key="index" :value="item.id">{{ item.description }}</option>
-              </select>
+          <div class="row justify-content-md-center">
+            <div class="col-md-12 mt-1">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Movimiento</th>
+                    <th scope="col">Cantidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in transaccionFiltrada" :key="index">
+                    <td>{{ item.descripcion }}</td>
+                    <td :class="isPrimaryBadge(item.descripcion)">{{ item.cantidad }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-
-        <div class="row justify-content-md-center">
-          <div class="col-md-12 mt-1">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Movimiento</th>
-                  <th scope="col">Cantidad</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in transaccionFiltrada" :key="index">
-                  <td>{{ item.descripcion }}</td>
-                  <td :class="isPrimaryBadge(item.descripcion)">{{ item.cantidad }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
+
 
     </div>
     <loading v-else></loading>
@@ -260,6 +187,7 @@ export default {
     this.getAllTansaccionEstado();
   },
   data: () => ({
+    detalle: false,
     busqueda: "",
     transacciones: null,
     message: "",
@@ -441,40 +369,40 @@ export default {
       };
     },
     transaccionFiltrada() {
-  // Crear subarrays para cada grupo
-  const grupo1 = [];
-  const grupo2 = [];
-  const grupo3 = [];
+      // Crear subarrays para cada grupo
+      const grupo1 = [];
+      const grupo2 = [];
+      const grupo3 = [];
 
-  // Filtrar y asignar cada objeto al grupo correspondiente
-  this.transaccionesOrdenadas.forEach(objeto => {
-    const ultimaLetra = objeto.codigo.slice(-1);
+      // Filtrar y asignar cada objeto al grupo correspondiente
+      this.transaccionesOrdenadas.forEach(objeto => {
+        const ultimaLetra = objeto.codigo.slice(-1);
 
-    if (["A", "B", "L", "N", "X", "SP", "M", "P"].includes(ultimaLetra)) {
-      grupo1.push(objeto);
-    } else if (["E", "R"].includes(ultimaLetra)) {
-      grupo2.push(objeto);
-    } else if (["H", "S"].includes(ultimaLetra)) {
-      grupo3.push(objeto);
+        if (["A", "B", "L", "N", "X", "SP", "M", "P"].includes(ultimaLetra)) {
+          grupo1.push(objeto);
+        } else if (["E", "R"].includes(ultimaLetra)) {
+          grupo2.push(objeto);
+        } else if (["H", "S"].includes(ultimaLetra)) {
+          grupo3.push(objeto);
+        }
+      });
+
+      // Ordenar cada grupo por cantidad de mayor a menor
+      grupo1.sort((a, b) => b.cantidad - a.cantidad);
+      grupo2.sort((a, b) => b.cantidad - a.cantidad);
+      grupo3.sort((a, b) => b.cantidad - a.cantidad);
+
+      // Concatenar los subarrays en un solo array ordenado
+      const transaccionesFiltradas = [...grupo1, ...grupo2, ...grupo3];
+
+      // Filtrar nuevamente según la búsqueda
+      const resultadoFinal = transaccionesFiltradas.filter(objeto => {
+        const descripcion = objeto.descripcion;
+        return descripcion.includes(this.busqueda);
+      });
+
+      return resultadoFinal;
     }
-  });
-
-  // Ordenar cada grupo por cantidad de mayor a menor
-  grupo1.sort((a, b) => b.cantidad - a.cantidad);
-  grupo2.sort((a, b) => b.cantidad - a.cantidad);
-  grupo3.sort((a, b) => b.cantidad - a.cantidad);
-
-  // Concatenar los subarrays en un solo array ordenado
-  const transaccionesFiltradas = [...grupo1, ...grupo2, ...grupo3];
-
-  // Filtrar nuevamente según la búsqueda
-  const resultadoFinal = transaccionesFiltradas.filter(objeto => {
-    const descripcion = objeto.descripcion;
-    return descripcion.includes(this.busqueda);
-  });
-
-  return resultadoFinal;
-}
 
 
   }

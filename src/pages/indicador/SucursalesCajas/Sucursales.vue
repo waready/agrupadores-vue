@@ -7,142 +7,101 @@
     <div v-if="sucursales">
       <hr />
       <div class="row">
-        <div class="col d-flex justify-content-center">
-          <Pie
-            id="my-chart-id"
-            :options="chartOptions"
-            :data="chartData"
-            :style="myStyles" />
+        <div class="col-7 d-flex justify-content-center">
+          <Pie id="my-chart-id" :options="chartOptions" :data="chartData" :style="myStyles" />
+        </div>
+        <div class="col-5">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-pie-chart dark font-large-1 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ sucursalcantA }}</h4>
+                      <span>Sucursales Abiertas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-pie-chart success font-large-1 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h4>{{ sucursalcantC }}</h4>
+                      <span>Sucursales Cerradas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <hr />
-
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(1)"
-            :class="{ active: sucursalA == true }">
+          <a class="nav-link" @click="selecionar(1)" :class="{ active: sucursalA == true }">
             Sucursales Abiertas
           </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            @click="selecionar(2)"
-            :class="{ active: sucursalC == true }">
+          <a class="nav-link" @click="selecionar(2)" :class="{ active: sucursalC == true }">
             Sucursales Cerradas
           </a>
         </li>
       </ul>
-
       <div class="row">
         <div class="col-md-12">
           <div class="card-body">
             <div v-show="sucursalA">
               <h3>Sucursales Abiertas</h3>
-
               <div class="">
-                <!-- <table class="table table-striped tamleter">
-                  <thead>
-                    <tr>
-                      <th style="width: 50%" class="w-75">#SUCURSAL</th>
-                      <th style="width: 10%">TELEFONO</th>
-                      <th style="width: 10%">DIRECCIÓN</th>
-                      <th style="width: 10%">CAJAS ABIERTAS</th>
-                      <th style="width: 10%">CAJAS CERRADAS</th>
-                      <th style="width: 10%">MAPA</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <template v-if="sucursalesFilter[0]">
-                      <tr v-for="(item, index) in sucursalesFilter" :key="index">
-                        <th scope="row">{{ item.descripcion }}</th>
-                        <td>{{ item.telefono }}</td>
-                        <td>{{ item.direccion }}</td>
-                        <td>
-                          <span class="btn btn-secondary" @click="obtenerCajasA(item)">
-                            {{ item.cantidadA }}</span>
-                        </td>
-                        <td>
-                          <span class="btn btn-success" @click="obtenerCajasC(item)">
-                            {{ item.cantidadC }}</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-info" data-toggle="modal"
-                            @click="generarMapa(item.latitud, item.longitud)" data-target="#exampleModalCenter">
-                            Mapa
-                          </button>
-                        </td>
-                      </tr>
-                    </template>
-
-                    <template v-else>
-                      <div class="alert alert-warning mt-1" role="alert">
-                        {{ "No se encuentran registros!" }}
-                      </div>
-                    </template>
-                  </tbody>
-                </table> -->
-
                 <template v-if="sucusalesPremiun[0]">
-                  <v-client-table
-                    ref="table"
-                    :data="sucusalesPremiun"
-                    :columns="columns"
-                    :options="options">
+                  <v-client-table ref="table" :data="sucusalesPremiun" :columns="columns" :options="options">
+                    <template v-slot:direccion="item">
+                      <p> {{ item.row.direccion }}
+                        <a data-toggle="modal"
+                          data-placement="top" title="Ver mapa" 
+                          @click="generarMapa(item.row.latitud, item.row.longitud)"
+                          data-target="#exampleModalCenter"
+                          :class="['letter', 'badge badge-primary ml-1 font-weight-bold']">
+                          <i class="fas fa-map-marker-alt text-white"></i>
+                        </a>
+                      </p>
+                    </template>
                     <template v-slot:cantidadA="item">
-                      <a
-                        @click="obtenerCajasA(item.row)"
-                        :class="[
-                          'letter',
-                          'badge badge-secondary  text-white font-weight-bold'
-                        ]">
+                      <a @click="obtenerCajasA(item.row)"
+                      data-toggle="tooltip" data-placement="top" title="Ver cajas"
+                      :class="[
+                        'letter',
+                        'badge badge-secondary text-white font-weight-bold'
+                      ]">
                         {{ item.row.cantidadA }}
-                        
-                        </a
-                      >
-                      <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye text-white ml-1"></i>
+                      </a>
                     </template>
                     <template v-slot:cantidadC="item">
-                      <a
-                        @click="obtenerCajasC(item.row)"
-                        :class="[
-                          'letter',
-                          'badge badge-success  text-white font-weight-bold'
-                        ]">
+                      <a @click="obtenerCajasC(item.row)"
+                      data-toggle="tooltip" data-placement="top" title="Ver cajas" 
+                      :class="[
+                        'letter',
+                        'badge badge-success  text-white font-weight-bold'
+                      ]">
                         {{ item.row.cantidadC }}
-                        
-                        </a
-                      >
-                      <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye text-white ml-1"></i>
+                      </a>
                     </template>
-                    <template v-slot:direccion="item">
-                     <p> {{ item.row.direccion   }}
-                      <p
-                       
-                        data-toggle="modal"
-                        @click="
-                          generarMapa(item.row.latitud, item.row.longitud)
-                        "
-                        data-target="#exampleModalCenter">
-                        <i class="fas fa-map-marker-alt"></i>
-                      </p>
-                     </p>
-                    </template>
-                    <!-- <template v-slot:MAPA="item">
-                      <button
-                        class="mr-3 btn btn-info"
-                        data-toggle="modal"
-                        @click="
-                          generarMapa(item.row.latitud, item.row.longitud)
-                        "
-                        data-target="#exampleModalCenter">
-                        <i class="fas fa-map-marker-alt"></i>
-                      </button>
-                     
-                    </template> -->
-
                   </v-client-table>
                 </template>
                 <template v-else>
@@ -154,74 +113,30 @@
             </div>
             <div v-show="sucursalC">
               <h3>Sucursales Cerradas</h3>
-              <!-- <div class="table-responsive">
-                  <table class="table table-striped tamleter">
-                    <thead>
-                      <tr>
-                        <th scope="col">#SUCURSAL</th>
-                        <th scope="col">TELEFONO</th>
-                        <th scope="col">DIRECCIÓN</th>
-                        <th scope="col">MAPA</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <template v-if="sucursalesCerradas[0]">
-                        <tr v-for="(item, index) in sucursalesCerradas" :key="index">
-                          <th scope="row">{{ item.descripcion }}</th>
-                          <td>{{ item.telefono }}</td>
-                          <td>{{ item.direccion }}</td>
-
-                          <td>
-                            <button class="btn btn-info" data-toggle="modal"
-                              @click="generarMapa(item.latitud, item.longitud)" data-target="#exampleModalCenter">
-                              Mapa
-                            </button>
-                          </td>
-                        </tr>
-                      </template>
-
-                      <template v-else>
-                        <div class="alert alert-warning mt-1" role="alert">
-                          {{ "No se encuentran registros!" }}
-                        </div>
-                      </template>
-                    </tbody>
-                  </table>
-                </div> -->
               <template v-if="sucursalesCerradas[0]">
-                <v-client-table
-                  ref="table"
-                  :data="sucursalesCerradas"
-                  :columns="optionc.columns"
-                  :options="optionc">
+                <v-client-table ref="table" :data="sucursalesCerradas" :columns="optionc.columns" :options="optionc">
+                  <template v-slot:direccion="item">
+                    <p> {{ item.row.direccion }}
+                      <a data-toggle="modal" @click="generarMapa(item.row.latitud, item.row.longitud)"
+                        data-target="#exampleModalCenter"
+                        :class="['letter', 'badge badge-primary ml-1 font-weight-bold']">
+                        <i class="fas fa-map-marker-alt text-white"></i>
+                      </a>
+                    </p>
+                  </template>
                   <template v-slot:cantidadA="item">
-                    <a
-                      @click="obtenerCajasA(item.row)"
-                      :class="[
-                        'letter',
-                        'badge badge-secondary  text-white font-weight-bold'
-                      ]">
-                      {{ item.row.cantidadA }}</a
-                    >
+                    <a @click="obtenerCajasA(item.row)" :class="[
+                      'letter',
+                      'badge badge-secondary  text-white font-weight-bold'
+                    ]">
+                      {{ item.row.cantidadA }}</a>
                   </template>
                   <template v-slot:cantidadC="item">
-                    <a
-                      @click="obtenerCajasC(item.row)"
-                      :class="[
-                        'letter',
-                        'badge badge-success  text-white font-weight-bold'
-                      ]">
-                      {{ item.row.cantidadC }}</a
-                    >
-                  </template>
-                  <template v-slot:MAPA="item">
-                    <button
-                      class="btn btn-info"
-                      data-toggle="modal"
-                      @click="generarMapa(item.row.latitud, item.row.longitud)"
-                      data-target="#exampleModalCenter">
-                      <i class="fas fa-map-marker-alt"></i>
-                    </button>
+                    <a @click="obtenerCajasC(item.row)" :class="[
+                      'letter',
+                      'badge badge-success  text-white font-weight-bold'
+                    ]">
+                      {{ item.row.cantidadC }}</a>
                   </template>
                 </v-client-table>
               </template>
@@ -234,25 +149,15 @@
           </div>
         </div>
       </div>
-
-      <div
-        class="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
                 Mapa geolocalización
               </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -260,10 +165,7 @@
               <div ref="elMap" class="app-store-map"></div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
             </div>
@@ -280,8 +182,6 @@ import { Pie } from "vue-chartjs";
 import AuthService from "@/utils/AuthService";
 import { ServerTable } from "v-tables-3";
 import loading from "@/components/Loading.vue";
-// var reponsibe = document.getElementById("#my-chart-id")
-// console.log(reponsibe)
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -294,7 +194,9 @@ export default {
   components: { Pie, loading, ServerTable },
   data() {
     return {
-      sucursal:"",
+      sucursalcantA:"",
+      sucursalcantC:"",
+      sucursal: "",
       message: "",
       sucursalA: true,
       sucursalC: false,
@@ -327,17 +229,13 @@ export default {
       ],
       options: {
         columnsClasses: {
-            // Asignamos la clase ancho-columna para establecer un ancho específico
-            cantidadA: 'ancho-columna',
-            cantidadC: 'ancho-columna',
-            descripcion: 'ancho-columna1',
-            direccion: 'ancho-columna1',
-            MAPA:'ancho-columna2'
-            // Puedes agregar más columnas y clases según sea necesario
-          },
-        // columnsDisplay:{
-        //   descripcion:"min_mobile"
-        // },
+          // Asignamos la clase ancho-columna para establecer un ancho específico
+          cantidadA: 'ancho-columna',
+          cantidadC: 'ancho-columna',
+          descripcion: 'ancho-columna1',
+          direccion: 'ancho-columna1'
+          // Puedes agregar más columnas y clases según sea necesario
+        },
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
           base: "fa",
@@ -370,13 +268,12 @@ export default {
           telefono: "TELÉFONO",
           direccion: "DIRECCIÓN",
           cantidadA: "CAJAS ABIERTAS",
-          cantidadC: "CAJAS CERRADAS",
-          MAPA:"MAPA"
+          cantidadC: "CAJAS CERRADAS"
         }
       },
 
       optionc: {
-        columns: ["descripcion", "telefono", "direccion", "MAPA"],
+        columns: ["descripcion", "telefono", "direccion"],
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
           base: "fa",
@@ -426,7 +323,6 @@ export default {
 
         const marker = L.marker([lat, lng]).addTo(mymap);
       }, 1000);
-
     },
     obtenerCajasA(item) {
       console.log(item.identificador);
@@ -455,7 +351,8 @@ export default {
     async getAllsucursales() {
       try {
         const response = await AuthService.getSucursalesCajas();
-
+        this.sucursalcantA = response.sdtSucursalesCajas.sucursalesAbiertas;
+        this.sucursalcantC = response.sdtSucursalesCajas.sucursalesCerradas
         if (
           response.Erroresnegocio &&
           response.Erroresnegocio.BTErrorNegocio[0]
@@ -511,12 +408,12 @@ export default {
 
         $(document).ready(function () {
           $(".VuePagination__count").text(function (i, text) {
-          return text.replace("Un registro", "1 registro");
-        });
-        $(".VueTables__search-field label").hide();
-        //$(".VueTables__search").addClass("float-right");
-        $(".VueTables__limit-field label").hide();
-        $(".VuePagination__pagination").addClass("justify-content-center");
+            return text.replace("Un registro", "1 registro");
+          });
+          $(".VueTables__search-field label").hide();
+          //$(".VueTables__search").addClass("float-right");
+          $(".VueTables__limit-field label").hide();
+          $(".VuePagination__pagination").addClass("justify-content-center");
         });
       } catch (error) {
         console.error("Error al obtener sucursales y cajas:", error);
@@ -530,15 +427,6 @@ export default {
         height: `${325}px`
       };
     }
-    // sucursalesFilter() {
-    //   var buscado = this.TextoBuscado.toUpperCase();
-    //   return this.sucusalesPremiun.filter((objeto) => {
-    //     return (
-    //       objeto.descripcion.toUpperCase().includes(buscado) ||
-    //       objeto.identificador == parseInt(buscado)
-    //     );
-    //   });
-    // }
   }
 };
 </script>
@@ -560,15 +448,18 @@ export default {
 
 /* Clase para establecer un ancho específico */
 .ancho-columna {
-  width: 10px; /* Puedes ajustar este valor según sea necesario */
+  width: 10px;
+  /* Puedes ajustar este valor según sea necesario */
 }
 
 .ancho-columna1 {
-  width: 300px; /* Puedes ajustar este valor según sea necesario */
+  width: 300px;
+  /* Puedes ajustar este valor según sea necesario */
 }
 
 .ancho-columna2 {
-  width: 2px; /* Puedes ajustar este valor según sea necesario */
-  padding:0px;
+  width: 2px;
+  /* Puedes ajustar este valor según sea necesario */
+  padding: 0px;
 }
 </style>
