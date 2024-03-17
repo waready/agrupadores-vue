@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <Navtab class="mb-3"></Navtab>
-    <div class="card">
-      <div class="card-body"><router-view></router-view></div>
+    <div>
+      <div>
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>

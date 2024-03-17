@@ -305,7 +305,7 @@
             <p>Listados de Fechas</p>
             <hr />
           </div>
-          <ApiService :fechaA="CondicionesGenerales.fechaApertura"  :fechaC = "CondicionesGenerales.fechaCierre"  :fecha7x24A = "CondicionesGenerales.fechaAperturaCanales"  :fecha7x24C ="CondicionesGenerales.fechaCierreCanales"></ApiService>
+          <Calendarios :fechaA="CondicionesGenerales.fechaApertura"  :fechaC = "CondicionesGenerales.fechaCierre"  :fecha7x24A = "CondicionesGenerales.fechaAperturaCanales"  :fecha7x24C ="CondicionesGenerales.fechaCierreCanales"></Calendarios>
         </section>
         <loading v-else></loading>
       </div>
@@ -334,7 +334,7 @@ ChartJS.register(
 );
 import moment from "moment";
 import AuthService from "@/utils/AuthService";
-import ApiService from "@/components/calendarios.vue";
+import Calendarios from "@/components/calendarios.vue";
 import Service from "@/components/calendar.vue";
 import loading from "@/components/Loading.vue";
 export default {
@@ -342,7 +342,7 @@ export default {
   components: {
     loading,
     Bar,
-    ApiService,
+    Calendarios,
     Service
   },
   mounted() {
@@ -421,7 +421,7 @@ export default {
 
 <style scoped>
 
-@media screen and (max-width: 1286px) {
+@media screen and (max-width: 1386px) {
   .custom-card {
     height: 130px; /* Ajusta la altura según tus necesidades */
   }
@@ -441,10 +441,10 @@ export default {
 
 @media screen and (max-width: 767px) {
   .custom-card {
-    height: 130px; /* Puedes ajustar la altura según tus necesidades */
+    height: 180px; /* Puedes ajustar la altura según tus necesidades */
   }
   .card-content{
-    height: 130px;
+    height: 180px;
   }
 }
 

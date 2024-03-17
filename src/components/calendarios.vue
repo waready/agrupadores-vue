@@ -6,7 +6,7 @@
           APERTURA CORE
         </header>
         <section>
-          10-05-2024
+          {{ fechaA }}
         </section>
       </figure>
     </div>
@@ -16,7 +16,7 @@
           CIERRE CORE
         </header>
         <section>
-          09-04-2024
+          {{ fechaC }}
         </section>
       </figure>
     </div>
@@ -26,7 +26,7 @@
           APERTURA 24X7
         </header>
         <section>
-          10-04-2024
+          {{ fecha7x24A }}
         </section>
       </figure>
     </div>
@@ -36,12 +36,18 @@
           CIERRE 24X7
         </header>
         <section>
-          09-04-2024
+          {{ fecha7x24C }}
         </section>
       </figure>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["fechaA", "fechaC", "fecha7x24A", "fecha7x24C"]
+};
+</script>
 
 <style scoped>
 /* @group Mixins */

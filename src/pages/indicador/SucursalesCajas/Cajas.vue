@@ -57,7 +57,7 @@
       </div>
       <hr />
 
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs mb-1">
         <li class="nav-item">
           <a class="nav-link" @click="selecionar(1)" :class="{ active: cajasA == true }">
             Cajas Abiertas
@@ -71,7 +71,7 @@
       </ul>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 card">
           <div class="card-body">
             <div v-show="cajasA">
               <h3>Cajas Abiertas</h3>

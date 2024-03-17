@@ -23,8 +23,12 @@
                   <div class="media-body text-left">
                     <h3>
                       {{ item.rubro }}
-                      <a class="mb-1" @click="toggleClave(index)" data-toggle="tooltip" data-placement="top" title="Ver clave">
-                        <i class="fas fa-eye text-secondary"></i>
+                      <a class="badge badge-primary" 
+                      @click="toggleClave(index)" 
+                      data-toggle="tooltip" 
+                      data-placement="top" 
+                      title="Ver clave">
+                        <i class="fas fa-eye text-white"></i>
                       </a>
                     </h3>
                     <p class="text-truncate tam-letter"><em>{{ item.descripcion }}</em></p>
