@@ -64,7 +64,8 @@ export default {
       if (idIndicador == 200) this.detalleIndicador = "Cajas Sucursales";
       if (idIndicador == 300) this.detalleIndicador = "Contabilidad";
 
-      await AuthService.GetIndicadores(idIndicador).then((response) => {
+      await AuthService.GetIndicadores(idIndicador)
+      .then((response) => {
         if (response.Erroresnegocio) {
           if (response.Erroresnegocio.BTErrorNegocio[0]) {
             this.message =
@@ -78,8 +79,6 @@ export default {
             }
           }
         }
-        // else{
-        // }
         this.indicadores = response.sdtIndicadores.sBTIndicador.map((item) => {
           switch (item.codigo) {
             case 105:
@@ -122,6 +121,10 @@ export default {
         if (!this.indicadores[0]) {
           this.message = "No se encuentran registros!";
         }
+      }).catch((error) => {
+        console.error('Error al obtener los indicadores:', error.response.data.data.Erroresnegocio.BTErrorNegocio[0]);
+        this.message =
+        error.response.data.data.Erroresnegocio.BTErrorNegocio[0].Descripcion;
       });
     },
     indicadorID(id) {
