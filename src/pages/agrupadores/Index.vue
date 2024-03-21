@@ -91,7 +91,7 @@ export default {
               break;
             default:
               // sin icon
-              item.icon = "";
+              item.icon = "fas fa-bar-chart fa-5x";
               break;
           }
           //console.log(item);

@@ -93,5 +93,74 @@ export default {
   };
   </script> -->
   <template>
-    
+    <div style="width: 100%">
+      <PowerBIReportEmbed
+        v-if="accessToken"
+        :embedConfig="embedConfig"
+        :css-class-name="'reportClass'"
+        :phased-embedding="false"
+        :event-handlers="eventHandlers"
+        style="height: 500px"></PowerBIReportEmbed>
+      <div v-else>Cargando...</div>
+    </div>
   </template>
+  
+  <script>
+  import { PowerBIReportEmbed } from "powerbi-client-vue-js";
+  import axios from "axios";
+  
+  export default {
+    components: {
+      PowerBIReportEmbed
+    },
+    data() {
+      return {
+        accessToken: null, // Inicialmente, el token de acceso se establece en null
+        embedConfig: {
+          type: "report",
+          id: "", // Reemplaza con el ID de tu informe
+          embedUrl:"", // Reemplaza con la URL de inserción de tu informe
+          accessToken: "",
+          tokenType: 1,
+          settings: {
+            //background: 'Transparent',
+          }
+        },
+        eventHandlers: new Map([
+          ["loaded", () => console.log("Informe cargado")],
+          ["rendered", () => console.log("Informe renderizado")],
+          ["error", (event) => console.log(event.detail)]
+        ])
+      };
+    },
+    mounted() {
+  
+      // Realiza la solicitud Axios para obtener el token de acceso
+      this.fetchAccessToken()
+        .then((data) => {
+          console.log(data)
+          this.embedConfig.accessToken = data.accessToken;
+          this.embedConfig.embedUrl = data.embedUrl;
+          this.embedConfig.id = data.id;
+          this.accessToken = data.accessToken;
+         
+        })
+        .catch((error) => {
+          console.error("Error al obtener el token de acceso:", error);
+        });
+    },
+    methods: {
+      fetchAccessToken() {
+        // const url = "http://localhost:5300/getEmbedToken";
+        const url = "http://10.25.4.10:5300/getEmbedToken";
+        return axios.get(url).then((response) => {
+          if (response.status === 200) {
+            return response.data;
+          } else {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
+        });
+      }
+    }
+  };
+  </script>

@@ -63,6 +63,7 @@ export default {
       if (idIndicador == 100) this.detalleIndicador = "Condiciones generales";
       if (idIndicador == 200) this.detalleIndicador = "Cajas Sucursales";
       if (idIndicador == 300) this.detalleIndicador = "Contabilidad";
+      if (idIndicador == 400) this.detalleIndicador = "Observabilidad";
 
       await AuthService.GetIndicadores(idIndicador)
       .then((response) => {
@@ -112,7 +113,7 @@ export default {
 
             default:
               // sin icon
-              item.icon = "";
+              item.icon = "fas fa-bar-chart fa-5x";
               break;
           }
           //console.log(item);
@@ -156,6 +157,10 @@ export default {
         this.$router.push({ path: `/rubros-centralizados` });
         //toastr.success("Ruta Valida", "Dirigiendo..");
       }
+      if (id == 400) {
+        this.$router.push({ path: `/powerbi` });
+        //toastr.success("Ruta Valida", "Dirigiendo..");
+      }
       //console.log(id);
     }
     //
@@ -163,7 +168,7 @@ export default {
   },
   watch: {
     "$route.params.id": function (newId) {
-      const valores = ["100","200","300"];
+      const valores = ["100","200","300","400"];
       if(valores.includes(newId))
         this.getAllAgrupadores(newId);
     }

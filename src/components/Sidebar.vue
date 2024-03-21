@@ -87,7 +87,7 @@ export default {
               break;
             default:
               // sin icon
-              item.icon = "";
+              item.icon = "bx-chart";
               break;
           }
 
