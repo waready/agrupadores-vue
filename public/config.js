@@ -7,7 +7,7 @@
 // Initialize variables globales 
 // BTEXPOSER ON ("true") - OFF ("false")
 
-window.GetBTexposer= "true"
+window.GetBTexposer= "false"
 
 // url ambiente - ejemplo:
 /*
@@ -19,7 +19,7 @@ window.GetBTexposer= "true"
     GetUrlPro = https://pioneroapp2.dlya.corp:3001/api/
 */
 
-window.GetUrlPro= "https://miscuotasqa.bantotal.com/api/"
+window.GetUrlPro= "http://10.25.4.10:6021/bthibrido/servlet/"
 
 //sufijo del ambiente - ejemplo
 /*
@@ -30,7 +30,7 @@ window.GetUrlPro= "https://miscuotasqa.bantotal.com/api/"
     BTEXPOSER 
     GetSufijo = ""
 */
-window.GetSufijo= ""
+window.GetSufijo= "ardwsbt"
 
 //Version auth 
 /*

@@ -1,7 +1,9 @@
 <template>
   <div class="row mt-3">
     <template v-if="indicadores">
-      <h2>Indicadores de {{ detalleIndicador }}</h2>
+      <h2 v-show="!(detalleIndicador == 'Observabilidad')">
+        Indicadores de {{ detalleIndicador }}
+      </h2>
       <hr />
       <div
         class="col-md-4 col-sm-5 mb-2"
@@ -158,7 +160,7 @@ export default {
         //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       if (id == 400) {
-        this.$router.push({ path: `/powerbi` });
+        this.$router.push({ path: `/observabilidad` });
         //toastr.success("Ruta Valida", "Dirigiendo..");
       }
       //console.log(id);

@@ -74,10 +74,9 @@ const routes = [
         component: () => import("../pages/indicador/CondicionesGenerales/Index.vue")
       },
       {
-        path: "/powerbi",
+        path: "/observabilidad",
         name: 'powerBI',
-        component: () => import("../pages/powerbi/powerbi.vue"),
-        meta: { requiresAuth: false },
+        component: () => import("../pages/powerbi/powerbi.vue")
       },
     ]
   },
@@ -94,12 +93,7 @@ const routes = [
       }
     }
   },
-  {
-    path: "/powerbi",
-    name: 'powerBI',
-    component: () => import("../pages/powerbi/powerbi.vue"),
-    meta: { requiresAuth: false },
-  },
+
   {
     path: '/404',
     name: "not fount",
