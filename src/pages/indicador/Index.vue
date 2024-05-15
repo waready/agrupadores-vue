@@ -163,6 +163,14 @@ export default {
         this.$router.push({ path: `/observabilidad` });
         //toastr.success("Ruta Valida", "Dirigiendo..");
       }
+      if (id == 600) {
+        this.$router.push({ path: `/SesionesPorUsuario` });
+        //toastr.success("Ruta Valida", "Dirigiendo..");
+      }
+      if (id == 500) {
+        this.$router.push({ path: `/EjecucionesPorServicio` });
+        //toastr.success("Ruta Valida", "Dirigiendo..");
+      }
       //console.log(id);
     }
     //

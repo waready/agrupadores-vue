@@ -78,6 +78,14 @@ const routes = [
         name: 'powerBI',
         component: () => import("../pages/powerbi/powerbi.vue")
       },
+      {
+        path: "/SesionesPorUsuario",
+        component: () => import("../pages/indicador/SesionesPorUsuario/Index.vue")
+      },
+      {
+        path: "/EjecucionesPorServicio",
+        component: () => import("../pages/indicador/EjecucionesPorServicio/Index.vue")
+      },
     ]
   },
   {

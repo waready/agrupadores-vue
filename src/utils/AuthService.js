@@ -148,6 +148,16 @@ class AuthService {
     const endpoint = "ObtenerTransaccionesEstados";
     return this.postRequest(endpoint, {});
   }
+
+  static async getEjecucionPorServicio() {
+    const endpoint = "ObtenerEjecucionesPorServicio";
+    return this.postRequest(endpoint, {});
+  }
+
+  static async getSesionesPorUsuario() {
+    const endpoint = "ObtenerSesionesPorUsuario";
+    return this.postRequest(endpoint, {});
+  }
 }
 
 export default AuthService;
