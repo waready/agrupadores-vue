@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="row">
-        <Bar id="my-chart-id" :data="chartData"/>
+        <Bar id="my-chart-id" :data="chartData" :options="options" />
         <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
           <div class="card shadow h-100">
             <div class="card-body">
@@ -17,16 +17,45 @@
               <p class="card-text text-muted">Método: {{ item.metodo }}</p>
               <p class="card-text text-muted">Cantidad de Ejecuciones: {{ item.cantidadEjecuciones }}</p>
               <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar" :style="{ width: (item.cantidadEjecuciones / maxEjecuciones * 100) + '%' }" aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxEjecuciones">{{ item.cantidadEjecuciones }}</div>
+                <div class="progress-bar bg-primary" role="progressbar"
+                  :style="{ width: (item.cantidadEjecuciones / maxEjecuciones * 100) + '%' }"
+                  aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxEjecuciones">{{
+                    item.cantidadEjecuciones }}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Sección nueva para mostrar la agrupación de ejecuciones por servicio -->
+      <div class="row mt-5">
+        <div class="col-12 mt-3 mb-1">
+          <h3 class="text-uppercase">Agrupación de Ejecuciones por Servicios</h3>
+          <p class="text-muted">Total de ejecuciones agrupadas por servicio</p>
+          <hr />
+        </div>
+        <div v-for="(item, index) in agrupacionServicios" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
+          <div class="card shadow h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.servicio }}</h5>
+              <p class="card-text text-muted">Total de Ejecuciones: {{ item.cantidadEjecuciones }}</p>
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar"
+                  :style="{ width: (item.cantidadEjecuciones / maxAgrupadas * 100) + '%' }"
+                  aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxAgrupadas">{{
+                    item.cantidadEjecuciones }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin de la nueva sección -->
+
     </div>
     <loading v-else></loading>
   </div>
 </template>
+
 <script>
 import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
@@ -70,25 +99,16 @@ export default {
   data: () => ({
     mostrarClave: [],
     rubroBolsa: null,
+    agrupacionServicios: [],
     message: "",
-    config: {
-      options: [
-        {
-          value: "option 1"
-        },
-        {
-          value: "option 2"
-        },
-        {
-          value: "option 3"
+    maxEjecuciones: 0,
+    maxAgrupadas: 0,
+    options: {
+      plugins: {
+        legend: {
+          display: false
         }
-      ],
-      placeholder: "Placeholder",
-      backgroundColor: "#cde4f5",
-      textColor: "black",
-      borderRadius: "1.5em",
-      border: "1px solid gray",
-      width: 180
+      }
     }
   }),
 
@@ -108,30 +128,63 @@ export default {
             }
           }
         }
-        //this.indices = response.sdtIndices.SdtBBTMONEDA;
 
         this.rubroBolsa = response.sdtEjecucionesPorServicio.sBTEjecucionesPorServicio;
 
         if (!this.rubroBolsa[0]) {
           this.message = "No se encuentran registros!";
+        } else {
+          this.maxEjecuciones = Math.max(...this.rubroBolsa.map(item => item.cantidadEjecuciones));
+          this.agruparEjecucionesPorServicio();
         }
       });
     },
+
+    agruparEjecucionesPorServicio() {
+      const agrupacion = {};
+
+      this.rubroBolsa.forEach(item => {
+        if (agrupacion[item.servicio]) {
+          agrupacion[item.servicio] += item.cantidadEjecuciones;
+        } else {
+          agrupacion[item.servicio] = item.cantidadEjecuciones;
+        }
+      });
+
+      this.agrupacionServicios = Object.keys(agrupacion).map(servicio => {
+        return {
+          servicio: servicio,
+          cantidadEjecuciones: agrupacion[servicio]
+        };
+      });
+
+      this.maxAgrupadas = Math.max(...this.agrupacionServicios.map(item => item.cantidadEjecuciones));
+    },
+
+    generateRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
   },
 
-  computed:{
+  computed: {
     chartData() {
-      const labels = this.rubroBolsa.map(item => `${item.metodo} (${item.servicio})`);
+      const labels = this.rubroBolsa.map(item => `${item.metodo} `);
       const data = this.rubroBolsa.map(item => item.cantidadEjecuciones);
+      const backgroundColors = this.rubroBolsa.map(() => this.generateRandomColor());
 
       return {
         labels: labels,
         datasets: [
           {
             label: 'Cantidad de Ejecuciones',
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors,
+            borderWidth: 2,
             data: data
           }
         ]
@@ -167,5 +220,4 @@ export default {
 .progress-bar {
   font-size: 0.875rem;
 }
-
 </style>
