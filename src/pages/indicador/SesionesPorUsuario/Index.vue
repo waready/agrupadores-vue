@@ -9,6 +9,10 @@
         </div>
       </div>
       <div class="row">
+        <div>
+          <v-client-table :columns="columns" :data="tableData" :options="options">
+          </v-client-table>
+        </div>
         <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
           <div class="card shadow h-100">
             <div class="card-body">
@@ -17,7 +21,9 @@
               </h5>
               <p class="card-text text-muted">Cantidad de Sesiones: {{ item.cantidadSesiones }}</p>
               <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar" :style="{ width: item.cantidadSesiones + '%' }" aria-valuenow="item.cantidadSesiones" aria-valuemin="0" aria-valuemax="100">{{ item.cantidadSesiones }}%</div>
+                <div class="progress-bar bg-primary" role="progressbar" :style="{ width: item.cantidadSesiones + '%' }"
+                  aria-valuenow="item.cantidadSesiones" aria-valuemin="0" aria-valuemax="100">{{ item.cantidadSesiones
+                  }}%</div>
               </div>
             </div>
           </div>
@@ -30,10 +36,12 @@
 <script>
 import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
+import { ServerTable } from "v-tables-3";
 export default {
   name: "RubroBolsa",
   components: {
-    loading
+    loading,
+    ServerTable
   },
   mounted() {
     this.getAllRubroBolsas();
@@ -42,24 +50,37 @@ export default {
     mostrarClave: [],
     rubroBolsa: null,
     message: "",
-    config: {
-      options: [
-        {
-          value: "option 1"
-        },
-        {
-          value: "option 2"
-        },
-        {
-          value: "option 3"
-        }
-      ],
-      placeholder: "Placeholder",
-      backgroundColor: "#cde4f5",
-      textColor: "black",
-      borderRadius: "1.5em",
-      border: "1px solid gray",
-      width: 180
+    columns: ['usuario', 'cantidadSesiones'],
+    indices: null,
+    monedas: null,
+    options: {
+      texts: {
+        count: "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
+        first: "Primero",
+        last: "Ultimo",
+        filter: "Filtro:",
+        filterPlaceholder: "Búsqueda",
+        limit: "Registros:",
+        page: "Pagina:",
+        noResults: "No hay registros coincidentes",
+        noRequest: "Seleccione al menos un filtro para obtener resultados",
+        filterBy: "Filtrar por {column}",
+        loading: "Cargando...",
+        defaultOption: "Seleccionar {column}",
+        columns: "Columnas"
+      },
+      sortIcon: {
+        is: "fa-sort", // utiliza iconos de Font Awesome
+        base: "fa",
+        up: "fa-sort-asc",
+        down: "fa-sort-desc"
+      },
+      perPage: 10,
+      perPageValues: [10, 25, 50, 100, 500],
+      headings: {
+        nombre: "Nombre",
+        tipoCambio: "Pasaje a histórico"
+      }
     }
   }),
 
@@ -88,11 +109,16 @@ export default {
         }
       });
     },
+
     toggleClave(index) {
       this.mostrarClave[index] = typeof this.mostrarClave[index] === 'undefined' ? true : !this.mostrarClave[index];
     }
-    //
-    //
+  },
+
+  computed: {
+    tableData() {
+      return this.rubroBolsa;
+    }
   }
 };
 </script>
@@ -124,4 +150,18 @@ export default {
   font-size: 0.875rem;
 }
 
+.sortable-header {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.sortable-header .sort-icon {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+}
+.sortable-header .sort-icon.fa-sort {
+  opacity: 0.5;
+}
 </style>

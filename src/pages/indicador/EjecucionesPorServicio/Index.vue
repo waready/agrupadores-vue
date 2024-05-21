@@ -9,6 +9,7 @@
         </div>
       </div>
       <div class="row">
+        <Bar id="my-chart-id" :data="chartData"/>
         <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
           <div class="card shadow h-100">
             <div class="card-body">
@@ -29,10 +30,39 @@
 <script>
 import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
+import { Bar } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  RadialLinearScale,
+  ArcElement,
+  Tooltip,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement,
+  BarElement,
+  Legend
+} from "chart.js";
+
+ChartJS.register(
+  RadialLinearScale,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement,
+  BarElement
+);
+
 export default {
   name: "RubroBolsa",
   components: {
-    loading
+    loading,
+    Bar,
   },
   mounted() {
     this.getAllRubroBolsas();
@@ -87,11 +117,26 @@ export default {
         }
       });
     },
-    toggleClave(index) {
-      this.mostrarClave[index] = typeof this.mostrarClave[index] === 'undefined' ? true : !this.mostrarClave[index];
-    }
-    //
-    //
+  },
+
+  computed:{
+    chartData() {
+      const labels = this.rubroBolsa.map(item => `${item.metodo} (${item.servicio})`);
+      const data = this.rubroBolsa.map(item => item.cantidadEjecuciones);
+
+      return {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Cantidad de Ejecuciones',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: data
+          }
+        ]
+      };
+    },
   }
 };
 </script>
