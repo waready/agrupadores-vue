@@ -8,31 +8,10 @@
           <hr />
         </div>
       </div>
-      <div class="row">
-        <Bar id="my-chart-id" :data="chartData" :options="options" />
-        <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
-          <div class="card shadow h-100">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.servicio }}</h5>
-              <p class="card-text text-muted">Método: {{ item.metodo }}</p>
-              <p class="card-text text-muted">Cantidad de Ejecuciones: {{ item.cantidadEjecuciones }}</p>
-              <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar"
-                  :style="{ width: (item.cantidadEjecuciones / maxEjecuciones * 100) + '%' }"
-                  aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxEjecuciones">{{
-                    item.cantidadEjecuciones }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Sección nueva para mostrar la agrupación de ejecuciones por servicio -->
-      <div class="row mt-5">
-        <div class="col-12 mt-3 mb-1">
-          <h3 class="text-uppercase">Agrupación de Ejecuciones por Servicios</h3>
-          <p class="text-muted">Total de ejecuciones agrupadas por servicio</p>
-          <hr />
+      <div class="row">
+        <div class="col-12 mt-2 mb-3">
+          <h3 class="text-center">RESUMEN</h3>
         </div>
         <div v-for="(item, index) in agrupacionServicios" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
           <div class="card shadow h-100">
@@ -50,7 +29,27 @@
         </div>
       </div>
       <!-- Fin de la nueva sección -->
-
+      <div class="row">
+        <div class="col-12 mt-2 mb-3">
+          <h3 class="text-center">LISTADO DE SERVICIOS POR EJECUCIONES</h3>
+        </div>
+        <Bar id="my-chart-id" :data="chartData" :options="options" />
+        <!-- <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
+          <div class="card shadow h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.servicio }}</h5>
+              <p class="card-text text-muted">Método: {{ item.metodo }}</p>
+              <p class="card-text text-muted">Cantidad de Ejecuciones: {{ item.cantidadEjecuciones }}</p>
+              <div class="progress">
+                <div class="progress-bar bg-primary" role="progressbar"
+                  :style="{ width: (item.cantidadEjecuciones / maxEjecuciones * 100) + '%' }"
+                  aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxEjecuciones">{{
+                    item.cantidadEjecuciones }}</div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
     </div>
     <loading v-else></loading>
   </div>
@@ -182,8 +181,8 @@ export default {
         datasets: [
           {
             label: 'Cantidad de Ejecuciones',
-            backgroundColor: backgroundColors,
-            borderColor: backgroundColors,
+            backgroundColor: '#acd4f4',
+            borderColor: '#2596be',
             borderWidth: 2,
             data: data
           }

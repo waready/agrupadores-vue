@@ -13,21 +13,6 @@
           <v-client-table :columns="columns" :data="tableData" :options="options">
           </v-client-table>
         </div>
-        <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
-          <div class="card shadow h-100">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="fas fa-user mr-2"></i>{{ item.usuario }}
-              </h5>
-              <p class="card-text text-muted">Cantidad de Sesiones: {{ item.cantidadSesiones }}</p>
-              <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar" :style="{ width: item.cantidadSesiones + '%' }"
-                  aria-valuenow="item.cantidadSesiones" aria-valuemin="0" aria-valuemax="100">{{ item.cantidadSesiones
-                  }}%</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <loading v-else></loading>
