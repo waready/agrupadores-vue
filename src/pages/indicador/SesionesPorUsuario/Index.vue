@@ -86,6 +86,17 @@ export default {
           }
         }
         //this.indices = response.sdtIndices.SdtBBTMONEDA;
+        $(document).ready(function () {
+          $(".VuePagination__count").text(function (i, text) {
+            return text.replace("Un registro", "1 registro");
+          });
+          $(".VueTables__search-field label").hide();
+          //$(".VueTables__search").addClass("float-right");
+
+          $(".VueTables__limit-field label").hide();
+
+          $(".VuePagination__pagination").addClass("justify-content-center");
+        });
 
         this.rubroBolsa = response.sdtSesionesPorUsuario.sBTSesionesPorUsuario;
 
@@ -109,43 +120,19 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  border: none;
-  transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-title {
-  font-size: 1.25rem;
-}
-
-.card-text {
-  font-size: 1rem;
-}
-
-.progress {
-  height: 25px;
-  margin-top: 10px;
-}
-
-.progress-bar {
-  font-size: 0.875rem;
-}
-
 .sortable-header {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
+
 .sortable-header .sort-icon {
   position: absolute;
   top: 50%;
   right: -20px;
   transform: translateY(-50%);
 }
+
 .sortable-header .sort-icon.fa-sort {
   opacity: 0.5;
 }

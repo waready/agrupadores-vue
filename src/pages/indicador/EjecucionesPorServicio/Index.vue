@@ -11,22 +11,9 @@
       <!-- Sección nueva para mostrar la agrupación de ejecuciones por servicio -->
       <div class="row">
         <div class="col-12 mt-2 mb-3">
-          <h3 class="text-center">RESUMEN</h3>
+          <h3 class="text-center">LISTADO DE METODOS POR EJECUCIONES</h3>
         </div>
-        <div v-for="(item, index) in agrupacionServicios" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
-          <div class="card shadow h-100">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.servicio }}</h5>
-              <p class="card-text text-muted">Total de Ejecuciones: {{ item.cantidadEjecuciones }}</p>
-              <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar"
-                  :style="{ width: (item.cantidadEjecuciones / maxAgrupadas * 100) + '%' }"
-                  aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxAgrupadas">{{
-                    item.cantidadEjecuciones }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Bar :data="chartDataServicio" :options="chartOptions" />
       </div>
       <!-- Fin de la nueva sección -->
       <div class="row">
@@ -34,21 +21,13 @@
           <h3 class="text-center">LISTADO DE SERVICIOS POR EJECUCIONES</h3>
         </div>
         <Bar id="my-chart-id" :data="chartData" :options="options" />
-        <!-- <div v-for="(item, index) in rubroBolsa" :key="index" class="col-lg-4 col-md-6 col-sm-12 mb-3">
-          <div class="card shadow h-100">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.servicio }}</h5>
-              <p class="card-text text-muted">Método: {{ item.metodo }}</p>
-              <p class="card-text text-muted">Cantidad de Ejecuciones: {{ item.cantidadEjecuciones }}</p>
-              <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar"
-                  :style="{ width: (item.cantidadEjecuciones / maxEjecuciones * 100) + '%' }"
-                  aria-valuenow="item.cantidadEjecuciones" aria-valuemin="0" :aria-valuemax="maxEjecuciones">{{
-                    item.cantidadEjecuciones }}</div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+      </div>
+
+      <div class="row">
+        <div class="col-12 mt-2 mb-3">
+          <h3 class="text-center">LISTADO DE TIEMPO POR EJECUCIONES</h3>
+        </div>
+        <Bar id="my-chart-id" :data="chartDataFicticio" :options="options" />
       </div>
     </div>
     <loading v-else></loading>
@@ -59,6 +38,7 @@
 import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
 import { Bar } from "vue-chartjs";
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import {
   Chart as ChartJS,
   Title,
@@ -83,7 +63,8 @@ ChartJS.register(
   LinearScale,
   CategoryScale,
   PointElement,
-  BarElement
+  BarElement,
+  ChartDataLabels
 );
 
 export default {
@@ -189,6 +170,54 @@ export default {
         ]
       };
     },
+
+    chartDataServicio() {
+      const labels = this.agrupacionServicios.map(item => item.servicio)
+      const data = this.agrupacionServicios.map(item => item.cantidadEjecuciones)
+      return {
+        labels,
+        datasets: [
+        {
+            label: 'Total de Ejecuciones',
+            backgroundColor: '#acd4f4',
+            borderColor: '#2596be',
+            borderWidth: 2,
+            data: data
+          }
+        ]
+      }
+    },
+    chartOptions() {
+      return {
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'end',
+            color: '#000',
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    },
+
+    chartDataFicticio() {
+      const labels = ['Ficticio 1', 'Ficticio 2', 'Ficticio 3']
+      const data = [30, 50, 70]
+      return {
+        labels,
+        datasets: [
+          {
+            label: 'Datos Ficticios',
+            backgroundColor: '#acd4f4',
+            borderColor: '#2596be',
+            borderWidth: 2,
+            data
+          }
+        ]
+      }
+    },
   }
 };
 </script>
@@ -219,4 +248,6 @@ export default {
 .progress-bar {
   font-size: 0.875rem;
 }
+
+
 </style>

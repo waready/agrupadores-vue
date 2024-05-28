@@ -2,11 +2,8 @@
   <div class="container">
     <div v-for="(item, index) in Sucursal" :key="index">
       <h2>Cajas de la Sucursal ( {{ item.descripcion }} )
-        <a class="btn btn-info mb-1" 
-        @click="generarSucursal(item.identificador)" 
-        data-toggle="modal"
-        data-placement="top" title="Ver mapa"
-          data-target="#exampleModalCenter">
+        <a class="btn btn-info mb-1" @click="generarSucursal(item.identificador)" data-toggle="modal"
+          data-placement="top" title="Ver mapa" data-target="#exampleModalCenter">
           <i class="fas fa-map-marker-alt text-white fa-xl"></i>
         </a>
       </h2>
@@ -77,6 +74,15 @@
               <h3>Cajas Abiertas</h3>
               <template v-if="cajasAbiertasPremiun[0]">
                 <v-client-table ref="table" :data="cajasAbiertasPremiun" :columns="columns" :options="options">
+                  <template v-slot:sesiones="item">
+                    <a :class="[
+                      item.row.sesiones != '0'
+                        ? 'badge badge-danger text-white font-weight-bold'
+                        : 'badge badge-success  text-white font-weight-bold',
+                      'letter'
+                    ]">
+                      {{ item.row.sesiones }}</a>
+                  </template>
                 </v-client-table>
               </template>
               <template v-else>
@@ -87,8 +93,17 @@
             </div>
             <div v-show="cajasC">
               <h3>Cajas Cerradas</h3>
-              <template v-if="cajasCerradas[0]">
-                <v-client-table ref="table" :data="cajasCerradas" :columns="columns" :options="options">
+              <template v-if="cajasCerradasPremiun[0]">
+                <v-client-table ref="table" :data="cajasCerradasPremiun" :columns="columns" :options="options">
+                  <template v-slot:sesiones="item">
+                    <a :class="[
+                      item.row.sesiones != '0'
+                        ? 'badge badge-danger text-white font-weight-bold'
+                        : 'badge badge-success  text-white font-weight-bold',
+                      'letter'
+                    ]">
+                      {{ item.row.sesiones }}</a>
+                  </template>
                 </v-client-table>
               </template>
               <template v-else>
@@ -102,13 +117,13 @@
       </div>
     </div>
     <loading v-else></loading>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <div v-for="(item, index) in Sucursal" :key="index">
-              <h5>Sucursal:  ( {{ item.descripcion }} )</h5>
+              <h5>Sucursal: ( {{ item.descripcion }} )</h5>
             </div>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -156,6 +171,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default {
   name: "sucursales",
   mounted() {
+    this.getAllSeciones();
     const datos = JSON.parse(this.$route.query.datos);
     const caja = JSON.parse(this.$route.query.caja);
     if (caja == 1) {
@@ -173,6 +189,7 @@ export default {
       cajasB: false,
       cajas: false,
       mostrar: false,
+      sesiones: null,
       TextoBuscado: "",
       cajasSelect: null,
       cajasAbiertas: [],
@@ -192,7 +209,7 @@ export default {
         responsive: true,
         maintainAspectRatio: false
       },
-      columns: ["indicador","usuario", "nombre"],
+      columns: ["indicador", "usuario", "nombre", "sesiones"],
       options: {
         sortIcon: {
           is: "fa-sort", // utiliza iconos de Font Awesome
@@ -223,12 +240,38 @@ export default {
         headings: {
           indicador: '# CAJA',
           usuario: "USUARIO",
-          nombre: "NOMBRE"
+          nombre: "NOMBRE",
+          sesiones: "SESIONES"
         }
       }
     };
   },
   methods: {
+    async getAllSeciones() {
+      await AuthService.getSesionesPorUsuario().then((response) => {
+        if (response.Erroresnegocio) {
+          if (response.Erroresnegocio.BTErrorNegocio[0]) {
+            this.message =
+              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            if (this.message == "Sesión inválida") {
+              setTimeout(() => {
+                AuthService.logout();
+                this.$store.dispatch("logout");
+                this.$router.push("/login");
+              }, 3000);
+            }
+          }
+        }
+
+        this.sesiones = response.sdtSesionesPorUsuario.sBTSesionesPorUsuario;
+
+        if (!this.sesiones[0]) {
+          this.message = "No se encuentran registros!";
+        } else {
+
+        }
+      });
+    },
     async getSucursalesCajas(id_sucursal) {
       await AuthService.getSucursalesCajas().then((r) => {
         /**recuperar sucursal**/
@@ -262,8 +305,32 @@ export default {
           }
 
           cajas.Sucursal = cajasSelect[0].descripcion;
+          // Añadir la cantidad de sesiones
+          const sesionData = this.sesiones.find(s => s.usuario === cajas.usuario);
+          cajas.sesiones = sesionData ? sesionData.cantidadSesiones : 0;
+
           return cajas;
         });
+
+        // Añadir la cantidad de sesiones a cajas cerradas
+        this.cajasCerradasPremiun = this.cajasCerradas.map((caja) => {
+          let cajasSelect = r.sdtSucursalesCajas.listadoSucursalesC.SdtsBTSucursal.filter(
+            (item) => item.identificador == caja.sucursalId
+          );
+          if (!cajasSelect.length) {
+            cajasSelect = r.sdtSucursalesCajas.listadoSucursalesA.SdtsBTSucursal.filter(
+              (item) => item.identificador == caja.sucursalId
+            );
+          }
+          caja.Sucursal = cajasSelect[0].descripcion;
+
+          // Añadir la cantidad de sesiones
+          const sesionData = this.sesiones.find(s => s.usuario === caja.usuario);
+          caja.sesiones = sesionData ? sesionData.cantidadSesiones : 0;
+
+          return caja;
+        });
+
         this.chartData = {
           labels: [`Abiertas`, `Cerradas`],
           datasets: [
