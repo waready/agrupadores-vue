@@ -10,7 +10,7 @@
     "uninstall-all": "npm ls --parseable --depth=0 | grep node_modules | sed 's/^.*node_modules\\///' | xargs npm uninstall"
   },
   "dependencies": {
-    "axios": "^1.2.2",
+    "axios": "^1.6.0",
     "bootstrap": "^4.6.1",
     "chart.js": "^4.2.0",
     "chartjs-plugin-datalabels": "^2.2.0",
