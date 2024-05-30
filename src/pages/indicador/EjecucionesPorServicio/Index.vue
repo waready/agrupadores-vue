@@ -27,7 +27,7 @@
         <div class="col-12 mt-2 mb-3">
           <h3 class="text-center">LISTADO DE TIEMPO POR EJECUCIONES</h3>
         </div>
-        <Bar id="my-chart-id" :data="chartDataFicticio" :options="options" />
+        <Bar id="my-chart-id" :data="chartDataFicticio"  :options="chartOptions" />
       </div>
     </div>
     <loading v-else></loading>
@@ -87,6 +87,22 @@ export default {
       plugins: {
         legend: {
           display: false
+        }
+      }
+    },
+    chartOptions: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              const item = tooltipItem.dataset.data[tooltipItem.dataIndex];
+              return [
+                `Promedio: ${item.tiempoPromedio}`,
+                `Máximo: ${item.tiempoMaximo}`,
+                `Mínimo: ${item.tiempoMinimo}`
+              ];
+            }
+          }
         }
       }
     }
@@ -162,8 +178,8 @@ export default {
         datasets: [
           {
             label: 'Cantidad de Ejecuciones',
-            backgroundColor: '#acd4f4',
-            borderColor: '#2596be',
+            backgroundColor: '#ffb0c1',
+            borderColor: '#ff6384',
             borderWidth: 2,
             data: data
           }
@@ -203,13 +219,13 @@ export default {
     },
 
     chartDataFicticio() {
-      const labels = ['Ficticio 1', 'Ficticio 2', 'Ficticio 3']
-      const data = [30, 50, 70]
+      const labels = this.rubroBolsa.map(item => `${item.metodo} `);
+      const data = this.rubroBolsa.map(item => item.tiempoPromedio)
       return {
         labels,
         datasets: [
           {
-            label: 'Datos Ficticios',
+            label: `Promedio de Tiempo`,
             backgroundColor: '#acd4f4',
             borderColor: '#2596be',
             borderWidth: 2,
