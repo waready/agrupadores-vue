@@ -42,3 +42,10 @@ window.GetSufijo= "ardwsbt"
     GetVrSer = v1/
 */
 window.GetVrSer= "v1"
+
+//Power bi url embed
+/*
+    url embed = http://appjava2019:10222/desaprodv2r3orcl/servlet/com.dlya.bantotal.odwsbt_Authenticate_v1
+    GetPowerUrlEmbed = http://10.25.4.10:5300/getEmbedToken 
+*/
+window.GetPowerUrlEmbed = "http://10.25.4.10:5300/getEmbedToken"

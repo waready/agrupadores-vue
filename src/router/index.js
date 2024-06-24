@@ -84,7 +84,21 @@ const routes = [
       },
       {
         path: "/EjecucionesPorServicio",
-        component: () => import("../pages/indicador/EjecucionesPorServicio/Index.vue")
+        name: '',
+        component: () => import("../pages/indicador/EjecucionesPorServicio/Index.vue"),
+        meta: { requiresAuth: true },
+        children: [
+          {
+            path: "",
+            component: () => import("../pages/indicador/EjecucionesPorServicio/Servicios.vue"),
+            name: "Servicios"
+          },
+          {
+            path: "metodos",
+            component: () => import("../pages/indicador/EjecucionesPorServicio/Metodos.vue"),
+            name: "Metodos"
+          },
+        ]
       },
     ]
   },
@@ -102,15 +116,15 @@ const routes = [
     }
   },
 
-  {
-    path: '/404',
-    name: "not fount",
-    component: () => import("@/pages/Default404.vue"),
-  },
-  {
-    path: "/:catchAll(.*)", // Unrecognized path automatically matches 404
-    redirect: '/404',
-  },
+  // {
+  //   path: '/404',
+  //   name: "not fount",
+  //   component: () => import("@/pages/Default404.vue"),
+  // },
+  // {
+  //   path: "/:catchAll(.*)", // Unrecognized path automatically matches 404
+  //   redirect: '/404',
+  // },
 
 ];
 

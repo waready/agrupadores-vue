@@ -89,6 +89,10 @@ export default {
               // "Contabilidad"
               item.icon = "fas fa-file-contract fa-5x success";
               break;
+            case 400:
+              // "Contabilidad"
+              item.icon = "fas fa-server fa-5x";
+              break;
             default:
               // sin icon
               item.icon = "fas fa-bar-chart fa-5x";

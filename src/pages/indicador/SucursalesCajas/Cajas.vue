@@ -12,7 +12,7 @@
       <hr />
       <div class="row">
         <div class="col-7 d-flex justify-content-center">
-          <Pie id="my-chart-id" :data="chartData" :style="myStyles" />
+          <Pie id="my-chart-id" :data="chartData" :style="myStyles" :options="chartOptions" />
         </div>
         <div class="col-5">
           <div class="col-12">
@@ -21,7 +21,7 @@
                 <div class="card-body">
                   <div class="media d-flex">
                     <div class="align-self-center">
-                      <i class="icon-pie-chart success font-large-2 float-left"></i>
+                      <i class="icon-pie-chart  font-large-2 float-left"></i>
                     </div>
                     <div class="media-body text-right">
                       <h4>{{ cajasAbiertas.length }}</h4>
@@ -39,7 +39,7 @@
                 <div class="card-body">
                   <div class="media d-flex">
                     <div class="align-self-center">
-                      <i class="icon-pie-chart danger font-large-2 float-left"></i>
+                      <i class="icon-pie-chart success font-large-2 float-left"></i>
                     </div>
                     <div class="media-body text-right">
                       <h4>{{ cajasCerradas.length }}</h4>
@@ -75,8 +75,8 @@
               <template v-if="cajasAbiertasPremiun[0]">
                 <v-client-table ref="table" :data="cajasAbiertasPremiun" :columns="columns" :options="options">
                   <template v-slot:sesiones="item">
-                    <a :class="[
-                      item.row.sesiones != '0'
+                    <a :class="[ 
+                      item.row.sesiones != '1'
                         ? 'badge badge-danger text-white font-weight-bold'
                         : 'badge badge-success  text-white font-weight-bold',
                       'letter'
@@ -206,7 +206,6 @@ export default {
         ]
       },
       chartOptions: {
-        responsive: true,
         maintainAspectRatio: false
       },
       columns: ["indicador", "usuario", "nombre", "sesiones"],

@@ -2,10 +2,12 @@ import http from "@/utils/http.js";
 import secureStorage from "./secureStorage.js";
 import router from "../router";
 import store from "@/store";
+import axios from "axios";
 
 const prefijo = process.env.VUE_APP_API_PREFIJO;
 const version = process.env.VUE_APP_API_VERSION;
 const btServicesEnv = process.env.VUE_APP_BTEXPOSER;
+const btObservabilidad = process.env.VUE_APP_URL_OBSERVABILIDAD;
 const btServicesEnabled = btServicesEnv === "true";
 
 const API_URL = btServicesEnabled
@@ -91,9 +93,13 @@ class AuthService {
 
       return response.data;
     } else {
-      console.log("nooo esta!")
       return (await http.post(`${API_URL}${endpoint}`, { ...user, ...parametros })).data;
     }
+  }
+
+  static async GetObservabilidad(){
+    //console.log(`${btObservabilidad} -  ${process.env.VUE_APP_URL_OBSERVABILIDAD}`);
+    return (await axios.get(btObservabilidad)).data
   }
 
   static removeToken() {
@@ -150,8 +156,13 @@ class AuthService {
   }
 
   static async getEjecucionPorServicio() {
-    const endpoint = "ObtenerEjecucionesPorServicio";
+    const endpoint = "ObtenerServiciosMasEjecutados";
     return this.postRequest(endpoint, {});
+  }
+
+  static async getMetodosMasEjecutados(name) {
+    const endpoint = "ObtenerMetodosMasEjecutados";
+    return this.postRequest(endpoint, { servicio: name });
   }
 
   static async getSesionesPorUsuario() {

@@ -8,7 +8,7 @@
       <hr />
       <div class="row">
         <div class="col-7 d-flex justify-content-center">
-          <Pie id="my-chart-id" :options="chartOptions" :data="chartData" :style="myStyles" />
+          <Pie id="my-chart-id" :data="chartData" :style="myStyles" :options="chartOptions" />
         </div>
         <div class="col-5">
           <div class="col-12">
@@ -202,6 +202,9 @@ export default {
       sucursalC: false,
       sucursales: false,
       TextoBuscado: "",
+      chartOptions: {
+        maintainAspectRatio: false
+      },
       sucursalesAbiertas: [],
       sucusalesPremiun: [],
       sucursalesCerradas: [],
@@ -215,10 +218,6 @@ export default {
             data: [40, 20, 12]
           }
         ]
-      },
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: true
       },
       columns: [
         "descripcion",

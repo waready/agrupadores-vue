@@ -1,0 +1,288 @@
+<template>
+  <div class="container">
+    <h2>Servicios Ejecutados</h2>
+    <div class="alert alert-warning" role="alert" v-show="message">
+      {{ message + "!" }}
+    </div>
+    <div v-if="sucursales">
+      <hr />
+      <div class="row">
+        <div class="col-6 d-flex justify-content-center">
+          <Pie id="my-chart-id" :data="chartData" :style="myStyles" :options="optionsChar"/>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-6 text-truncate" v-for="(item, index) in ServiciosEjecutados" :key="item.servicio">
+              <div class="card mb-3">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i class="icon-pie-chart font-large-1 float-left" :style="{ color: getOrderedColor(index) }"></i>
+                      </div>
+                      <div class="media-body">
+                        <span class="d-inline-block text-truncate" style="max-width: 140px; font-size: smaller;">{{ item.servicio }}</span>
+                        <p class="ml-3"> {{ item.cantidadEjecuciones }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <ul class="nav nav-tabs mb-1">
+      </ul>
+      <div class="row">
+        <div class="col-md-12 card">
+          <div class="card-body">
+            <div v-show="sucursalA">
+              <h3>Detalle de Servicios</h3>
+              <div class="">
+                <v-client-table ref="table" :data="ServiciosEjecutados" :columns="columns" :options="options">
+                  <!-- <template v-slot:tiempoMaximo="item">
+                    <a :class="[
+                      'badge badge-danger  text-white font-weight-bold',
+                      'letter'
+                    ]">
+                    {{ item.row.tiempoMaximo }}</a>
+                  </template>
+                  <template v-slot:tiempoMinimo="item">
+                    <a :class="[
+                      'badge badge-succes  text-white font-weight-bold',
+                      'letter'
+                    ]">
+                      {{ item.row.tiempoMinimo }}</a>
+                  </template>
+                  <template v-slot:tiempoPromedio="item">
+                    <a :class="[
+                      'badge badge-warning  text-white font-weight-bold',
+                      'letter'
+                    ]">
+                      {{ item.row.tiempoPromedio }}</a>
+                  </template> -->
+                  <template v-slot:metodo="item">
+                    <a @click="obtenerCajasC(item.row)" data-toggle="tooltip" data-placement="top" title="Ver cajas"
+                      :class="[
+                        'letter',
+                        'badge badge-success  text-white font-weight-bold'
+                      ]">
+                      <i class="fas fa-eye text-white "></i>
+                    </a>
+                  </template>
+                </v-client-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <loading v-else></loading>
+  </div>
+</template>
+<script>
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "vue-chartjs";
+import AuthService from "@/utils/AuthService";
+import { ServerTable } from "v-tables-3";
+import loading from "@/components/Loading.vue";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export default {
+  name: "sucursales",
+  mounted() {
+    this.getAllsucursales();
+  },
+
+  components: { Pie, loading, ServerTable },
+  data() {
+    return {
+      sucursalcantA: "",
+      sucursalcantC: "",
+      sucursal: "",
+      message: "",
+      sucursalA: true,
+      sucursalC: false,
+      sucursales: false,
+      TextoBuscado: "",
+      ServiciosEjecutados: [],
+      chartData: {
+        labels: ["January", "February", "March"],
+        datasets: [
+          {
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            data: [40, 20, 12]
+          }
+        ]
+      },
+      optionsChar: {
+        maintainAspectRatio: false
+      },
+      columns: [
+        "servicio",
+        "cantidadEjecuciones",
+        "tiempoPromedio",
+        "tiempoMaximo",
+        "tiempoMinimo",
+        "metodo"
+      ],
+      options: {
+        columnsClasses: {
+          // Asignamos la clase ancho-columna para establecer un ancho específico
+          cantidadA: 'ancho-columna',
+          cantidadC: 'ancho-columna',
+          descripcion: 'ancho-columna1',
+          direccion: 'ancho-columna1'
+          // Puedes agregar más columnas y clases según sea necesario
+        },
+        sortIcon: {
+          is: "fa-sort", // utiliza iconos de Font Awesome
+          base: "fa",
+          up: "fa-sort-asc",
+          down: "fa-sort-desc"
+        },
+        // see the options API
+        texts: {
+          count:
+            "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
+          first: "Primero",
+          last: "Ultimo",
+          filter: "Filtro:",
+          filterPlaceholder: "Búsqueda",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros coincidentes",
+          noRequest: "Seleccione al menos un filtro para obtener resultados",
+          filterBy: "Filtrar por {column}",
+          loading: "Cargando...",
+          defaultOption: "Seleccionar {column}",
+          columns: "Columnas"
+        },
+        // filterByColumn: true,
+        perPage: 10,
+        perPageValues: [10, 25, 50, 100, 500],
+        headings: {
+          // id: 'ID',
+          servicio: "Nombre",
+          cantidadEjecuciones: "Cantidad ejecuciones",
+          tiempoPromedio: "Tiempo promedio",
+          tiempoMaximo: "Tiempo máx",
+          tiempoMinimo: "Tiempo mín",
+          metodo: "Métodos"
+        }
+      },
+    };
+  },
+  methods: {
+    getAdjustedColor(color) {
+      const colorNum = Math.max(0, parseInt(color.slice(1), 16) - 50);
+      const adjustedColor = `#${colorNum.toString(16).padStart(6, '0').toUpperCase()}`;
+      return adjustedColor;
+    },
+    obtenerCajasC(item) {
+      console.log(item.servicio);
+      this.$router.push({
+        name: "Metodos",
+        query: { datos: item.servicio }
+      });
+    },
+    getOrderedColor(index) {
+      const colors = ['#FF5454', '#FFFF90', '#60C1FF', '#FFC670', '#8CC76D', '#C187E8', '#5D5A5D']; // rojo, amarillo, azul, naranja, verde, violeta, negro
+      let color = colors[index % colors.length];
+      // Ajustar el color si es repetido
+      if (index >= colors.length) {
+        color = this.getAdjustedColor(color);
+      }
+      return color;
+    },
+    async getAllsucursales() {
+      try {
+        const response = await AuthService.getEjecucionPorServicio();
+        if (
+          response.Erroresnegocio &&
+          response.Erroresnegocio.BTErrorNegocio[0]
+        ) {
+          this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+
+          if (this.message === "Sesión inválida") {
+            setTimeout(() => {
+              AuthService.logout();
+              this.$store.dispatch("logout");
+              this.$router.push("/login");
+            }, 3000);
+          }
+        }
+
+        this.sucursales = true;
+        this.ServiciosEjecutados = response.sdtEstadisticasServicios.sBTEstadisticasServicio;
+        this.chartData = {
+          //labels: this.ServiciosEjecutados.map(servicio => servicio.servicio),
+          datasets: [
+            {
+              label: 'Cantidad de Ejecuciones',
+              backgroundColor: this.ServiciosEjecutados.map((_, index) => this.getOrderedColor(index)),
+              data: this.ServiciosEjecutados.map(servicio => servicio.cantidadEjecuciones)
+            }
+          ]
+        };
+
+        $(document).ready(function () {
+          $(".VuePagination__count").text(function (i, text) {
+            return text.replace("Un registro", "1 registro");
+          });
+          $(".VueTables__search-field label").hide();
+          //$(".VueTables__search").addClass("float-right");
+          $(".VueTables__limit-field label").hide();
+          $(".VuePagination__pagination").addClass("justify-content-center");
+        });
+      } catch (error) {
+        console.error("Error al obtener sucursales y cajas:", error);
+        // Manejar el error según tus necesidades
+      }
+    }
+  },
+  computed: {
+    myStyles() {
+      return {
+        height: `${350}px`
+      };
+    }
+  }
+};
+</script>
+<style>
+.app-store-map {
+  width: 100%;
+  height: 500px;
+}
+
+.letter {
+  font-size: 14px;
+}
+
+/* Clase para quitar márgenes y rellenos */
+.sin-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+/* Clase para establecer un ancho específico */
+.ancho-columna {
+  width: 10px;
+  /* Puedes ajustar este valor según sea necesario */
+}
+
+.ancho-columna1 {
+  width: 300px;
+  /* Puedes ajustar este valor según sea necesario */
+}
+
+.ancho-columna2 {
+  width: 2px;
+  /* Puedes ajustar este valor según sea necesario */
+  padding: 0px;
+}
+</style>

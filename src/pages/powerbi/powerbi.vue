@@ -143,8 +143,9 @@ export default {
 </template>
 
 <script>
+
 import { PowerBIReportEmbed } from "powerbi-client-vue-js";
-import axios from "axios";
+import AuthService from "@/utils/AuthService";
 
 export default {
   components: {
@@ -187,16 +188,18 @@ export default {
       });
   },
   methods: {
-    fetchAccessToken() {
+    async fetchAccessToken() {
       // const url = "http://localhost:5300/getEmbedToken";
-      const url = "http://10.25.4.10:5300/getEmbedToken";
-      return axios.get(url).then((response) => {
-        if (response.status === 200) {
-          return response.data;
+      const response = await AuthService.GetObservabilidad();
+      console.log(response)
+      // const url = "http://10.25.4.10:5300/getEmbedToken";
+      // return axios.get(url).then((response) => {
+        if (response) {
+          return response;
         } else {
           throw new Error(`Request failed with status ${response.status}`);
         }
-      });
+      //});
     }
   }
 };

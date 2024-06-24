@@ -3,14 +3,23 @@
     <div v-if="rubroBolsa">
       <div class="row">
         <div class="col-12 mt-3 mb-1">
-          <h3 class="text-uppercase">Ejecuciones por Servicios</h3>
-          <p class="text-muted">Información detallada sobre las ejecuciones por servicios</p>
+          <h3 class="text-uppercase">Cantidad de sesiones por Usuario</h3>
+          <p class="text-muted">Información detallada sobre la cantidad de sesiones por Usuario</p>
           <hr />
         </div>
       </div>
       <div class="row">
         <div>
           <v-client-table :columns="columns" :data="tableData" :options="options">
+            <template v-slot:cantidadSesiones="item">
+              <a :class="[
+                  parseInt(item.row.cantidadSesiones) > 1
+                    ? 'badge badge-danger text-white font-weight-bold'
+                    : 'badge badge-success  text-white font-weight-bold',
+                  'letter'
+                ]">
+                {{ item.row.cantidadSesiones }}</a>
+            </template>
           </v-client-table>
         </div>
       </div>
@@ -63,8 +72,8 @@ export default {
       perPage: 10,
       perPageValues: [10, 25, 50, 100, 500],
       headings: {
-        nombre: "Nombre",
-        tipoCambio: "Pasaje a histórico"
+        usuario: "USUARIO",
+        cantidadSesiones: "CANTIDAD SESIONES"
       }
     }
   }),

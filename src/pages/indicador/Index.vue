@@ -66,6 +66,7 @@ export default {
       if (idIndicador == 200) this.detalleIndicador = "Cajas Sucursales";
       if (idIndicador == 300) this.detalleIndicador = "Contabilidad";
       if (idIndicador == 400) this.detalleIndicador = "Observabilidad";
+      if (idIndicador == 500) this.detalleIndicador = "Ejecución Servicios";
 
       await AuthService.GetIndicadores(idIndicador)
       .then((response) => {
@@ -111,6 +112,10 @@ export default {
             case 380:
               // "Posibles rubros bolsa"
               item.icon = "mt-2 fas fa-sack-dollar fa-5x secondary";
+              break;
+            case 500:
+              // 
+              item.icon = "mt-2 fas fa-server fa-5x secondary";
               break;
 
             default:
@@ -178,7 +183,7 @@ export default {
   },
   watch: {
     "$route.params.id": function (newId) {
-      const valores = ["100","200","300","400"];
+      const valores = ["100","200","300","400","500"];
       if(valores.includes(newId))
         this.getAllAgrupadores(newId);
     }

@@ -72,6 +72,7 @@ export default {
         }
 
         this.agrupadores = response.sdtAgrupadores.sBTAgrupador.map((item) => {
+          console.log(item)
           switch (item.codigo) {
             case 100:
               // "Condiciones Generales"
@@ -84,6 +85,10 @@ export default {
             case 300:
               // "Contabilidad"
               item.icon = "bx-file";
+              break;
+            case 400:
+              // "Contabilidad"
+              item.icon = "bx-server";
               break;
             default:
               // sin icon
