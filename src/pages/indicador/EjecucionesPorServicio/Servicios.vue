@@ -92,11 +92,17 @@ import loading from "@/components/Loading.vue";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
-  name: "sucursales",
+  name: "servicios",
   mounted() {
-    this.getAllsucursales();
+    this.fetchServicios();
   },
-
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
+  },
   components: { Pie, loading, ServerTable },
   data() {
     return {
@@ -104,6 +110,7 @@ export default {
       sucursalcantC: "",
       sucursal: "",
       message: "",
+      timeoutId: null,
       sucursalA: true,
       sucursalC: false,
       sucursales: false,
@@ -197,6 +204,10 @@ export default {
         color = this.getAdjustedColor(color);
       }
       return color;
+    },
+    async fetchServicios() {
+      await this.getAllsucursales();
+      this.timeoutId = setTimeout(this.fetchServicios, 5 * 60 * 1000);
     },
     async getAllsucursales() {
       try {

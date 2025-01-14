@@ -76,11 +76,18 @@ import { ServerTable } from "v-tables-3";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
-  name: "sucursales",
+  name: "metodos",
   mounted() {
     this.objeto = this.$route.query.datos;
-    console.log('Datos recibidos:', this.objeto);
-    this.getAllSeciones();
+    //console.log('Datos recibidos:', this.objeto);
+    this.fetchMetodos();
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
   },
   components: { Pie, loading, ServerTable },
   data() {
@@ -171,7 +178,11 @@ export default {
       }
       return color;
     },
-    async getAllSeciones() {
+    async fetchMetodos() {
+      await this.getAllMetodos();
+      this.timeoutId = setTimeout(this.fetchMetodos, 5 * 60 * 1000);
+    },
+    async getAllMetodos() {
       await AuthService.getMetodosMasEjecutados(this.objeto).then((response) => {
         if (response.Erroresnegocio) {
           if (response.Erroresnegocio.BTErrorNegocio[0]) {

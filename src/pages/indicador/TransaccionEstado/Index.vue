@@ -184,13 +184,21 @@ export default {
     loading
   },
   mounted() {
-    this.getAllTansaccionEstado();
+    this.fetchTansaccionEstado();
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
   },
   data: () => ({
     detalle: false,
     busqueda: "",
     transacciones: null,
     message: "",
+    timeoutId: null,
     transaccionesOrdenadas: [],
     chartData: {},
     labels: [
@@ -257,6 +265,10 @@ export default {
         return 'table-success'; // Assuming green for these labels
       }
       return 'table-warning'; // Default case
+    },
+    async fetchTansaccionEstado() {
+      await this.getAllTansaccionEstado();
+      this.timeoutId = setTimeout(this.fetchTansaccionEstado, 5 * 60 * 1000);
     },
     async getAllTansaccionEstado() {
       await AuthService.getTansaccionEstado().then((response) => {

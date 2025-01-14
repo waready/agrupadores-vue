@@ -188,9 +188,15 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default {
   name: "sucursales",
   mounted() {
-    this.getAllsucursales();
+    this.fetchSucursales();
   },
-
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
+  },
   components: { Pie, loading, ServerTable },
   data() {
     return {
@@ -198,6 +204,7 @@ export default {
       sucursalcantC:"",
       sucursal: "",
       message: "",
+      timeoutId: null,
       sucursalA: true,
       sucursalC: false,
       sucursales: false,
@@ -346,6 +353,10 @@ export default {
         this.sucursalA = false;
         this.sucursalC = true;
       }
+    },
+    async fetchSucursales() {
+      await this.getAllsucursales();
+      this.timeoutId = setTimeout(this.fetchSucursales, 5 * 60 * 1000);
     },
     async getAllsucursales() {
       try {

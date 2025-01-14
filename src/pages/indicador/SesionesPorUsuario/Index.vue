@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="rubroBolsa">
+    <div v-if="SesionesUsuarios">
       <div class="row">
         <div class="col-12 mt-3 mb-1">
           <h3 class="text-uppercase">Cantidad de sesiones por Usuario</h3>
@@ -27,26 +27,23 @@
     <loading v-else></loading>
   </div>
 </template>
+
 <script>
 import AuthService from "@/utils/AuthService";
 import loading from "@/components/Loading.vue";
 import { ServerTable } from "v-tables-3";
+
 export default {
-  name: "RubroBolsa",
+  name: "SesionesUsuarios",
   components: {
     loading,
     ServerTable
   },
-  mounted() {
-    this.getAllRubroBolsas();
-  },
   data: () => ({
     mostrarClave: [],
-    rubroBolsa: null,
+    SesionesUsuarios: null,
     message: "",
     columns: ['usuario', 'cantidadSesiones'],
-    indices: null,
-    monedas: null,
     options: {
       texts: {
         count: "Mostrando {from} a {to} de {count} registros |{count} registros|Un registro",
@@ -75,16 +72,29 @@ export default {
         usuario: "USUARIO",
         cantidadSesiones: "CANTIDAD SESIONES"
       }
-    }
+    },
+    timeoutId: null
   }),
-
+  mounted() {
+    this.fetchSesionesPorUsuario();
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
+  },
   methods: {
-    async getAllRubroBolsas() {
+    async fetchSesionesPorUsuario() {
+      await this.getAllSesionesPorUsuario();
+      this.timeoutId = setTimeout(this.fetchSesionesPorUsuario, 5 * 60 * 1000);
+    },
+    async getAllSesionesPorUsuario() {
       await AuthService.getSesionesPorUsuario().then((response) => {
         if (response.Erroresnegocio) {
           if (response.Erroresnegocio.BTErrorNegocio[0]) {
-            this.message =
-              response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
+            this.message = response.Erroresnegocio.BTErrorNegocio[0].Descripcion;
             if (this.message == "Sesión inválida") {
               setTimeout(() => {
                 AuthService.logout();
@@ -94,35 +104,26 @@ export default {
             }
           }
         }
-        //this.indices = response.sdtIndices.SdtBBTMONEDA;
         $(document).ready(function () {
           $(".VuePagination__count").text(function (i, text) {
             return text.replace("Un registro", "1 registro");
           });
           $(".VueTables__search-field label").hide();
-          //$(".VueTables__search").addClass("float-right");
-
           $(".VueTables__limit-field label").hide();
-
           $(".VuePagination__pagination").addClass("justify-content-center");
         });
 
-        this.rubroBolsa = response.sdtSesionesPorUsuario.sBTSesionesPorUsuario;
+        this.SesionesUsuarios = response.sdtSesionesPorUsuario.sBTSesionesPorUsuario;
 
-        if (!this.rubroBolsa[0]) {
+        if (!this.SesionesUsuarios[0]) {
           this.message = "No se encuentran registros!";
         }
       });
-    },
-
-    toggleClave(index) {
-      this.mostrarClave[index] = typeof this.mostrarClave[index] === 'undefined' ? true : !this.mostrarClave[index];
     }
   },
-
   computed: {
     tableData() {
-      return this.rubroBolsa;
+      return this.SesionesUsuarios;
     }
   }
 };

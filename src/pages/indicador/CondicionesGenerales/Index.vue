@@ -346,11 +346,19 @@ export default {
     Service
   },
   mounted() {
-    this.getAllCondicionesGenerales();
+    this.fetchCondicionesGenerales();
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
   },
   data: () => ({
     CondicionesGenerales: null,
     message: "",
+    timeoutId: null,
     // charts
     chartData: {},
     chartOptions: {
@@ -359,6 +367,10 @@ export default {
   }),
 
   methods: {
+    async fetchCondicionesGenerales() {
+      await this.getAllCondicionesGenerales();
+      this.timeoutId = setTimeout(this.fetchCondicionesGenerales, 5 * 60 * 1000);
+    },
     async getAllCondicionesGenerales() {
       await AuthService.getCondicionesGenerales().then((response) => {
         if (response.Erroresnegocio) {

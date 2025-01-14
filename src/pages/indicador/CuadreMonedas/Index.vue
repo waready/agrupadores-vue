@@ -106,7 +106,8 @@ export default {
   data: () => ({
     CuadreMonedas: null,
     message: "",
-    TextoBuscado: ""
+    TextoBuscado: "",
+    timeoutId:null
   }),
 
   computed: {
@@ -116,10 +117,21 @@ export default {
   // watch: {},
 
   mounted() {
-    this.getAllCuadreMonedaSaldos();
+    this.fetchCuadreMonedaSaldos();
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
   },
 
   methods: {
+    async fetchCuadreMonedaSaldos() {
+      await this.getAllCuadreMonedaSaldos();
+      this.timeoutId = setTimeout(this.fetchCuadreMonedaSaldos, 5 * 60 * 1000);
+    },
     async getAllCuadreMonedaSaldos() {
       await AuthService.getCuadreMonedaSaldos().then((response) => {
         if (response.Erroresnegocio) {

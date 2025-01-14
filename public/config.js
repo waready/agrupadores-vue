@@ -6,7 +6,6 @@
 
 // Initialize variables globales 
 // BTEXPOSER ON ("true") - OFF ("false")
-
 window.GetBTexposer= "false"
 
 // url ambiente - ejemplo:
@@ -19,7 +18,7 @@ window.GetBTexposer= "false"
     GetUrlPro = https://pioneroapp2.dlya.corp:3001/api/
 */
 
-window.GetUrlPro= "http://10.25.4.10:6021/bthibrido/servlet/"
+window.GetUrlPro= "https://pioneroapp2:6004/productogx16/servlet/"
 
 //sufijo del ambiente - ejemplo
 /*
@@ -35,11 +34,11 @@ window.GetSufijo= "ardwsbt"
 //Version auth 
 /*
     url ambiente = http://appjava2019:10222/desaprodv2r3orcl/servlet/com.dlya.bantotal.odwsbt_Authenticate_v1
-    GetVrSer = v1?
+    GetVrSer = v1
 */
 /*
     BTEXPOSER
-    GetVrSer = v1/
+    GetVrSer = v1
 */
 window.GetVrSer= "v1"
 
@@ -48,4 +47,4 @@ window.GetVrSer= "v1"
     url embed = http://appjava2019:10222/desaprodv2r3orcl/servlet/com.dlya.bantotal.odwsbt_Authenticate_v1
     GetPowerUrlEmbed = http://10.25.4.10:5300/getEmbedToken 
 */
-window.GetPowerUrlEmbed = "http://10.25.4.10:5300/getEmbedToken"
+// window.GetPowerUrlEmbed = "http://10.25.4.10:5300/getEmbedToken"

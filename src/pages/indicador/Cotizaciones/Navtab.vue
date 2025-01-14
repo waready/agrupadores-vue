@@ -61,7 +61,8 @@ export default {
     indices: null,
     moneda: true,
     indice: false,
-    message: ""
+    message: "",
+    timeoutId: null
   }),
 
   computed: {
@@ -71,11 +72,21 @@ export default {
   // watch: {},
 
   mounted() {
-    this.getAllAgrupadores();
+    this.fetchCotizaciones();
   },
-
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
+  },
   methods: {
-    async getAllAgrupadores() {
+    async fetchCotizaciones() {
+      await this.getAllCotizaciones();
+      this.timeoutId = setTimeout(this.fetchCotizaciones, 5 * 60 * 1000);
+    },
+    async getAllCotizaciones() {
       await AuthService.getCotizaciones().then((response) => {
         if (response.Erroresnegocio) {
           if (response.Erroresnegocio.BTErrorNegocio[0]) {

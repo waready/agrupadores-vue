@@ -70,35 +70,28 @@ export default {
   components: {
     loading
   },
-  mounted() {
-    this.getAllRubroBolsas();
-  },
   data: () => ({
     mostrarClave: [],
     rubroBolsa: null,
     message: "",
-    config: {
-      options: [
-        {
-          value: "option 1"
-        },
-        {
-          value: "option 2"
-        },
-        {
-          value: "option 3"
-        }
-      ],
-      placeholder: "Placeholder",
-      backgroundColor: "#cde4f5",
-      textColor: "black",
-      borderRadius: "1.5em",
-      border: "1px solid gray",
-      width: 180
-    }
+    timeoutId: null
   }),
+  mounted() {
+    this.fetchRubroBolsas();
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutId);
+  },
+  beforeRouteLeave(to, from, next) {
+    clearTimeout(this.timeoutId);
+    next();
+  },
 
   methods: {
+    async fetchRubroBolsas() {
+      await this.getAllRubroBolsas();
+      this.timeoutId = setTimeout(this.fetchRubroBolsas, 5 * 60 * 1000);
+    },
     async getAllRubroBolsas() {
       await AuthService.getRubroBolsas().then((response) => {
         if (response.Erroresnegocio) {
